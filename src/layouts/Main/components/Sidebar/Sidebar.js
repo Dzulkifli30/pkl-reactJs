@@ -81,7 +81,7 @@ const Sidebar=props => {
 
         {
           title: 'Provinsi',
-          href: '/#'
+          href: '/provinsi'
 
         },
       ]

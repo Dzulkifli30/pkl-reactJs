@@ -15,6 +15,7 @@ import mockDataSettingProvinsi from './dataSettingprovinsi';
 import { urlProv, urlAddProv, urlEditProv } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
+import axios from 'axios';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -278,6 +279,12 @@ const ProvinsiList=props => {
 
 
   };
+  const handleAddProv=(e, MessageButton,rowProvinsi) => {
+    setOpen(true);
+    setTitle(MessageButton)
+    // setRowProvinsisSelect(rowProvinsi)
+    // console.log(response.data.data)
+  }
   /**/
   //openPopup
   const handleClose=() => {
@@ -313,11 +320,14 @@ const ProvinsiList=props => {
       <div className={classes.content}>
         <ProvinsisTable
           handleOpenViewMap={handleOpenViewMap}
+          
           onChange={onChangefind}
           SettingProvinsi={SettingProvinsi}
           provinsisExport={provinsisExport}
           filteredItems={filteredItems}
-          selectedProvinsis={selectedProvinsis} handleOpen={handleOpen}
+          selectedProvinsis={selectedProvinsis} 
+          handleAddProv={handleAddProv}
+          handleOpen={handleOpen}
           setSelectedProvinsis={setSelectedProvinsis}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}

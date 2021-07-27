@@ -220,7 +220,7 @@ const ProvinsiAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title="Ubah Provinsi"
+          title= {urlAddProv === 1 ? "Tambah Provinsi" : "Edit Provinsi"}
         />
         <Divider />
         <CardContent>

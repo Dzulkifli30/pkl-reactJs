@@ -56,6 +56,7 @@ const useStyles=makeStyles(theme => ({
 const ProvinsisTable=props => {
   const {
     handleOpenViewMap,
+    handleAddProv,
     className,
     textfind,
     order, orderBy, SettingProvinsi,
@@ -216,9 +217,16 @@ const ProvinsisTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Peranan")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
       ,
-    },
+    },   {
+      name: 'Tambah Provinsi',
+      button: true,
+      cell: row =>
+      <Button className="primary " onClick={(e) => handleAddProv(e,row,"Tambah Provinsi")}>
+         Tambah Provinsi
+      </Button>
+    }
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {

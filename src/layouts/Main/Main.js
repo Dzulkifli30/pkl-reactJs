@@ -83,7 +83,7 @@ const Main=props => {
                       {/*<!-- The user image in the navbar-->*/}
                       {/*<!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->*/}
                       {/*<!-- hidden-xs hides the username on small devices so only the image appears. --> */}
-                      <span className="hidden-xs">User aktif &gt; <b>{localStorage.getItem("NamaLengkap").toString()}</b></span>
+                      <span className="hidden-xs">User aktif &gt; <b>{localStorage.getItem("NamaLengkap")}</b></span>
                     </a>
                     <ul className="dropdown-menu">
                       {/*<!-- The user image in the menu -->*/}

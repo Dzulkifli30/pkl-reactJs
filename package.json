@@ -62,6 +62,7 @@
     "react-scripts": "^4.0.3",
     "recompose": "^0.17.0",
     "serve": "^11.3.0",
+    "styled-components": "^5.3.0",
     "sweetalert": "^2.1.2",
     "underscore": "^1.9.1",
     "use-state-with-callback": "^1.0.18",
