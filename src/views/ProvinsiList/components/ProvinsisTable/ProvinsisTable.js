@@ -219,14 +219,7 @@ const ProvinsisTable=props => {
         <Button color="primary"
           onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
       ,
-    },   {
-      name: 'Tambah Provinsi',
-      button: true,
-      cell: row =>
-      <Button className="primary " onClick={(e) => handleAddProv(e,row,"Tambah Provinsi")}>
-         Tambah Provinsi
-      </Button>
-    }
+    },
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -241,6 +234,9 @@ const ProvinsisTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
+        <Button className="success " onClick={(e) => handleOpen(e,[],"Tambah Provinsi")}>
+         <AddIcon />
+      </Button>
 
       </div>
 

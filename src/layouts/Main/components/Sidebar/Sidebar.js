@@ -84,6 +84,16 @@ const Sidebar=props => {
           href: '/provinsi'
 
         },
+        {
+          title: 'Kabupaten',
+          href: '#'
+
+        },
+        {
+          title: 'Kelurahan',
+          href: '#'
+
+        },
       ]
     }
   ];
