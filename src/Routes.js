@@ -14,10 +14,9 @@ import {
   KabKotaList as KabKotaListView,
   ProductList as ProductListView,
   GroupList as GroupListView,
-
   Typography as TypographyView,
   Icons as IconsView,
-
+  VisitorUser as VisitorUsers,
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
@@ -49,8 +48,6 @@ const Routes=() => {
 
 
 
-
-
       <RouteWithLayout
         component={ProvinsiListView}
         exact
@@ -59,11 +56,18 @@ const Routes=() => {
       />
 
       <RouteWithLayout
+        component={VisitorUsers}
+        exact
+        layout={MainLayout}
+        path="/vuser"
+      />
+
+      <RouteWithLayout
         component={SignUpView}
         exact
         layout={MinimalLayout}
         path="/sign-up"
-      />
+      />  
       <RouteWithLayout
         component={SignInView}
         exact
