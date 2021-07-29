@@ -185,7 +185,7 @@ const ProvinsiAddModi=props => {
 
         handleClose();
         getDataBackend();
-        //alert("Sukses")
+        alert("Sukses")
         const data=res;
       })
       .catch((e) => {
@@ -311,7 +311,7 @@ const ProvinsiAddModi=props => {
         </CardContent>
         <Divider />
         <CardActions>
-          sasasa{!formState.isValid}
+          {!formState.isValid}
           <Button
             color="primary"
             className={classes.buttonSuccess}
@@ -335,7 +335,7 @@ const ProvinsiAddModi=props => {
 };
 
 ProvinsiAddModi.propTypes={
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default ProvinsiAddModi;

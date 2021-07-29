@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 //import styled from 'styled-components';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-
+import { urlDeleteProv } from 'kumpulanUrl';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
@@ -30,6 +31,8 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
+import { async } from 'validate.js';
+import { array } from 'yargs';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -56,7 +59,7 @@ const useStyles=makeStyles(theme => ({
 const ProvinsisTable=props => {
   const {
     handleOpenViewMap,
-    handleAddProv,
+    deleteProvinsi,
     className,
     textfind,
     order, orderBy, SettingProvinsi,
@@ -75,8 +78,19 @@ const ProvinsisTable=props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
+const deleteProv = async (e,selectableRows) => {
+  let url = urlDeleteProv;
+  let response = axios.delete(url + `/${selectableRows}`)
+  console.log(selectableRows)
+
+  if (response === 200) {
+    thisClickedFunda.closest(columns).remove();
+    console.log(response.data.data)
+  }
+  
 
 
+}
 
   const customStyles={
     header: {
@@ -216,17 +230,18 @@ const ProvinsisTable=props => {
       name: 'Edit Provinsi',
       button: true,
       cell: row =>
-        <Button color="primary"
+        <Button color="primary" id="edit"
           onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
       ,
-    },   {
-      name: 'Tambah Provinsi',
+    },
+    {
+      name: 'Hapus Provinsi',
       button: true,
       cell: row =>
-      <Button className="primary " onClick={(e) => handleAddProv(e,row,"Tambah Provinsi")}>
-         Tambah Provinsi
-      </Button>
-    }
+        <Button color="primary" id="delete"
+          onClick={(e) => deleteProv(e, "delete")}  ><p>Hapus</p></Button>
+      ,
+    },
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -240,6 +255,9 @@ const ProvinsisTable=props => {
       <div class="col-md-6">
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
+        </Button>
+        <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Provinsi")}>
+          Tambah Provinsi
         </Button>
 
       </div>
@@ -274,7 +292,7 @@ const ProvinsisTable=props => {
     let selectedProvinsis_var;
 
     if (event.target.checked) {
-      selectedProvinsis_var=provinsis.map(provinsi => provinsi.id);
+      selectedProvinsis_var=provinsis.map(provinsi => id);
     } else {
       selectedProvinsis_var=[];
     }

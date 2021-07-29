@@ -1,1 +1,1 @@
-export { default } from './VisitorUser';
+export { default } from './VisitorUser'

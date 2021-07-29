@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 //import '../../assets/vendor/dist/css/datatable1.css';
 //import { ImportScript } from '../components';
@@ -12,10 +11,11 @@ import { ModalComponent } from 'components';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import mockDataSettingProvinsi from './dataSettingprovinsi';
-import { urlProv, urlAddProv, urlEditProv } from '../../kumpulanUrl'
+import { urlProv, urlAddProv, urlEditProv, urlDeleteProv} from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
+import { async } from 'validate.js';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -102,12 +102,19 @@ const ProvinsiList=props => {
   }
 
 
-  const deleteProvinsi=(e) => {
+  
+
+  const deleteProvinsi=async (e, id) => {
     const selectedProvinsis_string=selectedProvinsis.join("<batas></batas>");
     let provinsis3=provinsis.filter(function (entry) {
       return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-    setfFlteredItems(provinsis3)
+    let url=urlDeleteProv
+    if (url === 200) {
+      // thisClickedFunda.closest("tr").remove();
+      console.log(url.data.message)
+    }
+    setFilteredItems(provinsis3)
     setProvinsis(provinsis3)
     setProvinsifind('')
     //console.log("groups3",groups3);
@@ -306,7 +313,7 @@ const ProvinsiList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'balck' }}>Provinsi</h5>
+      <h5 style={{ color: 'black' }}>Provinsi</h5>
       {/*}
       <ProvinsisToolbar
         handleOpenViewMap={handleOpenViewMap}
@@ -314,14 +321,14 @@ const ProvinsiList=props => {
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
         provinsis={provinsis}
-
       />
   {*/}
       <div className={classes.content}>
         <ProvinsisTable
           handleOpenViewMap={handleOpenViewMap}
-          
+          provinsis = {provinsis}
           onChange={onChangefind}
+          deleteProvinsi={deleteProvinsi}
           SettingProvinsi={SettingProvinsi}
           provinsisExport={provinsisExport}
           filteredItems={filteredItems}

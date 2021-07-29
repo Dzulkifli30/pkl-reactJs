@@ -85,7 +85,12 @@ const Sidebar=props => {
 
         },
       ]
-    }
+    },
+    {
+      title: 'Visitor User',
+      href: '/vuser'
+
+    },
   ];
   return (
 
