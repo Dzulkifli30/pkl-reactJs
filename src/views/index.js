@@ -5,5 +5,7 @@ export { default as Signout } from './Signout';
 export { default as SignUp } from './SignUp';
 
 export { default as ProvinsiList } from './ProvinsiList';
+export { default as KabupatenList } from './KabupatenList';
+export { default as KecamatanList } from './KecamatanList';
 
 

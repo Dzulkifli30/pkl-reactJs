@@ -55,14 +55,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const ProvinsisTable=props => {
+const KabupatenTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
-    textfind,provinsifind,
-    order, orderBy, SettingProvinsi,
-    provinsisExport, filteredItems, handleOpen, selectedProvinsis,
-    setSelectedProvinsis,
+    textfind,kabupatenfind,
+    order, orderBy,
+    provinsisExport, filteredItems, handleOpen, selectedkabupaten,
+    setselectedkabupaten,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -193,6 +193,11 @@ const ProvinsisTable=props => {
 
   const columns=[
     {
+      name: 'Kabupaten ID',
+      selector: 'id_kabupaten',
+      sortable: true,
+    },
+    {
       name: 'Provinsi ID',
       selector: 'id_provinsi',
       sortable: true,
@@ -203,8 +208,8 @@ const ProvinsisTable=props => {
       sortable: true,
     },
     {
-      name: 'Nama Provinsi',
-      selector: 'nama_provinsi',
+      name: 'Nama Kabupaten',
+      selector: 'nama_kabupaten',
       sortable: true,
     },
     {
@@ -214,19 +219,19 @@ const ProvinsisTable=props => {
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
-      name: 'Edit Provinsi',
+      name: 'Edit Kabupaten',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Kabupaten")}  ><EditIcon /></Button>
       ,
     },
     {
-      name: 'Hapus Provinsi',
+      name: 'Hapus Kabupaten',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleDelete(e, row, "Hapus Provinsi")} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e, row, "Hapus Kabupaten")} ><DeleteIcon /></Button>
       ,
     },
   ];
@@ -243,7 +248,7 @@ const ProvinsisTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambahah Provinsi")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Kabupaten")}>
           <AddIcon/>
         </Button>
 
@@ -252,7 +257,7 @@ const ProvinsisTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Provinsi"
+          placeholder="Search Kabupaten"
           textfind={textfind}
         />
       </div>
@@ -276,36 +281,36 @@ const ProvinsisTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedProvinsis_var;
+    let selectedkabupaten_var;
 
     if (event.target.checked) {
-      selectedProvinsis_var=provinsis.map(provinsi => provinsi.id);
+      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedProvinsis_var=[];
+      selectedkabupaten_var=[];
     }
 
-    setSelectedProvinsis(selectedProvinsis_var);
+    setselectedkabupaten(selectedkabupaten_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedProvinsis.indexOf(id);
-    let newSelectedProvinsis=[];
+    const selectedIndex=selectedkabupaten.indexOf(id);
+    let newselectedkabupaten=[];
 
     if (selectedIndex===-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis, id);
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
     } else if (selectedIndex===0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(1));
-    } else if (selectedIndex===selectedProvinsis.length-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(0, -1));
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
+    } else if (selectedIndex===selectedkabupaten.length-1) {
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(
-        selectedProvinsis.slice(0, selectedIndex),
-        selectedProvinsis.slice(selectedIndex+1)
+      newselectedkabupaten=newselectedkabupaten.concat(
+        selectedkabupaten.slice(0, selectedIndex),
+        selectedkabupaten.slice(selectedIndex+1)
       );
     }
 
-    setSelectedProvinsis(newSelectedProvinsis);
+    setselectedkabupaten(newselectedkabupaten);
     //console.log(selectedUsers);
   };
 
@@ -329,11 +334,11 @@ const ProvinsisTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Provinsi List"
+              title="Kabupaten List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_provinsi"
+              keyField="nama_kabupaten"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -353,9 +358,9 @@ const ProvinsisTable=props => {
   );
 };
 
-ProvinsisTable.propTypes={
+KabupatenTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default ProvinsisTable;
+export default KabupatenTable;

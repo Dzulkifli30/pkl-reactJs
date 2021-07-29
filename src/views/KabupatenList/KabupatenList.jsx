@@ -6,13 +6,12 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { ProvinsisToolbar, ProvinsisTable, ProvinsiAddModi, ViewMap } from './components';
+import { KabupatenTable, KabupatenAddModi } from '../KabupatenList/components';
 import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import mockDataSettingProvinsi from './dataSettingprovinsi';
-import { urlProv, urlAddProv, urlEditProv, urlDeleteProv } from '../../kumpulanUrl'
+import { urlKab,urlAddKab,urlEditKab } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -34,7 +33,7 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const ProvinsiList=props => {
+const KabupatenList=props => {
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
@@ -44,9 +43,9 @@ const ProvinsiList=props => {
 
   }
 
-  async function getProv() {
+  async function getKab() {
     const userId=localStorage.getItem('user_id');
-    setFilteredItems(provinsis);
+    setFilteredItems(kabupaten);
     setOpen(false);
 
     /* */
@@ -56,23 +55,23 @@ const ProvinsiList=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetProv=urlProv
+    let urlGetKab=urlKab
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlgetProv, requestOptions)
+    const response=await fetch(urlGetKab, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
         const data=resJson;
-        setProvinsis(data.data);
+        setkabupaten(data.data);
         setFilteredItems(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setProvinsis([]);
+        setkabupaten([]);
         setFilteredItems([]);
         setOpen(false);
         //this.setState({ ...this.state, isFetching: false });
@@ -84,14 +83,14 @@ const ProvinsiList=props => {
 
 
   const deleteProv = async (id) => {
-    let url = urlDeleteProv;
-    try {
-      let response = await axios.delete(url+`${id}`);
-    } catch {
-      e=>{
-        alert("error")
-      }
-    }
+    // let url = urlDeleteProv;
+    // try {
+    //   let response = await axios.delete(url+`${id}`);
+    // } catch {
+    //   e=>{
+    //     alert("error")
+    //   }
+    // }
   }
 
   const csvData=() => {
@@ -113,13 +112,13 @@ const ProvinsiList=props => {
   }
 
 
-  const deleteProvinsi=(e) => {
-    const selectedProvinsis_string=selectedProvinsis.join("<batas></batas>");
-    let provinsis3=provinsis.filter(function (entry) {
-      return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  const deleteKabupaten=(e) => {
+    const selectedkabupaten_string=selectedkabupaten.join("<batas></batas>");
+    let kabupaten3=kabupaten.filter(function (entry) {
+      return entry&&entry.id&&selectedkabupaten_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-    setFilteredItems(provinsis3)
-    setProvinsis(provinsis3)
+    setFilteredItems(kabupaten3)
+    setkabupaten(kabupaten3)
     setProvinsifind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
@@ -128,13 +127,13 @@ const ProvinsiList=props => {
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setProvinsisExport(flteredItems);
+    setkabupatenExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
       doc.setProperties({ title: SettingProvinsi[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#provinsisExport' })
+      doc.autoTable({ html: '#kabupatenExport' })
       var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
       doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
 
@@ -156,14 +155,14 @@ const ProvinsiList=props => {
     // return;
     if (e.target.value.length>=3) {
       setProvinsifind(e.target.value)
-      let provinsis4=provinsis.filter(function (entry) {
+      let kabupaten4=kabupaten.filter(function (entry) {
         return entry&&entry.nama_provinsi&&
           ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(provinsis4)? provinsis4:[provinsis4]);
+      setFilteredItems(Array.isArray(kabupaten4)? kabupaten4:[kabupaten4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(provinsis);
+      setFilteredItems(kabupaten);
     }
     setProvinsifind(e.target.value)
 
@@ -216,23 +215,22 @@ const ProvinsiList=props => {
   }
 
 
-  const [provinsis, setProvinsis]=useState([]);
+  const [kabupaten, setkabupaten]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowProvinsisSelect, setRowProvinsisSelect]=useState({});
+  const [rowkabupatenSelect, setRowkabupatenSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedProvinsis, setSelectedProvinsis]=useState([]);
-  const [provinsisExport, setProvinsisExport]=useState([]);
+  const [selectedkabupaten, setSelectedkabupaten]=useState([]);
+  const [kabupatenExport, setkabupatenExport]=useState([]);
   const [provinsifind, setProvinsifind]=useState([]);
   const [add,setAdd]=React.useState([])
-  const SettingProvinsi=useState(mockDataSettingProvinsi);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
 
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getProv();
+    getKab();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -242,8 +240,8 @@ const ProvinsiList=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedProvinsis({
-      ...setSelectedProvinsis,
+    setSelectedkabupaten({
+      ...setSelectedkabupaten,
       [event.target.name]: event.target.value[0]
     });
 
@@ -251,8 +249,8 @@ const ProvinsiList=props => {
 
 
   const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowProvinsisSelect({
-      ...selectedProvinsis,
+    setRowkabupatenSelect({
+      ...selectedkabupaten,
       [field1]: value1,
 
       [field2]: value2,
@@ -272,7 +270,7 @@ const ProvinsiList=props => {
   const handleOpen=(e, rowProvinsi, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowProvinsisSelect(rowProvinsi);
+    setRowkabupatenSelect(rowProvinsi);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
@@ -282,7 +280,7 @@ const ProvinsiList=props => {
   const handleDelete=(e,rowProvinsi, MessageButton) => {
     setTitle(MessageButton);
     deleteProv()
-    setRowProvinsisSelect(rowProvinsi);
+    setRowkabupatenSelect(rowProvinsi);
   };
 
   /* */
@@ -290,7 +288,7 @@ const ProvinsiList=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowProvinsisSelect(rowProvinsi);
+    //setRowkabupatenSelect(rowProvinsi);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -308,9 +306,9 @@ const ProvinsiList=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getProv}
+      <ModalComponent getDataBackend={getKab}
         handleChange={handleChange} setData={setData}
-        open={open} setRowSelect={setRowProvinsisSelect} rowSelect={rowProvinsisSelect}
+        open={open} setRowSelect={setRowkabupatenSelect} rowSelect={rowkabupatenSelect}
         title={title} datas={filteredItems} handleClose={handleClose} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
@@ -321,32 +319,31 @@ const ProvinsiList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Provinsi</h5>
+      <h5 style={{ color: 'black' }}>Kabupaten</h5>
       {/*}
-      <ProvinsisToolbar
+      <kabupatenToolbar
         handleOpenViewMap={handleOpenViewMap}
         textfind={provinsifind} deleteProvinsi={deleteProvinsi}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        provinsis={provinsis}
+        kabupaten={kabupaten}
 
       />
   {*/}
       <div className={classes.content}>
-        <ProvinsisTable
+        <KabupatenTable
           handleOpenViewMap={handleOpenViewMap}
           handleDelete={handleDelete}
           onChange={onChangefind}
-          SettingProvinsi={SettingProvinsi}
-          provinsisExport={provinsisExport}
+          kabupatenExport={kabupatenExport}
           // deleteProv={deleteProv}
           // deleteProvinsi={deleteProvinsi}
           provinsifind={provinsifind}
           filteredItems={filteredItems}
-          selectedProvinsis={selectedProvinsis} 
+          selectedkabupaten={selectedkabupaten} 
           provinsifind={provinsifind}
           handleOpen={handleOpen}
-          setSelectedProvinsis={setSelectedProvinsis}
+          setSelectedkabupaten={setSelectedkabupaten}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
@@ -354,7 +351,7 @@ const ProvinsiList=props => {
         />
 
 
-      {popupComponen(ProvinsiAddModi)}
+      {popupComponen(KabupatenAddModi)}
 
       </div>
 
@@ -363,4 +360,4 @@ const ProvinsiList=props => {
   );
 };
 
-export default ProvinsiList;
+export default KabupatenList;

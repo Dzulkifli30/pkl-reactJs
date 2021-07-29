@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddProv, urlEditProv } from '../../../../kumpulanUrl';
+import { urlAddKec, urlEditKec } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -26,7 +26,7 @@ const schema={
       maximum: 200
     }
   },
-  nama_provinsi: {
+  nama_kecamatan: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
@@ -66,7 +66,7 @@ const useStyles=makeStyles(theme => ({
   },
 }));
 
-const ProvinsiAddModi=props => {
+const KecamatanAddModi=props => {
   const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest }=props;
 
   const classes=useStyles();
@@ -143,11 +143,11 @@ const ProvinsiAddModi=props => {
 
   const handleSave=(event) => {
     const userId=localStorage.getItem('user_id');
-    let url=urlAddProv;
-    if (rowSelect.id_provinsi===undefined) {
-      url=urlAddProv;
+    let url=urlAddKec;
+    if (rowSelect.id_kecamatan===undefined) {
+      url=urlAddKec;
     } else {
-      url=urlEditProv;
+      url=urlEditKec;
     }
 
     //console.log(body);
@@ -161,8 +161,9 @@ const ProvinsiAddModi=props => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_provinsi": rowSelect.id_provinsi,
-        "nama_provinsi": rowSelect.nama_provinsi,
+        "id_kecamatan": rowSelect.id_kecamatan,
+        "id_kabupaten": rowSelect.id_kabupaten,
+        "nama_kecamatan": rowSelect.nama_kecamatan,
         "IsActive": rowSelect.IsActive,
       })
     };
@@ -217,7 +218,7 @@ const ProvinsiAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title={rowSelect.id_provinsi == undefined ? "Tambah Provinsi" : "Ubah Provinsi"}
+          title={rowSelect.id_kecamatan == undefined ? "Tambah Kecamatan" : "Ubah Kecamatan"}
         />
         <Divider />
         <CardContent>
@@ -245,6 +246,27 @@ const ProvinsiAddModi=props => {
                 variant="outlined"
               />
             </Grid>
+            
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="ID Kabupaten"
+                margin="dense"
+                name="id_kabupaten"
+                onChange={handleChange}
+                helperText={
+                  hasError('id_kabupaten')? formState.errors.id_kabupaten[0]:null
+                }
+
+                error={hasError('id_kabupaten')}
+                defaultValue={rowSelect&&rowSelect.id_kabupaten? rowSelect.id_kabupaten:''}
+                variant="outlined"
+              />
+            </Grid>
 
             <Grid
               item
@@ -254,17 +276,17 @@ const ProvinsiAddModi=props => {
 
               <TextField
                 fullWidth
-                label="Nama provinsi"
+                label="Nama Kecamatan"
                 margin="dense"
-                name="nama_provinsi"
+                name="nama_kecamatan"
                 onChange={handleChange}
                 helperText={
-                  hasError('nama_provinsi')? formState.errors.nama_provinsi[0]:null
+                  hasError('nama_kecamatan')? formState.errors.nama_kecamatan[0]:null
                 }
 
-                error={hasError('nama_provinsi')}
+                error={hasError('nama_kecamatan')}
 
-                defaultValue={rowSelect&&rowSelect.nama_provinsi? rowSelect.nama_provinsi:''}
+                defaultValue={rowSelect&&rowSelect.nama_kecamatan? rowSelect.nama_kecamatan:''}
                 variant="outlined"
               />
             </Grid>
@@ -331,8 +353,8 @@ const ProvinsiAddModi=props => {
   );
 };
 
-ProvinsiAddModi.propTypes={
+KecamatanAddModi.propTypes={
   className: PropTypes.string
 };
 
-export default ProvinsiAddModi;
+export default KecamatanAddModi;

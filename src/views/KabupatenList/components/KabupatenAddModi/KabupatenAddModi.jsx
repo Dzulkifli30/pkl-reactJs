@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddProv, urlEditProv } from '../../../../kumpulanUrl';
+import { urlAddKab, urlEditKab } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -26,7 +26,7 @@ const schema={
       maximum: 200
     }
   },
-  nama_provinsi: {
+  nama_kabupaten: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
@@ -66,7 +66,7 @@ const useStyles=makeStyles(theme => ({
   },
 }));
 
-const ProvinsiAddModi=props => {
+const KabupatenAddModi=props => {
   const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest }=props;
 
   const classes=useStyles();
@@ -143,11 +143,11 @@ const ProvinsiAddModi=props => {
 
   const handleSave=(event) => {
     const userId=localStorage.getItem('user_id');
-    let url=urlAddProv;
-    if (rowSelect.id_provinsi===undefined) {
-      url=urlAddProv;
+    let url=urlAddKab;
+    if (rowSelect.id_kabupaten===undefined) {
+      url=urlAddKab;
     } else {
-      url=urlEditProv;
+      url=urlEditKab;
     }
 
     //console.log(body);
@@ -162,7 +162,8 @@ const ProvinsiAddModi=props => {
       body: JSON.stringify({
         "KodeDepdagri": rowSelect.KodeDepdagri,
         "id_provinsi": rowSelect.id_provinsi,
-        "nama_provinsi": rowSelect.nama_provinsi,
+        "id_kabupaten": rowSelect.id_kabupaten,
+        "nama_kabupaten": rowSelect.nama_kabupaten,
         "IsActive": rowSelect.IsActive,
       })
     };
@@ -217,7 +218,7 @@ const ProvinsiAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title={rowSelect.id_provinsi == undefined ? "Tambah Provinsi" : "Ubah Provinsi"}
+          title={rowSelect.id_kabupaten == undefined ? "Tambah Kabupaten" : "Ubah Kabupaten"}
         />
         <Divider />
         <CardContent>
@@ -245,6 +246,27 @@ const ProvinsiAddModi=props => {
                 variant="outlined"
               />
             </Grid>
+            
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="ID Provinsi"
+                margin="dense"
+                name="id_provinsi"
+                onChange={handleChange}
+                helperText={
+                  hasError('id_provinsi')? formState.errors.id_provinsi[0]:null
+                }
+
+                error={hasError('id_provinsi')}
+                defaultValue={rowSelect&&rowSelect.id_provinsi? rowSelect.id_provinsi:''}
+                variant="outlined"
+              />
+            </Grid>
 
             <Grid
               item
@@ -254,17 +276,17 @@ const ProvinsiAddModi=props => {
 
               <TextField
                 fullWidth
-                label="Nama provinsi"
+                label="Nama Kabupaten"
                 margin="dense"
-                name="nama_provinsi"
+                name="nama_kabupaten"
                 onChange={handleChange}
                 helperText={
-                  hasError('nama_provinsi')? formState.errors.nama_provinsi[0]:null
+                  hasError('nama_kabupaten')? formState.errors.nama_kabupaten[0]:null
                 }
 
-                error={hasError('nama_provinsi')}
+                error={hasError('nama_kabupaten')}
 
-                defaultValue={rowSelect&&rowSelect.nama_provinsi? rowSelect.nama_provinsi:''}
+                defaultValue={rowSelect&&rowSelect.nama_kabupaten? rowSelect.nama_kabupaten:''}
                 variant="outlined"
               />
             </Grid>
@@ -331,8 +353,8 @@ const ProvinsiAddModi=props => {
   );
 };
 
-ProvinsiAddModi.propTypes={
+KabupatenAddModi.propTypes={
   className: PropTypes.string
 };
 
-export default ProvinsiAddModi;
+export default KabupatenAddModi;

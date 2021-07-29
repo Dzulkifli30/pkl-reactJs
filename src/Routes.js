@@ -25,6 +25,8 @@ import {
   NotFound as NotFoundView,
 
   ProvinsiList as ProvinsiListView,
+  KabupatenList as KabupatenListView,
+  KecamatanList as KecamatanListView,
 
 } from './views';
 
@@ -56,6 +58,20 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/provinsi"
+      />
+
+      <RouteWithLayout
+        component={KabupatenListView}
+        exact
+        layout={MainLayout}
+        path="/kabupaten"
+      />
+
+      <RouteWithLayout
+        component={KecamatanListView}
+        exact
+        layout={MainLayout}
+        path="/kecamatan"
       />
 
       <RouteWithLayout
