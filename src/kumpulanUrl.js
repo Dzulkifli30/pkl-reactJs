@@ -11,6 +11,7 @@ export const urlAddProv=ulrport+'provinsi/storeProv'
 export const urlEditProv=ulrport+'provinsi/updateProv'
 
  //Kabupaten
+ export const urlShowKab=ulrport+'kabupaten/showKabupaten'
  export const urlKab=ulrport+'kabupaten/getKabupaten'
 //  export const urlDeleteProv=ulrport+'kabupaten/delete/'
  export const urlAddKab=ulrport+'kabupaten/storeKab'

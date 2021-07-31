@@ -193,18 +193,13 @@ const KabupatenTable=props => {
 
   const columns=[
     {
-      name: 'Kabupaten ID',
-      selector: 'id_kabupaten',
-      sortable: true,
-    },
-    {
-      name: 'Provinsi ID',
-      selector: 'id_provinsi',
-      sortable: true,
-    },
-    {
       name: 'Kode Depdagri',
       selector: 'KodeDepdagri',
+      sortable: true,
+    },
+    {
+      name: 'Nama Provinsi',
+      selector: 'nama_provinsi',
       sortable: true,
     },
     {

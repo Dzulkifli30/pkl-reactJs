@@ -193,18 +193,13 @@ const KecamatanTable=props => {
 
   const columns=[
     {
-      name: 'Kecamatan ID',
-      selector: 'id_kecamatan',
-      sortable: true,
-    },
-    {
-      name: 'Kabupaten ID',
-      selector: 'id_kabupaten',
-      sortable: true,
-    },
-    {
       name: 'Kode Depdagri',
       selector: 'KodeDepdagri',
+      sortable: true,
+    },
+    {
+      name: 'Nama Kabupaten',
+      selector: 'nama_kabupaten',
       sortable: true,
     },
     {

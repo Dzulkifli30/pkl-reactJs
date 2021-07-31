@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddKab, urlEditKab } from '../../../../kumpulanUrl';
+import { urlAddKab, urlEditKab, urlKab, urlProv } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -34,6 +34,13 @@ const schema={
     }
   },
   IsActive: {
+    presence: { allowEmpty: false, message: 'harus diisi' },
+    //email: true,
+    /* length: {
+       maximum: 1
+     }*/
+  },
+  id_provinsi: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     /* length: {
@@ -74,6 +81,7 @@ const KabupatenAddModi=props => {
   const [values, setValues]=useState({});
   const [getStatus, setStatus]=useState([]);
   const [getKeyId, setKeyId]=useState([]);
+  const [prov, setProv] = useState([])
 
   const status=[
     {
@@ -87,6 +95,7 @@ const KabupatenAddModi=props => {
 
 
   ];
+
   const [formState, setFormState]=useState({
     isValid: false,
     values: {},
@@ -97,13 +106,38 @@ const KabupatenAddModi=props => {
 
   ///  const mapRef=createRef();
 
+  async function getProv() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let url=urlProv
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setProv(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setProv([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+
   useEffect(() => {
-    /*
-    if (rowSelect.IsActive==='1') {
-      rowSelect.status='Active'
-    } else if (rowSelect.status==='0') {
-      rowSelect.status='Non Activw'
-    }*/
+    getProv()
+
     const errors=validate(rowSelect, schema);
 
     setFormState(formState => ({
@@ -112,8 +146,6 @@ const KabupatenAddModi=props => {
       errors: errors||{}
     }));
     console.log("formState", formState)
-
-
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
@@ -194,8 +226,6 @@ const KabupatenAddModi=props => {
 
 
       });
-
-
   }
 
 
@@ -254,18 +284,25 @@ const KabupatenAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="ID Provinsi"
+                label="Pilih Provinsi"
                 margin="dense"
                 name="id_provinsi"
                 onChange={handleChange}
-                helperText={
-                  hasError('id_provinsi')? formState.errors.id_provinsi[0]:null
-                }
+                select
 
-                error={hasError('id_provinsi')}
-                defaultValue={rowSelect&&rowSelect.id_provinsi? rowSelect.id_provinsi:''}
+                value={rowSelect.id_provinsi}
                 variant="outlined"
-              />
+              >
+                {prov.map((option)=> (
+                  <option
+                    key={option.id_provinsi}
+                    value={option.id_provinsi}
+                  >
+                    {option.nama_provinsi}
+                  </option>
+                ))}
+
+              </TextField>
             </Grid>
 
             <Grid
