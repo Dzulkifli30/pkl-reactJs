@@ -82,7 +82,14 @@ const Sidebar=props => {
         {
           title: 'Provinsi',
           href: '/provinsi'
-
+        },
+        {
+          title: 'Kabupaten',
+          href: '/kabupaten'
+        },
+        {
+          title: 'Kecamatan',
+          href: '/kecamatan'
         },
         {
           title: 'Kabupaten',

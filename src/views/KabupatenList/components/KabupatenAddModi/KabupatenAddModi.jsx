@@ -395,3 +395,5 @@ KabupatenAddModi.propTypes={
 };
 
 export default KabupatenAddModi;
+export default KabupatenAddModi;
+

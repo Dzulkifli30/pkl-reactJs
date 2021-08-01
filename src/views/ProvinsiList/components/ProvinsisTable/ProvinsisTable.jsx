@@ -13,6 +13,8 @@ import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
 import DataTable from 'react-data-table-component';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 
 import {
   Card,
@@ -60,10 +62,15 @@ const useStyles=makeStyles(theme => ({
 const ProvinsisTable=props => {
   const {
     handleOpenViewMap,
+<<<<<<< HEAD:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.jsx
     deleteProvinsi,
     className,
     getMockData,
     textfind,
+=======
+    className,handleDelete,
+    textfind,provinsifind,
+>>>>>>> b5ac07ddb637768973be99849ab2d110bd9a4d33:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.js
     order, orderBy, SettingProvinsi,
     provinsisExport, filteredItems, handleOpen, selectedProvinsis,
     setSelectedProvinsis,
@@ -253,11 +260,18 @@ const deleteProv = async (e,selectedProvinsis) => {
       name: 'Hapus Provinsi',
       button: true,
       cell: row =>
+<<<<<<< HEAD:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.jsx
         <Button color="primary" id="delete"
           onClick={(e) => deleteProv(e, row)}  ><p>Hapus</p></Button>
       ,
     },
     
+=======
+        <Button color="primary"
+          onClick={(e) => handleDelete(e, row, "Hapus Provinsi")} ><DeleteIcon /></Button>
+      ,
+    },
+>>>>>>> b5ac07ddb637768973be99849ab2d110bd9a4d33:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.js
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -272,10 +286,16 @@ const deleteProv = async (e,selectedProvinsis) => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
+<<<<<<< HEAD:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.jsx
         <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Provinsi")}>
           Tambah Provinsi
         </Button>
 
+=======
+        <Button onClick={(e) => handleOpen(e, [], "Tambahah Provinsi")}>
+          <AddIcon/>
+        </Button>
+>>>>>>> b5ac07ddb637768973be99849ab2d110bd9a4d33:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.js
 
       </div>
 

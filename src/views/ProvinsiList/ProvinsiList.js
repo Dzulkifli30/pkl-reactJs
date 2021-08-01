@@ -12,6 +12,9 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import mockDataSettingProvinsi from './dataSettingprovinsi';
 import { urlProv, urlAddProv, urlEditProv, urlDeleteProv} from '../../kumpulanUrl'
+
+import { urlProv, urlAddProv, urlEditProv, urlDeleteProv } from '../../kumpulanUrl'
+
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -95,6 +98,17 @@ const ProvinsiList=props => {
 
 
 
+  const deleteProv = async (id) => {
+    let url = urlDeleteProv;
+    try {
+      let response = await axios.delete(url+`${id}`);
+    } catch {
+      e=>{
+        alert("error")
+      }
+    }
+  }
+
   const csvData=() => {
     const tempCsv=[];
     const tempCsvItem=[];
@@ -121,17 +135,20 @@ const ProvinsiList=props => {
     let provinsis3=provinsis.filter(function (entry) {
       return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
+
     let url=urlDeleteProv
     if (url === 200) {
       // thisClickedFunda.closest("tr").remove();
       console.log(url.data.message)
     }
+
     setFilteredItems(provinsis3)
     setProvinsis(provinsis3)
     setProvinsifind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
+  
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
@@ -231,7 +248,7 @@ const ProvinsiList=props => {
   const [selectedProvinsis, setSelectedProvinsis]=useState([]);
   const [provinsisExport, setProvinsisExport]=useState([]);
   const [provinsifind, setProvinsifind]=useState([]);
-
+  const [add,setAdd]=React.useState([])
   const SettingProvinsi=useState(mockDataSettingProvinsi);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
@@ -285,6 +302,13 @@ const ProvinsiList=props => {
 
 
   };
+
+  const handleDelete=(e,rowProvinsi, MessageButton) => {
+    setTitle(MessageButton);
+    deleteProv()
+    setRowProvinsisSelect(rowProvinsi);
+  };
+
   /* */
   const handleOpenViewMap=(e, MessageButton) => {
     setOpen(true);
@@ -298,12 +322,7 @@ const ProvinsiList=props => {
 
 
   };
-  const handleAddProv=(e, MessageButton,rowProvinsi) => {
-    setOpen(true);
-    setTitle(MessageButton)
-    // setRowProvinsisSelect(rowProvinsi)
-    // console.log(response.data.data)
-  }
+
   /**/
   //openPopup
   const handleClose=() => {
@@ -316,8 +335,9 @@ const ProvinsiList=props => {
       <ModalComponent getDataBackend={getProv}
         handleChange={handleChange} setData={setData}
         open={open} setRowSelect={setRowProvinsisSelect} rowSelect={rowProvinsisSelect}
-        title={title} datas={filteredItems} handleClose={handleClose}
-        ComponenAddModi={componenPopup}></ModalComponent>
+        title={title} datas={filteredItems} handleClose={handleClose} 
+        ComponenAddModi={componenPopup}>
+         </ModalComponent>
 
     )
   }
@@ -340,13 +360,17 @@ const ProvinsiList=props => {
           handleOpenViewMap={handleOpenViewMap}
           getMockData={getMockData}
           provinsis = {provinsis}
+          handleDelete={handleDelete}
           onChange={onChangefind}
           deleteProvinsi={deleteProvinsi}
           SettingProvinsi={SettingProvinsi}
           provinsisExport={provinsisExport}
+          // deleteProv={deleteProv}
+          // deleteProvinsi={deleteProvinsi}
+          provinsifind={provinsifind}
           filteredItems={filteredItems}
           selectedProvinsis={selectedProvinsis} 
-          handleAddProv={handleAddProv}
+          provinsifind={provinsifind}
           handleOpen={handleOpen}
           setSelectedProvinsis={setSelectedProvinsis}
           Export={Export}
@@ -356,7 +380,7 @@ const ProvinsiList=props => {
         />
 
 
-        {popupComponen(ProvinsiAddModi)}
+      {popupComponen(ProvinsiAddModi)}
 
       </div>
 

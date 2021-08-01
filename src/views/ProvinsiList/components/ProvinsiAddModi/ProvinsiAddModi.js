@@ -105,9 +105,6 @@ const ProvinsiAddModi=props => {
       rowSelect.status='Non Activw'
     }*/
     const errors=validate(rowSelect, schema);
-    console.log(errors)
-    console.log("rowSelect", rowSelect)
-    console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
@@ -172,7 +169,7 @@ const ProvinsiAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-
+    alert(url);
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -221,6 +218,7 @@ const ProvinsiAddModi=props => {
         <CardHeader
           subheader=""
           title= {rowSelect.id_provinsi === 1 ? "Edit Provinsi" : "Tambah Provinsi"}
+          title={rowSelect.id_provinsi == undefined ? "Tambah Provinsi" : "Ubah Provinsi"}
         />
         <Divider />
         <CardContent>
@@ -312,6 +310,7 @@ const ProvinsiAddModi=props => {
         <Divider />
         <CardActions>
           {!formState.isValid}
+         {!formState.isValid}
           <Button
             color="primary"
             className={classes.buttonSuccess}
