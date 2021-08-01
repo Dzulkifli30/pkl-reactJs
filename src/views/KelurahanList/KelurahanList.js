@@ -5,13 +5,13 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { ProvinsisToolbar, ProvinsisTable, ProvinsiAddModi, ViewMap } from './components';
+import { ProvinsisToolbar, KelurahansTable, KelurahanAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
-import mockData from './dataPropinsi';
+//import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import mockDataSettingProvinsi from './dataSettingprovinsi';
-import { urlProv, urlAddProv, urlEditProv, urlDeleteProv} from '../../kumpulanUrl'
+import mockDataSettingKelurahan from './dataSettingkelurahan';
+import { urlKel, urlAddKel, urlEditKel, urlDeleteKel} from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -20,18 +20,6 @@ import { async } from 'validate.js';
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
 //import Fade from "@material-ui/core/Fade";
-
-const getMockData=() =>{
-  mockData.map(mock => {
-    return(
-      <h4>{mock}</h4>
-
-    )
-  })
-  console.log(mockData)
-
-  
-}
 
 const useStyles=makeStyles(theme => ({
   root: {
@@ -46,7 +34,7 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const ProvinsiList=props => {
+const KelurahanList=props => {
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
@@ -56,9 +44,9 @@ const ProvinsiList=props => {
 
   }
 
-  async function getProv() {
+  async function getKel() {
     const userId=localStorage.getItem('user_id');
-    setFilteredItems(provinsis);
+    setFilteredItems(kelurahans);
     setOpen(false);
 
     /* */
@@ -68,23 +56,23 @@ const ProvinsiList=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetProv=urlProv
+    let urlgetKel=urlKel
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlgetProv, requestOptions)
+    const response=await fetch(urlgetKel, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
         const data=resJson;
-        setProvinsis(data.data);
+        setKelurahans(data.data);
         setFilteredItems(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setProvinsis([]);
+        setKelurahans([]);
         setFilteredItems([]);
         setOpen(false);
         //this.setState({ ...this.state, isFetching: false });
@@ -101,7 +89,7 @@ const ProvinsiList=props => {
 
     //];
 
-    SettingProvinsi[0].HeaderData.map(headCell => {
+    SettingKelurahan[0].HeaderData.map(headCell => {
       tempCsvItem.push(
         headCell.label
       )
@@ -116,36 +104,36 @@ const ProvinsiList=props => {
 
   
 
-  const deleteProvinsi=async (e, id) => {
-    const selectedProvinsis_string=selectedProvinsis.join("<batas></batas>");
-    let provinsis3=provinsis.filter(function (entry) {
-      return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  const deleteKelurahan=async (e, id) => {
+    const selectedKelurahans_string=selectedKelurahans.join("<batas></batas>");
+    let kelurahans3=kelurahans.filter(function (entry) {
+      return entry&&entry.id&&selectedKelurahans_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
     let url=urlDeleteProv
     if (url === 200) {
       // thisClickedFunda.closest("tr").remove();
       console.log(url.data.message)
     }
-    setFilteredItems(provinsis3)
-    setProvinsis(provinsis3)
-    setProvinsifind('')
+    setFilteredItems(kelurahans3)
+    setKelurahans(kelurahans3)
+    setKelurahanfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setProvinsisExport(flteredItems);
+    setKelurahansExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
-      doc.setProperties({ title: SettingProvinsi[0].TitleModule });
+      doc.setProperties({ title: SettingKelurahan[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#provinsisExport' })
-      var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
-      doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
+      doc.autoTable({ html: '#kelurahanExport' })
+      var posis_x=(doc.previousAutoTable.width-(SettingKelurahan[0].TitleModule).length)/2
+      doc.text(SettingKelurahan[0].TitleModule, posis_x, 6);
 
-      doc.save('provinsi.pdf')
+      doc.save('kelurahan.pdf')
     }, 2000);
     return () => clearTimeout(timer);
 
@@ -162,17 +150,17 @@ const ProvinsiList=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setProvinsifind(e.target.value)
-      let provinsis4=provinsis.filter(function (entry) {
+      setKelurahanfind(e.target.value)
+      let kelurahans4=kelurahans.filter(function (entry) {
         return entry&&entry.nama_provinsi&&
           ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(provinsis4)? provinsis4:[provinsis4]);
+      setFilteredItems(Array.isArray(kelurahans4)? kelurahans4:[kelurahans4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(provinsis);
+      setFilteredItems(kelurahans);
     }
-    setProvinsifind(e.target.value)
+    setKelurahanfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -223,23 +211,23 @@ const ProvinsiList=props => {
   }
 
 
-  const [provinsis, setProvinsis]=useState([]);
+  const [kelurahans, setKelurahans]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowProvinsisSelect, setRowProvinsisSelect]=useState({});
+  const [rowKelurahansSelect, setRowKelurahanSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedProvinsis, setSelectedProvinsis]=useState([]);
-  const [provinsisExport, setProvinsisExport]=useState([]);
-  const [provinsifind, setProvinsifind]=useState([]);
+  const [selectedKelurahans, setSelectedKelurahans]=useState([]);
+  const [kelurahansExport, setKelurahansExport]=useState([]);
+  const [kelurahanfind, setKelurahanfind]=useState([]);
 
-  const SettingProvinsi=useState(mockDataSettingProvinsi);
+  const SettingKelurahan=useState(mockDataSettingKelurahan);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
 
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getProv();
+    getKel();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -249,22 +237,22 @@ const ProvinsiList=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedProvinsis({
-      ...setSelectedProvinsis,
+    setSelectedKelurahans({
+      ...setSelectedKelurahans,
       [event.target.name]: event.target.value[0]
     });
 
   };
 
 
-  const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowProvinsisSelect({
-      ...selectedProvinsis,
+  const setData=(field1, value1, field2, value2, nmKelurahan, kdKelurahan, status, keyId) => {
+    setRowKelurahanSelect({
+      ...selectedKelurahans,
       [field1]: value1,
 
       [field2]: value2,
-      ['kdProvinsi']: kdProvinsi,
-      ['nmProvinsi']: nmProvinsi,
+      ['kdKelurahan']: kdKelurahan,
+      ['nmKelurahan']: nmKelurahan,
       ['status']: status,
       ['keyId']: keyId,
     });
@@ -276,10 +264,10 @@ const ProvinsiList=props => {
   };
 
 
-  const handleOpen=(e, rowProvinsi, MessageButton) => {
+  const handleOpen=(e, rowKelurahan, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowProvinsisSelect(rowProvinsi);
+    setRowKelurahanSelect(rowKelurahan);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
@@ -290,7 +278,7 @@ const ProvinsiList=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowProvinsisSelect(rowProvinsi);
+    //setRowKelurahanSelect(rowKelurahan);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -298,10 +286,10 @@ const ProvinsiList=props => {
 
 
   };
-  const handleAddProv=(e, MessageButton,rowProvinsi) => {
+  const handleAddProv=(e, MessageButton,rowKelurahan) => {
     setOpen(true);
     setTitle(MessageButton)
-    // setRowProvinsisSelect(rowProvinsi)
+    // setRowKelurahanSelect(rowKelurahan)
     // console.log(response.data.data)
   }
   /**/
@@ -313,9 +301,9 @@ const ProvinsiList=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getProv}
+      <ModalComponent getDataBackend={getKel}
         handleChange={handleChange} setData={setData}
-        open={open} setRowSelect={setRowProvinsisSelect} rowSelect={rowProvinsisSelect}
+        open={open} setRowSelect={setRowKelurahanSelect} rowSelect={rowKelurahansSelect}
         title={title} datas={filteredItems} handleClose={handleClose}
         ComponenAddModi={componenPopup}></ModalComponent>
 
@@ -325,30 +313,29 @@ const ProvinsiList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Provinsi</h5>
+      <h5 style={{ color: 'black' }}>Kelurahan</h5>
       {/*}
       <ProvinsisToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={provinsifind} deleteProvinsi={deleteProvinsi}
+        textfind={kelurahanfind} deleteKelurahan={deleteKelurahan}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        provinsis={provinsis}
+        kelurahans={kelurahans}
       />
   {*/}
       <div className={classes.content}>
-        <ProvinsisTable
+        <KelurahansTable
           handleOpenViewMap={handleOpenViewMap}
-          getMockData={getMockData}
-          provinsis = {provinsis}
+          kelurahans = {kelurahans}
           onChange={onChangefind}
-          deleteProvinsi={deleteProvinsi}
-          SettingProvinsi={SettingProvinsi}
-          provinsisExport={provinsisExport}
+          deleteKelurahan={deleteKelurahan}
+          SettingKelurahan={SettingKelurahan}
+          kelurahansExport={kelurahansExport}
           filteredItems={filteredItems}
-          selectedProvinsis={selectedProvinsis} 
+          selectedKelurahans={selectedKelurahans} 
           handleAddProv={handleAddProv}
           handleOpen={handleOpen}
-          setSelectedProvinsis={setSelectedProvinsis}
+          setSelectedKelurahans={setSelectedKelurahans}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
@@ -356,7 +343,7 @@ const ProvinsiList=props => {
         />
 
 
-        {popupComponen(ProvinsiAddModi)}
+        {popupComponen(KelurahanAddModi)}
 
       </div>
 
@@ -365,4 +352,4 @@ const ProvinsiList=props => {
   );
 };
 
-export default ProvinsiList;
+export default KelurahanList;

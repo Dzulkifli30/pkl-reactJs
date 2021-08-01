@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddProv, urlEditProv } from '../../../../kumpulanUrl';
+import { urlAddKec, urlEditKec, urlKab, urlProv, urlShowKab } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -26,7 +26,7 @@ const schema={
       maximum: 200
     }
   },
-  nama_provinsi: {
+  nama_kecamatan: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
@@ -66,14 +66,16 @@ const useStyles=makeStyles(theme => ({
   },
 }));
 
-const ProvinsiAddModi=props => {
-  const { className, setData, getDataBackend,getMockData, setRowSelect, rowSelect, title, ...rest }=props;
+const KecamatanAddModi=props => {
+  const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest }=props;
 
   const classes=useStyles();
 
   const [values, setValues]=useState({});
   const [getStatus, setStatus]=useState([]);
   const [getKeyId, setKeyId]=useState([]);
+  const [kabupaten, setkabupaten]=useState([]);
+  const [prov, setProv]=useState([]);
 
   const status=[
     {
@@ -94,10 +96,100 @@ const ProvinsiAddModi=props => {
     errors: {}
   });
 
+  async function showKab(id_provinsi) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_provinsi": id_provinsi,
+      })
+    };
+
+    let urlShow=urlShowKab
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('kabupaten =',data.data)
+        setkabupaten(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setkabupaten([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function getKab() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let urlGetKabAll=urlKab
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlGetKabAll, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setkabupaten(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setkabupaten([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function getProv() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let urlGetProv=urlProv
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlGetProv, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setProv(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setProv([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
 
   ///  const mapRef=createRef();
 
   useEffect(() => {
+    // getKab()
+    getProv()
     /*
     if (rowSelect.IsActive==='1') {
       rowSelect.status='Active'
@@ -105,9 +197,6 @@ const ProvinsiAddModi=props => {
       rowSelect.status='Non Activw'
     }*/
     const errors=validate(rowSelect, schema);
-    console.log(errors)
-    console.log("rowSelect", rowSelect)
-    console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
@@ -120,6 +209,10 @@ const ProvinsiAddModi=props => {
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
+  const handleChangeProvinsi=event=> {
+    handleChange(event)
+    showKab(event.target.value)
+  }
 
   const handleChange=event => {
 
@@ -146,17 +239,14 @@ const ProvinsiAddModi=props => {
 
   const handleSave=(event) => {
     const userId=localStorage.getItem('user_id');
-    let url=urlAddProv;
-    if (rowSelect.id_provinsi===undefined) {
-      url=urlAddProv;
+    let url=urlAddKec;
+    if (rowSelect.id_kecamatan===undefined) {
+      url=urlAddKec;
     } else {
-      url=urlEditProv;
+      url=urlEditKec;
     }
 
     //console.log(body);
-
-
-
 
     const requestOptions={
       method: 'POST',
@@ -164,15 +254,16 @@ const ProvinsiAddModi=props => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_provinsi": rowSelect.id_provinsi,
-        "nama_provinsi": rowSelect.nama_provinsi,
+        "id_kecamatan": rowSelect.id_kecamatan,
+        "id_kabupaten": rowSelect.id_kabupaten,
+        "nama_kecamatan": rowSelect.nama_kecamatan,
         "IsActive": rowSelect.IsActive,
       })
     };
 
 
     ///let urlGetData=urlPostLogin
-
+    alert(url);
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -185,7 +276,7 @@ const ProvinsiAddModi=props => {
 
         handleClose();
         getDataBackend();
-        alert("Sukses")
+        //alert("Sukses")
         const data=res;
       })
       .catch((e) => {
@@ -199,6 +290,8 @@ const ProvinsiAddModi=props => {
 
 
   }
+
+  
 
 
 
@@ -220,7 +313,7 @@ const ProvinsiAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title= {rowSelect.id_provinsi === 1 ? "Edit Provinsi" : "Tambah Provinsi"}
+          title={rowSelect.id_kecamatan == undefined ? "Tambah Kecamatan" : "Ubah Kecamatan"}
         />
         <Divider />
         <CardContent>
@@ -254,20 +347,86 @@ const ProvinsiAddModi=props => {
               md={6}
               xs={12}
             >
+              <TextField
+                fullWidth
+                label="Pilih Provinsi"
+                margin="dense"
+                name="id_provinsi"
+                onChange={handleChangeProvinsi}
+                //required
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                //SelectProps={{ native: true }}
+
+                //defaultValue={rowSelect.IsActive}
+                value={rowSelect.id_provinsi}
+                variant="outlined"
+              >
+                {prov.map(option => (
+                  <option
+                    key={option.id_provinsi}
+                    value={option.id_provinsi}
+                  >
+                    {option.nama_provinsi}
+                  </option>
+                ))}
+
+              </TextField>
+
+            </Grid>
+            
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Pilih Kabupaten"
+                margin="dense"
+                name="id_kabupaten"
+                onChange={handleChange}
+                //required
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                //SelectProps={{ native: true }}
+
+                //defaultValue={rowSelect.IsActive}
+                value={rowSelect.id_kabupaten}
+                variant="outlined"
+              >
+                {kabupaten.map(option => (
+                  <option
+                    key={option.id_kabupaten}
+                    value={option.id_kabupaten}
+                  >
+                    {option.nama_kabupaten}
+                  </option>
+                ))}
+
+              </TextField>
+
+            </Grid>
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
 
               <TextField
                 fullWidth
-                label="Nama provinsi"
+                label="Nama Kecamatan"
                 margin="dense"
-                name="nama_provinsi"
+                name="nama_kecamatan"
                 onChange={handleChange}
                 helperText={
-                  hasError('nama_provinsi')? formState.errors.nama_provinsi[0]:null
+                  hasError('nama_kecamatan')? formState.errors.nama_kecamatan[0]:null
                 }
 
-                error={hasError('nama_provinsi')}
+                error={hasError('nama_kecamatan')}
 
-                defaultValue={rowSelect&&rowSelect.nama_provinsi? rowSelect.nama_provinsi:''}
+                defaultValue={rowSelect&&rowSelect.nama_kecamatan? rowSelect.nama_kecamatan:''}
                 variant="outlined"
               />
             </Grid>
@@ -311,7 +470,7 @@ const ProvinsiAddModi=props => {
         </CardContent>
         <Divider />
         <CardActions>
-          {!formState.isValid}
+         {!formState.isValid}
           <Button
             color="primary"
             className={classes.buttonSuccess}
@@ -334,8 +493,8 @@ const ProvinsiAddModi=props => {
   );
 };
 
-ProvinsiAddModi.propTypes={
-  className: PropTypes.string,
+KecamatanAddModi.propTypes={
+  className: PropTypes.string
 };
 
-export default ProvinsiAddModi;
+export default KecamatanAddModi;

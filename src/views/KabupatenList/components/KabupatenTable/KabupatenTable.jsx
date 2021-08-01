@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 //import styled from 'styled-components';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-import { urlDeleteProv } from 'kumpulanUrl';
-import swal from 'sweetalert';
+
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
 import DataTable from 'react-data-table-component';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 
 import {
   Card,
@@ -32,8 +32,6 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
-import { async } from 'validate.js';
-import { array } from 'yargs';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -57,16 +55,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const ProvinsisTable=props => {
+const KabupatenTable=props => {
   const {
     handleOpenViewMap,
-    deleteProvinsi,
-    className,
-    getMockData,
-    textfind,
-    order, orderBy, SettingProvinsi,
-    provinsisExport, filteredItems, handleOpen, selectedProvinsis,
-    setSelectedProvinsis,
+    className,handleDelete,
+    textfind,kabupatenfind,
+    order, orderBy,
+    provinsisExport, filteredItems, handleOpen, selectedkabupaten,
+    setselectedkabupaten,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -80,32 +76,8 @@ const ProvinsisTable=props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
-const deleteProv = async (e,selectedProvinsis) => {
-  swal( {
-    title: "Anda Yakin?",
-    text:'',
-    icon: 'warning',
-    buttons:true,
-    dangerMode:true
-  }).then( (willDelete) => {
-      if (willDelete) {
-        let url = urlDeleteProv;
-        let response = axios.delete(url + `/${selectedProvinsis.id_provinsi}`)
-        console.log(selectedProvinsis),{
-          onSuccess:() => {
-            swal("Data Sudah Terhapus",'Halaman Di Refresh Ya!!')
-          }
-        }
-      }
-  
- 
-  })
 
 
-  
-
-
-}
 
   const customStyles={
     header: {
@@ -221,11 +193,6 @@ const deleteProv = async (e,selectedProvinsis) => {
 
   const columns=[
     {
-      name: 'Provinsi ID',
-      selector: 'id_provinsi',
-      sortable: true,
-    },
-    {
       name: 'Kode Depdagri',
       selector: 'KodeDepdagri',
       sortable: true,
@@ -236,28 +203,32 @@ const deleteProv = async (e,selectedProvinsis) => {
       sortable: true,
     },
     {
+      name: 'Nama Kabupaten',
+      selector: 'nama_kabupaten',
+      sortable: true,
+    },
+    {
       name: 'Keterangan',
       selector: 'IsActive',
       sortable: true,
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
-      name: 'Edit Provinsi',
+      name: 'Edit Kabupaten',
       button: true,
       cell: row =>
-        <Button color="primary" id="edit"
-          onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
+        <Button color="primary"
+          onClick={(e) => handleOpen(e, row, "Ubah Kabupaten")}  ><EditIcon /></Button>
       ,
     },
     {
-      name: 'Hapus Provinsi',
+      name: 'Hapus Kabupaten',
       button: true,
       cell: row =>
-        <Button color="primary" id="delete"
-          onClick={(e) => deleteProv(e, row)}  ><p>Hapus</p></Button>
+        <Button color="primary"
+          onClick={(e) => handleDelete(e, row, "Hapus Kabupaten")} ><DeleteIcon /></Button>
       ,
     },
-    
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -272,17 +243,16 @@ const deleteProv = async (e,selectedProvinsis) => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Provinsi")}>
-          Tambah Provinsi
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Kabupaten")}>
+          <AddIcon/>
         </Button>
-
 
       </div>
 
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Provinsi"
+          placeholder="Search Kabupaten"
           textfind={textfind}
         />
       </div>
@@ -306,36 +276,36 @@ const deleteProv = async (e,selectedProvinsis) => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedProvinsis_var;
+    let selectedkabupaten_var;
 
     if (event.target.checked) {
-      selectedProvinsis_var=provinsis.map(provinsi => id);
+      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedProvinsis_var=[];
+      selectedkabupaten_var=[];
     }
 
-    setSelectedProvinsis(selectedProvinsis_var);
+    setselectedkabupaten(selectedkabupaten_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedProvinsis.indexOf(id);
-    let newSelectedProvinsis=[];
+    const selectedIndex=selectedkabupaten.indexOf(id);
+    let newselectedkabupaten=[];
 
     if (selectedIndex===-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis, id);
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
     } else if (selectedIndex===0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(1));
-    } else if (selectedIndex===selectedProvinsis.length-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(0, -1));
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
+    } else if (selectedIndex===selectedkabupaten.length-1) {
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(
-        selectedProvinsis.slice(0, selectedIndex),
-        selectedProvinsis.slice(selectedIndex+1)
+      newselectedkabupaten=newselectedkabupaten.concat(
+        selectedkabupaten.slice(0, selectedIndex),
+        selectedkabupaten.slice(selectedIndex+1)
       );
     }
 
-    setSelectedProvinsis(newSelectedProvinsis);
+    setselectedkabupaten(newselectedkabupaten);
     //console.log(selectedUsers);
   };
 
@@ -359,11 +329,11 @@ const deleteProv = async (e,selectedProvinsis) => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Provinsi List"
+              title="Kabupaten List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_provinsi"
+              keyField="nama_kabupaten"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -383,9 +353,9 @@ const deleteProv = async (e,selectedProvinsis) => {
   );
 };
 
-ProvinsisTable.propTypes={
+KabupatenTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default ProvinsisTable;
+export default KabupatenTable;

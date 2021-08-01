@@ -22,6 +22,9 @@ import {
   SignIn as SignInView,
   Signout as SignoutView,
   NotFound as NotFoundView,
+  KelurahanList as KelurahanListView,
+  KabupatenList as KabupatenListView,
+  KecamatanList as KecamatanListView,
 
   ProvinsiList as ProvinsiListView,
 
@@ -55,11 +58,31 @@ const Routes=() => {
         path="/provinsi"
       />
 
+    <RouteWithLayout
+        component={KabupatenListView}
+        exact
+        layout={MainLayout}
+        path="/kabupaten"
+      />
+      
+      <RouteWithLayout
+        component={KecamatanListView}
+        exact
+        layout={MainLayout}
+        path="/kecamatan"
+      />
       <RouteWithLayout
         component={VisitorUsers}
         exact
         layout={MainLayout}
         path="/vuser"
+      />
+      
+      <RouteWithLayout
+        component={KelurahanListView}
+        exact
+        layout={MainLayout}
+        path="/kelurahan"
       />
 
       <RouteWithLayout
