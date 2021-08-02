@@ -5,15 +5,16 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { KecamatanTable, KecamatanAddModi } from '../KecamatanList/components';
+import { ProvinsisToolbar, KelurahansTable, KelurahanAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKec,urlAddKec,urlEditKec } from '../../kumpulanUrl'
+import { urlKel, urlAddKel, urlEditKel, urlDeleteKel} from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
+import { async } from 'validate.js';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -32,7 +33,7 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const KecamatanList=props => {
+const KelurahanList=props => {
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
@@ -42,9 +43,9 @@ const KecamatanList=props => {
 
   }
 
-  async function getKec() {
+  async function getKel() {
     const userId=localStorage.getItem('user_id');
-    setFilteredItems(kecamatan);
+    setFilteredItems(kelurahans);
     setOpen(false);
 
     /* */
@@ -54,23 +55,23 @@ const KecamatanList=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetKec=urlKec
+    let urlgetKel=urlKel
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlgetKec, requestOptions)
+    const response=await fetch(urlgetKel, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
         const data=resJson;
-        setkecamatan(data.data);
+        setKelurahans(data.data);
         setFilteredItems(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setkecamatan([]);
+        setKelurahans([]);
         setFilteredItems([]);
         setOpen(false);
         //this.setState({ ...this.state, isFetching: false });
@@ -81,24 +82,13 @@ const KecamatanList=props => {
 
 
 
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
-  }
-
   const csvData=() => {
     const tempCsv=[];
     const tempCsvItem=[];
 
     //];
 
-    SettingProvinsi[0].HeaderData.map(headCell => {
+    SettingKelurahan[0].HeaderData.map(headCell => {
       tempCsvItem.push(
         headCell.label
       )
@@ -111,32 +101,38 @@ const KecamatanList=props => {
   }
 
 
-  const deleteKecamatan=(e) => {
-    const selectedkecamatan_string=selectedkecamatan.join("<batas></batas>");
-    let kecamatan3=kecamatan.filter(function (entry) {
-      return entry&&entry.id&&selectedkecamatan_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  
+
+  const deleteKelurahan=async (e, id) => {
+    const selectedKelurahans_string=selectedKelurahans.join("<batas></batas>");
+    let kelurahans3=kelurahans.filter(function (entry) {
+      return entry&&entry.id&&selectedKelurahans_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-    setFilteredItems(kecamatan3)
-    setkecamatan(kecamatan3)
-    setProvinsifind('')
+    let url=urlDeleteProv
+    if (url === 200) {
+      // thisClickedFunda.closest("tr").remove();
+      console.log(url.data.message)
+    }
+    setFilteredItems(kelurahans3)
+    setKelurahans(kelurahans3)
+    setKelurahanfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
-  
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setkecamatanExport(flteredItems);
+    setKelurahansExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
-      doc.setProperties({ title: SettingProvinsi[0].TitleModule });
+      doc.setProperties({ title: SettingKelurahan[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#kecamatanExport' })
-      var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
-      doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
+      doc.autoTable({ html: '#kelurahanExport' })
+      var posis_x=(doc.previousAutoTable.width-(SettingKelurahan[0].TitleModule).length)/2
+      doc.text(SettingKelurahan[0].TitleModule, posis_x, 6);
 
-      doc.save('provinsi.pdf')
+      doc.save('kelurahan.pdf')
     }, 2000);
     return () => clearTimeout(timer);
 
@@ -153,17 +149,17 @@ const KecamatanList=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setProvinsifind(e.target.value)
-      let kecamatan4=kecamatan.filter(function (entry) {
+      setKelurahanfind(e.target.value)
+      let kelurahans4=kelurahans.filter(function (entry) {
         return entry&&entry.nama_provinsi&&
           ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(kecamatan4)? kecamatan4:[kecamatan4]);
+      setFilteredItems(Array.isArray(kelurahans4)? kelurahans4:[kelurahans4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(kecamatan);
+      setFilteredItems(kelurahans);
     }
-    setProvinsifind(e.target.value)
+    setKelurahanfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -214,22 +210,21 @@ const KecamatanList=props => {
   }
 
 
-  const [kecamatan, setkecamatan]=useState([]);
+  const [kelurahans, setKelurahans]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowkecamatanSelect, setRowkecamatanSelect]=useState({});
+  const [rowKelurahansSelect, setRowKelurahanSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedkecamatan, setSelectedkecamatan]=useState([]);
-  const [kecamatanExport, setkecamatanExport]=useState([]);
-  const [provinsifind, setProvinsifind]=useState([]);
-  const [add,setAdd]=React.useState([])
+  const [selectedKelurahans, setSelectedKelurahans]=useState([]);
+  const [kelurahansExport, setKelurahansExport]=useState([]);
+  const [kelurahanfind, setKelurahanfind]=useState([]);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
 
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getKec();
+    getKel();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -239,22 +234,22 @@ const KecamatanList=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedkecamatan({
-      ...setSelectedkecamatan,
+    setSelectedKelurahans({
+      ...setSelectedKelurahans,
       [event.target.name]: event.target.value[0]
     });
 
   };
 
 
-  const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowkecamatanSelect({
-      ...selectedkecamatan,
+  const setData=(field1, value1, field2, value2, nmKelurahan, kdKelurahan, status, keyId) => {
+    setRowKelurahanSelect({
+      ...selectedKelurahans,
       [field1]: value1,
 
       [field2]: value2,
-      ['kdProvinsi']: kdProvinsi,
-      ['nmProvinsi']: nmProvinsi,
+      ['kdKelurahan']: kdKelurahan,
+      ['nmKelurahan']: nmKelurahan,
       ['status']: status,
       ['keyId']: keyId,
     });
@@ -266,28 +261,21 @@ const KecamatanList=props => {
   };
 
 
-  const handleOpen=(e, rowProvinsi, MessageButton) => {
+  const handleOpen=(e, rowKelurahan, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowkecamatanSelect(rowProvinsi);
+    setRowKelurahanSelect(rowKelurahan);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
 
   };
-
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowkecamatanSelect(rowProvinsi);
-  };
-
   /* */
   const handleOpenViewMap=(e, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowkecamatanSelect(rowProvinsi);
+    //setRowKelurahanSelect(rowKelurahan);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -295,7 +283,12 @@ const KecamatanList=props => {
 
 
   };
-
+  const handleAddProv=(e, MessageButton,rowKelurahan) => {
+    setOpen(true);
+    setTitle(MessageButton)
+    // setRowKelurahanSelect(rowKelurahan)
+    // console.log(response.data.data)
+  }
   /**/
   //openPopup
   const handleClose=() => {
@@ -305,12 +298,11 @@ const KecamatanList=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getKec}
+      <ModalComponent getDataBackend={getKel}
         handleChange={handleChange} setData={setData}
-        open={open} setRowSelect={setRowkecamatanSelect} rowSelect={rowkecamatanSelect}
-        title={title} datas={filteredItems} handleClose={handleClose} 
-        ComponenAddModi={componenPopup}>
-         </ModalComponent>
+        open={open} setRowSelect={setRowKelurahanSelect} rowSelect={rowKelurahansSelect}
+        title={title} datas={filteredItems} handleClose={handleClose}
+        ComponenAddModi={componenPopup}></ModalComponent>
 
     )
   }
@@ -318,30 +310,28 @@ const KecamatanList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Kecamatan</h5>
+      <h5 style={{ color: 'black' }}>Kelurahan</h5>
       {/*}
-      <kecamatanToolbar
+      <ProvinsisToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={provinsifind} deleteProvinsi={deleteProvinsi}
+        textfind={kelurahanfind} deleteKelurahan={deleteKelurahan}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        kecamatan={kecamatan}
+        kelurahans={kelurahans}
       />
   {*/}
       <div className={classes.content}>
-        <KecamatanTable
+        <KelurahansTable
           handleOpenViewMap={handleOpenViewMap}
-          handleDelete={handleDelete}
+          kelurahans = {kelurahans}
           onChange={onChangefind}
-          kecamatanExport={kecamatanExport}
-          // deleteProv={deleteProv}
-          // deleteProvinsi={deleteProvinsi}
-          provinsifind={provinsifind}
+          deleteKelurahan={deleteKelurahan}
+          kelurahansExport={kelurahansExport}
           filteredItems={filteredItems}
-          selectedkecamatan={selectedkecamatan} 
-          provinsifind={provinsifind}
+          selectedKelurahans={selectedKelurahans} 
+          handleAddProv={handleAddProv}
           handleOpen={handleOpen}
-          setSelectedkecamatan={setSelectedkecamatan}
+          setSelectedKelurahans={setSelectedKelurahans}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
@@ -349,7 +339,7 @@ const KecamatanList=props => {
         />
 
 
-      {popupComponen(KecamatanAddModi)}
+        {popupComponen(KelurahanAddModi)}
 
       </div>
 
@@ -358,4 +348,4 @@ const KecamatanList=props => {
   );
 };
 
-export default KecamatanList;
+export default KelurahanList;

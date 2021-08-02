@@ -55,14 +55,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const KecamatanTable=props => {
+const RwTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
-    textfind,kecamatanfind,
+    textfind,rwfind,
     order, orderBy,
-    kecamatanExport, filteredItems, handleOpen, selectedkecamatan,
-    setselectedkecamatan,
+    provinsisExport, filteredItems, handleOpen, selectedrw,
+    setselectedrw,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -193,18 +193,23 @@ const KecamatanTable=props => {
 
   const columns=[
     {
+      name: 'Rw ID',
+      selector: 'id_rw',
+      sortable: true,
+    },
+    {
+      name: 'Nama Rw',
+      selector: 'nama_rw',
+      sortable: true,
+    },
+    {
       name: 'Kode Depdagri',
       selector: 'KodeDepdagri',
       sortable: true,
     },
     {
-      name: 'Nama Kabupaten',
-      selector: 'nama_kabupaten',
-      sortable: true,
-    },
-    {
-      name: 'Nama Kecamatan',
-      selector: 'nama_kecamatan',
+      name: 'Kelurahan ID',
+      selector: 'id_kelurahan',
       sortable: true,
     },
     {
@@ -214,19 +219,19 @@ const KecamatanTable=props => {
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
-      name: 'Edit Kecamatan',
+      name: 'Edit Rw',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Kecamatan")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Rw")}  ><EditIcon /></Button>
       ,
     },
     {
-      name: 'Hapus Kecamatan',
+      name: 'Hapus Rw',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleDelete(e, row, "Hapus Kecamatan")} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e, row, "Hapus Rw")} ><DeleteIcon /></Button>
       ,
     },
   ];
@@ -243,7 +248,7 @@ const KecamatanTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Kecamatan")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Rw")}>
           <AddIcon/>
         </Button>
 
@@ -252,7 +257,7 @@ const KecamatanTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Kecamatan"
+          placeholder="Search Rw"
           textfind={textfind}
         />
       </div>
@@ -276,36 +281,36 @@ const KecamatanTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedkecamatan_var;
+    let selectedrw_var;
 
     if (event.target.checked) {
-      selectedkecamatan_var=provinsis.map(provinsi => provinsi.id);
+      selectedrw_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedkecamatan_var=[];
+      selectedrw_var=[];
     }
 
-    setselectedkecamatan(selectedkecamatan_var);
+    setselectedrw(selectedrw_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedkecamatan.indexOf(id);
-    let newselectedkecamatan=[];
+    const selectedIndex=selectedrw.indexOf(id);
+    let newselectedrw=[];
 
     if (selectedIndex===-1) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan, id);
+      newselectedrw=newselectedrw.concat(selectedrw, id);
     } else if (selectedIndex===0) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(1));
-    } else if (selectedIndex===selectedkecamatan.length-1) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(0, -1));
+      newselectedrw=newselectedrw.concat(selectedrw.slice(1));
+    } else if (selectedIndex===selectedrw.length-1) {
+      newselectedrw=newselectedrw.concat(selectedrw.slice(0, -1));
     } else if (selectedIndex>0) {
-      newselectedkecamatan=newselectedkecamatan.concat(
-        selectedkecamatan.slice(0, selectedIndex),
-        selectedkecamatan.slice(selectedIndex+1)
+      newselectedrw=newselectedrw.concat(
+        selectedrw.slice(0, selectedIndex),
+        selectedrw.slice(selectedIndex+1)
       );
     }
 
-    setselectedkecamatan(newselectedkecamatan);
+    setselectedrw(newselectedrw);
     //console.log(selectedUsers);
   };
 
@@ -329,11 +334,11 @@ const KecamatanTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Kecamatan List"
+              title="Rw List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_kecamatan"
+              keyField="nama_rw"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -353,9 +358,9 @@ const KecamatanTable=props => {
   );
 };
 
-KecamatanTable.propTypes={
+RwTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KecamatanTable;
+export default RwTable;

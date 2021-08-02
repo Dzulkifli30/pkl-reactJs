@@ -91,6 +91,18 @@ const Sidebar=props => {
           title: 'Kecamatan',
           href: '/kecamatan'
         },
+        {
+          title: 'Kelurahan',
+          href: '/kelurahan'
+        },
+        {
+          title: 'Rw',
+          href: '/rw'
+        },
+        {
+          title: 'Rt',
+          href: '/rt'
+        },
       ]
     }
   ];

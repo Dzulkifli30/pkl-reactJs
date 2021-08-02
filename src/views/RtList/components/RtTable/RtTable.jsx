@@ -55,14 +55,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const KecamatanTable=props => {
+const RtTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
-    textfind,kecamatanfind,
+    textfind,rtfind,
     order, orderBy,
-    kecamatanExport, filteredItems, handleOpen, selectedkecamatan,
-    setselectedkecamatan,
+    provinsisExport, filteredItems, handleOpen, selectedrt,
+    setselectedrt,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -193,18 +193,18 @@ const KecamatanTable=props => {
 
   const columns=[
     {
-      name: 'Kode Depdagri',
-      selector: 'KodeDepdagri',
+      name: 'Nama Rt',
+      selector: 'nama_rt',
       sortable: true,
     },
     {
-      name: 'Nama Kabupaten',
-      selector: 'nama_kabupaten',
+      name: 'Kode RT',
+      selector: 'KodeRT',
       sortable: true,
     },
     {
-      name: 'Nama Kecamatan',
-      selector: 'nama_kecamatan',
+      name: 'Nama Rw',
+      selector: 'nama_rw',
       sortable: true,
     },
     {
@@ -214,19 +214,19 @@ const KecamatanTable=props => {
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
-      name: 'Edit Kecamatan',
+      name: 'Edit Rt',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Kecamatan")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Rt")}  ><EditIcon /></Button>
       ,
     },
     {
-      name: 'Hapus Kecamatan',
+      name: 'Hapus Rt',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleDelete(e, row, "Hapus Kecamatan")} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e, row, "Hapus Rt")} ><DeleteIcon /></Button>
       ,
     },
   ];
@@ -243,7 +243,7 @@ const KecamatanTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Kecamatan")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Rt")}>
           <AddIcon/>
         </Button>
 
@@ -252,7 +252,7 @@ const KecamatanTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Kecamatan"
+          placeholder="Search Rt"
           textfind={textfind}
         />
       </div>
@@ -276,36 +276,36 @@ const KecamatanTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedkecamatan_var;
+    let selectedrt_var;
 
     if (event.target.checked) {
-      selectedkecamatan_var=provinsis.map(provinsi => provinsi.id);
+      selectedrt_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedkecamatan_var=[];
+      selectedrt_var=[];
     }
 
-    setselectedkecamatan(selectedkecamatan_var);
+    setselectedrt(selectedrt_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedkecamatan.indexOf(id);
-    let newselectedkecamatan=[];
+    const selectedIndex=selectedrt.indexOf(id);
+    let newselectedrt=[];
 
     if (selectedIndex===-1) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan, id);
+      newselectedrt=newselectedrt.concat(selectedrt, id);
     } else if (selectedIndex===0) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(1));
-    } else if (selectedIndex===selectedkecamatan.length-1) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(0, -1));
+      newselectedrt=newselectedrt.concat(selectedrt.slice(1));
+    } else if (selectedIndex===selectedrt.length-1) {
+      newselectedrt=newselectedrt.concat(selectedrt.slice(0, -1));
     } else if (selectedIndex>0) {
-      newselectedkecamatan=newselectedkecamatan.concat(
-        selectedkecamatan.slice(0, selectedIndex),
-        selectedkecamatan.slice(selectedIndex+1)
+      newselectedrt=newselectedrt.concat(
+        selectedrt.slice(0, selectedIndex),
+        selectedrt.slice(selectedIndex+1)
       );
     }
 
-    setselectedkecamatan(newselectedkecamatan);
+    setselectedrt(newselectedrt);
     //console.log(selectedUsers);
   };
 
@@ -329,11 +329,11 @@ const KecamatanTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Kecamatan List"
+              title="Rt List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_kecamatan"
+              keyField="nama_rt"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -353,9 +353,9 @@ const KecamatanTable=props => {
   );
 };
 
-KecamatanTable.propTypes={
+RtTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KecamatanTable;
+export default RtTable;

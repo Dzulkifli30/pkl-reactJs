@@ -11,14 +11,35 @@ export const urlAddProv=ulrport+'provinsi/storeProv'
 export const urlEditProv=ulrport+'provinsi/updateProv'
 
  //Kabupaten
+ export const urlShowKab=ulrport+'kabupaten/showKabupaten'
  export const urlKab=ulrport+'kabupaten/getKabupaten'
 //  export const urlDeleteProv=ulrport+'kabupaten/delete/'
  export const urlAddKab=ulrport+'kabupaten/storeKab'
  export const urlEditKab=ulrport+'kabupaten/updateKab'
 
  //Kecamatan
- export const urlKec=ulrport+'kecamatan/getKecamatan'
- export const urlAddKec=ulrport+'kecamatan/storeKec'
- export const urlEditKec=ulrport+'kecamatan/updateKec'
+export const urlShowkec=ulrport+'kecamatan/showKecamatan'
+export const urlKec=ulrport+'kecamatan/getKecamatan'
+export const urlAddKec=ulrport+'kecamatan/storeKec'
+export const urlEditKec=ulrport+'kecamatan/updateKec'
+
+// Kelurahan
+export const urlKel = ulrport+'kelurahan/getKelurahan'
+export const urlAddKel = ulrport+'kelurahan/storeKel'
+export const urlEditKel = ulrport+'kelurahan/updateKel'
+export const urlDeleteKel = ulrport+'kelurahan/deleteKel'
+
+//RW
+export const urlRw=ulrport+'rw/getRw'
+export const urlAddRw=ulrport+'rw/storeRw'
+export const urlEditRw=ulrport+'rw/updateRw'
+export const urlDeleteRw=ulrport +'rw/deleteRw'
+
+//RT
+export const urlShowRt=ulrport+'rt/showRt'
+export const urlRt=ulrport+'rt/getRt'
+export const urlAddRt=ulrport+'rt/storeRt'
+export const urlEditRt=ulrport+'rt/updateRt'
+export const urlDeleteRt=ulrport +'rt/deleteRt'
 
 

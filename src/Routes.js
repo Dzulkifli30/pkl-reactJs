@@ -27,10 +27,13 @@ import {
   ProvinsiList as ProvinsiListView,
   KabupatenList as KabupatenListView,
   KecamatanList as KecamatanListView,
+  KelurahanList as KelurahanListView,
+  RwList as RwListView,
+  RtList as RtListView,
 
 } from './views';
 
-const Routes=() => {
+const Routes = () => {
 
   return (
     <Switch>
@@ -72,6 +75,27 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/kecamatan"
+      />
+
+      <RouteWithLayout
+        component={KelurahanListView}
+        exact
+        layout={MainLayout}
+        path="/kelurahan"
+      />
+
+      <RouteWithLayout
+        component={RwListView}
+        exact
+        layout={MainLayout}
+        path="/rw"
+      />
+
+      <RouteWithLayout
+        component={RtListView}
+        exact
+        layout={MainLayout}
+        path="/rt"
       />
 
       <RouteWithLayout

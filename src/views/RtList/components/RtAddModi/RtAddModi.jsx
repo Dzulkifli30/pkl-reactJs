@@ -14,19 +14,19 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddKec, urlEditKec, urlKab, urlProv, urlShowKab } from '../../../../kumpulanUrl';
+import { urlAddRt, urlEditRt, urlRt, urlRw } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 const schema={
-  KodeDepdagri: {
+  KodeRT: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
       maximum: 200
     }
   },
-  nama_kecamatan: {
+  nama_rt: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
@@ -66,7 +66,7 @@ const useStyles=makeStyles(theme => ({
   },
 }));
 
-const KecamatanAddModi=props => {
+const RtAddModi=props => {
   const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest }=props;
 
   const classes=useStyles();
@@ -74,8 +74,7 @@ const KecamatanAddModi=props => {
   const [values, setValues]=useState({});
   const [getStatus, setStatus]=useState([]);
   const [getKeyId, setKeyId]=useState([]);
-  const [kabupaten, setkabupaten]=useState([]);
-  const [prov, setProv]=useState([]);
+  const [rw, setRw]=useState([]);
 
   const status=[
     {
@@ -89,6 +88,7 @@ const KecamatanAddModi=props => {
 
 
   ];
+
   const [formState, setFormState]=useState({
     isValid: false,
     values: {},
@@ -96,39 +96,7 @@ const KecamatanAddModi=props => {
     errors: {}
   });
 
-  async function showKab(id_provinsi) {
-    /* */
-    const requestOptions={
-      method: 'POST',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "id_provinsi": id_provinsi,
-      })
-    };
-
-    let urlShow=urlShowKab
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlShow, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        console.log('kabupaten =',data.data)
-        setkabupaten(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setkabupaten([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-
-  async function getKab() {
+  async function getRw() {
     /* */
     const requestOptions={
       method: 'get',
@@ -136,66 +104,30 @@ const KecamatanAddModi=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlGetKabAll=urlKab
+    let url=urlRw
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlGetKabAll, requestOptions)
+    const response=await fetch(url, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
         const data=resJson;
-        setkabupaten(data.data);
+        setRw(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setkabupaten([]);
+        setRw([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
-
-  async function getProv() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let urlGetProv=urlProv
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlGetProv, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setProv(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setProv([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-
-
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    // getKab()
-    getProv()
-    /*
-    if (rowSelect.IsActive==='1') {
-      rowSelect.status='Active'
-    } else if (rowSelect.status==='0') {
-      rowSelect.status='Non Activw'
-    }*/
+    getRw()
+
     const errors=validate(rowSelect, schema);
 
     setFormState(formState => ({
@@ -204,15 +136,9 @@ const KecamatanAddModi=props => {
       errors: errors||{}
     }));
     console.log("formState", formState)
-
-
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
-  const handleChangeProvinsi=event=> {
-    handleChange(event)
-    showKab(event.target.value)
-  }
 
   const handleChange=event => {
 
@@ -239,25 +165,27 @@ const KecamatanAddModi=props => {
 
   const handleSave=(event) => {
     const userId=localStorage.getItem('user_id');
-    let url=urlAddKec;
-    if (rowSelect.id_kecamatan===undefined) {
-      url=urlAddKec;
+    let url=urlAddRt;
+    if (rowSelect.id_rt===undefined) {
+      url=urlAddRt;
     } else {
-      url=urlEditKec;
+      url=urlEditRt;
     }
 
     //console.log(body);
+
+
+
 
     const requestOptions={
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "id_provinsi": rowSelect.id_provinsi,
-        "nama_kecamatan": rowSelect.nama_kecamatan,
+        "KodeRT": rowSelect.KodeRT,
+        "id_rt": rowSelect.id_rt,
+        "nama_rt": rowSelect.nama_rt,
+        "id_rw": rowSelect.id_rw,
         "IsActive": rowSelect.IsActive,
       })
     };
@@ -292,8 +220,6 @@ const KecamatanAddModi=props => {
 
   }
 
-  
-
 
 
 
@@ -314,7 +240,7 @@ const KecamatanAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title={rowSelect.id_kecamatan == undefined ? "Tambah Kecamatan" : "Ubah Kecamatan"}
+          title={rowSelect.id_rt == undefined ? "Tambah Rt" : "Ubah Rt"}
         />
         <Divider />
         <CardContent>
@@ -329,111 +255,73 @@ const KecamatanAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="Kode Depdagri"
+                label="Kode RT"
                 margin="dense"
-                name="KodeDepdagri"
+                name="KodeRT"
                 onChange={handleChange}
                 helperText={
-                  hasError('KodeDepdagri')? formState.errors.KodeDepdagri[0]:null
+                  hasError('KodeRT')? formState.errors.KodeRT[0]:null
                 }
 
-                error={hasError('KodeDepdagri')}
-                defaultValue={rowSelect&&rowSelect.KodeDepdagri? rowSelect.KodeDepdagri:''}
+                error={hasError('KodeRT')}
+                defaultValue={rowSelect&&rowSelect.KodeRT? rowSelect.KodeRT:''}
                 variant="outlined"
               />
-            </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Pilih Provinsi"
-                margin="dense"
-                name="id_provinsi"
-                onChange={handleChangeProvinsi}
-                //required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                //SelectProps={{ native: true }}
-
-                //defaultValue={rowSelect.IsActive}
-                value={rowSelect.id_provinsi}
-                variant="outlined"
-              >
-                {prov.map(option => (
-                  <option
-                    key={option.id_provinsi}
-                    value={option.id_provinsi}
-                  >
-                    {option.nama_provinsi}
-                  </option>
-                ))}
-
-              </TextField>
-
             </Grid>
             
+
             <Grid
               item
               md={6}
               xs={12}
             >
+
               <TextField
                 fullWidth
-                label="Pilih Kabupaten"
+                label="Nama RT"
                 margin="dense"
-                name="id_kabupaten"
+                name="nama_rt"
                 onChange={handleChange}
-                //required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                //SelectProps={{ native: true }}
+                helperText={
+                  hasError('nama_rt')? formState.errors.nama_rt[0]:null
+                }
 
-                //defaultValue={rowSelect.IsActive}
-                value={rowSelect.id_kabupaten}
+                error={hasError('nama_rt')}
+
+                defaultValue={rowSelect&&rowSelect.nama_rt? rowSelect.nama_rt:''}
+                variant="outlined"
+              />
+            </Grid>
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+
+              <TextField
+                fullWidth
+                label="Pilih Rw"
+                margin="dense"
+                name="id_rw"
+                onChange={handleChange}
+                select
+
+                value={rowSelect.id_rw}
                 variant="outlined"
               >
-                {kabupaten.map(option => (
+                {rw.map((option)=> (
                   <option
-                    key={option.id_kabupaten}
-                    value={option.id_kabupaten}
+                    key={option.id_rw}
+                    value={option.id_rw}
                   >
-                    {option.nama_kabupaten}
+                    {option.nama_rw}
                   </option>
                 ))}
 
               </TextField>
 
             </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-
-              <TextField
-                fullWidth
-                label="Nama Kecamatan"
-                margin="dense"
-                name="nama_kecamatan"
-                onChange={handleChange}
-                helperText={
-                  hasError('nama_kecamatan')? formState.errors.nama_kecamatan[0]:null
-                }
-
-                error={hasError('nama_kecamatan')}
-
-                defaultValue={rowSelect&&rowSelect.nama_kecamatan? rowSelect.nama_kecamatan:''}
-                variant="outlined"
-              />
-            </Grid>
-
-
-
             <Grid
               item
               md={6}
@@ -467,6 +355,8 @@ const KecamatanAddModi=props => {
               </TextField>
 
             </Grid>
+
+
           </Grid>
         </CardContent>
         <Divider />
@@ -494,8 +384,8 @@ const KecamatanAddModi=props => {
   );
 };
 
-KecamatanAddModi.propTypes={
+RtAddModi.propTypes={
   className: PropTypes.string
 };
 
-export default KecamatanAddModi;
+export default RtAddModi;
