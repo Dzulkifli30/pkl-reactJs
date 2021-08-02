@@ -33,6 +33,7 @@ const schema = {
       maximum: 200
     }
   },
+  
   IsActive: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
@@ -103,7 +104,7 @@ const KelurahanAddModi = props => {
   } 
    const handleChangeKabupaten=event=> {
     handleChange(event)
-    showKecamatan(event.target.value)
+    showKec(event.target.value)
   }
 async function showKab(id_provinsi) {
     /* */
@@ -137,9 +138,9 @@ async function showKab(id_provinsi) {
       });
   }
 
-  async function showKecamatan(id_kabupaten) {
+  async function showKec(id_kabupaten) {
     /* */
-    const requestOptions = {
+    const requestOptions={
       method: 'POST',
       //mode: "cors",
       headers: { 'Content-Type': 'application/json' },
@@ -148,16 +149,16 @@ async function showKab(id_provinsi) {
       })
     };
 
-    let urlShow = urlShowkec
+    let urlShow=urlShowkec
     // eslint-disable-next-line no-useless-concat
-    const response = await fetch(urlShow, requestOptions)
+    const response=await fetch(urlShow, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
-        const data = resJson;
-        console.log('kecamatan =', data.data)
+        const data=resJson;
+        console.log('kecamatan =',data.data)
         setKecamatan(data.data);
         //return false;
       })
@@ -168,6 +169,37 @@ async function showKab(id_provinsi) {
         //this.setState({ ...this.state, isFetching: false });
       });
   }
+
+  // async function showKecamatan(id_kabupaten) {
+  //   /* */
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     //mode: "cors",
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({
+  //       "id_kabupaten": id_kabupaten,
+  //     })
+  //   };
+
+  //   let urlShow = urlShowkec
+  //   // eslint-disable-next-line no-useless-concat
+  //   const response = await fetch(urlShow, requestOptions)
+  //     .then(res => {
+  //       return res.json();
+  //     })
+  //     .then(resJson => {
+  //       const data = resJson;
+  //       console.log('kecamatan =', data.data)
+  //       setKecamatan(data.data);
+  //       //return false;
+  //     })
+  //     .catch(e => {
+  //       //console.log(e);
+  //       alert("Nextwork Error");
+  //       setKecamatan([]);
+  //       //this.setState({ ...this.state, isFetching: false });
+  //     });
+  // }
 
   async function getKec() {
     /* */
@@ -314,13 +346,13 @@ async function showKab(id_provinsi) {
     getDataBackend();
   }
 
-  const handleSave = (event) => {
-    const userId = localStorage.getItem('user_id');
-    let url = urlAddKel;
-    if (rowSelect.id_kelurahan === undefined) {
-      url = urlAddKel;
+  const handleSave=(event) => {
+    const userId=localStorage.getItem('user_id');
+    let url=urlAddKel;
+    if (rowSelect.id_kelurahan===undefined) {
+      url=urlAddKel;
     } else {
-      url = urlEditKel;
+      url=urlEditKel;
     }
 
     //console.log(body);
@@ -328,14 +360,14 @@ async function showKab(id_provinsi) {
 
 
 
-    const requestOptions = {
+    const requestOptions={
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kelurahan": rowSelect.id_kelurahan,
         "id_kecamatan": rowSelect.id_kecamatan,
+        "id_kelurahan": rowSelect.id_kelurahan,
         "nama_kelurahan": rowSelect.nama_kelurahan,
         "IsActive": rowSelect.IsActive,
       })
@@ -343,9 +375,8 @@ async function showKab(id_provinsi) {
 
 
     ///let urlGetData=urlPostLogin
-
-    alert(url)
-    const response = fetch(url, requestOptions)
+    alert(url);
+    const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
       })/**/
@@ -357,19 +388,14 @@ async function showKab(id_provinsi) {
 
         handleClose();
         getDataBackend();
-        alert("Sukses")
-        const data = res;
+        //alert("Sukses")
+        const data=res;
       })
       .catch((e) => {
 
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
+        swal("Gagal Login!", "Gagal Login", "error", null,)
         return false;
-
-
       });
-
-
   }
 
 
@@ -392,7 +418,7 @@ async function showKab(id_provinsi) {
       >
         <CardHeader
           subheader=""
-          title={rowSelect.id_kecamatan == undefined ? "Tambah Kelurahan" : "Ubah Kelurahan"}
+          title={rowSelect.id_kelurahan  ?   "Ubah Kelurahan": "Tambah Kelurahan" }
         />
         <Divider />
         <CardContent>
@@ -425,9 +451,8 @@ async function showKab(id_provinsi) {
               item
               md={6}
               xs={12}
-            >
-              <Grid
-            >
+              >
+              <Grid>
               <TextField
                 fullWidth
                 label="Pilih Provinsi"
@@ -486,7 +511,7 @@ async function showKab(id_provinsi) {
 
             </Grid>
 
-
+                  
               <TextField
                 fullWidth
                 label="Pilih kecamatan"
