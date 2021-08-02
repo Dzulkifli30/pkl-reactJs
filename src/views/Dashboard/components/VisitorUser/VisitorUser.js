@@ -3,18 +3,18 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
+import { urlGetVuser } from 'kumpulanUrl';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import { Icon, InlineIcon } from '@iconify/react';
 import counterIcon from '@iconify/icons-mdi/counter';
 import PeopleIcon from '@material-ui/icons/People';
-import '../../../../assets_sbmpp_bo/css/bootstrap.css';
-//import '../../assets/cssnonlogin/core.css';
-import '../../../../assets_sbmpp_bo/css/components.css';
+// import '../../../../assets_sbmpp_bo/css/bootstrap.css';
+// import '../../assets/cssnonlogin/core.css';
+// import '../../../../assets_sbmpp_bo/css/components.css';
 import '../../../../assets_sbmpp_bo/css/colors.css';
 import '../../../../assets_sbmpp_bo/css/icons/icomoon/styles.css';
-
 
 
 const isClient=typeof window==='object';
@@ -62,7 +62,9 @@ function getSize() {
 }
 
 
-const VisitorUser=props => {
+
+
+export default function VisitorUser (props)  {
   const { className, dashboard,
     totalVisitorMobile, totalDailyVisitorMobile, totalUserRegistration,
     totalVisitorWeb, totalDailyVisitorWeb,
@@ -71,9 +73,56 @@ const VisitorUser=props => {
   function handleResize() {
     setWindowSize(getSize());
   }
+
+  async function getVuser() {
+    const userId=localStorage.getItem('user_id');
+    setFilteredItems(vUsers);
+    setOpen(false);
+
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let urlgetV=urlGetVuser
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlgetV, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setVusers(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setProvinsis([]);
+        setFilteredItems([]);
+        setOpen(false);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+
+    setOpen(false);
+  }
   //alert(dashboard.totalVisitorMobile)
   //console.log(dashboard.data.listAccessMenuMobile)
   const classes=useStyles();
+
+  const [vUsers, setVusers]=useState([]);
+  const [filteredItems, setFilteredItems]=useState([]);
+  const [order, setOrder]=React.useState('asc');
+  const [open, setOpen]=React.useState(false);
+
+  const [orderBy, setOrderBy]=React.useState('keyId');
+  useEffect(() => {
+    getVuser();
+  }, [order,orderBy]);
 
   return (
     <>
@@ -306,5 +355,3 @@ const VisitorUser=props => {
 VisitorUser.propTypes={
   className: PropTypes.string
 };
-
-export default VisitorUser;

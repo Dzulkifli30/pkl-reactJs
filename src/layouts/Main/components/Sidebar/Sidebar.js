@@ -104,7 +104,12 @@ const Sidebar=props => {
           href: '/rt'
         },
       ]
-    }
+    },
+    {
+      title: 'Visitor User',
+      href: '/vuser'
+
+    },
   ];
   return (
 

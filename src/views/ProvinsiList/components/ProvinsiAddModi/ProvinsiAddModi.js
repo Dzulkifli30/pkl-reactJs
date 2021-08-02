@@ -67,7 +67,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const ProvinsiAddModi=props => {
-  const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest }=props;
+  const { className, setData, getDataBackend,getMockData, setRowSelect, rowSelect, title, ...rest }=props;
 
   const classes=useStyles();
 
@@ -182,7 +182,7 @@ const ProvinsiAddModi=props => {
 
         handleClose();
         getDataBackend();
-        //alert("Sukses")
+        alert("Sukses")
         const data=res;
       })
       .catch((e) => {
@@ -217,6 +217,7 @@ const ProvinsiAddModi=props => {
       >
         <CardHeader
           subheader=""
+          title= {rowSelect.id_provinsi === 1 ? "Edit Provinsi" : "Tambah Provinsi"}
           title={rowSelect.id_provinsi == undefined ? "Tambah Provinsi" : "Ubah Provinsi"}
         />
         <Divider />
@@ -308,6 +309,7 @@ const ProvinsiAddModi=props => {
         </CardContent>
         <Divider />
         <CardActions>
+          {!formState.isValid}
          {!formState.isValid}
           <Button
             color="primary"
@@ -332,7 +334,7 @@ const ProvinsiAddModi=props => {
 };
 
 ProvinsiAddModi.propTypes={
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default ProvinsiAddModi;

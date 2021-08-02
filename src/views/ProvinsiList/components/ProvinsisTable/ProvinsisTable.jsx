@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 //import styled from 'styled-components';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-
+import { urlDeleteProv } from 'kumpulanUrl';
+import swal from 'sweetalert';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
@@ -32,6 +34,8 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
+import { async } from 'validate.js';
+import { array } from 'yargs';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -58,8 +62,15 @@ const useStyles=makeStyles(theme => ({
 const ProvinsisTable=props => {
   const {
     handleOpenViewMap,
+<<<<<<< HEAD:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.jsx
+    deleteProvinsi,
+    className,
+    getMockData,
+    textfind,
+=======
     className,handleDelete,
     textfind,provinsifind,
+>>>>>>> b5ac07ddb637768973be99849ab2d110bd9a4d33:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.js
     order, orderBy, SettingProvinsi,
     provinsisExport, filteredItems, handleOpen, selectedProvinsis,
     setSelectedProvinsis,
@@ -76,8 +87,32 @@ const ProvinsisTable=props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
+const deleteProv = async (e,selectedProvinsis) => {
+  swal( {
+    title: "Anda Yakin?",
+    text:'',
+    icon: 'warning',
+    buttons:true,
+    dangerMode:true
+  }).then( (willDelete) => {
+      if (willDelete) {
+        let url = urlDeleteProv;
+        let response = axios.delete(url + `/${selectedProvinsis.id_provinsi}`)
+        console.log(selectedProvinsis),{
+          onSuccess:() => {
+            swal("Data Sudah Terhapus",'Halaman Di Refresh Ya!!')
+          }
+        }
+      }
+  
+ 
+  })
 
 
+  
+
+
+}
 
   const customStyles={
     header: {
@@ -217,7 +252,7 @@ const ProvinsisTable=props => {
       name: 'Edit Provinsi',
       button: true,
       cell: row =>
-        <Button color="primary"
+        <Button color="primary" id="edit"
           onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
       ,
     },
@@ -225,10 +260,18 @@ const ProvinsisTable=props => {
       name: 'Hapus Provinsi',
       button: true,
       cell: row =>
+<<<<<<< HEAD:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.jsx
+        <Button color="primary" id="delete"
+          onClick={(e) => deleteProv(e, row)}  ><p>Hapus</p></Button>
+      ,
+    },
+    
+=======
         <Button color="primary"
           onClick={(e) => handleDelete(e, row, "Hapus Provinsi")} ><DeleteIcon /></Button>
       ,
     },
+>>>>>>> b5ac07ddb637768973be99849ab2d110bd9a4d33:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.js
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -243,9 +286,16 @@ const ProvinsisTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
+<<<<<<< HEAD:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.jsx
+        <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Provinsi")}>
+          Tambah Provinsi
+        </Button>
+
+=======
         <Button onClick={(e) => handleOpen(e, [], "Tambahah Provinsi")}>
           <AddIcon/>
         </Button>
+>>>>>>> b5ac07ddb637768973be99849ab2d110bd9a4d33:src/views/ProvinsiList/components/ProvinsisTable/ProvinsisTable.js
 
       </div>
 
@@ -279,7 +329,7 @@ const ProvinsisTable=props => {
     let selectedProvinsis_var;
 
     if (event.target.checked) {
-      selectedProvinsis_var=provinsis.map(provinsi => provinsi.id);
+      selectedProvinsis_var=provinsis.map(provinsi => id);
     } else {
       selectedProvinsis_var=[];
     }

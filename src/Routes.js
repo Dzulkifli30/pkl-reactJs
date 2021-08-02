@@ -14,15 +14,17 @@ import {
   KabKotaList as KabKotaListView,
   ProductList as ProductListView,
   GroupList as GroupListView,
-
   Typography as TypographyView,
   Icons as IconsView,
-
+  VisitorUser as VisitorUsers,
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
   Signout as SignoutView,
   NotFound as NotFoundView,
+  KelurahanList as KelurahanListView,
+  KabupatenList as KabupatenListView,
+  KecamatanList as KecamatanListView,
 
   ProvinsiList as ProvinsiListView,
   KabupatenList as KabupatenListView,
@@ -54,13 +56,38 @@ const Routes = () => {
 
 
 
-
-
       <RouteWithLayout
         component={ProvinsiListView}
         exact
         layout={MainLayout}
         path="/provinsi"
+      />
+
+    <RouteWithLayout
+        component={KabupatenListView}
+        exact
+        layout={MainLayout}
+        path="/kabupaten"
+      />
+      
+      <RouteWithLayout
+        component={KecamatanListView}
+        exact
+        layout={MainLayout}
+        path="/kecamatan"
+      />
+      <RouteWithLayout
+        component={VisitorUsers}
+        exact
+        layout={MainLayout}
+        path="/vuser"
+      />
+      
+      <RouteWithLayout
+        component={KelurahanListView}
+        exact
+        layout={MainLayout}
+        path="/kelurahan"
       />
 
       <RouteWithLayout
@@ -103,7 +130,7 @@ const Routes = () => {
         exact
         layout={MinimalLayout}
         path="/sign-up"
-      />
+      />  
       <RouteWithLayout
         component={SignInView}
         exact

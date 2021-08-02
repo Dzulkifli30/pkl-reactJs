@@ -5,15 +5,17 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { KabupatenTable, KabupatenAddModi } from '../KabupatenList/components';
+import { ProvinsisToolbar, KelurahansTable, KelurahanAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKab,urlProv } from '../../kumpulanUrl'
+import mockDataSettingKelurahan from './dataSettingkelurahan';
+import { urlKel, urlAddKel, urlEditKel, urlDeleteKel} from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
+import { async } from 'validate.js';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -32,11 +34,19 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const KabupatenList=props => {
+const KelurahanList=props => {
+  //  componentWillMount() {
+  //    alert("fdfdf")
+  //  }
+  const { history }=props;
+  if (!localStorage.getItem("NamaLengkap")) {
+    history.push('/beranda');
 
-  async function getKab() {
+  }
+
+  async function getKel() {
     const userId=localStorage.getItem('user_id');
-    setFilteredItems(kabupaten);
+    setFilteredItems(kelurahans);
     setOpen(false);
 
     /* */
@@ -46,23 +56,23 @@ const KabupatenList=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlGetKab=urlKab
+    let urlgetKel=urlKel
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlGetKab, requestOptions)
+    const response=await fetch(urlgetKel, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
         const data=resJson;
-        setkabupaten(data.data);
+        setKelurahans(data.data);
         setFilteredItems(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setkabupaten([]);
+        setKelurahans([]);
         setFilteredItems([]);
         setOpen(false);
         //this.setState({ ...this.state, isFetching: false });
@@ -71,16 +81,7 @@ const KabupatenList=props => {
     setOpen(false);
   }
 
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
-  }
+
 
   const csvData=() => {
     const tempCsv=[];
@@ -88,7 +89,7 @@ const KabupatenList=props => {
 
     //];
 
-    SettingProvinsi[0].HeaderData.map(headCell => {
+    SettingKelurahan[0].HeaderData.map(headCell => {
       tempCsvItem.push(
         headCell.label
       )
@@ -101,32 +102,38 @@ const KabupatenList=props => {
   }
 
 
-  const deleteKabupaten=(e) => {
-    const selectedkabupaten_string=selectedkabupaten.join("<batas></batas>");
-    let kabupaten3=kabupaten.filter(function (entry) {
-      return entry&&entry.id&&selectedkabupaten_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  
+
+  const deleteKelurahan=async (e, id) => {
+    const selectedKelurahans_string=selectedKelurahans.join("<batas></batas>");
+    let kelurahans3=kelurahans.filter(function (entry) {
+      return entry&&entry.id&&selectedKelurahans_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-    setFilteredItems(kabupaten3)
-    setkabupaten(kabupaten3)
-    setkabupatenfind('')
+    let url=urlDeleteProv
+    if (url === 200) {
+      // thisClickedFunda.closest("tr").remove();
+      console.log(url.data.message)
+    }
+    setFilteredItems(kelurahans3)
+    setKelurahans(kelurahans3)
+    setKelurahanfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
-  
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setkabupatenExport(flteredItems);
+    setKelurahansExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
-      doc.setProperties({ title: SettingProvinsi[0].TitleModule });
+      doc.setProperties({ title: SettingKelurahan[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#kabupatenExport' })
-      var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
-      doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
+      doc.autoTable({ html: '#kelurahanExport' })
+      var posis_x=(doc.previousAutoTable.width-(SettingKelurahan[0].TitleModule).length)/2
+      doc.text(SettingKelurahan[0].TitleModule, posis_x, 6);
 
-      doc.save('provinsi.pdf')
+      doc.save('kelurahan.pdf')
     }, 2000);
     return () => clearTimeout(timer);
 
@@ -143,17 +150,17 @@ const KabupatenList=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setkabupatenfind(e.target.value)
-      let kabupaten4=kabupaten.filter(function (entry) {
+      setKelurahanfind(e.target.value)
+      let kelurahans4=kelurahans.filter(function (entry) {
         return entry&&entry.nama_provinsi&&
           ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(kabupaten4)? kabupaten4:[kabupaten4]);
+      setFilteredItems(Array.isArray(kelurahans4)? kelurahans4:[kelurahans4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(kabupaten);
+      setFilteredItems(kelurahans);
     }
-    setkabupatenfind(e.target.value)
+    setKelurahanfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -204,23 +211,23 @@ const KabupatenList=props => {
   }
 
 
-  const [kabupaten, setkabupaten]=useState([]);
-  // const [provinsiId, setProvinsiId]=useState(getKab());
+  const [kelurahans, setKelurahans]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowkabupatenSelect, setRowkabupatenSelect]=useState({});
+  const [rowKelurahansSelect, setRowKelurahanSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedkabupaten, setSelectedkabupaten]=useState([]);
-  const [kabupatenExport, setkabupatenExport]=useState([]);
-  const [kabupatenfind, setkabupatenfind]=useState([]);
-  const [add,setAdd]=React.useState([])
+  const [selectedKelurahans, setSelectedKelurahans]=useState([]);
+  const [kelurahansExport, setKelurahansExport]=useState([]);
+  const [kelurahanfind, setKelurahanfind]=useState([]);
+
+  const SettingKelurahan=useState(mockDataSettingKelurahan);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
+
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getKab();
-    // console.log('prov',provinsiId)
+    getKel();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -230,22 +237,22 @@ const KabupatenList=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedkabupaten({
-      ...setSelectedkabupaten,
+    setSelectedKelurahans({
+      ...setSelectedKelurahans,
       [event.target.name]: event.target.value[0]
     });
 
   };
 
 
-  const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowkabupatenSelect({
-      ...selectedkabupaten,
+  const setData=(field1, value1, field2, value2, nmKelurahan, kdKelurahan, status, keyId) => {
+    setRowKelurahanSelect({
+      ...selectedKelurahans,
       [field1]: value1,
 
       [field2]: value2,
-      ['kdProvinsi']: kdProvinsi,
-      ['nmProvinsi']: nmProvinsi,
+      ['kdKelurahan']: kdKelurahan,
+      ['nmKelurahan']: nmKelurahan,
       ['status']: status,
       ['keyId']: keyId,
     });
@@ -257,28 +264,21 @@ const KabupatenList=props => {
   };
 
 
-  const handleOpen=(e, rowKabupaten, MessageButton) => {
+  const handleOpen=(e, rowKelurahan, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowkabupatenSelect(rowKabupaten);
+    setRowKelurahanSelect(rowKelurahan);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
 
   };
-
-  const handleDelete=(e,rowKabupaten, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowkabupatenSelect(rowKabupaten);
-  };
-
   /* */
   const handleOpenViewMap=(e, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowkabupatenSelect(rowKabupaten);
+    //setRowKelurahanSelect(rowKelurahan);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -286,7 +286,12 @@ const KabupatenList=props => {
 
 
   };
-
+  const handleAddProv=(e, MessageButton,rowKelurahan) => {
+    setOpen(true);
+    setTitle(MessageButton)
+    // setRowKelurahanSelect(rowKelurahan)
+    // console.log(response.data.data)
+  }
   /**/
   //openPopup
   const handleClose=() => {
@@ -296,12 +301,11 @@ const KabupatenList=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getKab}
-        handleChange={handleChange} setData={setData} 
-        open={open} setRowSelect={setRowkabupatenSelect} rowSelect={rowkabupatenSelect}
-        title={title} datas={filteredItems} handleClose={handleClose} 
-        ComponenAddModi={componenPopup}>
-         </ModalComponent>
+      <ModalComponent getDataBackend={getKel}
+        handleChange={handleChange} setData={setData}
+        open={open} setRowSelect={setRowKelurahanSelect} rowSelect={rowKelurahansSelect}
+        title={title} datas={filteredItems} handleClose={handleClose}
+        ComponenAddModi={componenPopup}></ModalComponent>
 
     )
   }
@@ -309,30 +313,29 @@ const KabupatenList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Kabupaten</h5>
+      <h5 style={{ color: 'black' }}>Kelurahan</h5>
       {/*}
-      <kabupatenToolbar
+      <ProvinsisToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={kabupatenfind} deleteProvinsi={deleteProvinsi}
+        textfind={kelurahanfind} deleteKelurahan={deleteKelurahan}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        kabupaten={kabupaten}
+        kelurahans={kelurahans}
       />
   {*/}
       <div className={classes.content}>
-        <KabupatenTable
+        <KelurahansTable
           handleOpenViewMap={handleOpenViewMap}
-          handleDelete={handleDelete}
+          kelurahans = {kelurahans}
           onChange={onChangefind}
-          kabupatenExport={kabupatenExport}
-          // deleteProv={deleteProv}
-          // deleteProvinsi={deleteProvinsi}
-          kabupatenfind={kabupatenfind}
+          deleteKelurahan={deleteKelurahan}
+          SettingKelurahan={SettingKelurahan}
+          kelurahansExport={kelurahansExport}
           filteredItems={filteredItems}
-          selectedkabupaten={selectedkabupaten} 
-          kabupatenfind={kabupatenfind}
+          selectedKelurahans={selectedKelurahans} 
+          handleAddProv={handleAddProv}
           handleOpen={handleOpen}
-          setSelectedkabupaten={setSelectedkabupaten}
+          setSelectedKelurahans={setSelectedKelurahans}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
@@ -340,7 +343,7 @@ const KabupatenList=props => {
         />
 
 
-      {popupComponen(KabupatenAddModi)}
+        {popupComponen(KelurahanAddModi)}
 
       </div>
 
@@ -349,4 +352,4 @@ const KabupatenList=props => {
   );
 };
 
-export default KabupatenList;
+export default KelurahanList;

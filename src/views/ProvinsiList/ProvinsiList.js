@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 //import '../../assets/vendor/dist/css/datatable1.css';
 //import { ImportScript } from '../components';
@@ -8,18 +7,34 @@ import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
 import { ProvinsisToolbar, ProvinsisTable, ProvinsiAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
-//import mockData from './dataPropinsi';
+import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import mockDataSettingProvinsi from './dataSettingprovinsi';
+import { urlProv, urlAddProv, urlEditProv, urlDeleteProv} from '../../kumpulanUrl'
+
 import { urlProv, urlAddProv, urlEditProv, urlDeleteProv } from '../../kumpulanUrl'
+
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
+import { async } from 'validate.js';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
 //import Fade from "@material-ui/core/Fade";
+
+const getMockData=() =>{
+  mockData.map(mock => {
+    return(
+      <h4>{mock}</h4>
+
+    )
+  })
+  console.log(mockData)
+
+  
+}
 
 const useStyles=makeStyles(theme => ({
   root: {
@@ -113,11 +128,20 @@ const ProvinsiList=props => {
   }
 
 
-  const deleteProvinsi=(e) => {
+  
+
+  const deleteProvinsi=async (e, id) => {
     const selectedProvinsis_string=selectedProvinsis.join("<batas></batas>");
     let provinsis3=provinsis.filter(function (entry) {
       return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
+
+    let url=urlDeleteProv
+    if (url === 200) {
+      // thisClickedFunda.closest("tr").remove();
+      console.log(url.data.message)
+    }
+
     setFilteredItems(provinsis3)
     setProvinsis(provinsis3)
     setProvinsifind('')
@@ -329,14 +353,16 @@ const ProvinsiList=props => {
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
         provinsis={provinsis}
-
       />
   {*/}
       <div className={classes.content}>
         <ProvinsisTable
           handleOpenViewMap={handleOpenViewMap}
+          getMockData={getMockData}
+          provinsis = {provinsis}
           handleDelete={handleDelete}
           onChange={onChangefind}
+          deleteProvinsi={deleteProvinsi}
           SettingProvinsi={SettingProvinsi}
           provinsisExport={provinsisExport}
           // deleteProv={deleteProv}
