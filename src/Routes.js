@@ -22,9 +22,6 @@ import {
   SignIn as SignInView,
   Signout as SignoutView,
   NotFound as NotFoundView,
-  KelurahanList as KelurahanListView,
-  KabupatenList as KabupatenListView,
-  KecamatanList as KecamatanListView,
 
   ProvinsiList as ProvinsiListView,
   KabupatenList as KabupatenListView,
