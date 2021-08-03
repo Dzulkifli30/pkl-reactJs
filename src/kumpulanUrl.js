@@ -6,7 +6,6 @@ let ulrportRefresh="http://localhost:8000/";//"http://10.242.11.101:8081/";
 export const urlPostLogin=ulrport+'vuser/showUser'
 export const urlGetVuser=ulrport+'vuser/getUser'
 
-
  //provinsi
 export const urlProv=ulrport+'provinsi/getProvinsi'
 export const urlAddProv=ulrport+'provinsi/storeProv'

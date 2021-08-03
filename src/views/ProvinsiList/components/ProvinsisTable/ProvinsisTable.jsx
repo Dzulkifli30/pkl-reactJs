@@ -389,3 +389,4 @@ ProvinsisTable.propTypes={
 };
 
 export default ProvinsisTable;
+
