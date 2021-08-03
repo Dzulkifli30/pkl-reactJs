@@ -169,24 +169,26 @@ const ProvinsiAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+    // alert(url);
+    
     const response=fetch(url, requestOptions)
       .then(res => {
+        console.log("res =", res.json());
+        // alert("sukses");
         return res.json();
       })/**/
 
       .then(res => {
         //console.log(res)
         //console.log(res.data)
+        // alert("sukses");
         alert(res.message)
-
+        swal("Berhasil Membuat Data","Provini Berhasil","success")
         handleClose();
         getDataBackend();
-        alert("Sukses")
         const data=res;
       })
       .catch((e) => {
-
         swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
 
         return false;

@@ -11,7 +11,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlRw,urlAddRw,urlEditRw } from '../../kumpulanUrl'
+import { urlRw,urlshowRw } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -34,9 +34,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const RwList=props => {
-  //  componentWillMount() {
-  //    alert("fdfdf")
-  //  }
+  
   const { history }=props;
   if (!localStorage.getItem("NamaLengkap")) {
     history.push('/beranda');
@@ -99,7 +97,7 @@ const RwList=props => {
 
     //];
 
-    SettingProvinsi[0].HeaderData.map(headCell => {
+    SettingRw[0].HeaderData.map(headCell => {
       tempCsvItem.push(
         headCell.label
       )
@@ -119,7 +117,7 @@ const RwList=props => {
     });
     setFilteredItems(rw3)
     setrw(rw3)
-    setProvinsifind('')
+    setrwfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
@@ -131,11 +129,11 @@ const RwList=props => {
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
-      doc.setProperties({ title: SettingProvinsi[0].TitleModule });
+      doc.setProperties({ title: SettingRw[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
       doc.autoTable({ html: '#rwExport' })
-      var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
-      doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
+      var posis_x=(doc.previousAutoTable.width-(SettingRw[0].TitleModule).length)/2
+      doc.text(SettingRw[0].TitleModule, posis_x, 6);
 
       doc.save('rw.pdf')
     }, 2000);
@@ -154,7 +152,7 @@ const RwList=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setProvinsifind(e.target.value)
+      setrwfind(e.target.value)
       let rw4=rw.filter(function (entry) {
         return entry&&entry.nama_rw&&
           ((entry.nama_rw!==null? entry.nama_rw:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
@@ -164,7 +162,7 @@ const RwList=props => {
     } if (e.target.value.length==0) {
       setFilteredItems(rw);
     }
-    setProvinsifind(e.target.value)
+    setrwfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -222,7 +220,7 @@ const RwList=props => {
   const [title, setTitle]=React.useState(false);
   const [selectedrw, setSelectedrw]=useState([]);
   const [rwExport, setrwExport]=useState([]);
-  const [rwfind, setProvinsifind]=useState([]);
+  const [rwfind, setrwfind]=useState([]);
   const [add,setAdd]=React.useState([])
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
@@ -248,14 +246,14 @@ const RwList=props => {
   };
 
 
-  const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
+  const setData=(field1, value1, field2, value2, nmRw, kdRw, status, keyId) => {
     setRowrwSelect({
       ...selectedrw,
       [field1]: value1,
 
       [field2]: value2,
-      ['kdProvinsi']: kdProvinsi,
-      ['nmProvinsi']: nmProvinsi,
+      ['kdRw']: kdRw,
+      ['nmRw']: nmRw,
       ['status']: status,
       ['keyId']: keyId,
     });
@@ -267,20 +265,20 @@ const RwList=props => {
   };
 
 
-  const handleOpen=(e, rowProvinsi, MessageButton) => {
+  const handleOpen=(e, rowRw, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowrwSelect(rowProvinsi);
+    setRowrwSelect(rowRw);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
+  const handleDelete=(e,rowRw, MessageButton) => {
     setTitle(MessageButton);
     deleteProv()
-    setRowrwSelect(rowProvinsi);
+    setRowrwSelect(rowRw);
   };
 
   /* */
@@ -288,7 +286,7 @@ const RwList=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowrwSelect(rowProvinsi);
+    //setRowrwSelect(rowRw);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -323,7 +321,7 @@ const RwList=props => {
       {/*}
       <rwToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={rwfind} deleteProvinsi={deleteProvinsi}
+        textfind={rwfind} deleteRw={deleteRw}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
         rw={rw}
@@ -337,7 +335,7 @@ const RwList=props => {
           onChange={onChangefind}
           RwExport={rwExport}
           // deleteProv={deleteProv}
-          // deleteProvinsi={deleteProvinsi}
+          // deleteRw={deleteRw}
           rwfind={rwfind}
           filteredItems={filteredItems}
           selectedrw={selectedrw} 

@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddRt, urlEditRt, urlRt, urlRw } from '../../../../kumpulanUrl';
+import { urlAddRt, urlEditRt, urlRt, urlRw, urlKel, urlKec, urlKab, urlProv, urlShowKab, urlShowkec, urlShowkel, urlShowRw } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -75,6 +75,10 @@ const RtAddModi=props => {
   const [getStatus, setStatus]=useState([]);
   const [getKeyId, setKeyId]=useState([]);
   const [rw, setRw]=useState([]);
+  const [kabupaten, setKabupaten] = useState([]);
+  const [kecamatan, setKecamatan] = useState([]);
+  const [provinsi, setProvinsi] = useState([]);
+  const [kel, setKel]=useState([]);
 
   const status=[
     {
@@ -95,6 +99,264 @@ const RtAddModi=props => {
     touched: {},
     errors: {}
   });
+
+  const handleChangeProvinsi=event=> {
+    handleChange(event)
+    showKab(event.target.value)
+  } 
+  const handleChangeKabupaten=event=> {
+    handleChange(event)
+    showKecamatan(event.target.value)
+  }
+  const handleChangeKecamatan=event=> {
+    handleChange(event)
+    showKel(event.target.value)
+  }
+
+  const handleChangeKelurahan=event=> {
+    handleChange(event)
+    showRw(event.target.value)
+  }
+
+  async function showKab(id_provinsi) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_provinsi": id_provinsi,
+      })
+    };
+
+    let urlShow=urlShowKab
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('kabupaten =',data.data)
+        setKabupaten(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setKabupaten([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function showKecamatan(id_kabupaten) {
+    /* */
+    const requestOptions = {
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_kabupaten": id_kabupaten,
+      })
+    };
+
+    let urlShow = urlShowkec
+    // eslint-disable-next-line no-useless-concat
+    const response = await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data = resJson;
+        console.log('kecamatan =', data.data)
+        setKecamatan(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setKecamatan([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function showKel(id_kecamatan) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_kecamatan": id_kecamatan,
+      })
+    };
+
+    let urlShow=urlShowkel
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('kelurahan =',data.data)
+        setKel(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setKel([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function showRw(id_kelurahan) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_kelurahan": id_kelurahan,
+      })
+    };
+
+    let urlShow=urlShowRw
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('Rw =',data.data)
+        setRw(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setRw([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function getKel() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let url=urlKel
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setKel(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setKel([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function getKec() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let urlGetKecAll=urlKec
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlGetKecAll, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setKecamatan(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setKecamatan([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function getKab() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let urlGetKabAll=urlKab
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlGetKabAll, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setKabupaten(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setKabupaten([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function getProv() {
+    /* */
+    const requestOptions = {
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let urlGetProv = urlProv
+    // eslint-disable-next-line no-useless-concat
+    const response = await fetch(urlGetProv, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data = resJson;
+        setProvinsi(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setProvinsi([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
 
   async function getRw() {
     /* */
@@ -126,9 +388,16 @@ const RtAddModi=props => {
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    getRw()
+    getProv();
+    showKab(rowSelect.id_provinsi);
+    showKecamatan(rowSelect.id_kabupaten);
+    showKel(rowSelect.id_kecamatan);
+    showRw(rowSelect.id_kelurahan);
 
     const errors=validate(rowSelect, schema);
+    console.log(errors)
+    console.log("rowSelect", rowSelect)
+    console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
@@ -248,6 +517,41 @@ const RtAddModi=props => {
             container
             spacing={3}
           >
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+
+              <TextField
+                fullWidth
+                label="Pilih Provinsi"
+                margin="dense"
+                name="id_provinsi"
+                onChange={handleChangeProvinsi}
+                //required
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                //SelectProps={{ native: true }}
+
+                //defaultValue={rowSelect.IsActive}
+                value={rowSelect.id_provinsi}
+                variant="outlined"
+              >
+                {provinsi.map(option => (
+                  <option
+                    key={option.id_provinsi}
+                    value={option.id_provinsi}
+                  >
+                    {option.nama_provinsi}
+                  </option>
+                ))}
+
+              </TextField>
+
+            </Grid>
+
             <Grid
               item
               md={6}
@@ -255,21 +559,59 @@ const RtAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="Kode RT"
+                label="Pilih Kabupaten"
                 margin="dense"
-                name="KodeRT"
-                onChange={handleChange}
-                helperText={
-                  hasError('KodeRT')? formState.errors.KodeRT[0]:null
-                }
+                name="id_kabupaten"
+                onChange={handleChangeKabupaten}
+                //required
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                //SelectProps={{ native: true }}
 
-                error={hasError('KodeRT')}
-                defaultValue={rowSelect&&rowSelect.KodeRT? rowSelect.KodeRT:''}
+                //defaultValue={rowSelect.IsActive}
+                value={rowSelect.id_kabupaten}
                 variant="outlined"
-              />
+              >
+                {kabupaten.map(option => (
+                  <option
+                    key={option.id_kabupaten}
+                    value={option.id_kabupaten}
+                  >
+                    {option.nama_kabupaten}
+                  </option>
+                ))}
+
+              </TextField>
+
+            </Grid>
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Pilih kecamatan"
+                margin="dense"
+                select
+                name="id_kecamatan"
+                onChange={handleChangeKecamatan}
+                value={rowSelect.id_kecamatan}
+                variant="outlined"
+              >
+                {kecamatan.map(option => (
+                  <option
+                    key={option.id_kecamatan}
+                    value={option.id_kecamatan}
+                  >
+                    {option.nama_kecamatan}
+                  </option>
+                ))}
+              </TextField>
+
             </Grid>
             
-
             <Grid
               item
               md={6}
@@ -278,19 +620,26 @@ const RtAddModi=props => {
 
               <TextField
                 fullWidth
-                label="Nama RT"
+                label="Pilih Kelurahan"
                 margin="dense"
-                name="nama_rt"
-                onChange={handleChange}
-                helperText={
-                  hasError('nama_rt')? formState.errors.nama_rt[0]:null
-                }
+                name="id_kelurahan"
+                onChange={handleChangeKelurahan}
+                select
 
-                error={hasError('nama_rt')}
-
-                defaultValue={rowSelect&&rowSelect.nama_rt? rowSelect.nama_rt:''}
+                value={rowSelect.id_kelurahan}
                 variant="outlined"
-              />
+              >
+                {kel.map((option)=> (
+                  <option
+                    key={option.id_kelurahan}
+                    value={option.id_kelurahan}
+                  >
+                    {option.nama_kelurahan}
+                  </option>
+                ))}
+
+              </TextField>
+
             </Grid>
 
             <Grid
@@ -354,6 +703,51 @@ const RtAddModi=props => {
 
               </TextField>
 
+            </Grid>
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Kode RT"
+                margin="dense"
+                name="KodeRT"
+                onChange={handleChange}
+                helperText={
+                  hasError('KodeRT')? formState.errors.KodeRT[0]:null
+                }
+
+                error={hasError('KodeRT')}
+                defaultValue={rowSelect&&rowSelect.KodeRT? rowSelect.KodeRT:''}
+                variant="outlined"
+              />
+            </Grid>
+            
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+
+              <TextField
+                fullWidth
+                label="Nama RT"
+                margin="dense"
+                name="nama_rt"
+                onChange={handleChange}
+                helperText={
+                  hasError('nama_rt')? formState.errors.nama_rt[0]:null
+                }
+
+                error={hasError('nama_rt')}
+
+                defaultValue={rowSelect&&rowSelect.nama_rt? rowSelect.nama_rt:''}
+                variant="outlined"
+              />
             </Grid>
 
 

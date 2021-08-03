@@ -189,7 +189,8 @@ const KecamatanAddModi=props => {
 
   useEffect(() => {
     // getKab()
-    getProv()
+    getProv();
+    showKab(rowSelect.id_provinsi)
     /*
     if (rowSelect.IsActive==='1') {
       rowSelect.status='Active'

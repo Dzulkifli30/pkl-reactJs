@@ -193,11 +193,6 @@ const RwTable=props => {
 
   const columns=[
     {
-      name: 'Rw ID',
-      selector: 'id_rw',
-      sortable: true,
-    },
-    {
       name: 'Nama Rw',
       selector: 'nama_rw',
       sortable: true,
@@ -208,8 +203,8 @@ const RwTable=props => {
       sortable: true,
     },
     {
-      name: 'Kelurahan ID',
-      selector: 'id_kelurahan',
+      name: 'Nama Kelurahan',
+      selector: 'nama_kelurahan',
       sortable: true,
     },
     {

@@ -131,7 +131,6 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -163,7 +162,6 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -226,9 +224,6 @@ async function showKab(id_provinsi) {
       });
   }
 
-
-  
-
   async function getProv() {
     /* */
     const requestOptions = {
@@ -266,6 +261,9 @@ async function showKab(id_provinsi) {
 
   useEffect(() => {
     getProv()
+    showKecamatan(rowSelect.id_kabupaten)
+    showKab(rowSelect.id_provinsi)
+    // getKab()
     // getKec()
 
     /*
@@ -392,7 +390,7 @@ async function showKab(id_provinsi) {
       >
         <CardHeader
           subheader=""
-          title={rowSelect.id_kecamatan == undefined ? "Tambah Kelurahan" : "Ubah Kelurahan"}
+          title={rowSelect.id_kelurahan== undefined ? "Tambah Kelurahan" : "Ubah Kelurahan"}
         />
         <Divider />
         <CardContent>
@@ -489,7 +487,7 @@ async function showKab(id_provinsi) {
 
               <TextField
                 fullWidth
-                label="Pilih kecamatan"
+                label="Pilih Kecamatan"
                 margin="dense"
                 select
                 name="id_kecamatan"
@@ -517,7 +515,7 @@ async function showKab(id_provinsi) {
             >
               <TextField
                 fullWidth
-                label="Nama kelurahan"
+                label="Nama Kelurahan"
                 margin="dense"
                 name="nama_kelurahan"
                 onChange={handleChange}
