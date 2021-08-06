@@ -287,7 +287,9 @@ const KabupatenAddModi=props => {
                 label="Pilih Provinsi"
                 margin="dense"
                 name="id_provinsi"
-                onChange={handleChange}
+                onChange={handleChange
+                
+                }
                 select
 
                 value={rowSelect.id_provinsi}
@@ -395,5 +397,3 @@ KabupatenAddModi.propTypes={
 };
 
 export default KabupatenAddModi;
-export default KabupatenAddModi;
-
