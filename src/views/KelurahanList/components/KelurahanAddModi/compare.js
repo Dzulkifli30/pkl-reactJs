@@ -263,7 +263,6 @@ async function showKab(id_provinsi) {
     getProv()
     showKecamatan(rowSelect.id_kabupaten)
     showKab(rowSelect.id_provinsi)
-    // getKab()
     // getKec()
 
     /*
@@ -345,27 +344,23 @@ async function showKab(id_provinsi) {
     alert(url)
     const response = fetch(url, requestOptions)
       .then(res => {
-        if (res === 200) {
-          alert('bisa')
-          return res.json()
-        }
         return res.json();
       })/**/
 
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        // alert(res.message)
+        alert(res.message)
 
-        swal("Berhasil Tambah data", "berhasil", "success").then(
-        handleClose()
-        )
+        handleClose();
         getDataBackend();
-        // alert("Sukses")
+        alert("Sukses")
         const data = res;
       })
       .catch((e) => {
-          alert(e.message)
+
+        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+
         return false;
 
 

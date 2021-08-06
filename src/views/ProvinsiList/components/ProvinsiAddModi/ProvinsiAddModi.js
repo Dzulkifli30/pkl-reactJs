@@ -1,4 +1,5 @@
 import React, { createRef, useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -18,6 +19,7 @@ import { urlAddProv, urlEditProv } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
+import swal from 'sweetalert';
 const schema={
   KodeDepdagri: {
     presence: { allowEmpty: false, message: 'harus diisi' },
@@ -154,7 +156,6 @@ const ProvinsiAddModi=props => {
 
 
 
-
     const requestOptions={
       method: 'POST',
       mode: "cors",
@@ -169,25 +170,30 @@ const ProvinsiAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+
+    // alert(url);
     const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
+      .then(tester => {
+        if (tester.status === 200) {
+          alert('berhasil')
+       handleClose();
+          return tester.json();
+        }
+       
       })/**/
 
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        alert(res.message)
-
-        handleClose();
+      .then(tester => {
+        console.log(tester)
+        alert(tester.message)
         getDataBackend();
+
         alert("Sukses")
-        const data=res;
+        const data=tester;
       })
       .catch((e) => {
 
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+        alert(e)
+        // swal("Gagal Login!", "Gagal Login", "error",  )
 
         return false;
 
@@ -204,6 +210,8 @@ const ProvinsiAddModi=props => {
   const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
   }
+
+
 
   return (
     <Card

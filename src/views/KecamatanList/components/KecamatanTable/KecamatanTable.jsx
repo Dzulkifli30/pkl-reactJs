@@ -196,6 +196,10 @@ const KecamatanTable=props => {
       name: 'Kode Depdagri',
       selector: 'KodeDepdagri',
       sortable: true,
+    },    {
+      name: 'Nama Provinsi',
+      selector: 'nama_provinsi',
+      sortable: true,
     },
     {
       name: 'Nama Kabupaten',

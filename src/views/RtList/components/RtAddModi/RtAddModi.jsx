@@ -14,37 +14,31 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddKel, urlEditKel, urlKab, urlKec, urlProv, urlShowKab,urlShowKec } from '../../../../kumpulanUrl';
+import { urlAddRt, urlEditRt, urlRt, urlRw, urlKel, urlKec, urlKab, urlProv, urlShowKab, urlShowKec, urlShowKel, urlShowRw } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
-import validate, { async } from 'validate.js';
+import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
-const schema = {
-  KodeDepdagri: {
+const schema={
+  KodeRT: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
       maximum: 200
     }
   },
-  nama_kelurahan: {
+  nama_rt: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
       maximum: 200
     }
   },
-  IsActive: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    /* length: {
-       maximum: 1
-     }*/
-  },
+
   /**/
 
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles=makeStyles(theme => ({
   root: {},
   buttonSuccess: {
     color: theme.palette.white,
@@ -66,19 +60,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const KelurahanAddModi = props => {
-  const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest } = props;
+const RtAddModi=props => {
+  const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest }=props;
 
-  const classes = useStyles();
+  const classes=useStyles();
 
-  const [values, setValues] = useState({});
-  const [getStatus, setStatus] = useState([]);
+  const [values, setValues]=useState({});
+  const [getStatus, setStatus]=useState([]);
+  const [getKeyId, setKeyId]=useState([]);
+  const [rw, setRw]=useState([]);
   const [kabupaten, setKabupaten] = useState([]);
   const [kecamatan, setKecamatan] = useState([]);
   const [provinsi, setProvinsi] = useState([]);
-  const [getKeyId, setKeyId] = useState([]);
+  const [kel, setKel]=useState([]);
 
-  const status = [
+  const status=[
     {
       value: '1',
       label: 'Active'
@@ -90,7 +86,8 @@ const KelurahanAddModi = props => {
 
 
   ];
-  const [formState, setFormState] = useState({
+
+  const [formState, setFormState]=useState({
     isValid: false,
     values: {},
     touched: {},
@@ -101,11 +98,21 @@ const KelurahanAddModi = props => {
     handleChange(event)
     showKab(event.target.value)
   } 
-   const handleChangeKabupaten=event=> {
+  const handleChangeKabupaten=event=> {
     handleChange(event)
     showKecamatan(event.target.value)
   }
-async function showKab(id_provinsi) {
+  const handleChangeKecamatan=event=> {
+    handleChange(event)
+    showKel(event.target.value)
+  }
+
+  const handleChangeKelurahan=event=> {
+    handleChange(event)
+    showRw(event.target.value)
+  }
+
+  async function showKab(id_provinsi) {
     /* */
     const requestOptions={
       method: 'POST',
@@ -131,6 +138,7 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
+        // alert("Nextwork Error");
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -162,7 +170,100 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
+        // alert("Nextwork Error");
         setKecamatan([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function showKel(id_kecamatan) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_kecamatan": id_kecamatan,
+      })
+    };
+
+    let urlShow=urlShowKel
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('kelurahan =',data.data)
+        setKel(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setKel([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function showRw(id_kelurahan) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_kelurahan": id_kelurahan,
+      })
+    };
+
+    let urlShow=urlShowRw
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('Rw =',data.data)
+        setRw(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setRw([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function getKel() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let url=urlKel
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setKel(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setKel([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
@@ -194,7 +295,6 @@ async function showKab(id_provinsi) {
         //this.setState({ ...this.state, isFetching: false });
       });
   }
-
 
   async function getKab() {
     /* */
@@ -252,53 +352,67 @@ async function showKab(id_provinsi) {
       });
   }
 
+  async function getRw() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
 
+    let url=urlRw
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
 
-
-
-
+      .then(resJson => {
+        const data=resJson;
+        setRw(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setRw([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    getProv()
-    showKecamatan(rowSelect.id_kabupaten)
-    showKab(rowSelect.id_provinsi)
-    // getKab()
-    // getKec()
+    getProv();
+    showKab(rowSelect.id_provinsi);
+    showKecamatan(rowSelect.id_kabupaten);
+    showKel(rowSelect.id_kecamatan);
+    showRw(rowSelect.id_kelurahan);
 
-    /*
-    if (rowSelect.IsActive==='1') {
-      rowSelect.status='Active'
-    } else if (rowSelect.status==='0') {
-      rowSelect.status='Non Activw'
-    }*/
-    const errors = validate(rowSelect, schema);
+    const errors=validate(rowSelect, schema);
     console.log(errors)
     console.log("rowSelect", rowSelect)
     console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
-      isValid: errors ? false : true,
-      errors: errors || {}
+      isValid: errors? false:true,
+      errors: errors||{}
     }));
     console.log("formState", formState)
-
-
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
 
-  const handleChange = event => {
+  const handleChange=event => {
 
     //    event.persist();
 
-    const errors = validate(rowSelect, schema);
+    const errors=validate(rowSelect, schema);
 
     setFormState(formState => ({
       ...rowSelect,
-      isValid: errors ? false : true,
-      errors: errors || {}
+      isValid: errors? false:true,
+      errors: errors||{}
     }));
 
 
@@ -308,17 +422,17 @@ async function showKab(id_provinsi) {
     });
   }
 
-  const handleClose = () => {
+  const handleClose=() => {
     getDataBackend();
   }
 
-  const handleSave = (event) => {
-    const userId = localStorage.getItem('user_id');
-    let url = urlAddKel;
-    if (rowSelect.id_kelurahan === undefined) {
-      url = urlAddKel;
+  const handleSave=(event) => {
+    const userId=localStorage.getItem('user_id');
+    let url=urlAddRt;
+    if (rowSelect.id_rt===undefined) {
+      url=urlAddRt;
     } else {
-      url = urlEditKel;
+      url=urlEditRt;
     }
 
     //console.log(body);
@@ -326,46 +440,40 @@ async function showKab(id_provinsi) {
 
 
 
-    const requestOptions = {
+    const requestOptions={
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kelurahan": rowSelect.id_kelurahan,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "nama_kelurahan": rowSelect.nama_kelurahan,
-        "IsActive": rowSelect.IsActive,
+        "KodeRT": rowSelect.KodeRT,
+        "id_rt": rowSelect.id_rt,
+        "nama_rt": rowSelect.nama_rt,
+        "id_rw": rowSelect.id_rw,
       })
     };
 
 
     ///let urlGetData=urlPostLogin
-
-    alert(url)
-    const response = fetch(url, requestOptions)
+    alert(url);
+    const response=fetch(url, requestOptions)
       .then(res => {
-        if (res === 200) {
-          alert('bisa')
-          return res.json()
-        }
         return res.json();
       })/**/
 
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        // alert(res.message)
+        alert(res.message)
 
-        swal("Berhasil Tambah data", "berhasil", "success").then(
-        handleClose()
-        )
+        handleClose();
         getDataBackend();
-        // alert("Sukses")
-        const data = res;
+        //alert("Sukses")
+        const data=res;
       })
       .catch((e) => {
-          alert(e.message)
+
+        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+
         return false;
 
 
@@ -378,8 +486,8 @@ async function showKab(id_provinsi) {
 
 
   //  const position=[currentLocation.lat, currentLocation.lng]
-  const hasError = field => {
-    return formState && formState.errors && formState.errors[field] ? true : false;
+  const hasError=field => {
+    return formState&&formState.errors&&formState.errors[field]? true:false;
   }
 
   return (
@@ -394,7 +502,7 @@ async function showKab(id_provinsi) {
       >
         <CardHeader
           subheader=""
-          title={rowSelect.id_kelurahan== undefined ? "Tambah Kelurahan" : "Ubah Kelurahan"}
+          title={rowSelect.id_rt == undefined ? "Tambah Rt" : "Ubah Rt"}
         />
         <Divider />
         <CardContent>
@@ -402,34 +510,13 @@ async function showKab(id_provinsi) {
             container
             spacing={3}
           >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Kode Depdagri"
-                margin="dense"
-                name="KodeDepdagri"
-                onChange={handleChange}
-                helperText={
-                  hasError('KodeDepdagri') ? formState.errors.KodeDepdagri[0] : null
-                }
-
-                error={hasError('KodeDepdagri')}
-                defaultValue={rowSelect && rowSelect.KodeDepdagri ? rowSelect.KodeDepdagri : ''}
-                variant="outlined"
-              />
-            </Grid>
 
             <Grid
               item
               md={6}
               xs={12}
             >
-              <Grid
-            >
+
               <TextField
                 fullWidth
                 label="Pilih Provinsi"
@@ -457,8 +544,11 @@ async function showKab(id_provinsi) {
               </TextField>
 
             </Grid>
-            
+
             <Grid
+              item
+              md={6}
+              xs={12}
             >
               <TextField
                 fullWidth
@@ -488,14 +578,18 @@ async function showKab(id_provinsi) {
 
             </Grid>
 
-
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
               <TextField
                 fullWidth
-                label="Pilih Kecamatan"
+                label="Pilih kecamatan"
                 margin="dense"
                 select
                 name="id_kecamatan"
-                onChange={handleChange}
+                onChange={handleChangeKecamatan}
                 value={rowSelect.id_kecamatan}
                 variant="outlined"
               >
@@ -508,34 +602,9 @@ async function showKab(id_provinsi) {
                   </option>
                 ))}
               </TextField>
-              
-             
+
             </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Nama Kelurahan"
-                margin="dense"
-                name="nama_kelurahan"
-                onChange={handleChange}
-                helperText={
-                  hasError('nama_kelurahan') ? formState.errors.nama_kelurahan[0] : null
-                }
-
-                error={hasError('nama_kelurahan')}
-
-                defaultValue={rowSelect && rowSelect.nama_kelurahan ? rowSelect.nama_kelurahan : ''}
-                variant="outlined"
-              />
-            </Grid>
-
-
-
+            
             <Grid
               item
               md={6}
@@ -544,25 +613,21 @@ async function showKab(id_provinsi) {
 
               <TextField
                 fullWidth
-                label="Select aktiv"
+                label="Pilih Kelurahan"
                 margin="dense"
-                name="IsActive"
-                onChange={handleChange}
-                //required
+                name="id_kelurahan"
+                onChange={handleChangeKelurahan}
                 select
-                // eslint-disable-next-line react/jsx-sort-props
-                //SelectProps={{ native: true }}
 
-                //defaultValue={rowSelect.IsActive}
-                value={rowSelect && rowSelect.IsActive ? rowSelect.IsActive : ''}
+                value={rowSelect.id_kelurahan}
                 variant="outlined"
               >
-                {status.map(option => (
+                {kel.map((option)=> (
                   <option
-                    key={option.value}
-                    value={option.value}
+                    key={option.id_kelurahan}
+                    value={option.id_kelurahan}
                   >
-                    {option.label}
+                    {option.nama_kelurahan}
                   </option>
                 ))}
 
@@ -570,11 +635,86 @@ async function showKab(id_provinsi) {
 
             </Grid>
 
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+
+              <TextField
+                fullWidth
+                label="Pilih Rw"
+                margin="dense"
+                name="id_rw"
+                onChange={handleChange}
+                select
+
+                value={rowSelect.id_rw}
+                variant="outlined"
+              >
+                {rw.map((option)=> (
+                  <option
+                    key={option.id_rw}
+                    value={option.id_rw}
+                  >
+                    {option.nama_rw}
+                  </option>
+                ))}
+
+              </TextField>
+
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Kode RT"
+                margin="dense"
+                name="KodeRT"
+                onChange={handleChange}
+                helperText={
+                  hasError('KodeRT')? formState.errors.KodeRT[0]:null
+                }
+
+                error={hasError('KodeRT')}
+                defaultValue={rowSelect&&rowSelect.KodeRT? rowSelect.KodeRT:''}
+                variant="outlined"
+              />
+            </Grid>
+            
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+
+              <TextField
+                fullWidth
+                label="Nama RT"
+                margin="dense"
+                name="nama_rt"
+                onChange={handleChange}
+                helperText={
+                  hasError('nama_rt')? formState.errors.nama_rt[0]:null
+                }
+
+                error={hasError('nama_rt')}
+
+                defaultValue={rowSelect&&rowSelect.nama_rt? rowSelect.nama_rt:''}
+                variant="outlined"
+              />
+            </Grid>
+
+
           </Grid>
         </CardContent>
         <Divider />
         <CardActions>
-          {!formState.isValid}
+         {!formState.isValid}
           <Button
             color="primary"
             className={classes.buttonSuccess}
@@ -590,14 +730,15 @@ async function showKab(id_provinsi) {
             className={classes.buttonCancel}
             variant="contained"
             onClick={handleClose} >Batal</Button>
+
         </CardActions>
       </form>
     </Card>
   );
 };
 
-KelurahanAddModi.propTypes = {
-  className: PropTypes.string,
+RtAddModi.propTypes={
+  className: PropTypes.string
 };
 
-export default KelurahanAddModi;
+export default RtAddModi;

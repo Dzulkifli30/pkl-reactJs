@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 //import '../../assets/vendor/dist/css/datatable1.css';
 //import { ImportScript } from '../components';
@@ -5,35 +6,19 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { ProvinsisToolbar, ProvinsisTable, ProvinsiAddModi, ViewMap } from './components';
+import { RwTable, RwAddModi } from '../RwList/components';
 import { ModalComponent } from 'components';
-import mockData from './dataPropinsi';
+//import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import mockDataSettingProvinsi from './dataSettingprovinsi';
-import { urlProv, urlAddProv, urlEditProv, urlDeleteProv} from '../../kumpulanUrl'
-
-
+import { urlRw,urlshowRw } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
-import { async } from 'validate.js';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
 //import Fade from "@material-ui/core/Fade";
-
-const getMockData=() =>{
-  mockData.map(mock => {
-    return(
-      <h4>{mock}</h4>
-
-    )
-  })
-  console.log(mockData)
-
-  
-}
 
 const useStyles=makeStyles(theme => ({
   root: {
@@ -48,19 +33,17 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const ProvinsiList=props => {
-  //  componentWillMount() {
-  //    alert("fdfdf")
-  //  }
+const RwList=props => {
+  
   const { history }=props;
   if (!localStorage.getItem("NamaLengkap")) {
     history.push('/beranda');
 
   }
 
-  async function getProv() {
+  async function getRw() {
     const userId=localStorage.getItem('user_id');
-    setFilteredItems(provinsis);
+    setFilteredItems(rw);
     setOpen(false);
 
     /* */
@@ -70,23 +53,23 @@ const ProvinsiList=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetProv=urlProv
+    let urlGetRw=urlRw
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlgetProv, requestOptions)
+    const response=await fetch(urlGetRw, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
         const data=resJson;
-        setProvinsis(data.data);
+        setrw(data.data);
         setFilteredItems(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setProvinsis([]);
+        setrw([]);
         setFilteredItems([]);
         setOpen(false);
         //this.setState({ ...this.state, isFetching: false });
@@ -98,14 +81,14 @@ const ProvinsiList=props => {
 
 
   const deleteProv = async (id) => {
-    let url = urlDeleteProv;
-    try {
-      let response = await axios.delete(url+`${id}`);
-    } catch {
-      e=>{
-        alert("error")
-      }
-    }
+    // let url = urlDeleteProv;
+    // try {
+    //   let response = await axios.delete(url+`${id}`);
+    // } catch {
+    //   e=>{
+    //     alert("error")
+    //   }
+    // }
   }
 
   const csvData=() => {
@@ -114,7 +97,7 @@ const ProvinsiList=props => {
 
     //];
 
-    SettingProvinsi[0].HeaderData.map(headCell => {
+    SettingRw[0].HeaderData.map(headCell => {
       tempCsvItem.push(
         headCell.label
       )
@@ -127,23 +110,14 @@ const ProvinsiList=props => {
   }
 
 
-  
-
-  const deleteProvinsi=async (e, id) => {
-    const selectedProvinsis_string=selectedProvinsis.join("<batas></batas>");
-    let provinsis3=provinsis.filter(function (entry) {
-      return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  const deleterw=(e) => {
+    const selectedrw_string=selectedrw.join("<batas></batas>");
+    let rw3=rw.filter(function (entry) {
+      return entry&&entry.id&&selectedrw_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-
-    let url=urlDeleteProv
-    if (url === 200) {
-      // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
-    }
-
-    setFilteredItems(provinsis3)
-    setProvinsis(provinsis3)
-    setProvinsifind('')
+    setFilteredItems(rw3)
+    setrw(rw3)
+    setrwfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
@@ -151,17 +125,17 @@ const ProvinsiList=props => {
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setProvinsisExport(flteredItems);
+    setrwExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
-      doc.setProperties({ title: SettingProvinsi[0].TitleModule });
+      doc.setProperties({ title: SettingRw[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#provinsisExport' })
-      var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
-      doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
+      doc.autoTable({ html: '#rwExport' })
+      var posis_x=(doc.previousAutoTable.width-(SettingRw[0].TitleModule).length)/2
+      doc.text(SettingRw[0].TitleModule, posis_x, 6);
 
-      doc.save('provinsi.pdf')
+      doc.save('rw.pdf')
     }, 2000);
     return () => clearTimeout(timer);
 
@@ -178,17 +152,17 @@ const ProvinsiList=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setProvinsifind(e.target.value)
-      let provinsis4=provinsis.filter(function (entry) {
-        return entry&&entry.nama_provinsi&&
-          ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+      setrwfind(e.target.value)
+      let rw4=rw.filter(function (entry) {
+        return entry&&entry.nama_rw&&
+          ((entry.nama_rw!==null? entry.nama_rw:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(provinsis4)? provinsis4:[provinsis4]);
+      setFilteredItems(Array.isArray(rw4)? rw4:[rw4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(provinsis);
+      setFilteredItems(rw);
     }
-    setProvinsifind(e.target.value)
+    setrwfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -239,23 +213,22 @@ const ProvinsiList=props => {
   }
 
 
-  const [provinsis, setProvinsis]=useState([]);
+  const [rw, setrw]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowProvinsisSelect, setRowProvinsisSelect]=useState({});
+  const [rowrwSelect, setRowrwSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedProvinsis, setSelectedProvinsis]=useState([]);
-  const [provinsisExport, setProvinsisExport]=useState([]);
-  const [provinsifind, setProvinsifind]=useState([]);
+  const [selectedrw, setSelectedrw]=useState([]);
+  const [rwExport, setrwExport]=useState([]);
+  const [rwfind, setrwfind]=useState([]);
   const [add,setAdd]=React.useState([])
-  const SettingProvinsi=useState(mockDataSettingProvinsi);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
 
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getProv();
+    getRw();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -265,22 +238,22 @@ const ProvinsiList=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedProvinsis({
-      ...setSelectedProvinsis,
+    setSelectedrw({
+      ...setSelectedrw,
       [event.target.name]: event.target.value[0]
     });
 
   };
 
 
-  const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowProvinsisSelect({
-      ...selectedProvinsis,
+  const setData=(field1, value1, field2, value2, nmRw, kdRw, status, keyId) => {
+    setRowrwSelect({
+      ...selectedrw,
       [field1]: value1,
 
       [field2]: value2,
-      ['kdProvinsi']: kdProvinsi,
-      ['nmProvinsi']: nmProvinsi,
+      ['kdRw']: kdRw,
+      ['nmRw']: nmRw,
       ['status']: status,
       ['keyId']: keyId,
     });
@@ -292,20 +265,20 @@ const ProvinsiList=props => {
   };
 
 
-  const handleOpen=(e, rowProvinsi, MessageButton) => {
+  const handleOpen=(e, rowRw, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowProvinsisSelect(rowProvinsi);
+    setRowrwSelect(rowRw);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
+  const handleDelete=(e,rowRw, MessageButton) => {
     setTitle(MessageButton);
     deleteProv()
-    setRowProvinsisSelect(rowProvinsi);
+    setRowrwSelect(rowRw);
   };
 
   /* */
@@ -313,7 +286,7 @@ const ProvinsiList=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowProvinsisSelect(rowProvinsi);
+    //setRowrwSelect(rowRw);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -331,9 +304,9 @@ const ProvinsiList=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getProv}
+      <ModalComponent getDataBackend={getRw}
         handleChange={handleChange} setData={setData}
-        open={open} setRowSelect={setRowProvinsisSelect} rowSelect={rowProvinsisSelect}
+        open={open} setRowSelect={setRowrwSelect} rowSelect={rowrwSelect}
         title={title} datas={filteredItems} handleClose={handleClose} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
@@ -344,34 +317,31 @@ const ProvinsiList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Provinsi</h5>
+      <h5 style={{ color: 'black' }}>rw</h5>
       {/*}
-      <ProvinsisToolbar
+      <rwToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={provinsifind} deleteProvinsi={deleteProvinsi}
+        textfind={rwfind} deleteRw={deleteRw}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        provinsis={provinsis}
+        rw={rw}
+
       />
   {*/}
       <div className={classes.content}>
-        <ProvinsisTable
+        <RwTable
           handleOpenViewMap={handleOpenViewMap}
-          getMockData={getMockData}
-          provinsis = {provinsis}
           handleDelete={handleDelete}
           onChange={onChangefind}
-          deleteProvinsi={deleteProvinsi}
-          SettingProvinsi={SettingProvinsi}
-          provinsisExport={provinsisExport}
+          RwExport={rwExport}
           // deleteProv={deleteProv}
-          // deleteProvinsi={deleteProvinsi}
-          provinsifind={provinsifind}
+          // deleteRw={deleteRw}
+          rwfind={rwfind}
           filteredItems={filteredItems}
-          selectedProvinsis={selectedProvinsis} 
-          provinsifind={provinsifind}
+          selectedrw={selectedrw} 
+          rwfind={rwfind}
           handleOpen={handleOpen}
-          setSelectedProvinsis={setSelectedProvinsis}
+          setSelectedrw={setSelectedrw}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
@@ -379,7 +349,7 @@ const ProvinsiList=props => {
         />
 
 
-      {popupComponen(ProvinsiAddModi)}
+      {popupComponen(RwAddModi)}
 
       </div>
 
@@ -388,4 +358,4 @@ const ProvinsiList=props => {
   );
 };
 
-export default ProvinsiList;
+export default RwList;

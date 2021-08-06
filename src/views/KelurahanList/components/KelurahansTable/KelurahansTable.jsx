@@ -210,20 +210,15 @@ const deleteKel = async (e,selectedKelurahans) => {
       selector: 'KodeDepdagri',
       sortable: true,
     },
-    // {
-    //   name:'Nama Provinsi',
-    //   selector:'',
-    //   sortable:true,
-    // },    {
-    //   name:'Nama Kabupaten',
-    //   selector:'',
-    //   sortable:true,
-    // },
-    //  {
-    //   name:'Nama Kabupaten',
-    //   selector:'nama_kabupaten',
-    //   sortable:true,
-    // },
+    {
+      name:'Nama Provinsi',
+      selector:'nama_provinsi',
+      sortable:true,
+    },    {
+      name:'Nama Kabupaten',
+      selector:'nama_kabupaten',
+      sortable:true,
+    },
     {
       name:'Nama Kecamatan',
       selector:'nama_kecamatan',
@@ -232,7 +227,7 @@ const deleteKel = async (e,selectedKelurahans) => {
     {
       name: 'Nama Kelurahan',
       selector: 'nama_kelurahan',
-      sortable: true,
+      sortable: true, 
     },
     {
       name: 'Keterangan',
@@ -240,6 +235,8 @@ const deleteKel = async (e,selectedKelurahans) => {
       sortable: true,
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
+
+    
     {
       name: 'Edit Kelurahan',
       button: true,
@@ -256,6 +253,43 @@ const deleteKel = async (e,selectedKelurahans) => {
           onClick={(e) => deleteKel(e, row)}  ><p>Hapus</p></Button>
       ,
     },
+    {
+      name: 'CreatedBy',
+      selector: 'NamaLengkap',
+      sortable: true,
+    },
+    {
+      name: 'Created',
+      selector: 'Created',
+      sortable: true,
+    },
+    {
+      name: 'LastModifiedBy',
+      selector: 'NamaLengkap',
+      sortable: true,
+    },
+    {
+      name: 'OriginalID',
+      selector: 'OriginalID',
+      sortable: true,
+    },    {
+      name: 'OriginalKode',
+      selector: 'OriginalKode',
+      sortable: true,
+    },
+
+
+    {
+      name: 'OriginalNama',
+      selector: 'OriginalNama',
+      sortable: true,
+    },    
+    {
+      name: 'nama_kelurahan_old',
+      selector: 'nama_kelurahan_old',
+      sortable: true,
+    },
+
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {

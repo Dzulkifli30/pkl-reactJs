@@ -5,35 +5,19 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { ProvinsisToolbar, ProvinsisTable, ProvinsiAddModi, ViewMap } from './components';
+import { RtTable, RtAddModi } from './components';
 import { ModalComponent } from 'components';
-import mockData from './dataPropinsi';
+//import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import mockDataSettingProvinsi from './dataSettingprovinsi';
-import { urlProv, urlAddProv, urlEditProv, urlDeleteProv} from '../../kumpulanUrl'
-
-
+import { urlRt,urlShowRt } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
-import { async } from 'validate.js';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
 //import Fade from "@material-ui/core/Fade";
-
-const getMockData=() =>{
-  mockData.map(mock => {
-    return(
-      <h4>{mock}</h4>
-
-    )
-  })
-  console.log(mockData)
-
-  
-}
 
 const useStyles=makeStyles(theme => ({
   root: {
@@ -48,19 +32,11 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const ProvinsiList=props => {
-  //  componentWillMount() {
-  //    alert("fdfdf")
-  //  }
-  const { history }=props;
-  if (!localStorage.getItem("NamaLengkap")) {
-    history.push('/beranda');
+const RtList=props => {
 
-  }
-
-  async function getProv() {
+  async function getRt() {
     const userId=localStorage.getItem('user_id');
-    setFilteredItems(provinsis);
+    setFilteredItems(rt);
     setOpen(false);
 
     /* */
@@ -70,23 +46,23 @@ const ProvinsiList=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetProv=urlProv
+    let urlGetRt=urlRt
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlgetProv, requestOptions)
+    const response=await fetch(urlGetRt, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
         const data=resJson;
-        setProvinsis(data.data);
+        setrt(data.data);
         setFilteredItems(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setProvinsis([]);
+        setrt([]);
         setFilteredItems([]);
         setOpen(false);
         //this.setState({ ...this.state, isFetching: false });
@@ -98,14 +74,14 @@ const ProvinsiList=props => {
 
 
   const deleteProv = async (id) => {
-    let url = urlDeleteProv;
-    try {
-      let response = await axios.delete(url+`${id}`);
-    } catch {
-      e=>{
-        alert("error")
-      }
-    }
+    // let url = urlDeleteProv;
+    // try {
+    //   let response = await axios.delete(url+`${id}`);
+    // } catch {
+    //   e=>{
+    //     alert("error")
+    //   }
+    // }
   }
 
   const csvData=() => {
@@ -122,28 +98,18 @@ const ProvinsiList=props => {
     tempCsv.push(tempCsvItem)
 
 
-
     return tempCsv
   }
 
 
-  
-
-  const deleteProvinsi=async (e, id) => {
-    const selectedProvinsis_string=selectedProvinsis.join("<batas></batas>");
-    let provinsis3=provinsis.filter(function (entry) {
-      return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  const deletert=(e) => {
+    const selectedrt_string=selectedrt.join("<batas></batas>");
+    let rt3=rt.filter(function (entry) {
+      return entry&&entry.id&&selectedrt_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-
-    let url=urlDeleteProv
-    if (url === 200) {
-      // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
-    }
-
-    setFilteredItems(provinsis3)
-    setProvinsis(provinsis3)
-    setProvinsifind('')
+    setFilteredItems(rt3)
+    setrt(rt3)
+    setrtfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
@@ -151,13 +117,13 @@ const ProvinsiList=props => {
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setProvinsisExport(flteredItems);
+    setrtExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
       doc.setProperties({ title: SettingProvinsi[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#provinsisExport' })
+      doc.autoTable({ html: '#rtExport' })
       var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
       doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
 
@@ -178,17 +144,17 @@ const ProvinsiList=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setProvinsifind(e.target.value)
-      let provinsis4=provinsis.filter(function (entry) {
-        return entry&&entry.nama_provinsi&&
-          ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+      setrtfind(e.target.value)
+      let rt4=rt.filter(function (entry) {
+        return entry&&entry.nama_rt&&
+          ((entry.nama_rt!==null? entry.nama_rt:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(provinsis4)? provinsis4:[provinsis4]);
+      setFilteredItems(Array.isArray(rt4)? rt4:[rt4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(provinsis);
+      setFilteredItems(rt);
     }
-    setProvinsifind(e.target.value)
+    setrtfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -239,23 +205,22 @@ const ProvinsiList=props => {
   }
 
 
-  const [provinsis, setProvinsis]=useState([]);
+  const [rt, setrt]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowProvinsisSelect, setRowProvinsisSelect]=useState({});
+  const [rowrtSelect, setRowrtSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedProvinsis, setSelectedProvinsis]=useState([]);
-  const [provinsisExport, setProvinsisExport]=useState([]);
-  const [provinsifind, setProvinsifind]=useState([]);
+  const [selectedrt, setSelectedrt]=useState([]);
+  const [rtExport, setrtExport]=useState([]);
+  const [rtfind, setrtfind]=useState([]);
   const [add,setAdd]=React.useState([])
-  const SettingProvinsi=useState(mockDataSettingProvinsi);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
 
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getProv();
+    getRt();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -265,8 +230,8 @@ const ProvinsiList=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedProvinsis({
-      ...setSelectedProvinsis,
+    setSelectedrt({
+      ...setSelectedrt,
       [event.target.name]: event.target.value[0]
     });
 
@@ -274,8 +239,8 @@ const ProvinsiList=props => {
 
 
   const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowProvinsisSelect({
-      ...selectedProvinsis,
+    setRowrtSelect({
+      ...selectedrt,
       [field1]: value1,
 
       [field2]: value2,
@@ -295,7 +260,7 @@ const ProvinsiList=props => {
   const handleOpen=(e, rowProvinsi, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowProvinsisSelect(rowProvinsi);
+    setRowrtSelect(rowProvinsi);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
@@ -305,7 +270,7 @@ const ProvinsiList=props => {
   const handleDelete=(e,rowProvinsi, MessageButton) => {
     setTitle(MessageButton);
     deleteProv()
-    setRowProvinsisSelect(rowProvinsi);
+    setRowrtSelect(rowProvinsi);
   };
 
   /* */
@@ -313,7 +278,7 @@ const ProvinsiList=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowProvinsisSelect(rowProvinsi);
+    //setRowrtSelect(rowProvinsi);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -331,9 +296,9 @@ const ProvinsiList=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getProv}
+      <ModalComponent getDataBackend={getRt}
         handleChange={handleChange} setData={setData}
-        open={open} setRowSelect={setRowProvinsisSelect} rowSelect={rowProvinsisSelect}
+        open={open} setRowSelect={setRowrtSelect} rowSelect={rowrtSelect}
         title={title} datas={filteredItems} handleClose={handleClose} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
@@ -344,34 +309,30 @@ const ProvinsiList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Provinsi</h5>
+      <h5 style={{ color: 'black' }}>rt</h5>
       {/*}
-      <ProvinsisToolbar
+      <rtToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={provinsifind} deleteProvinsi={deleteProvinsi}
+        textfind={rtfind} deleteProvinsi={deleteProvinsi}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        provinsis={provinsis}
+        rt={rt}
+
       />
   {*/}
       <div className={classes.content}>
-        <ProvinsisTable
+        <RtTable
           handleOpenViewMap={handleOpenViewMap}
-          getMockData={getMockData}
-          provinsis = {provinsis}
           handleDelete={handleDelete}
           onChange={onChangefind}
-          deleteProvinsi={deleteProvinsi}
-          SettingProvinsi={SettingProvinsi}
-          provinsisExport={provinsisExport}
+          rtExport={rtExport}
           // deleteProv={deleteProv}
           // deleteProvinsi={deleteProvinsi}
-          provinsifind={provinsifind}
+          rtfind={rtfind}
           filteredItems={filteredItems}
-          selectedProvinsis={selectedProvinsis} 
-          provinsifind={provinsifind}
+          selectedrt={selectedrt} 
           handleOpen={handleOpen}
-          setSelectedProvinsis={setSelectedProvinsis}
+          setSelectedrt={setSelectedrt}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
@@ -379,7 +340,7 @@ const ProvinsiList=props => {
         />
 
 
-      {popupComponen(ProvinsiAddModi)}
+      {popupComponen(RtAddModi)}
 
       </div>
 
@@ -388,4 +349,4 @@ const ProvinsiList=props => {
   );
 };
 
-export default ProvinsiList;
+export default RtList;

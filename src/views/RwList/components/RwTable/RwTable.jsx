@@ -4,8 +4,7 @@ import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-import axios from 'axios';
-import { urlDeleteProv } from 'kumpulanUrl';
+
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
@@ -33,7 +32,6 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
-import { async } from 'validate.js';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -57,14 +55,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const ProvinsisTable=props => {
+const RwTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
-    textfind,provinsifind,
-    order, orderBy, SettingProvinsi,
-    provinsisExport, filteredItems, handleOpen, selectedProvinsis,
-    setSelectedProvinsis,
+    textfind,rwfind,
+    order, orderBy,
+    provinsisExport, filteredItems, handleOpen, selectedrw,
+    setselectedrw,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -191,21 +189,12 @@ const ProvinsisTable=props => {
     },
   };
 
-  const deleteProv = async (e,selectedProvinsis) => {
-    let url = urlDeleteProv
-    let response = axios.delete(url + `/${selectedProvinsis.id_provinsi}`)
-    console.log(selectedProvinsis.id_provinsi)
 
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-    }
 
   const columns=[
     {
-      name: 'Provinsi ID',
-      selector: 'id_provinsi',
+      name: 'Nama Rw',
+      selector: 'nama_rw',
       sortable: true,
     },
     {
@@ -214,8 +203,8 @@ const ProvinsisTable=props => {
       sortable: true,
     },
     {
-      name: 'Nama Provinsi',
-      selector: 'nama_provinsi',
+      name: 'Nama Kelurahan',
+      selector: 'nama_kelurahan',
       sortable: true,
     },
     {
@@ -225,19 +214,19 @@ const ProvinsisTable=props => {
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
-      name: 'Edit Provinsi',
+      name: 'Edit Rw',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Rw")}  ><EditIcon /></Button>
       ,
     },
     {
-      name: 'Hapus Provinsi',
+      name: 'Hapus Rw',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => deleteProv(e)} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e, row, "Hapus Rw")} ><DeleteIcon /></Button>
       ,
     },
   ];
@@ -254,7 +243,7 @@ const ProvinsisTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambahah Provinsi")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Rw")}>
           <AddIcon/>
         </Button>
 
@@ -263,7 +252,7 @@ const ProvinsisTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Provinsi"
+          placeholder="Search Rw"
           textfind={textfind}
         />
       </div>
@@ -287,36 +276,36 @@ const ProvinsisTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedProvinsis_var;
+    let selectedrw_var;
 
     if (event.target.checked) {
-      selectedProvinsis_var=provinsis.map(provinsi => provinsi.id);
+      selectedrw_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedProvinsis_var=[];
+      selectedrw_var=[];
     }
 
-    setSelectedProvinsis(selectedProvinsis_var);
+    setselectedrw(selectedrw_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedProvinsis.indexOf(id);
-    let newSelectedProvinsis=[];
+    const selectedIndex=selectedrw.indexOf(id);
+    let newselectedrw=[];
 
     if (selectedIndex===-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis, id);
+      newselectedrw=newselectedrw.concat(selectedrw, id);
     } else if (selectedIndex===0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(1));
-    } else if (selectedIndex===selectedProvinsis.length-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(0, -1));
+      newselectedrw=newselectedrw.concat(selectedrw.slice(1));
+    } else if (selectedIndex===selectedrw.length-1) {
+      newselectedrw=newselectedrw.concat(selectedrw.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(
-        selectedProvinsis.slice(0, selectedIndex),
-        selectedProvinsis.slice(selectedIndex+1)
+      newselectedrw=newselectedrw.concat(
+        selectedrw.slice(0, selectedIndex),
+        selectedrw.slice(selectedIndex+1)
       );
     }
 
-    setSelectedProvinsis(newSelectedProvinsis);
+    setselectedrw(newselectedrw);
     //console.log(selectedUsers);
   };
 
@@ -340,11 +329,11 @@ const ProvinsisTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Provinsi List"
+              title="Rw List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_provinsi"
+              keyField="nama_rw"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -364,9 +353,9 @@ const ProvinsisTable=props => {
   );
 };
 
-ProvinsisTable.propTypes={
+RwTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default ProvinsisTable;
+export default RwTable;

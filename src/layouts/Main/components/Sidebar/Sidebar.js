@@ -90,23 +90,39 @@ const Sidebar=props => {
         {
           title: 'Kecamatan',
           href: '/kecamatan'
-        },
-        {
-          title: 'Kabupaten',
-          href: '/kabupaten'
-
-        },
-        {
-          title: 'Kecamatan',
-          href: '/kecamatan'
 
         },
         {
           title: 'Kelurahan',
           href: '/kelurahan',
+        },
+        {
+          title: 'Rw',
+          href: '/rw',
+        },
+        {
+          title: 'Rt',
+          href: '/rt',
+        } ,
+
+      ]
+    },
+
+    {
+      title: 'Laporan Wilayah Indonesia',
+      href:'/#',
+      items : [
+        {
+          title:'Laporan Kabupaten',
+          href:'/laporan-kabupaten'
+        },
+        {
+          title:'Laporan Kecamatan',
+          href:'/laporan-kecamatan'
         }
       ]
     },
+
     {
       title: 'Visitor User',
       href: '/vuser'

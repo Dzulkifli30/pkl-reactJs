@@ -4,8 +4,7 @@ import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-import axios from 'axios';
-import { urlDeleteProv } from 'kumpulanUrl';
+
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
@@ -13,7 +12,7 @@ import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
 import DataTable from 'react-data-table-component';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddIcon from '@material-ui/icons/Add';
+import SearchIcon from '@material-ui/icons/Search';
 
 import {
   Card,
@@ -33,7 +32,7 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
-import { async } from 'validate.js';
+// import LaporanKecamatanTable from '.';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -57,14 +56,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const ProvinsisTable=props => {
+const LaporanKecamatanTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
-    textfind,provinsifind,
-    order, orderBy, SettingProvinsi,
-    provinsisExport, filteredItems, handleOpen, selectedProvinsis,
-    setSelectedProvinsis,
+    textfind,kecamatanfind,
+    order, orderBy,
+    kecamatanExport, filteredItems, handleOpen, selectedkecamatan,
+    setselectedkecamatan,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -191,55 +190,31 @@ const ProvinsisTable=props => {
     },
   };
 
-  const deleteProv = async (e,selectedProvinsis) => {
-    let url = urlDeleteProv
-    let response = axios.delete(url + `/${selectedProvinsis.id_provinsi}`)
-    console.log(selectedProvinsis.id_provinsi)
 
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-    }
 
   const columns=[
+
     {
-      name: 'Provinsi ID',
-      selector: 'id_provinsi',
+      name: 'Nama Kecamatan',
+      selector: 'Nama_Kecamatan',
       sortable: true,
     },
     {
-      name: 'Kode Depdagri',
-      selector: 'KodeDepdagri',
+      name: 'Jumlah Kelurahan',
+      selector: 'Jumlah_Kelurahan',
+      sortable: true,
+    },    
+    {
+      name: 'Jumlah RT',
+      selector: 'Jumlah_RT',
       sortable: true,
     },
     {
-      name: 'Nama Provinsi',
-      selector: 'nama_provinsi',
+      name: 'Jumlah RW',
+      selector: 'Jumlah_RW',
       sortable: true,
     },
-    {
-      name: 'Keterangan',
-      selector: 'IsActive',
-      sortable: true,
-      cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
-    },
-    {
-      name: 'Edit Provinsi',
-      button: true,
-      cell: row =>
-        <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
-      ,
-    },
-    {
-      name: 'Hapus Provinsi',
-      button: true,
-      cell: row =>
-        <Button color="primary"
-          onClick={(e) => deleteProv(e)} ><DeleteIcon /></Button>
-      ,
-    },
+
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -254,8 +229,8 @@ const ProvinsisTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambahah Provinsi")}>
-          <AddIcon/>
+        <Button onClick={(e) => handleOpen(e, [],)}>
+          <SearchIcon/>
         </Button>
 
       </div>
@@ -263,7 +238,7 @@ const ProvinsisTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Provinsi"
+          placeholder="Search Kecamatan"
           textfind={textfind}
         />
       </div>
@@ -287,36 +262,36 @@ const ProvinsisTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedProvinsis_var;
+    let selectedkecamatan_var;
 
     if (event.target.checked) {
-      selectedProvinsis_var=provinsis.map(provinsi => provinsi.id);
+      selectedkecamatan_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedProvinsis_var=[];
+      selectedkecamatan_var=[];
     }
 
-    setSelectedProvinsis(selectedProvinsis_var);
+    setselectedkecamatan(selectedkecamatan_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedProvinsis.indexOf(id);
-    let newSelectedProvinsis=[];
+    const selectedIndex=selectedkecamatan.indexOf(id);
+    let newselectedkecamatan=[];
 
     if (selectedIndex===-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis, id);
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan, id);
     } else if (selectedIndex===0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(1));
-    } else if (selectedIndex===selectedProvinsis.length-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(0, -1));
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(1));
+    } else if (selectedIndex===selectedkecamatan.length-1) {
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(
-        selectedProvinsis.slice(0, selectedIndex),
-        selectedProvinsis.slice(selectedIndex+1)
+      newselectedkecamatan=newselectedkecamatan.concat(
+        selectedkecamatan.slice(0, selectedIndex),
+        selectedkecamatan.slice(selectedIndex+1)
       );
     }
 
-    setSelectedProvinsis(newSelectedProvinsis);
+    setselectedkecamatan(newselectedkecamatan);
     //console.log(selectedUsers);
   };
 
@@ -340,11 +315,11 @@ const ProvinsisTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Provinsi List"
+              title="Jumlah Wilayah Kecamatan"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_provinsi"
+              keyField="nama_kecamatan"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -364,9 +339,9 @@ const ProvinsisTable=props => {
   );
 };
 
-ProvinsisTable.propTypes={
+LaporanKecamatanTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default ProvinsisTable;
+export default LaporanKecamatanTable;

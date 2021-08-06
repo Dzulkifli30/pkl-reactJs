@@ -24,11 +24,13 @@ import {
   NotFound as NotFoundView,
   KelurahanList as KelurahanListView,
   KabupatenList as KabupatenListView,
+  LaporanKabupaten as LaporanKabupatenView,
   KecamatanList as KecamatanListView,
-
   ProvinsiList as ProvinsiListView,
-  KabupatenList as KabupatenListView,
-  KecamatanList as KecamatanListView,
+  RtList as RtListView,
+  RwList as RwListView,
+  LaporanKecamatan as LaporanKecamatanView
+
 
 } from './views';
 
@@ -43,16 +45,21 @@ const Routes=() => {
       />
 
 
-
       <RouteWithLayout
         component={DashboardView}
         exact
         layout={MainLayout}
         path="/beranda"
       />
+      <RouteWithLayout
+        component={VisitorUsers}
+        exact
+        layout={MainLayout}
+        path="/vuser"
+      />
 
 
-
+    {/* Beginning Of Input Data */}
       <RouteWithLayout
         component={ProvinsiListView}
         exact
@@ -66,25 +73,32 @@ const Routes=() => {
         layout={MainLayout}
         path="/kabupaten"
       />
-      
+
       <RouteWithLayout
         component={KecamatanListView}
         exact
         layout={MainLayout}
         path="/kecamatan"
       />
-      <RouteWithLayout
-        component={VisitorUsers}
-        exact
-        layout={MainLayout}
-        path="/vuser"
-      />
+
       
       <RouteWithLayout
         component={KelurahanListView}
         exact
         layout={MainLayout}
         path="/kelurahan"
+      />
+        <RouteWithLayout
+        component={RtListView}
+        exact
+        layout={MainLayout}
+        path="/rt"
+      />
+            <RouteWithLayout
+        component={RwListView}
+        exact
+        layout={MainLayout}
+        path="/rw"
       />
 
       <RouteWithLayout
@@ -99,7 +113,25 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/kecamatan"
+      />    
+       {/*End Of Input Data  */}
+
+
+      {/* Beginning of Laporan */}
+
+      <RouteWithLayout
+        component={LaporanKabupatenView}
+        exact
+        layout={MainLayout}
+        path="/laporan-kabupaten"
       />
+      <RouteWithLayout
+        component={LaporanKecamatanView}
+        exact
+        layout={MainLayout}
+        path="/laporan-kecamatan"
+      />
+      {/* Ennding */}
 
       <RouteWithLayout
         component={SignUpView}
