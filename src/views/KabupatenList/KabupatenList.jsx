@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 //import '../../assets/vendor/dist/css/datatable1.css';
 //import { ImportScript } from '../components';
@@ -318,7 +317,6 @@ const KabupatenList=props => {
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
         kabupaten={kabupaten}
-
       />
   {*/}
       <div className={classes.content}>

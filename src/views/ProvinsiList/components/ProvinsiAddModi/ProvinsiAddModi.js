@@ -170,7 +170,6 @@ const ProvinsiAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-
     // alert(url);
     const response=fetch(url, requestOptions)
       .then(tester => {

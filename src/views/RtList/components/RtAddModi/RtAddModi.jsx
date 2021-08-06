@@ -156,6 +156,7 @@ const RtAddModi=props => {
     };
 
     let urlShow = urlShowKec
+
     // eslint-disable-next-line no-useless-concat
     const response = await fetch(urlShow, requestOptions)
       .then(res => {
@@ -188,6 +189,7 @@ const RtAddModi=props => {
     };
 
     let urlShow=urlShowKel
+
     // eslint-disable-next-line no-useless-concat
     const response=await fetch(urlShow, requestOptions)
       .then(res => {
@@ -449,6 +451,7 @@ const RtAddModi=props => {
         "id_rt": rowSelect.id_rt,
         "nama_rt": rowSelect.nama_rt,
         "id_rw": rowSelect.id_rw,
+
       })
     };
 
@@ -664,6 +667,40 @@ const RtAddModi=props => {
               </TextField>
 
             </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+
+              <TextField
+                fullWidth
+                label="Select aktiv"
+                margin="dense"
+                name="IsActive"
+                onChange={handleChange}
+                //required
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                //SelectProps={{ native: true }}
+
+                //defaultValue={rowSelect.IsActive}
+                value={rowSelect&&rowSelect.IsActive? rowSelect.IsActive:''}
+                variant="outlined"
+              >
+                {status.map(option => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+
+              </TextField>
+
+            </Grid>
+
             <Grid
               item
               md={6}

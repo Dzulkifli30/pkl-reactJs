@@ -189,7 +189,8 @@ const KecamatanAddModi=props => {
 
   useEffect(() => {
     // getKab()
-    getProv()
+    getProv();
+    showKab(rowSelect.id_provinsi)
     /*
     if (rowSelect.IsActive==='1') {
       rowSelect.status='Active'
@@ -256,6 +257,7 @@ const KecamatanAddModi=props => {
         "KodeDepdagri": rowSelect.KodeDepdagri,
         "id_kecamatan": rowSelect.id_kecamatan,
         "id_kabupaten": rowSelect.id_kabupaten,
+        "id_provinsi": rowSelect.id_provinsi,
         "nama_kecamatan": rowSelect.nama_kecamatan,
         "IsActive": rowSelect.IsActive,
       })
