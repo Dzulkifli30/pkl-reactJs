@@ -11,7 +11,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKec,urlAddKec,urlEditKec,urlLaporanKec } from '../../kumpulanUrl'
+import { urlKec,urlAddKec,urlEditKec,urlLaporanKec,urlShowKec } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -51,7 +51,8 @@ const LaporanKecamatan=props => {
     /* */
     const requestOptions={
       method: 'get',
-      //mode: "cors",
+      // mode: "cors",
+
       headers: { 'Content-Type': 'application/json' },
     };
 
@@ -60,6 +61,50 @@ const LaporanKecamatan=props => {
     const response=await fetch(urlgetKec, requestOptions)
       .then(res => {
         return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setkecamatan(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setkecamatan([]);
+        setFilteredItems([]);
+        setOpen(false);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+
+    setOpen(false);
+  }
+
+  async function showKec(rowkecamatanSelect) {
+    const userId=localStorage.getItem('user_id');
+    setFilteredItems(kecamatan);
+    setOpen(false);
+    /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+        body: JSON.stringify({
+          "id_kabupaten": rowkecamatanSelect.id_kabupaten,
+        }),
+      
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let urlgetKec=urlShowKec
+    alert(urlgetKec)
+    // eslint-disable-next-line no-useless-concat
+    // alert()
+    const response=await fetch(urlgetKec, requestOptions)
+      .then(res => {
+
+        return res.json();
+        
       })
 
       .then(resJson => {
@@ -230,7 +275,7 @@ const LaporanKecamatan=props => {
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getKec();
+    // getKec();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -309,10 +354,9 @@ const LaporanKecamatan=props => {
       <ModalComponent getDataBackend={getKec}
         handleChange={handleChange} setData={setData}
         open={open} setRowSelect={setRowkecamatanSelect} rowSelect={rowkecamatanSelect}
-        title={title} datas={filteredItems} handleClose={handleClose} 
+        title={title} datas={filteredItems} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
-
     )
   }
 
@@ -331,6 +375,12 @@ const LaporanKecamatan=props => {
       />
   {*/}
       <div className={classes.content}>
+        <KecamatanSearchModi
+          getDataBackend={showKec}
+          handleChange={handleChange} setData={setData}
+          open={open} setRowSelect={setRowkecamatanSelect} rowSelect={rowkecamatanSelect}
+          title={title} datas={filteredItems}
+        />
         <LaporanKecamatanTable
           handleOpenViewMap={handleOpenViewMap}
           handleDelete={handleDelete}

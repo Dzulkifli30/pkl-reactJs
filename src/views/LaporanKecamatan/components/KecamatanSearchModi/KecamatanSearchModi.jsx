@@ -227,46 +227,47 @@ const KecamatanSearchModi=props => {
     }
 
     //console.log(body);
+    getDataBackend(rowSelect)
 
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "nama_kecamatan": rowSelect.nama_kecamatan,
-        "IsActive": rowSelect.IsActive,
-      })
-    };
+    // const requestOptions={
+    //   method: 'POST',
+    //   mode: "cors",
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     "KodeDepdagri": rowSelect.KodeDepdagri,
+    //     "id_kecamatan": rowSelect.id_kecamatan,
+    //     "id_kabupaten": rowSelect.id_kabupaten,
+    //     "nama_kecamatan": rowSelect.nama_kecamatan,
+    //     "IsActive": rowSelect.IsActive,
+    //   })
+    // };
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
-    const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })/**/
+    // alert(url);
+    // const response=fetch(url,)
+    //   .then(res => {
+    //     return res.json();
+    //   })/**/
 
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        alert(res.message)
+    //   .then(res => {
+    //     //console.log(res)
+    //     //console.log(res.data)
+    //     alert(res.message)
 
-        handleClose();
-        getDataBackend();
-        //alert("Sukses")
-        const data=res;
-      })
-      .catch((e) => {
+    //     handleClose();
+    //     getDataBackend();
+    //     //alert("Sukses")
+    //     const data=res;
+    //   })
+    //   .catch((e) => {
 
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+    //     swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
 
-        return false;
+    //     return false;
 
 
-      });
+    //   });
 
 
   }
@@ -372,7 +373,7 @@ const KecamatanSearchModi=props => {
               md={6}
               xs={12}
             >
-              <TextField
+              {/* <TextField
                 fullWidth
                 label="Pilih Kecamatan"
                 margin="dense"
@@ -396,7 +397,7 @@ const KecamatanSearchModi=props => {
                   </option>
                 ))}
 
-              </TextField>
+              </TextField> */}
 
             </Grid>
           </Grid>
@@ -412,13 +413,8 @@ const KecamatanSearchModi=props => {
             disabled={!formState.isValid}
 
           >
-            Simpan
+            Search
           </Button>
-
-          <Button color="primary"
-            className={classes.buttonCancel}
-            variant="contained"
-            onClick={handleClose} >Batal</Button>
 
         </CardActions>
       </form>

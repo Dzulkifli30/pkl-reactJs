@@ -11,7 +11,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKab,urlLaporanKab } from '../../kumpulanUrl'
+import { urlKab,urlLaporanKab,urlShowKab } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -263,6 +263,38 @@ const LaporanKabupaten=props => {
 
   };
 
+  async function showKab(id_provinsi) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_provinsi": id_provinsi,
+      })
+    };
+
+    let urlShow=urlShowKab
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('kabupaten =',data.data)
+        setkabupaten(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setkabupaten([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  } 
+
 
   const handleOpen=(e, rowKabupaten, MessageButton) => {
     setOpen(true);
@@ -336,6 +368,7 @@ const LaporanKabupaten=props => {
           handleDelete={handleDelete}
         // textfind={kabupatenfind} 
           onChange={onChangefind}
+          showKab={showKab}
           kabupatenExport={kabupatenExport}
           kabupatenfind={kabupatenfind}
           filteredItems={filteredItems}

@@ -295,26 +295,7 @@ const KecamatanAddModi=props => {
             container
             spacing={3}
           >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Kode Depdagri"
-                margin="dense"
-                name="KodeDepdagri"
-                onChange={handleChange}
-                helperText={
-                  hasError('KodeDepdagri')? formState.errors.KodeDepdagri[0]:null
-                }
 
-                error={hasError('KodeDepdagri')}
-                defaultValue={rowSelect&&rowSelect.KodeDepdagri? rowSelect.KodeDepdagri:''}
-                variant="outlined"
-              />
-            </Grid>
 
             <Grid
               item
@@ -375,65 +356,6 @@ const KecamatanAddModi=props => {
                     value={option.id_kabupaten}
                   >
                     {option.nama_kabupaten}
-                  </option>
-                ))}
-
-              </TextField>
-
-            </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-
-              <TextField
-                fullWidth
-                label="Nama Kecamatan"
-                margin="dense"
-                name="nama_kecamatan"
-                onChange={handleChange}
-                helperText={
-                  hasError('nama_kecamatan')? formState.errors.nama_kecamatan[0]:null
-                }
-
-                error={hasError('nama_kecamatan')}
-
-                defaultValue={rowSelect&&rowSelect.nama_kecamatan? rowSelect.nama_kecamatan:''}
-                variant="outlined"
-              />
-            </Grid>
-
-
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-
-              <TextField
-                fullWidth
-                label="Select aktiv"
-                margin="dense"
-                name="IsActive"
-                onChange={handleChange}
-                //required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                //SelectProps={{ native: true }}
-
-                //defaultValue={rowSelect.IsActive}
-                value={rowSelect&&rowSelect.IsActive? rowSelect.IsActive:''}
-                variant="outlined"
-              >
-                {status.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
                   </option>
                 ))}
 

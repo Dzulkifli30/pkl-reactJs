@@ -63,6 +63,7 @@ const useStyles=makeStyles(theme => ({
 const LaporanKabupatenTable=props => {
   const {
     kab,
+    showKab,
     setKab,
     className,handleDelete,
     textfind,kabupatenfind,
@@ -267,6 +268,7 @@ const LaporanKabupatenTable=props => {
 
   const handleChangeProvinsi=event=> {
     handleChange(event)
+    alert('kabupaten')
     showKab(event.target.value)
   }
   const handleChange=event => {
@@ -286,40 +288,9 @@ const LaporanKabupatenTable=props => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
-    // showKab(event.target.value)
+    showKab(event.target.value)
   }
-  async function showKab(id_provinsi) {
-    const requestOptions={
-      method: 'POST',
-      // mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "id_provinsi": id_provinsi,
-      })
-    };
-
-    let url=urlShowKab
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setKab(data.data);
-        console.log("Kabupaten Hasil =",data.data)
-
-        // alert("kabupaten")
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Network Error");
-        setKab([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }  
+ 
 
   async function getLaporanKab() {
     const requestOptions={
@@ -380,7 +351,7 @@ const LaporanKabupatenTable=props => {
   }
   useEffect(() => {
     getProv()
-    // alert('ini prov')
+    alert('ini prov')
   }, [rowSelect])
   const columns=[
     // {
@@ -434,60 +405,7 @@ const LaporanKabupatenTable=props => {
         autoComplete="off"
         noValidate
       >
-          <TextField
-                fullWidth
-                label="Pilih Provinsi"
-                margin="dense"
-                name="id_provinsi"
-                onChange={handleChangeProvinsi}
-                selector="id_provinsi"
-                select
-                // value={rowSelect.id_provinsi}  
-                variant="outlined"
-              >
-                {prov.map((option)=> (
-                  <option
-                    key={option.id_provinsi}
-                    // onChange={handleChangeProvinsi}
-                    value={option.id_provinsi}
-                  >
-                   {option.nama_provinsi}
-                  </option>
-                ))}
-
-              </TextField>
-              <TextField
-                fullWidth
-                label="Pilih Kabupaten"
-                margin="dense"
-                name="id_kabupaten"
-                onChange={handleChange}
-                selector="id_kabupaten"
-                select
-                // value={.id_kabupaten}  
-                variant="outlined"
-              >
-                {kab.map((option)=> (
-                  <option
-                    key={option.id_kabupaten}
-                    // onChange={handleChange}
-                    value={option.id_kabupaten}
-                  >
-                   {option.nama_kabupaten}
-                  </option>
-                ))}
-
-              </TextField>
-              <Button
-            color="primary"
-            className={classes.buttonSuccess}
-            variant="contained"
-            // onClick={handleChangeProvinsi}
-            // disabled={!formState.isValid}
-
-          >
-            Simpan
-          </Button>
+         
       </form>
       
                     
