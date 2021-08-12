@@ -114,11 +114,20 @@ const Sidebar=props => {
       items : [
         {
           title:'Laporan Kabupaten',
-          href:'/laporan-kabupaten'
+          href:'/laporan-kabupaten',
+        
+        },
+        {
+          title:'Laporan Per Kabupaten',
+          href:'laporan-per-kabupaten',
         },
         {
           title:'Laporan Kecamatan',
           href:'/laporan-kecamatan'
+        }        
+        ,{
+          title:'Laporan Per Kecamatan',
+          href:'/laporan-per-kecamatan'
         }
       ]
     },

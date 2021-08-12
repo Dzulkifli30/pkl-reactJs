@@ -269,12 +269,12 @@ const PerKabupatenSearchModi = props => {
   const pencarian = (paramKab, id_kab) => {
     let value = id_kab
     let result = [];
-    alert(value)
+    // alert(value)
     result = paramKab.filter((entry) => {
       return entry&&entry.id_kabupaten &&(entry.id_kabupaten === value) 
     });
     console.log("result =",result[0].nama_kabupaten)
-    alert("result = " + result[0].nama_kabupaten)
+    // alert("result = " + result[0].nama_kabupaten)
     return result[0].nama_kabupaten
   }
 

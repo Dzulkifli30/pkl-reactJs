@@ -211,6 +211,15 @@ const KecamatanSearchModi=props => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
+    let nama = event.target.name.replace("id","nama")
+    if (event.target.name == "id_kabupaten") {
+      setRowSelect({
+        ...rowSelect,
+         [nama]:pencarian(kabupaten,event.target.value),
+         [event.target.name]: event.target.value,
+      });
+      console.log("Ket Kabupaten =", kabupaten)
+    }
   }
 
   const handleClose=() => {
@@ -218,62 +227,22 @@ const KecamatanSearchModi=props => {
   }
 
   const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
-    let url=urlAddKec;
-    if (rowSelect.id_kecamatan===undefined) {
-      url=urlAddKec;
-    } else {
-      url=urlEditKec;
-    }
-
-    //console.log(body);
+    console.log("Rs =".rowSelect)
     getDataBackend(rowSelect)
-
-    // const requestOptions={
-    //   method: 'POST',
-    //   mode: "cors",
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     "KodeDepdagri": rowSelect.KodeDepdagri,
-    //     "id_kecamatan": rowSelect.id_kecamatan,
-    //     "id_kabupaten": rowSelect.id_kabupaten,
-    //     "nama_kecamatan": rowSelect.nama_kecamatan,
-    //     "IsActive": rowSelect.IsActive,
-    //   })
-    // };
-
-
-    ///let urlGetData=urlPostLogin
-    // alert(url);
-    // const response=fetch(url,)
-    //   .then(res => {
-    //     return res.json();
-    //   })/**/
-
-    //   .then(res => {
-    //     //console.log(res)
-    //     //console.log(res.data)
-    //     alert(res.message)
-
-    //     handleClose();
-    //     getDataBackend();
-    //     //alert("Sukses")
-    //     const data=res;
-    //   })
-    //   .catch((e) => {
-
-    //     swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
-    //     return false;
-
-
-    //   });
-
-
   }
 
   
-
+  const pencarian = (paramKab, id_kab) => {
+    let value = id_kab
+    let result = [];
+    // alert(value)
+    result = paramKab.filter((entry) => {
+      return entry&&entry.id_kabupaten &&(entry.id_kabupaten === value) 
+    });
+    console.log("result =",result[0].nama_kabupaten)
+    // alert("result = " + result[0].nama_kabupaten)
+    return result[0].nama_kabupaten
+  }
 
 
 
@@ -293,6 +262,7 @@ const KecamatanSearchModi=props => {
         noValidate
       >
         <CardHeader
+        
           subheader=""
           title="Search Wilayah"
         />
@@ -373,32 +343,6 @@ const KecamatanSearchModi=props => {
               md={6}
               xs={12}
             >
-              {/* <TextField
-                fullWidth
-                label="Pilih Kecamatan"
-                margin="dense"
-                name="id_kecamatan"
-                onChange={handleChange}
-                //required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                //SelectProps={{ native: true }}
-
-                //defaultValue={rowSelect.IsActive}
-                value={rowSelect.id_kecamatan}
-                variant="outlined"
-              >
-                {kabupaten.map(option => (
-                  <option
-                    key={option.id_kecamatan}
-                    value={option.id_kecamatan}
-                  >
-                    {option.nama_kecamatan}
-                  </option>
-                ))}
-
-              </TextField> */}
-
             </Grid>
           </Grid>
         </CardContent>
@@ -411,7 +355,6 @@ const KecamatanSearchModi=props => {
             variant="contained"
             onClick={handleSave}
             disabled={!formState.isValid}
-
           >
             Search
           </Button>

@@ -22,8 +22,10 @@ export const urlDeleteProv= ulrport+ 'provinsi/deleteProv'
  export const urlAddKec=ulrport+'kecamatan/storeKec'
  export const urlEditKec=ulrport+'kecamatan/updateKec'
  export const urlShowKec=ulrport+'kecamatan/showKecamatan'
+ export const urlShowKecs=ulrport+'kecamatan/showKecamatans'
  export const urlDeleteKec=ulrport+'kecamatan/delete/{id}'
  export const urlLaporanKec=ulrport+'kecamatan/laporanKec'
+ export const urlShowPerKec=ulrport+'kecamatan/show-per-kec'
 
 
 // Kelurahan
@@ -40,6 +42,7 @@ export const urlShowKab=ulrport+'kabupaten/showKabupaten'
  export const urlAddKab=ulrport+'kabupaten/storeKab'
  export const urlEditKab=ulrport+'kabupaten/updateKab'
  export const urlLaporanKab=ulrport+'kabupaten/laporanKab'
+ export const urlLaporanPerKab=ulrport+'kabupaten/show-per-kab'
 
  //RW
 export const urlShowRw=ulrport+'rw/showRw'

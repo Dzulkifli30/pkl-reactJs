@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddKec, urlEditKec, urlKab, urlProv, urlShowKab,urlLaporanPerKab } from '../../../../kumpulanUrl';
+import { urlAddKec, urlEditKec, urlKab, urlProv, urlShowKab,urlLaporanPerKab,urlShowPerKec, urlShowKec } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -47,7 +47,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const PerKecamatanSearchModi=props => {
-  const { className, setData, getDataBackend, setRowSelect, rowSelect, title,setKab, ...rest }=props;
+  const { className, setData, getDataBackend, setRowSelect, rowSelect, title,setKec, ...rest }=props;
 
   const classes=useStyles();
 
@@ -56,6 +56,8 @@ const PerKecamatanSearchModi=props => {
   const [getKeyId, setKeyId]=useState([]);
   const [perKabupaten, setPerKabupaten]=useState([]);
   const [kabupaten, setKabupaten]=useState([]);
+  const [perKecamatan,setPerKecamatan]=useState([])
+  const [kecamatan,setKecamatan]=useState([]);
   const [prov, setProv]=useState([]);
 
   const status=[
@@ -76,6 +78,40 @@ const PerKecamatanSearchModi=props => {
     touched: {},
     errors: {}
   });
+
+  async function showKec(id_kabupaten) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_kabupaten": id_kabupaten,
+      })
+    };
+
+    let urlShow=urlShowKec
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('kecamatan =',data.data)
+        setKec(data.data);
+        setKecamatan(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("err");
+        setKec([]);
+        setKecamatan([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
 
   async function showKab(id_provinsi) {
     /* */
@@ -98,31 +134,31 @@ const PerKecamatanSearchModi=props => {
       .then(resJson => {
         const data=resJson;
         console.log('kabupaten =',data.data)
-        setKab(data.data);
+        setKec(data.data);
         setKabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("err");
-        setKab([]);
+        setKec([]);
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
 
-  async function showPerKab(id_kabupaten) {
+  async function showPerKec(id_kecamatan) {
     /* */
     const requestOptions={
       method: 'POST',
       //mode: "cors",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        "id_kabupaten": id_kabupaten,
+        "id_kecamatan": id_kecamatan,
       })
     };
 
-    let urlShow=urlLaporanPerKab
+    let urlShow=urlShowPerKec
     // eslint-disable-next-line no-useless-concat
     const response=await fetch(urlShow, requestOptions)
       .then(res => {
@@ -131,45 +167,45 @@ const PerKecamatanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
-        setPerKabupaten(data.data);
+        console.log('Kecamatan =',data.data)
+        setPerKecamatan(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("err");
-        setPerKabupaten([]);
+        setPerKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
 
-  async function getKab() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
+  // async function getKab() {
+  //   /* */
+  //   const requestOptions={
+  //     method: 'get',
+  //     //mode: "cors",
+  //     headers: { 'Content-Type': 'application/json' },
+  //   };
 
-    let urlGetKabAll=urlKab
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlGetKabAll, requestOptions)
-      .then(res => {
-        return res.json();
-      })
+  //   let urlGetKabAll=urlKab
+  //   // eslint-disable-next-line no-useless-concat
+  //   const response=await fetch(urlGetKabAll, requestOptions)
+  //     .then(res => {
+  //       return res.json();
+  //     })
 
-      .then(resJson => {
-        const data=resJson;
-        setPerKabupaten(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setPerKabupaten([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
+  //     .then(resJson => {
+  //       const data=resJson;
+  //       setPerKabupaten(data.data);
+  //       //return false;
+  //     })
+  //     .catch(e => {
+  //       //console.log(e);
+  //       alert("Nextwork Error");
+  //       setPerKabupaten([]);
+  //       //this.setState({ ...this.state, isFetching: false });
+  //     });
+  // }
 
   async function getProv() {
     /* */
@@ -228,6 +264,10 @@ const PerKecamatanSearchModi=props => {
     handleChange(event)
     showKab(event.target.value)
   }
+  const handleChangeKabupaten=event=> {
+    handleChange(event)
+    showKec(event.target.value)
+  }
 
   const handleChange=event => {
 
@@ -244,13 +284,15 @@ const PerKecamatanSearchModi=props => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
-    // alert(event.target.name.replace("id","nama"))
-    // let nama = event.target.name.replace("id","nama")
-    // console.log(event.target)
-    // setRowSelect({
-    //   ...rowSelect,
-    //   [nama]: event.target.value
-    // });
+    let nama = event.target.name.replace("id","nama")
+    if (event.target.name == "id_kecamatan") {
+      setRowSelect({
+        ...rowSelect,
+         [nama]:pencarian(kecamatan,event.target.value),
+         [event.target.name]: event.target.value,
+      });
+      console.log("Ket kecamatan =", kecamatan)
+    }
   }
 
 
@@ -259,10 +301,20 @@ const PerKecamatanSearchModi=props => {
   }
 
   const handleSave=(event) => {
-    console.log("Rs =".rowSelect)
     getDataBackend(rowSelect)
   }
 
+  const pencarian = (paramKec, id_kec) => {
+    let value = id_kec
+    let result = [];
+    // alert(value)
+    result = paramKec.filter((entry) => {
+      return entry&&entry.id_kecamatan &&(entry.id_kecamatan === value) 
+    });
+    console.log("result =",result[0].nama_kecamatan)
+    // alert("result = " + result[0].nama_kecamatan)
+    return result[0].nama_kecamatan
+  }
   
 
 
@@ -333,7 +385,7 @@ const PerKecamatanSearchModi=props => {
                 label="Pilih Kabupaten"
                 margin="dense"
                 name="id_kabupaten"
-                onChange={handleChange}
+                onChange={handleChangeKabupaten}
                 select
                 value={rowSelect.id_kabupaten}
                 variant="outlined"
@@ -344,6 +396,33 @@ const PerKecamatanSearchModi=props => {
                     value={option.id_kabupaten}
                   >
                     {option.nama_kabupaten}
+                  </option>
+                ))}
+
+              </TextField>
+
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Pilih Kecamatan"
+                margin="dense"
+                name="id_kecamatan"
+                onChange={handleChange}
+                select
+                value={rowSelect.id_kecamatan}
+                variant="outlined"
+              >
+                {kecamatan.map(option => (
+                  <option
+                    key={option.id_kecamatan}
+                    value={option.id_kecamatan}
+                  >
+                    {option.nama_kecamatan}
                   </option>
                 ))}
 

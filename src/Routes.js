@@ -29,7 +29,9 @@ import {
   ProvinsiList as ProvinsiListView,
   RtList as RtListView,
   RwList as RwListView,
-  LaporanKecamatan as LaporanKecamatanView
+  LaporanKecamatan as LaporanKecamatanView,
+  LaporanPerKabupaten as LaporanPerKabupatenView,
+  LaporanPerKecamatan as LaporanPerKecamatanView
 
 
 } from './views';
@@ -124,6 +126,18 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/laporan-kabupaten"
+      />
+      <RouteWithLayout
+        component={LaporanPerKabupatenView}
+        exact
+        layout={MainLayout}
+        path="/laporan-per-kabupaten"
+      />
+        <RouteWithLayout
+        component={LaporanPerKecamatanView}
+        exact
+        layout={MainLayout}
+        path="/laporan-per-kecamatan"
       />
       <RouteWithLayout
         component={LaporanKecamatanView}

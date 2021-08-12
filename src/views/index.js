@@ -8,6 +8,8 @@ export {default as VisitorUser} from './Dashboard/components/VisitorUser/';
 export {default as ProvinsiList} from './ProvinsiList'
 export {default as KelurahanList} from './KelurahanList'
 export {default as LaporanKabupaten} from './LaporanKabupaten'
+export {default as LaporanPerKabupaten} from './LaporanPerKabupaten'
+export {default as LaporanPerKecamatan} from './LaporanPerKecamatan'
 export {default as LaporanKecamatan} from './LaporanKecamatan'
 export {default as KecamatanList} from './KecamatanList'
 export {default as KabupatenList} from './KabupatenList'

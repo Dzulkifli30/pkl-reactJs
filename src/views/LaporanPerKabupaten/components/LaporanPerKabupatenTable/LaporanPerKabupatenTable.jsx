@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 //import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
@@ -10,17 +10,15 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
-import { urlProv,urlShowKab } from '../../../../kumpulanUrl';
 import DataTable from 'react-data-table-component';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddIcon from '@material-ui/icons/Add';
+import SearchIcon from '@material-ui/icons/Search';
 
 import {
   Card,
   CardActions,
   CardContent,
   Avatar,
-  TextField,
   Checkbox,
   Table,
   TableBody,
@@ -34,6 +32,7 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
+// import LaporanPerKabupatenTable from '.';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -51,105 +50,35 @@ const useStyles=makeStyles(theme => ({
   avatar: {
     marginRight: theme.spacing(2)
   },
-  fontFamily:{
-    fontFamily: 'font-poppins'
-  },
   actions: {
     justifyContent: 'flex-end'
   }, importButton: {
     marginRight: theme.spacing(1)
   },
 }));
-const LaporanKabupatenTable=props => {
+const LaporanPerKabupatenTable=props => {
   const {
-    kab,
-    setKab,
+    handleOpenViewMap,
     className,handleDelete,
-    textfind,kabupatenfind,
+    textfind,kecamatanfind,
     order, orderBy,
-    provinsisExport, filteredItems, handleOpen, selectedkabupaten,
-    setselectedkabupaten,
+    kecamatanExport, filteredItems, handleOpen, selectedkecamatan,
+    rowSelect,setRowSelect,
+    setselectedkecamatan,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV,
-    rowSelect,
-    setRowSelect,
-    // setFormState,
-    onChangeFind
+    setKab,
+    kab
 
     , ...rest }=props;
 
-  
   const [filterText, setFilterText]=React.useState('');
   const [resetPaginationToggle, setResetPaginationToggle]=React.useState(false);
   const classes=useStyles();
 
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
-  const[laporKab,setLaporKab]=useState([])
-  const [prov, setProv]=useState([]);
-  const [formState, setFormState]=useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {}
-  });
-
-
-
-
-  const handleSearch=(event) => {
-    const userId=localStorage.getItem('user_id');
-    let url=urlAddKec;
-    if (rowSelect.id_kecamatan===undefined) {
-      url=urlShowKab;
-    }
-
-    //console.log(body);
-
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "nama_kabupaten": rowSelect.nama_kabupaten,
-        "IsActive": rowSelect.IsActive,
-      })
-    };
-
-
-    ///let urlGetData=urlPostLogin
-    alert(url);
-    const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })/**/
-
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        alert(res.message)
-
-        handleClose();
-        getDataBackend();
-        //alert("Sukses")
-        const data=res;
-      })
-      .catch((e) => {
-
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
-        return false;
-
-
-      });
-
-
-  }
-
 
 
 
@@ -255,115 +184,15 @@ const LaporanKabupatenTable=props => {
           minHeight: '30px', // override the row heigh
 
         }
-
-        
-
-
       },
 
     },
   };
 
 
-  const handleChangeProvinsi=event=> {
-    handleChange(event)
-    alert('kabupaten')
-    showKab(event.target.value)
-  }
-  const handleChange=event => {
 
-    //    event.persist();
-
-    // const errors=validate(rowSelect, schema);
-
-    setFormState(formState => ({
-      ...rowSelect,
-      // isValid: errors? false:true,
-      // errors: errors||{}
-    }));
-
-
-    setRowSelect({
-      ...rowSelect,
-      [event.target.name]: event.target.value
-    });
-    // showKab(event.target.value)
-  }
- 
-
-  async function getLaporanKab() {
-    const requestOptions={
-      method: 'get',
-      // mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let url=urlShowKab
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setLaporKab(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert(e);
-        setLaporKab([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  } 
-
-
-
-
-  async function getProv() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let url=urlProv
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setProv(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Network Error");
-        setProv([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-  useEffect(() => {
-    getProv()
-    // alert('ini prov')
-  }, [rowSelect])
   const columns=[
-    // {
-    //   name: 'Kode Depdagri',
-    //   selector: 'KodeDepdagri',
-    //   sortable: true,
-    // },
-    {
-      name: 'Kabupaten',
-      selector: 'Nama_Kabupaten',
-      font:'Poppins',
-      sortable: true,
-    }, 
+
     {
       name: 'Jumlah Kecamatan',
       selector: 'Jumlah_Kecamatan',
@@ -373,16 +202,18 @@ const LaporanKabupatenTable=props => {
       name: 'Jumlah Kelurahan',
       selector: 'Jumlah_Kelurahan',
       sortable: true,
-    },
+    },    
     {
-      name: 'Jumlah Rw',
-      selector: 'Jumlah_RW',
-      sortable: true,
-    },    {
-      name: 'Jumlah Rt',
+      name: 'Jumlah RT',
       selector: 'Jumlah_RT',
       sortable: true,
     },
+    {
+      name: 'Jumlah RW',
+      selector: 'Jumlah_RW',
+      sortable: true,
+    },
+
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -392,24 +223,14 @@ const LaporanKabupatenTable=props => {
         setFilterText('');
       }
     };
-  return <div class="form-group">
-      <div className="col-md-4 mx-0 my-10">
-      <form
-        autoComplete="off"
-        noValidate
-      >
-         
-      </form>
-      
-                    
-      </div>
+    return <div class="form-group">
+      <div class="col-md-6">
+        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+          <img src="/img/xls.jpeg" />
+        </Button>
 
-              <div className="col-md-4 mx-0 my-10">
-              
-              </div>
-      <div class="col-md-4 mx-0 my-10 flex">
-        </div>
-  </div>
+      </div>
+    </div>
 
 
 
@@ -429,36 +250,36 @@ const LaporanKabupatenTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedkabupaten_var;
+    let selectedkecamatan_var;
 
     if (event.target.checked) {
-      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
+      selectedkecamatan_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedkabupaten_var=[];
+      selectedkecamatan_var=[];
     }
 
-    setselectedkabupaten(selectedkabupaten_var);
+    setselectedkecamatan(selectedkecamatan_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedkabupaten.indexOf(id);
-    let newselectedkabupaten=[];
+    const selectedIndex=selectedkecamatan.indexOf(id);
+    let newselectedkecamatan=[];
 
     if (selectedIndex===-1) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan, id);
     } else if (selectedIndex===0) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
-    } else if (selectedIndex===selectedkabupaten.length-1) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(1));
+    } else if (selectedIndex===selectedkecamatan.length-1) {
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(0, -1));
     } else if (selectedIndex>0) {
-      newselectedkabupaten=newselectedkabupaten.concat(
-        selectedkabupaten.slice(0, selectedIndex),
-        selectedkabupaten.slice(selectedIndex+1)
+      newselectedkecamatan=newselectedkecamatan.concat(
+        selectedkecamatan.slice(0, selectedIndex),
+        selectedkecamatan.slice(selectedIndex+1)
       );
     }
 
-    setselectedkabupaten(newselectedkabupaten);
+    setselectedkecamatan(newselectedkecamatan);
     //console.log(selectedUsers);
   };
 
@@ -469,8 +290,8 @@ const LaporanKabupatenTable=props => {
   const handleRowsPerPageChange=event => {
     setRowsPerPage(event.target.value);
   };
-  //  const filteredItems=provinsis;
-  //const actionsMemo=React.useMemo(() => <Export onExport={() => downloadCSV()} />, []);
+
+ 
 
   return (
     <Card
@@ -479,11 +300,9 @@ const LaporanKabupatenTable=props => {
     >
       <CardContent className={classes.content}>
         <PerfectScrollbar>
-
           <div className={classes.inner}>
             <DataTable
-            font="Poppins"
-              title="Laporan Jumlah Wilayah"
+              title={rowSelect.nama_kabupaten == undefined ? "Jumlah Wilayah Kab/Kota" : "Jumlah Wilayah Kab/Kota " +rowSelect.nama_kabupaten}
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
@@ -496,8 +315,6 @@ const LaporanKabupatenTable=props => {
               persistTableHead
               dense
             />
-
-
           </div>
 
 
@@ -507,9 +324,9 @@ const LaporanKabupatenTable=props => {
   );
 };
 
-LaporanKabupatenTable.propTypes={
+LaporanPerKabupatenTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default LaporanKabupatenTable;
+export default LaporanPerKabupatenTable;

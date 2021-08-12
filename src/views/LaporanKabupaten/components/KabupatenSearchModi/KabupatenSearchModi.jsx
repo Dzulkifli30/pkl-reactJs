@@ -212,56 +212,7 @@ const KecamatanAddModi=props => {
   }
 
   const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
-    let url=urlAddKec;
-    if (rowSelect.id_kecamatan===undefined) {
-      url=urlAddKec;
-    } else {
-      url=urlEditKec;
-    }
-
-    //console.log(body);
-
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "nama_kecamatan": rowSelect.nama_kecamatan,
-        "IsActive": rowSelect.IsActive,
-      })
-    };
-
-
-    ///let urlGetData=urlPostLogin
-    alert(url);
-    const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })/**/
-
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        alert(res.message)
-
-        handleClose();
-        getDataBackend();
-        //alert("Sukses")
-        const data=res;
-      })
-      .catch((e) => {
-
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
-        return false;
-
-
-      });
-
+    getDataBackend(rowSelect)
 
   }
 
@@ -287,7 +238,7 @@ const KecamatanAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title={rowSelect.id_kecamatan == undefined ? "Tambah Kecamatan" : "Ubah Kecamatan"}
+          title="Search Wilayah Kabupaten"
         />
         <Divider />
         <CardContent>
@@ -335,32 +286,6 @@ const KecamatanAddModi=props => {
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Pilih Kabupaten"
-                margin="dense"
-                name="id_kabupaten"
-                onChange={handleChange}
-                //required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                //SelectProps={{ native: true }}
-
-                //defaultValue={rowSelect.IsActive}
-                value={rowSelect.id_kabupaten}
-                variant="outlined"
-              >
-                {kabupaten.map(option => (
-                  <option
-                    key={option.id_kabupaten}
-                    value={option.id_kabupaten}
-                  >
-                    {option.nama_kabupaten}
-                  </option>
-                ))}
-
-              </TextField>
-
             </Grid>
           </Grid>
         </CardContent>
@@ -373,15 +298,9 @@ const KecamatanAddModi=props => {
             variant="contained"
             onClick={handleSave}
             disabled={!formState.isValid}
-
           >
-            Simpan
+            Search
           </Button>
-
-          <Button color="primary"
-            className={classes.buttonCancel}
-            variant="contained"
-            onClick={handleClose} >Batal</Button>
 
         </CardActions>
       </form>

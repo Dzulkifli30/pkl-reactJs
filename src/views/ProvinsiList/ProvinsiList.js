@@ -11,6 +11,7 @@ import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import mockDataSettingProvinsi from './dataSettingprovinsi';
+import { urlProv } from 'kumpulanUrl';
 
 
 import '../../assets/vendor/dist/css/datatable.css';

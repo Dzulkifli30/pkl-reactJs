@@ -59,6 +59,7 @@ const useStyles=makeStyles(theme => ({
 const LaporanKecamatanTable=props => {
   const {
     handleOpenViewMap,
+    rowSelect,
     className,handleDelete,
     textfind,kecamatanfind,
     order, orderBy,
@@ -315,7 +316,7 @@ const LaporanKecamatanTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Jumlah Wilayah Kecamatan"
+              title={rowSelect.nama_kabupaten == undefined ? "Laporan Jumlah Wilayah" : "Laporan Jumlah Wilayah " + rowSelect.nama_kabupaten }
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
@@ -328,8 +329,6 @@ const LaporanKecamatanTable=props => {
               persistTableHead
               dense
             />
-
-
           </div>
 
 

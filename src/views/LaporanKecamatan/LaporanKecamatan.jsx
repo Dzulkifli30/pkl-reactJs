@@ -11,7 +11,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKec,urlAddKec,urlEditKec,urlLaporanKec,urlShowKec } from '../../kumpulanUrl'
+import { urlKec,urlAddKec,urlEditKec,urlLaporanKec,urlShowKecs } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -96,8 +96,8 @@ const LaporanKecamatan=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetKec=urlShowKec
-    alert(urlgetKec)
+    let urlgetKec=urlShowKecs
+    console.log(urlgetKec)
     // eslint-disable-next-line no-useless-concat
     // alert()
     const response=await fetch(urlgetKec, requestOptions)
@@ -383,6 +383,7 @@ const LaporanKecamatan=props => {
         />
         <LaporanKecamatanTable
           handleOpenViewMap={handleOpenViewMap}
+          rowSelect={rowkecamatanSelect}
           handleDelete={handleDelete}
           onChange={onChangefind}
           kecamatanExport={kecamatanExport}
