@@ -113,6 +113,14 @@ const Sidebar=props => {
       href:'/#',
       items : [
         {
+          title: 'Jumlah Wilayah Provinsi di Indonesia',
+          href: '/laporan/provinsiID'
+        },
+        {
+          title: 'Jumlah Wilayah di Provinsi',
+          href: '/laporan/perProvTable'
+        },
+        {
           title:'Laporan Kabupaten',
           href:'/laporan-kabupaten',
         

@@ -31,7 +31,9 @@ import {
   RwList as RwListView,
   LaporanKecamatan as LaporanKecamatanView,
   LaporanPerKabupaten as LaporanPerKabupatenView,
-  LaporanPerKecamatan as LaporanPerKecamatanView
+  LaporanPerKecamatan as LaporanPerKecamatanView,
+  LaporanProvID as LaporanProvIDView,
+  LaporanPerProv as LaporanPerProvView,
 
 
 } from './views';
@@ -121,6 +123,19 @@ const Routes=() => {
 
       {/* Beginning of Laporan */}
 
+      <RouteWithLayout
+        component={LaporanProvIDView}
+        exact
+        layout={MainLayout}
+        path="/laporan/provinsiID"
+      />
+
+      <RouteWithLayout
+        component={LaporanPerProvView}
+        exact
+        layout={MainLayout}
+        path="/laporan/perProvTable"
+      />
       <RouteWithLayout
         component={LaporanKabupatenView}
         exact

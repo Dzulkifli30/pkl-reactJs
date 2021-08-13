@@ -16,6 +16,8 @@ export const urlProv=ulrport+'provinsi/getProvinsi'
 export const urlAddProv=ulrport+'provinsi/storeProv'
 export const urlEditProv=ulrport+'provinsi/updateProv'
 export const urlDeleteProv= ulrport+ 'provinsi/deleteProv'
+export const urlLaporanProv=ulrport+'provinsi/laporanProv'
+export const urlLaporanPerProv=ulrport+'provinsi/laporanPerProv'
 
  //Kecamatan
  export const urlKec=ulrport+'kecamatan/getKecamatan'
@@ -37,6 +39,7 @@ export const urlDeleteKel = ulrport+'kelurahan/deleteKel/{id}'
 
 //Kabupaten
 export const urlShowKab=ulrport+'kabupaten/showKabupaten'
+export const urlShowsKab=ulrport+'kabupaten/showsKabupaten'
  export const urlKab=ulrport+'kabupaten/getKabupaten'
  export const urlDeleteKab=ulrport+'kabupaten/delete/{id}'
  export const urlAddKab=ulrport+'kabupaten/storeKab'

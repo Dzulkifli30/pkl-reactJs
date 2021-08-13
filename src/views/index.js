@@ -13,6 +13,8 @@ export {default as LaporanPerKecamatan} from './LaporanPerKecamatan'
 export {default as LaporanKecamatan} from './LaporanKecamatan'
 export {default as KecamatanList} from './KecamatanList'
 export {default as KabupatenList} from './KabupatenList'
+export { default as LaporanProvID } from './LaporanProvID';
+export { default as LaporanPerProv } from './LaporanPerProv';
 export {default as RtList} from './RtList'
 export {default as RwList} from './RwList'
 // export {default as RtList} from './RtList'

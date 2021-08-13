@@ -6,12 +6,12 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { KabupatenSearchModi, LaporanKabupatenTable} from '../LaporanKabupaten/components';
+import {LaporanPerProvTable, ComboProv} from './components';
 import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKab,urlLaporanKab,urlShowsKab,urlShowKab } from '../../kumpulanUrl'
+import { urlProv, urlLaporanPerProv, urlLaporanProv } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -33,46 +33,41 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const LaporanKabupaten=props => {
+const LaporanPerProvList=props => {
 
-
-  async function showKab(rowkabupatenSelect) {
+  async function showKab(rowProvinsisSelect) {
     const userId=localStorage.getItem('user_id');
-    // setFilteredItems(kabupaten);
+    setFilteredItems(provinsis);
     setOpen(false);
+
     /* */
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
+    
+    const requestOptions = {
+        method: 'POST',
+        mode: "cors",
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          "id_provinsi": rowkabupatenSelect.id_provinsi,
-          // "id_kabupaten": rowkabupatenSelect.id_kabupaten,
-        }),
-      
-      headers: { 'Content-Type': 'application/json' },
+            "id_provinsi": rowProvinsisSelect.id_provinsi,
+        })
     };
 
-    let urlgetKab=urlShowsKab
-    console.log(urlgetKab)
+    let urlget=urlLaporanPerProv
     // eslint-disable-next-line no-useless-concat
-    // alert()
-    const response=await fetch(urlgetKab, requestOptions)
+    const response=await fetch(urlget, requestOptions)
       .then(res => {
-
         return res.json();
-        
       })
 
       .then(resJson => {
         const data=resJson;
-        setkabupaten(data.data);
+        setProvinsis(data.data);
         setFilteredItems(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setkabupaten([]);
+        setProvinsis([]);
         setFilteredItems([]);
         setOpen(false);
         //this.setState({ ...this.state, isFetching: false });
@@ -81,16 +76,12 @@ const LaporanKabupaten=props => {
     setOpen(false);
   }
 
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
+  const { history }=props;
+  if (!localStorage.getItem("NamaLengkap")) {
+    history.push('/beranda');
+
   }
+
 
   const csvData=() => {
     const tempCsv=[];
@@ -111,14 +102,14 @@ const LaporanKabupaten=props => {
   }
 
 
-  const deleteKabupaten=(e) => {
-    const selectedkabupaten_string=selectedkabupaten.join("<batas></batas>");
-    let kabupaten3=kabupaten.filter(function (entry) {
-      return entry&&entry.id&&selectedkabupaten_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  const deleteProvinsi=(e) => {
+    const selectedProvinsis_string=selectedProvinsis.join("<batas></batas>");
+    let provinsis3=provinsis.filter(function (entry) {
+      return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-    setFilteredItems(kabupaten3)
-    setkabupaten(kabupaten3)
-    setkabupatenfind('')
+    setFilteredItems(provinsis3)
+    setProvinsis(provinsis3)
+    setProvinsifind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
@@ -126,13 +117,13 @@ const LaporanKabupaten=props => {
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setkabupatenExport(flteredItems);
+    setProvinsisExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
       doc.setProperties({ title: SettingProvinsi[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#kabupatenExport' })
+      doc.autoTable({ html: '#provinsisExport' })
       var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
       doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
 
@@ -150,25 +141,20 @@ const LaporanKabupaten=props => {
       status='Inactive'
     return status;
   }
-  const comboBox=(e) =>{
-    if (e.targer.value.length>=3) {
-      
-    }
-  }
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setkabupatenfind(e.target.value)
-      let kabupaten4=kabupaten.filter(function (entry) {
-        return entry&&entry.Nama_Kabupaten&&
-          ((entry.Nama_Kabupaten!==null? entry.Nama_Kabupaten:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+      setProvinsifind(e.target.value)
+      let provinsis4=provinsis.filter(function (entry) {
+        return entry&&entry.nama_provinsi&&
+          ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(kabupaten4)? kabupaten4:[kabupaten4]);
+      setFilteredItems(Array.isArray(provinsis4)? provinsis4:[provinsis4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(kabupaten);
+      setFilteredItems(provinsis);
     }
-    setkabupatenfind(e.target.value)
+    setProvinsifind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -219,24 +205,22 @@ const LaporanKabupaten=props => {
   }
 
 
-  const [kabupaten, setkabupaten]=useState([]);
-  const [kab, setKab]=useState([]);
-  // const [provinsiId, setProvinsiId]=useState(getKab());
+  const [provinsis, setProvinsis]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowkabupatenSelect, setRowkabupatenSelect]=useState({});
+  const [rowProvinsisSelect, setRowProvinsisSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedkabupaten, setSelectedkabupaten]=useState([]);
-  const [kabupatenExport, setkabupatenExport]=useState([]);
-  const [kabupatenfind, setkabupatenfind]=useState([]);
+  const [selectedProvinsis, setSelectedProvinsis]=useState([]);
+  const [provinsisExport, setProvinsisExport]=useState([]);
+  const [provinsifind, setProvinsifind]=useState([]);
   const [add,setAdd]=React.useState([])
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
+  const [prov, setProv] = useState([]);
+
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    // getKab();
-    // console.log('prov',provinsiId)
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -246,8 +230,8 @@ const LaporanKabupaten=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedkabupaten({
-      ...setSelectedkabupaten,
+    setSelectedProvinsis({
+      ...setSelectedProvinsis,
       [event.target.name]: event.target.value[0]
     });
 
@@ -255,8 +239,8 @@ const LaporanKabupaten=props => {
 
 
   const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowkabupatenSelect({
-      ...selectedkabupaten,
+    setRowProvinsisSelect({
+      ...selectedProvinsis,
       [field1]: value1,
 
       [field2]: value2,
@@ -272,67 +256,25 @@ const LaporanKabupaten=props => {
 
   };
 
-  // async function showKab(id_provinsi) {
-  //   /* */
-  //   const requestOptions={
-  //     method: 'POST',
-  //     //mode: "cors",
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({
-  //       "id_provinsi": id_provinsi,
-  //     })
-  //   };
 
-  //   let urlShow=urlShowKab
-  //   // eslint-disable-next-line no-useless-concat
-  //   const response=await fetch(urlShow, requestOptions)
-  //     .then(res => {
-  //       return res.json();
-  //     })
-
-  //     .then(resJson => {
-  //       const data=resJson;
-  //       console.log('kabupaten =',data.data)
-  //       setkabupaten(data.data);
-  //       //return false;
-  //     })
-  //     .catch(e => {
-  //       //console.log(e);
-  //       alert("Nextwork Error");
-  //       setkabupaten([]);
-  //       //this.setState({ ...this.state, isFetching: false });
-  //     });
-  // } 
-
-
-  const handleOpen=(e, rowKabupaten, MessageButton) => {
+  const handleOpen=(e, rowProvinsi, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowkabupatenSelect(rowKabupaten);
+    setRowProvinsisSelect(rowProvinsi);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
-
-
   };
 
-  const handleDelete=(e,rowKabupaten, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowkabupatenSelect(rowKabupaten);
-  };
 
   /* */
   const handleOpenViewMap=(e, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowkabupatenSelect(rowKabupaten);
-
+    //setRowProvinsisSelect(rowProvinsi);
     //setCompPopup("Map")
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
-
-
   };
 
   /**/
@@ -342,65 +284,43 @@ const LaporanKabupaten=props => {
   };
 
 
-  function popupComponen(componenPopup) {
-    return (
-      <ModalComponent 
-        handleChange={handleChange} setData={setData} 
-        open={open} setRowSelect={setRowkabupatenSelect} rowSelect={rowkabupatenSelect}
-        title={title} datas={filteredItems} handleClose={handleClose} 
-        ComponenAddModi={componenPopup}>
-         </ModalComponent>
-
-    )
-  }
-
-
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }} className="font-poppins">Kabupaten</h5>
+      <h5 style={{ color: 'black' }}>Provinsi</h5>
       {/*}
-      <kabupatenToolbar
+      <ProvinsisToolbar
         handleOpenViewMap={handleOpenViewMap}
-        deleteProvinsi={deleteProvinsi}
+        textfind={provinsifind} deleteProvinsi={deleteProvinsi}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        kabupaten={kabupaten}
+        provinsis={provinsis}
 
       />
   {*/}
       <div className={classes.content}>
-        <KabupatenSearchModi
-        getDataBackend={showKab}
-        handleChange={handleChange} setData={setData} 
-        open={open} setRowSelect={setRowkabupatenSelect} rowSelect={rowkabupatenSelect}
-        title={title} datas={filteredItems} handleClose={handleClose} 
-        />
-        <LaporanKabupatenTable
+        <ComboProv  handleChange={handleChange} setData={setData} getDataBackend={showKab}
+        open={open} setRowSelect={setRowProvinsisSelect} rowSelect={rowProvinsisSelect}
+        title={title} datas={filteredItems}>
+        </ComboProv>
+        <LaporanPerProvTable
           handleOpenViewMap={handleOpenViewMap}
-          rowSelect={rowkabupatenSelect}
-          kabupaten={kabupaten}
-          kab={kab}
-          setKab={setKab}
-          handleDelete={handleDelete}
-        // textfind={kabupatenfind} 
           onChange={onChangefind}
-          // showKab={showKab}
-          kabupatenExport={kabupatenExport}
-          kabupatenfind={kabupatenfind}
+          setRowSelect={setRowProvinsisSelect}
+          dataProv={prov}
+          rowSelect={rowProvinsisSelect}
+          provinsisExport={provinsisExport}
+          // deleteProvinsi={deleteProvinsi}
+          provinsifind={provinsifind}
           filteredItems={filteredItems}
-          setRowSelect={setRowkabupatenSelect} rowSelect={rowkabupatenSelect}
-          selectedkabupaten={selectedkabupaten} 
-          kabupatenfind={kabupatenfind}
+          selectedProvinsis={selectedProvinsis} 
+          provinsifind={provinsifind}
           handleOpen={handleOpen}
-          setSelectedkabupaten={setSelectedkabupaten}
+          setSelectedProvinsis={setSelectedProvinsis}
           Export={Export}
+          data={provinsis}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
-
         />
-      {popupComponen(KabupatenSearchModi)}
-
-
       </div>
 
     </div>
@@ -408,4 +328,4 @@ const LaporanKabupaten=props => {
   );
 };
 
-export default LaporanKabupaten;
+export default LaporanPerProvList

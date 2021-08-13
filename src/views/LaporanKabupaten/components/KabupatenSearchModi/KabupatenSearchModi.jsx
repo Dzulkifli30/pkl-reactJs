@@ -205,6 +205,15 @@ const KecamatanAddModi=props => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
+    let nama = event.target.name.replace("id","nama")
+    if (event.target.name == "id_provinsi") {
+      setRowSelect({
+        ...rowSelect,
+         [nama]:pencarian(prov,event.target.value),
+         [event.target.name]: event.target.value,
+      });
+      console.log("Ket Provinsi =", prov)
+    }
   }
 
   const handleClose=() => {
@@ -224,6 +233,17 @@ const KecamatanAddModi=props => {
   //  const position=[currentLocation.lat, currentLocation.lng]
   const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
+  }
+  const pencarian = (paramProv, id_prov) => {
+    let value = id_prov
+    let result = [];
+    // alert(value)
+    result = paramProv.filter((entry) => {
+      return entry&&entry.id_provinsi &&(entry.id_provinsi === value) 
+    });
+    console.log("result =",result[0].nama_provinsi)
+    // alert("result = " + result[0].nama_provinsi)
+    return result[0].nama_provinsi
   }
 
   return (
