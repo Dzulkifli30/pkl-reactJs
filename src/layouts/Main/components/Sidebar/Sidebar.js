@@ -80,6 +80,10 @@ const Sidebar=props => {
       items: [
 
         {
+          title: 'Vuser',
+          href: '/vusertable'
+        },
+        {
           title: 'Provinsi',
           href: '/provinsi'
         },
@@ -132,10 +136,18 @@ const Sidebar=props => {
         {
           title:'Laporan Kecamatan',
           href:'/laporan-kecamatan'
-        }        
-        ,{
+        },        
+        {
           title:'Laporan Per Kecamatan',
           href:'/laporan-per-kecamatan'
+        },
+        {
+          title:'Laporan Kelurahan',
+          href:'/laporan-kelurahan'
+        },
+        {
+          title:'Laporan PerKelurahan',
+          href:'/laporan-perkelurahan'
         }
       ]
     },

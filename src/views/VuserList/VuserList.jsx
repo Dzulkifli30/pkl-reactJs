@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 //import '../../assets/vendor/dist/css/datatable1.css';
 //import { ImportScript } from '../components';
@@ -6,19 +5,32 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { LaporanPerKabupatenTable, PerKabupatenSearchModi } from './components';
+import { VuserToolbar, VuserTable, VuserAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
-//import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKec,urlAddKec,urlEditKec,urlLaporanKec,urlShowKec,urlLaporanPerKab } from '../../kumpulanUrl'
+import { urlKab,urlGetVuser } from '../../kumpulanUrl'
+
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
+import { async } from 'validate.js';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
 //import Fade from "@material-ui/core/Fade";
+
+const getMockData=() =>{
+  mockData.map(mock => {
+    return(
+      <h4>{mock}</h4>
+
+    )
+  })
+  console.log(mockData)
+
+  
+}
 
 const useStyles=makeStyles(theme => ({
   root: {
@@ -33,7 +45,7 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const LaporanPerKabupaten=props => {
+const VuserList=props => {
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
@@ -43,80 +55,35 @@ const LaporanPerKabupaten=props => {
 
   }
 
-  async function getPerKab() {
+  async function getVuser() {
     const userId=localStorage.getItem('user_id');
-    setFilteredItems(perKabupaten);
+    setFilteredItems(Vuser);
     setOpen(false);
 
     /* */
     const requestOptions={
       method: 'get',
-      mode: "cors",
-
+      //mode: "cors",
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetKec=urlLaporanKec
+    let urlgetVuser=urlGetVuser
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlgetKec, requestOptions)
+    const response=await fetch(urlgetVuser, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
         const data=resJson;
-        setPerKabupaten(data.data);
+        setVuser(data.data);
         setFilteredItems(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setPerKabupaten([]);
-        setFilteredItems([]);
-        setOpen(false);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-
-    setOpen(false);
-  }
-
-  async function showPerKab(rowPerKabupatenSelect) {
-    const userId=localStorage.getItem('user_id');
-    setFilteredItems(perKabupaten);
-    setOpen(false);
-    /* */
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-        body: JSON.stringify({
-          "id_kabupaten": rowPerKabupatenSelect.id_kabupaten,
-        }),
-      
-      headers: { 'Content-Type': 'application/json' },
-    };
-// Menggunakan Having Clause Di Back-end
-    let urlgetKec=urlLaporanPerKab
-    console.log(urlgetKec)
-    // eslint-disable-next-line no-useless-concat
-    // alert()
-    const response=await fetch(urlgetKec, requestOptions)
-      .then(res => {
-
-        return res.json();
-        
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setPerKabupaten(data.data);
-        setFilteredItems(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setPerKabupaten([]);
+        setVuser([]);
         setFilteredItems([]);
         setOpen(false);
         //this.setState({ ...this.state, isFetching: false });
@@ -128,14 +95,14 @@ const LaporanPerKabupaten=props => {
 
 
   const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
+    let url = urlDeleteProv;
+    try {
+      let response = await axios.delete(url+`${id}`);
+    } catch {
+      e=>{
+        alert("error")
+      }
+    }
   }
 
   const csvData=() => {
@@ -144,7 +111,7 @@ const LaporanPerKabupaten=props => {
 
     //];
 
-    SettingProvinsi[0].HeaderData.map(headCell => {
+    SettingVuser[0].HeaderData.map(headCell => {
       tempCsvItem.push(
         headCell.label
       )
@@ -157,14 +124,23 @@ const LaporanPerKabupaten=props => {
   }
 
 
-  const deleteKecamatan=(e) => {
-    const selectedkecamatan_string=selectedkecamatan.join("<batas></batas>");
-    let kecamatan3=perKabupaten.filter(function (entry) {
-      return entry&&entry.id&&selectedkecamatan_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  
+
+  const deleteVuser=async (e, id) => {
+    const selectedVuser_string=selectedVuser.join("<batas></batas>");
+    let Vuser3=Vuser.filter(function (entry) {
+      return entry&&entry.id&&selectedVuser_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-    setFilteredItems(kecamatan3)
-    setPerKabupaten(kecamatan3)
-    setProvinsifind('')
+
+    let url=urlDeleteProv
+    if (url === 200) {
+      // thisClickedFunda.closest("tr").remove();
+      console.log(url.data.message)
+    }
+
+    setFilteredItems(Vuser3)
+    setVuser(Vuser3)
+    setVuserfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
@@ -172,17 +148,17 @@ const LaporanPerKabupaten=props => {
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setkecamatanExport(flteredItems);
+    setVuserExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
-      doc.setProperties({ title: SettingProvinsi[0].TitleModule });
+      doc.setProperties({ title: SettingVuser[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#kecamatanExport' })
-      var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
-      doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
+      doc.autoTable({ html: '#VuserExport' })
+      var posis_x=(doc.previousAutoTable.width-(SettingVuser[0].TitleModule).length)/2
+      doc.text(SettingVuser[0].TitleModule, posis_x, 6);
 
-      doc.save('provinsi.pdf')
+      doc.save('Vuser.pdf')
     }, 2000);
     return () => clearTimeout(timer);
 
@@ -199,17 +175,17 @@ const LaporanPerKabupaten=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setProvinsifind(e.target.value)
-      let kecamatan4=perKabupaten.filter(function (entry) {
-        return entry&&entry.nama_provinsi&&
-          ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+      setVuserfind(e.target.value)
+      let Vuser4=Vuser.filter(function (entry) {
+        return entry&&entry.UserName&&
+          ((entry.UserName!==null? entry.UserName:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(kecamatan4)? kecamatan4:[kecamatan4]);
+      setFilteredItems(Array.isArray(Vuser4)? Vuser4:[Vuser4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(perKabupaten);
+      setFilteredItems(Vuser);
     }
-    setProvinsifind(e.target.value)
+    setVuserfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -260,23 +236,23 @@ const LaporanPerKabupaten=props => {
   }
 
 
-  const [perKabupaten, setPerKabupaten]=useState([]);
-  const [kab,setKab] = React.useState([]);
+  const [Vuser, setVuser]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowPerKabupatenSelect, setRowPerKabupatenSelect]=useState({});
+  const [rowVuserSelect, setRowVuserSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedkecamatan, setSelectedPerKabupaten]=useState([]);
-  const [kecamatanExport, setkecamatanExport]=useState([]);
-  const [provinsifind, setProvinsifind]=useState([]);
+  const [selectedVuser, setSelectedVuser]=useState([]);
+  const [VuserExport, setVuserExport]=useState([]);
+  const [Vuserfind, setVuserfind]=useState([]);
   const [add,setAdd]=React.useState([])
+  // const SettingVuser=useState(mockDataSettingVuser);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
 
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    // getPerKab();
+    getVuser();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -286,22 +262,22 @@ const LaporanPerKabupaten=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedPerKabupaten({
-      ...setSelectedPerKabupaten,
+    setSelectedVuser({
+      ...setSelectedVuser,
       [event.target.name]: event.target.value[0]
     });
 
   };
 
 
-  const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowPerKabupatenSelect({
-      ...selectedkecamatan,
+  const setData=(field1, value1, field2, value2, nmVuser, kdVuser, status, keyId) => {
+    setRowVuserSelect({
+      ...selectedVuser,
       [field1]: value1,
 
       [field2]: value2,
-      ['kdProvinsi']: kdProvinsi,
-      ['nmProvinsi']: nmProvinsi,
+      ['kdVuser']: kdVuser,
+      ['nmVuser']: nmVuser,
       ['status']: status,
       ['keyId']: keyId,
     });
@@ -313,20 +289,20 @@ const LaporanPerKabupaten=props => {
   };
 
 
-  const handleOpen=(e, rowProvinsi, MessageButton) => {
+  const handleOpen=(e, rowVuser, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowPerKabupatenSelect(rowProvinsi);
+    setRowVuserSelect(rowVuser);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
+  const handleDelete=(e,rowVuser, MessageButton) => {
     setTitle(MessageButton);
     deleteProv()
-    setRowPerKabupatenSelect(rowProvinsi);
+    setRowVuserSelect(rowVuser);
   };
 
   /* */
@@ -334,7 +310,7 @@ const LaporanPerKabupaten=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowPerKabupatenSelect(rowProvinsi);
+    //setRowVuserSelect(rowVuser);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -352,53 +328,46 @@ const LaporanPerKabupaten=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getPerKab}
+      <ModalComponent getDataBackend={getVuser}
         handleChange={handleChange} setData={setData}
-        open={open} setRowSelect={setRowPerKabupatenSelect} rowSelect={rowPerKabupatenSelect}
-        title={title} datas={filteredItems} 
+        open={open} setRowSelect={setRowVuserSelect} rowSelect={rowVuserSelect}
+        title={title} datas={filteredItems} handleClose={handleClose} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
+
     )
   }
 
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Laporan Wilayah Per Kabupaten</h5>
+      <h5 style={{ color: 'black' }}>Vuser</h5>
       {/*}
-      <kecamatanToolbar
+      <VuserToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={provinsifind} deleteProvinsi={deleteProvinsi}
+        textfind={Vuserfind} deleteVuser={deleteVuser}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        perKabupaten={perKabupaten}
-
+        Vuser={Vuser}
       />
   {*/}
       <div className={classes.content}>
-        <PerKabupatenSearchModi
-          getDataBackend={showPerKab}
-          setKab={setKab}
-          handleChange={handleChange} setData={setData}
-          open={open} setRowSelect={setRowPerKabupatenSelect} rowSelect={rowPerKabupatenSelect}
-          title={title} datas={filteredItems}
-        />
-        <LaporanPerKabupatenTable
+        <VuserTable
           handleOpenViewMap={handleOpenViewMap}
-          setKab={setKab}
-          kab={kab}
+          getMockData={getMockData}
+          Vuser = {Vuser}
           handleDelete={handleDelete}
           onChange={onChangefind}
-          kecamatanExport={kecamatanExport}
+          deleteVuser={deleteVuser}
+          // SettingVuser={SettingVuser}
+          VuserExport={VuserExport}
           // deleteProv={deleteProv}
-          // deleteProvinsi={deleteProvinsi}
-          setRowSelect={setRowPerKabupatenSelect} 
-          rowSelect={rowPerKabupatenSelect}
-          provinsifind={provinsifind}
+          // deleteVuser={deleteVuser}
+          Vuserfind={Vuserfind}
           filteredItems={filteredItems}
-          selectedkecamatan={selectedkecamatan} 
+          selectedVuser={selectedVuser} 
           handleOpen={handleOpen}
-          setSelectedPerKabupaten={setSelectedPerKabupaten}
+          setSelectedVuser={setSelectedVuser}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
@@ -406,7 +375,7 @@ const LaporanPerKabupaten=props => {
         />
 
 
-      {popupComponen(PerKabupatenSearchModi)}
+      {popupComponen(VuserAddModi)}
 
       </div>
 
@@ -415,4 +384,4 @@ const LaporanPerKabupaten=props => {
   );
 };
 
-export default LaporanPerKabupaten;
+export default VuserList;

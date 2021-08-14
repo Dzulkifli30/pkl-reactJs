@@ -7,6 +7,8 @@ let ulrportRefresh="http://localhost:8000/";
 
 
 export const urlPostLogin=ulrport+'vuser/showUser'
+export const urlAddVuser=ulrport+'vuser/storeUser'
+export const urlEditVuser=ulrport+'vuser/updateUser'
 export const urlGetVuser=ulrport+'vuser/getUser'
 
 
@@ -36,6 +38,8 @@ export const urlAddKel = ulrport+'kelurahan/storeKel'
 export const urlEditKel = ulrport+'kelurahan/updateKel'
 export const urlShowKel = ulrport + '/kelurahan/showKel'
 export const urlDeleteKel = ulrport+'kelurahan/deleteKel/{id}'
+export const urlLaporanKel=ulrport+'kelurahan/laporanKel'
+export const urlLaporanPerKel=ulrport+'kelurahan/laporanPerKel'
 
 //Kabupaten
 export const urlShowKab=ulrport+'kabupaten/showKabupaten'

@@ -11,12 +11,15 @@ export {default as LaporanKabupaten} from './LaporanKabupaten'
 export {default as LaporanPerKabupaten} from './LaporanPerKabupaten'
 export {default as LaporanPerKecamatan} from './LaporanPerKecamatan'
 export {default as LaporanKecamatan} from './LaporanKecamatan'
+export {default as LaporanKelurahan} from './LaporanKelurahan'
+export {default as LaporanPerKelurahan} from './LaporanPerKelurahan'
 export {default as KecamatanList} from './KecamatanList'
 export {default as KabupatenList} from './KabupatenList'
 export { default as LaporanProvID } from './LaporanProvID';
 export { default as LaporanPerProv } from './LaporanPerProv';
 export {default as RtList} from './RtList'
 export {default as RwList} from './RwList'
+export {default as VuserList} from './VuserList'
 // export {default as RtList} from './RtList'
 // export {default as RwList} from './RwList'
 

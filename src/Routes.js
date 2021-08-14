@@ -29,11 +29,14 @@ import {
   ProvinsiList as ProvinsiListView,
   RtList as RtListView,
   RwList as RwListView,
+  VuserList as VuserListView,
   LaporanKecamatan as LaporanKecamatanView,
   LaporanPerKabupaten as LaporanPerKabupatenView,
   LaporanPerKecamatan as LaporanPerKecamatanView,
   LaporanProvID as LaporanProvIDView,
   LaporanPerProv as LaporanPerProvView,
+  LaporanKelurahan as LaporanKelurahanView,
+  LaporanPerKelurahan as LaporanPerKelurahanView
 
 
 } from './views';
@@ -65,13 +68,20 @@ const Routes=() => {
 
     {/* Beginning Of Input Data */}
       <RouteWithLayout
+        component={VuserListView}
+        exact
+        layout={MainLayout}
+        path="/vusertable"
+      /> 
+
+      <RouteWithLayout
         component={ProvinsiListView}
         exact
         layout={MainLayout}
         path="/provinsi"
       />
 
-    <RouteWithLayout
+      <RouteWithLayout
         component={KabupatenListView}
         exact
         layout={MainLayout}
@@ -104,20 +114,7 @@ const Routes=() => {
         layout={MainLayout}
         path="/rw"
       />
-
-      <RouteWithLayout
-        component={KabupatenListView}
-        exact
-        layout={MainLayout}
-        path="/kabupaten"
-      />
-
-      <RouteWithLayout
-        component={KecamatanListView}
-        exact
-        layout={MainLayout}
-        path="/kecamatan"
-      />    
+   
        {/*End Of Input Data  */}
 
 
@@ -159,6 +156,18 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/laporan-kecamatan"
+      />
+      <RouteWithLayout
+        component={LaporanKelurahanView}
+        exact
+        layout={MainLayout}
+        path="/laporan-kelurahan"
+      />
+      <RouteWithLayout
+        component={LaporanPerKelurahanView}
+        exact
+        layout={MainLayout}
+        path="/laporan-perkelurahan"
       />
       {/* Ennding */}
 
