@@ -451,6 +451,7 @@ const RtAddModi=props => {
         "id_rt": rowSelect.id_rt,
         "nama_rt": rowSelect.nama_rt,
         "id_rw": rowSelect.id_rw,
+        "IsActive": rowSelect.IsActive,
 
       })
     };

@@ -143,7 +143,7 @@ const RtList=props => {
   }
   const onChangefind=(e) => {
     // return;
-    if (e.target.value.length>=3) {
+    if (e.target.value.length>=1) {
       setrtfind(e.target.value)
       let rt4=rt.filter(function (entry) {
         return entry&&entry.nama_rt&&

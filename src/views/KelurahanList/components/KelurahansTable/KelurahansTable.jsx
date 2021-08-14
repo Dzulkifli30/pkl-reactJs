@@ -235,8 +235,6 @@ const deleteKel = async (e,selectedKelurahans) => {
       sortable: true,
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
-
-    
     {
       name: 'Edit Kelurahan',
       button: true,

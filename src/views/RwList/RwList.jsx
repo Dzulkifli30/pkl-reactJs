@@ -151,7 +151,7 @@ const RwList=props => {
   }
   const onChangefind=(e) => {
     // return;
-    if (e.target.value.length>=3) {
+    if (e.target.value.length>=1) {
       setrwfind(e.target.value)
       let rw4=rw.filter(function (entry) {
         return entry&&entry.nama_rw&&
@@ -339,7 +339,6 @@ const RwList=props => {
           rwfind={rwfind}
           filteredItems={filteredItems}
           selectedrw={selectedrw} 
-          rwfind={rwfind}
           handleOpen={handleOpen}
           setSelectedrw={setSelectedrw}
           Export={Export}

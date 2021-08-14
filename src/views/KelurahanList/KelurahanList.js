@@ -286,12 +286,6 @@ const KelurahanList=props => {
 
 
   };
-  const handleAddProv=(e, MessageButton,rowKelurahan) => {
-    setOpen(true);
-    setTitle(MessageButton)
-    // setRowKelurahanSelect(rowKelurahan)
-    // console.log(response.data.data)
-  }
   /**/
   //openPopup
   const handleClose=() => {
@@ -333,7 +327,6 @@ const KelurahanList=props => {
           kelurahansExport={kelurahansExport}
           filteredItems={filteredItems}
           selectedKelurahans={selectedKelurahans} 
-          handleAddProv={handleAddProv}
           handleOpen={handleOpen}
           setSelectedKelurahans={setSelectedKelurahans}
           Export={Export}
