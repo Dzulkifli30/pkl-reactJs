@@ -182,6 +182,7 @@ const SignIn=props => {
             localStorage.setItem('accessId', data.data[0].accessId);
             localStorage.setItem('Jabatan', data.data[0].Jabatan);
             localStorage.setItem('Foto', data.data[0].Foto);
+            localStorage.setItem('Periode Sensus', data.data2[0].value_setting);
             window.location='/beranda';
             //history.push('/beranda');
 
