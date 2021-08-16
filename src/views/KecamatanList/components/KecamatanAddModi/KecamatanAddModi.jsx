@@ -122,7 +122,6 @@ const KecamatanAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -150,7 +149,6 @@ const KecamatanAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -178,7 +176,6 @@ const KecamatanAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -264,8 +261,7 @@ const KecamatanAddModi=props => {
     };
 
 
-    ///let urlGetData=urlPostLogin
-    alert(url);
+    ///let urlGetData=urlPostLogi
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -274,7 +270,6 @@ const KecamatanAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        alert(res.message)
 
         handleClose();
         getDataBackend();

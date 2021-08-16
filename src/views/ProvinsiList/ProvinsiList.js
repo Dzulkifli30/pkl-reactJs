@@ -18,6 +18,7 @@ import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
 import { async } from 'validate.js';
+import { urlDeleteProv } from '../../kumpulanUrl';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -97,15 +98,36 @@ const ProvinsiList=props => {
 
 
 
-  const deleteProv = async (id) => {
-    let url = urlDeleteProv;
-    try {
-      let response = await axios.delete(url+`${id}`);
-    } catch {
-      e=>{
-        alert("error")
-      }
-    }
+  const deleteProv = async (id_provinsi) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_provinsi: id_provinsi
+      })
+    };
+
+    let url=urlDeleteProv
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setProvinsis(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setProvinsis([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -302,10 +324,9 @@ const ProvinsiList=props => {
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowProvinsisSelect(rowProvinsi);
+  const handleDelete=(e,rowProvinsisSelect) => {
+    deleteProv(rowProvinsisSelect.id_provinsi)
+    getProv()
   };
 
   /* */

@@ -12,6 +12,8 @@ import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
 import DataTable from 'react-data-table-component';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 
 import {
   Card,
@@ -59,8 +61,8 @@ const useStyles=makeStyles(theme => ({
 const KelurahansTable =props => {
   const {
     handleOpenViewMap,
-    deleteKelurahan,
     className,
+    handleDelete,
     textfind,
     order, orderBy, SettingKelurahan,
     provinsisExport, filteredItems, handleOpen, selectedKelurahans,
@@ -244,14 +246,6 @@ const deleteKel = async (e,selectedKelurahans) => {
       ,
     },
     {
-      name: 'Hapus Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="delete"
-          onClick={(e) => deleteKel(e, row)}  ><p>Hapus</p></Button>
-      ,
-    },
-    {
       name: 'CreatedBy',
       selector: 'NamaLengkap',
       sortable: true,
@@ -267,27 +261,13 @@ const deleteKel = async (e,selectedKelurahans) => {
       sortable: true,
     },
     {
-      name: 'OriginalID',
-      selector: 'OriginalID',
-      sortable: true,
-    },    {
-      name: 'OriginalKode',
-      selector: 'OriginalKode',
-      sortable: true,
+      name: 'Hapus Kelurahan',
+      button: true,
+      cell: row =>
+        <Button color="primary" id="delete"
+          onClick={(e) => handleDelete(e, row, "Hapus Kelurahan")}  ><DeleteIcon /></Button>
+      ,
     },
-
-
-    {
-      name: 'OriginalNama',
-      selector: 'OriginalNama',
-      sortable: true,
-    },    
-    {
-      name: 'nama_kelurahan_old',
-      selector: 'nama_kelurahan_old',
-      sortable: true,
-    },
-
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -303,7 +283,7 @@ const deleteKel = async (e,selectedKelurahans) => {
           <img src="/img/xls.jpeg" />
         </Button>
         <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Kelurahan")}>
-          Tambah Kelurahan
+        <AddIcon />
         </Button>
 
       </div>

@@ -16,6 +16,7 @@ import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
 import { async } from 'validate.js';
+import { get } from 'underscore';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -79,6 +80,38 @@ const KelurahanList=props => {
       });
 
     setOpen(false);
+  }
+
+  const deleteKel = async (id_kelurahan) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_kelurahan: id_kelurahan
+      })
+    };
+
+    let url=urlDeleteKel
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setKelurahans(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setKelurahans([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
 
@@ -286,6 +319,12 @@ const KelurahanList=props => {
 
 
   };
+
+  const handleDelete=(e, rowKelurahansSelect)=>{
+    deleteKel(rowKelurahansSelect.id_kelurahan)
+    getKel()
+  }
+
   /**/
   //openPopup
   const handleClose=() => {
@@ -322,7 +361,7 @@ const KelurahanList=props => {
           handleOpenViewMap={handleOpenViewMap}
           kelurahans = {kelurahans}
           onChange={onChangefind}
-          deleteKelurahan={deleteKelurahan}
+          handleDelete={handleDelete}
           SettingKelurahan={SettingKelurahan}
           kelurahansExport={kelurahansExport}
           filteredItems={filteredItems}

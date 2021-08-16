@@ -10,7 +10,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlRt,urlShowRt } from '../../kumpulanUrl'
+import { urlDeleteRt, urlRt,urlShowRt } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -71,17 +71,36 @@ const RtList=props => {
     setOpen(false);
   }
 
+  const deleteRt = async (id_rt) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_rt: id_rt
+      })
+    };
 
+    let url=urlDeleteRt
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
 
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
+      .then(resJson => {
+        const data=resJson;
+        setrt(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setrt([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -267,10 +286,9 @@ const RtList=props => {
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowrtSelect(rowProvinsi);
+  const handleDelete=(e,rowrtSelect) => {
+    deleteRt(rowrtSelect.id_rt)
+    getRt()
   };
 
   /* */

@@ -189,7 +189,7 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+     
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -218,7 +218,6 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -246,7 +245,6 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setProvinsi([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -342,11 +340,9 @@ async function showKab(id_provinsi) {
 
     ///let urlGetData=urlPostLogin
 
-    alert(url)
     const response = fetch(url, requestOptions)
       .then(res => {
         if (res === 200) {
-          alert('bisa')
           return res.json()
         }
         return res.json();
@@ -365,7 +361,7 @@ async function showKab(id_provinsi) {
         const data = res;
       })
       .catch((e) => {
-          alert(e.message)
+
         return false;
 
 

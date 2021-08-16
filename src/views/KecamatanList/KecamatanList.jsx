@@ -10,7 +10,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKec,urlAddKec,urlEditKec } from '../../kumpulanUrl'
+import { urlKec,urlDeleteKec } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -79,17 +79,36 @@ const KecamatanList=props => {
     setOpen(false);
   }
 
+  const deleteKec = async (id_kecamatan) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_kecamatan: id_kecamatan
+      })
+    };
 
+    let url=urlDeleteKec
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
 
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
+      .then(resJson => {
+        const data=resJson;
+        setkecamatan(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setkecamatan([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -276,10 +295,9 @@ const KecamatanList=props => {
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowkecamatanSelect(rowProvinsi);
+  const handleDelete=(e,rowkecamatanSelect) => {
+    deleteKec(rowkecamatanSelect.id_kecamatan)
+    getKec()
   };
 
   /* */

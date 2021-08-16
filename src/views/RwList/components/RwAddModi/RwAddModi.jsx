@@ -137,7 +137,7 @@ const RwAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        // alert("Nextwork Error");
+        
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -169,7 +169,7 @@ const RwAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        // alert("Nextwork Error");
+        
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -201,7 +201,7 @@ const RwAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        // alert("Nextwork Error");
+        
         setKelurahan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -229,7 +229,7 @@ const RwAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // 
         setKelurahan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -257,7 +257,7 @@ const RwAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // 
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -285,7 +285,7 @@ const RwAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // 
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -313,7 +313,7 @@ const RwAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // 
         setProvinsi([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -396,7 +396,7 @@ const RwAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -405,11 +405,11 @@ const RwAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        alert(res.message)
+
 
         handleClose();
         getDataBackend();
-        alert("Sukses")
+    
         const data=res;
       })
       .catch((e) => {

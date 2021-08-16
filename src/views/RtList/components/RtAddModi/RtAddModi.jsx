@@ -138,7 +138,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        // alert("Nextwork Error");
+        //
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -171,7 +171,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        // alert("Nextwork Error");
+        //
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -204,7 +204,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        // alert("Nextwork Error");
+        //
         setKel([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -236,7 +236,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        // alert("Nextwork Error");
+        //
         setRw([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -264,7 +264,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        // alert("Nextwork Error");
+        //
         setKel([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -292,7 +292,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+      
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -320,7 +320,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+      
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -348,7 +348,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+      
         setProvinsi([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -376,7 +376,7 @@ const RtAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+
         setRw([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -452,13 +452,12 @@ const RtAddModi=props => {
         "nama_rt": rowSelect.nama_rt,
         "id_rw": rowSelect.id_rw,
         "IsActive": rowSelect.IsActive,
-
       })
     };
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+ 
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -467,7 +466,7 @@ const RtAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        alert(res.message)
+        
 
         handleClose();
         getDataBackend();

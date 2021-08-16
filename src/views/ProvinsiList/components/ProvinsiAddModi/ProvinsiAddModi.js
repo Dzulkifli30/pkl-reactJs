@@ -174,7 +174,6 @@ const ProvinsiAddModi=props => {
     const response=fetch(url, requestOptions)
       .then(tester => {
         if (tester.status === 200) {
-          alert('berhasil')
        handleClose();
           return tester.json();
         }
@@ -183,15 +182,13 @@ const ProvinsiAddModi=props => {
 
       .then(tester => {
         console.log(tester)
-        alert(tester.message)
         getDataBackend();
 
-        alert("Sukses")
         const data=tester;
       })
       .catch((e) => {
 
-        alert(e)
+        console.log(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
 
         return false;

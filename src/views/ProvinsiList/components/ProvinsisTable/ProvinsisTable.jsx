@@ -191,17 +191,6 @@ const ProvinsisTable=props => {
     },
   };
 
-  const deleteProv = async (e,selectedProvinsis) => {
-    let url = urlDeleteProv
-    let response = axios.delete(url + `/${selectedProvinsis.id_provinsi}`)
-    console.log(selectedProvinsis.id_provinsi)
-
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-    }
-
   const columns=[
     {
       name: 'Provinsi ID',
@@ -237,7 +226,7 @@ const ProvinsisTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => deleteProv(e)} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e, row, "Hapus Provinsi")} ><DeleteIcon /></Button>
       ,
     },
   ];

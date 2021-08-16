@@ -128,7 +128,6 @@ const KabupatenAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -202,7 +201,6 @@ const KabupatenAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -211,7 +209,6 @@ const KabupatenAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        alert(res.message)
 
         handleClose();
         getDataBackend();

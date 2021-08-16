@@ -182,7 +182,6 @@ const VuserAddModi=props => {
     const response=fetch(url, requestOptions)
       .then(res => {
         if (res.status === 200) {
-          alert('berhasil')
        handleClose();
           return res.json();
         }
@@ -191,15 +190,14 @@ const VuserAddModi=props => {
 
       .then(res => {
         console.log(res)
-        alert(res.message)
         getDataBackend();
 
-        alert("Sukses")
+
         const data=res;
       })
       .catch((e) => {
 
-        alert(e)
+    
         // swal("Gagal Login!", "Gagal Login", "error",  )
 
         return false;
