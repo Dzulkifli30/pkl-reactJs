@@ -193,6 +193,31 @@ const RtTable=props => {
 
   const columns=[
     {
+      name: 'Nama Provinsi',
+      selector: 'nama_provinsi',
+      sortable: true,
+    },
+    {
+      name: 'Nama Kabupaten/Kota',
+      selector: 'nama_kabupaten',
+      sortable: true,
+    },
+    {
+      name: 'Nama Kecamatan',
+      selector: 'nama_kecamatan',
+      sortable: true,
+    },
+    {
+      name: 'Nama Kelurahan',
+      selector: 'nama_kelurahan',
+      sortable: true,
+    },
+    {
+      name: 'Nama Rw',
+      selector: 'nama_rw',
+      sortable: true,
+    },
+    {
       name: 'Nama Rt',
       selector: 'nama_rt',
       sortable: true,
@@ -200,11 +225,6 @@ const RtTable=props => {
     {
       name: 'Kode RT',
       selector: 'KodeRT',
-      sortable: true,
-    },
-    {
-      name: 'Nama Rw',
-      selector: 'nama_rw',
       sortable: true,
     },
     {
