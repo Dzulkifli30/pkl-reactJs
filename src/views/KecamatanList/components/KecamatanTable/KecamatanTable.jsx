@@ -233,6 +233,26 @@ const KecamatanTable=props => {
           onClick={(e) => handleDelete(e, row, "Hapus Kecamatan")} ><DeleteIcon /></Button>
       ,
     },
+    {
+      name: 'CreatedBy',
+      selector: 'CreatedBy',
+      sortable: true,
+    },
+    {
+      name: 'Created',
+      selector: 'Created',
+      sortable: true,
+    },
+    {
+      name: 'LastModified',
+      selector: 'LastModified',
+      sortable: true,
+    },
+    {
+      name: 'LastModifiedBy',
+      selector: 'LastModifiedBy',
+      sortable: true,
+    },
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {

@@ -368,12 +368,22 @@ const RwAddModi=props => {
   }
 
   const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
+    const userName=localStorage.getItem('username');
     let url=urlAddRw;
+    let varJson = {
+      "KodeDepdagri": rowSelect.KodeDepdagri,
+      "id_kelurahan": rowSelect.id_kelurahan,
+      "id_rw": rowSelect.id_rw,
+      "nama_rw": rowSelect.nama_rw,
+      "IsActive": rowSelect.IsActive,
+    }
     if (rowSelect.id_rw === undefined) {
       url=urlAddRw;
+      varJson.CreatedBy = userName
+      varJson.LastModifiedBy = userName
     } else {
       url=urlEditRw;
+      varJson.LastModifiedBy = userName
     }
 
     //console.log(body);
@@ -385,13 +395,9 @@ const RwAddModi=props => {
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kelurahan": rowSelect.id_kelurahan,
-        "id_rw": rowSelect.id_rw,
-        "nama_rw": rowSelect.nama_rw,
-        "IsActive": rowSelect.IsActive,
-      })
+      body: JSON.stringify(
+        varJson
+      )
     };
 
 

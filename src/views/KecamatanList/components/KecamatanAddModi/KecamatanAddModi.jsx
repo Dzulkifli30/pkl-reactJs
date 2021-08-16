@@ -239,12 +239,23 @@ const KecamatanAddModi=props => {
   }
 
   const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
+    const userName=localStorage.getItem('username');
     let url=urlAddKec;
+    let varJson = {
+      "KodeDepdagri": rowSelect.KodeDepdagri,
+      "id_kecamatan": rowSelect.id_kecamatan,
+      "id_kabupaten": rowSelect.id_kabupaten,
+      "id_provinsi": rowSelect.id_provinsi,
+      "nama_kecamatan": rowSelect.nama_kecamatan,
+      "IsActive": rowSelect.IsActive,
+    }
     if (rowSelect.id_kecamatan===undefined) {
       url=urlAddKec;
+      varJson.CreatedBy = userName
+      varJson.LastModifiedBy = userName
     } else {
       url=urlEditKec;
+      varJson.LastModifiedBy = userName
     }
 
     //console.log(body);
@@ -253,14 +264,9 @@ const KecamatanAddModi=props => {
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "id_provinsi": rowSelect.id_provinsi,
-        "nama_kecamatan": rowSelect.nama_kecamatan,
-        "IsActive": rowSelect.IsActive,
-      })
+      body: JSON.stringify(
+        varJson
+      )
     };
 
 

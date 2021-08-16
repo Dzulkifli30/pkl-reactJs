@@ -253,7 +253,7 @@ const deleteKel = async (e,selectedKelurahans) => {
     },
     {
       name: 'CreatedBy',
-      selector: 'NamaLengkap',
+      selector: 'CreatedBy',
       sortable: true,
     },
     {
@@ -262,8 +262,13 @@ const deleteKel = async (e,selectedKelurahans) => {
       sortable: true,
     },
     {
+      name: 'LastModified',
+      selector: 'LastModified',
+      sortable: true,
+    },
+    {
       name: 'LastModifiedBy',
-      selector: 'NamaLengkap',
+      selector: 'LastModifiedBy',
       sortable: true,
     },
     {
