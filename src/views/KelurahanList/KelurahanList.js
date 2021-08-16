@@ -81,6 +81,37 @@ const KelurahanList=props => {
     setOpen(false);
   }
 
+  const deleteKel = async (id_kelurahan) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_kelurahan: id_kelurahan
+      })
+    };
+
+    let url=urlDeleteKel
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setKelurahans(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setKelurahans([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
 
 
   const csvData=() => {
@@ -103,23 +134,6 @@ const KelurahanList=props => {
 
 
   
-
-  const deleteKelurahan=async (e, id) => {
-    const selectedKelurahans_string=selectedKelurahans.join("<batas></batas>");
-    let kelurahans3=kelurahans.filter(function (entry) {
-      return entry&&entry.id&&selectedKelurahans_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-    let url=urlDeleteProv
-    if (url === 200) {
-      // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
-    }
-    setFilteredItems(kelurahans3)
-    setKelurahans(kelurahans3)
-    setKelurahanfind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
-  }
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
@@ -286,6 +300,11 @@ const KelurahanList=props => {
 
 
   };
+
+  const handleDelete=(e, rowKelurahansSelect)=>{
+    deleteKel(rowKelurahansSelect.id_kelurahan)
+    getKel()
+  }
   /**/
   //openPopup
   const handleClose=() => {
@@ -322,7 +341,7 @@ const KelurahanList=props => {
           handleOpenViewMap={handleOpenViewMap}
           kelurahans = {kelurahans}
           onChange={onChangefind}
-          deleteKelurahan={deleteKelurahan}
+          handleDelete={handleDelete}
           SettingKelurahan={SettingKelurahan}
           kelurahansExport={kelurahansExport}
           filteredItems={filteredItems}

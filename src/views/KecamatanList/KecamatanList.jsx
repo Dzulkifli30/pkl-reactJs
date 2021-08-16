@@ -10,7 +10,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKec,urlAddKec,urlEditKec } from '../../kumpulanUrl'
+import { urlKec,urlDeleteKec } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -81,15 +81,36 @@ const KecamatanList=props => {
 
 
 
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
+  const deleteKec = async (id_kecamatan) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_kecamatan: id_kecamatan
+      })
+    };
+
+    let url=urlDeleteKec
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setkecamatan(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setkecamatan([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -108,19 +129,6 @@ const KecamatanList=props => {
 
 
     return tempCsv
-  }
-
-
-  const deleteKecamatan=(e) => {
-    const selectedkecamatan_string=selectedkecamatan.join("<batas></batas>");
-    let kecamatan3=kecamatan.filter(function (entry) {
-      return entry&&entry.id&&selectedkecamatan_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-    setFilteredItems(kecamatan3)
-    setkecamatan(kecamatan3)
-    setProvinsifind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
   }
   
   const classes=useStyles();
@@ -276,10 +284,9 @@ const KecamatanList=props => {
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowkecamatanSelect(rowProvinsi);
+  const handleDelete=(e,rowkecamatanSelect) => {
+    deleteKec(rowkecamatanSelect.id_kecamatan)
+    getKec()
   };
 
   /* */
