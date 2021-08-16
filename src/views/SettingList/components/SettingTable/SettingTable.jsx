@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 //import styled from 'styled-components';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-import { urlDeleteKel } from 'kumpulanUrl';
+import axios from 'axios';
+import { urlDeleteProv } from 'kumpulanUrl';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
 import DataTable from 'react-data-table-component';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 
 import {
   Card,
@@ -32,7 +34,6 @@ import {
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
 import { async } from 'validate.js';
-import { array } from 'yargs';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -56,15 +57,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const KelurahansTable =props => {
+const SettingTable=props => {
   const {
     handleOpenViewMap,
-    handleDelete,
-    className,
-    textfind,
-    order, orderBy, SettingKelurahan,
-    provinsisExport, filteredItems, handleOpen, selectedKelurahans,
-    setSelectedKelurahans,
+    className,handleDelete,
+    textfind,Vuserfind,
+    order, orderBy, SettingVuser,
+    VuserExport, filteredItems, handleOpen, selectedVuser,
+    setSelectedVuser,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -78,19 +78,8 @@ const KelurahansTable =props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
-const deleteKel = async (e,selectedKelurahans) => {
-  let url = urlDeleteKel;
-  let response = axios.delete(url + `/${selectedKelurahans.id_kelurahan}`)
-  console.log(selectedKelurahans.id_kelurahan)
-
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-  
 
 
-}
 
   const customStyles={
     header: {
@@ -202,60 +191,34 @@ const deleteKel = async (e,selectedKelurahans) => {
     },
   };
 
+  const deleteProv = async (e,selectedVuser) => {
+    let url = urlDeleteProv
+    let response = axios.delete(url + `/${selectedVuser.id_Vuser}`)
+    console.log(selectedVuser.id_Vuser)
 
+  if (response === 200) {
+    thisClickedFunda.closest(columns).remove();
+    console.log(response.data.data)
+  }
+    }
 
   const columns=[
     {
-      name: 'Kode Depdagri',
-      selector: 'KodeDepdagri',
+      name: 'Nama',
+      selector: 'nama',
       sortable: true,
     },
     {
-      name:'Nama Provinsi',
-      selector:'nama_provinsi',
-      sortable:true,
-    },    {
-      name:'Nama Kabupaten',
-      selector:'nama_kabupaten',
-      sortable:true,
-    },
-    {
-      name:'Nama Kecamatan',
-      selector:'nama_kecamatan',
-      sortable:true,
-    },
-    {
-      name: 'Nama Kelurahan',
-      selector: 'nama_kelurahan',
-      sortable: true, 
-    },
-    {
-      name: 'Keterangan',
-      selector: 'IsActive',
+      name: 'Value Setting',
+      selector: 'value_setting',
       sortable: true,
-      cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
-      name: 'Edit Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="edit"
-          onClick={(e) => handleOpen(e, row, "Ubah Kelurahan")}  ><EditIcon /></Button>
-      ,
-    },
-    {
-      name: 'Hapus Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="delete"
-          onClick={(e) => handleDelete(e, row)}  ><p>Hapus</p></Button>
-      ,
-    },
-    {
-      name: 'Created By',
+      name: 'CreatedBy',
       selector: 'CreatedBy',
       sortable: true,
     },
+    
     {
       name: 'Created',
       selector: 'Created',
@@ -272,29 +235,21 @@ const deleteKel = async (e,selectedKelurahans) => {
       sortable: true,
     },
     {
-      name: 'OriginalID',
-      selector: 'OriginalID',
-      sortable: true,
-    },    {
-      name: 'OriginalKode',
-      selector: 'OriginalKode',
-      sortable: true,
+      button: true,
+      cell: row =>
+        <Button color="primary"
+          onClick={(e) => handleOpen(e, row, "Ubah Vuser")}  ><EditIcon /></Button>
+      ,
     },
-
-
     {
-      name: 'OriginalNama',
-      selector: 'OriginalNama',
-      sortable: true,
-    },    
-    {
-      name: 'nama_kelurahan_old',
-      selector: 'nama_kelurahan_old',
-      sortable: true,
+      button: true,
+      cell: row =>
+        <Button color="primary"
+          onClick={(e) => deleteProv(e)} ><DeleteIcon /></Button>
+      ,
     },
-
   ];
-  // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
+  // const filteredItems=Vuser.filter(item => item.nama_Vuser&&item.nama_Vuser.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
     const handleClear=() => {
       if (filterText) {
@@ -307,8 +262,8 @@ const deleteKel = async (e,selectedKelurahans) => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Kelurahan")}>
-          Tambah Kelurahan
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Vuser")}>
+          <AddIcon/>
         </Button>
 
       </div>
@@ -316,7 +271,7 @@ const deleteKel = async (e,selectedKelurahans) => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Kelurahan"
+          placeholder="Search Vuser"
           textfind={textfind}
         />
       </div>
@@ -340,36 +295,36 @@ const deleteKel = async (e,selectedKelurahans) => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedKelurahans_var;
+    let selectedVuser_var;
 
     if (event.target.checked) {
-      selectedKelurahans_var=provinsis.map(provinsi => id);
+      selectedVuser_var=Vuser.map(Vuser => Vuser.id);
     } else {
-      selectedKelurahans_var=[];
+      selectedVuser_var=[];
     }
 
-    setSelectedKelurahans(selectedKelurahans_var);
+    setSelectedVuser(selectedVuser_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedKelurahans.indexOf(id);
-    let newSelectedKelurahans=[];
+    const selectedIndex=selectedVuser.indexOf(id);
+    let newSelectedVuser=[];
 
     if (selectedIndex===-1) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans, id);
+      newSelectedVuser=newSelectedVuser.concat(selectedVuser, id);
     } else if (selectedIndex===0) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans.slice(1));
-    } else if (selectedIndex===selectedKelurahans.length-1) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans.slice(0, -1));
+      newSelectedVuser=newSelectedVuser.concat(selectedVuser.slice(1));
+    } else if (selectedIndex===selectedVuser.length-1) {
+      newSelectedVuser=newSelectedVuser.concat(selectedVuser.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(
-        selectedKelurahans.slice(0, selectedIndex),
-        selectedKelurahans.slice(selectedIndex+1)
+      newSelectedVuser=newSelectedVuser.concat(
+        selectedVuser.slice(0, selectedIndex),
+        selectedVuser.slice(selectedIndex+1)
       );
     }
 
-    setSelectedKelurahans(newSelectedKelurahans);
+    setSelectedVuser(newSelectedVuser);
     //console.log(selectedUsers);
   };
 
@@ -380,7 +335,7 @@ const deleteKel = async (e,selectedKelurahans) => {
   const handleRowsPerPageChange=event => {
     setRowsPerPage(event.target.value);
   };
-  //  const filteredItems=provinsis;
+  //  const filteredItems=Vuser;
   //const actionsMemo=React.useMemo(() => <Export onExport={() => downloadCSV()} />, []);
 
   return (
@@ -393,11 +348,11 @@ const deleteKel = async (e,selectedKelurahans) => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Kelrahan List"
+              title="Setting List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_kelurahan"
+              keyField="UserName"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -417,9 +372,9 @@ const deleteKel = async (e,selectedKelurahans) => {
   );
 };
 
-KelurahansTable.propTypes={
+SettingTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KelurahansTable;
+export default SettingTable;
