@@ -20,6 +20,8 @@ export { default as LaporanPerProv } from './LaporanPerProv';
 export {default as RtList} from './RtList'
 export {default as RwList} from './RwList'
 export {default as VuserList} from './VuserList'
+export {default as SettingList} from './SettingList'
+export {default as KelompokDataList} from './KelompokDataList'
 // export {default as RtList} from './RtList'
 // export {default as RwList} from './RwList'
 

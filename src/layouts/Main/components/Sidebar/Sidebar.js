@@ -153,10 +153,16 @@ const Sidebar=props => {
     },
 
     {
-      title: 'Visitor User',
-      href: '/vuser'
+      title: 'Setting User',
+      href: '/setting'
 
     },
+    {
+      title: 'Kelompok Data',
+      href: '/kelompok-data'
+
+    },
+    
   ];
   return (
 

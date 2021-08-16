@@ -36,7 +36,9 @@ import {
   LaporanProvID as LaporanProvIDView,
   LaporanPerProv as LaporanPerProvView,
   LaporanKelurahan as LaporanKelurahanView,
-  LaporanPerKelurahan as LaporanPerKelurahanView
+  LaporanPerKelurahan as LaporanPerKelurahanView,
+  SettingList as SettingListView,
+  KelompokDataList as KelompokDataListView
 
 
 } from './views';
@@ -59,10 +61,16 @@ const Routes=() => {
         path="/beranda"
       />
       <RouteWithLayout
-        component={VisitorUsers}
+        component={SettingListView}
         exact
         layout={MainLayout}
-        path="/vuser"
+        path="/setting"
+      />
+      <RouteWithLayout
+        component={KelompokDataListView}
+        exact
+        layout={MainLayout}
+        path="/kelompok-data"
       />
 
 
