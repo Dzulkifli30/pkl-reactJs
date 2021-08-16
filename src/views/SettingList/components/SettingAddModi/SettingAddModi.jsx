@@ -76,6 +76,7 @@ const SettingAddModi=props => {
 
 
   ];
+  
   const [formState, setFormState]=useState({
     isValid: false,
     values: {},
@@ -244,10 +245,8 @@ const SettingAddModi=props => {
         const data=tester;
       })
       .catch((e) => {
-
         alert(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
-
         return false;
 
 
@@ -264,7 +263,24 @@ const SettingAddModi=props => {
   const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
   }
-
+const handling =()=>{
+  {
+    var tmp = []; 
+    // alert( localStorage.getItem("Periode Sensus") - 5 )
+    for (var option = parseInt(localStorage.getItem("Periode Sensus")); option >= localStorage.getItem("Periode Sensus")-5; option--)
+     tmp.push({"option" : option})
+    console.log('temp =',tmp)
+    return  tmp.map(option => (
+      <div className="">
+        <option value={option.option}>
+          {option.option}
+        </option>
+      </div>
+                 
+         ))}
+    
+    
+}
 
 
   return (
@@ -323,9 +339,7 @@ const SettingAddModi=props => {
                 helperText={
                   hasError('value_setting')? formState.errors.value_setting[0]:null
                 }
-
                 error={hasError('value_setting')}
-
                 defaultValue={rowSelect&&rowSelect.value_setting? rowSelect.value_setting:''}
                 variant="outlined"
               />
@@ -336,6 +350,7 @@ const SettingAddModi=props => {
               md={6}
               xs={12}
             >
+
             <TextField
                 fullWidth
                 label="Pilih Kelompok"
@@ -351,15 +366,11 @@ const SettingAddModi=props => {
                 value={rowSelect.Id_kelompok_data}
                 variant="outlined"
               >
-                {kelompokData.map(option => (
-                  <option
-                    key={option.Id_kelompok_data}
-                    value={option.Id_kelompok_data}
-                  >
+                {kelompokData.map(option =>(
+                  <option value={option.Id_kelompok_data}>
                     {option.nama_kelompok_data}
                   </option>
                 ))}
-
               </TextField>
             </Grid>
 
