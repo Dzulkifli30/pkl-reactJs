@@ -237,7 +237,7 @@ const ProvinsisTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => deleteProv(e)} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e, row)} ><DeleteIcon /></Button>
       ,
     },
     {

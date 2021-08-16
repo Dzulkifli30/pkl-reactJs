@@ -272,25 +272,29 @@ const KecamatanAddModi=props => {
 
     ///let urlGetData=urlPostLogin
     alert(url);
-    const response=fetch(url, requestOptions)
+    const response = fetch(url, requestOptions)
       .then(res => {
+        if (res === 200) {
+          alert('bisa')
+          return res.json()
+        }
         return res.json();
       })/**/
 
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        alert(res.message)
+        // alert(res.message)
 
-        handleClose();
+        swal("Berhasil Tambah data", "berhasil", "success").then(
+        handleClose()
+        )
         getDataBackend();
-        //alert("Sukses")
-        const data=res;
+        // alert("Sukses")
+        const data = res;
       })
       .catch((e) => {
-
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
+          alert(e.message)
         return false;
 
 

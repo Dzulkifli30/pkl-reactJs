@@ -10,7 +10,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlRt,urlShowRt } from '../../kumpulanUrl'
+import { urlRt,urlShowRt,urlDeleteRt } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -73,15 +73,36 @@ const RtList=props => {
 
 
 
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
+  const deleteRt = async (id_rt) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_rt: id_rt
+      })
+    };
+
+    let url=urlDeleteRt
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setrt(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setrt([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -101,18 +122,6 @@ const RtList=props => {
     return tempCsv
   }
 
-
-  const deletert=(e) => {
-    const selectedrt_string=selectedrt.join("<batas></batas>");
-    let rt3=rt.filter(function (entry) {
-      return entry&&entry.id&&selectedrt_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-    setFilteredItems(rt3)
-    setrt(rt3)
-    setrtfind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
-  }
   
   const classes=useStyles();
   const printPdf=(e) => {
@@ -267,10 +276,9 @@ const RtList=props => {
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowrtSelect(rowProvinsi);
+  const handleDelete=(e,rowrtSelect) => {
+    deleteRt(rowrtSelect.id_rt)
+    getRt()
   };
 
   /* */

@@ -59,7 +59,7 @@ const useStyles=makeStyles(theme => ({
 const KelurahansTable =props => {
   const {
     handleOpenViewMap,
-    deleteKelurahan,
+    handleDelete,
     className,
     textfind,
     order, orderBy, SettingKelurahan,
@@ -248,7 +248,7 @@ const deleteKel = async (e,selectedKelurahans) => {
       button: true,
       cell: row =>
         <Button color="primary" id="delete"
-          onClick={(e) => deleteKel(e, row)}  ><p>Hapus</p></Button>
+          onClick={(e) => handleDelete(e, row)}  ><p>Hapus</p></Button>
       ,
     },
     {

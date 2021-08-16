@@ -11,7 +11,7 @@ import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import mockDataSettingProvinsi from './dataSettingprovinsi';
-import { urlProv } from 'kumpulanUrl';
+import { urlProv,urlDeleteProv } from 'kumpulanUrl';
 
 
 import '../../assets/vendor/dist/css/datatable.css';
@@ -97,15 +97,36 @@ const ProvinsiList=props => {
 
 
 
-  const deleteProv = async (id) => {
-    let url = urlDeleteProv;
-    try {
-      let response = await axios.delete(url+`${id}`);
-    } catch {
-      e=>{
-        alert("error")
-      }
-    }
+  const deleteProv = async (id_provinsi) => {
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_provinsi: id_provinsi
+      })
+    };
+
+    let url=urlDeleteProv
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setProvinsis(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setProvinsis([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -302,10 +323,9 @@ const ProvinsiList=props => {
 
   };
 
-  const handleDelete=(e,rowProvinsi, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowProvinsisSelect(rowProvinsi);
+  const handleDelete=(e,rowProvinsisSelect) => {
+    deleteProv(rowProvinsisSelect.id_provinsi)
+    getProv()
   };
 
   /* */

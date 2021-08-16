@@ -11,7 +11,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlRw,urlshowRw } from '../../kumpulanUrl'
+import { urlRw,urlshowRw,urlDeleteRw } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -80,15 +80,36 @@ const RwList=props => {
 
 
 
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
+  const deleteRw = async (id_rw) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_rw: id_rw
+      })
+    };
+
+    let url=urlDeleteRw
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setrw(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setrw([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -109,18 +130,6 @@ const RwList=props => {
     return tempCsv
   }
 
-
-  const deleterw=(e) => {
-    const selectedrw_string=selectedrw.join("<batas></batas>");
-    let rw3=rw.filter(function (entry) {
-      return entry&&entry.id&&selectedrw_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-    setFilteredItems(rw3)
-    setrw(rw3)
-    setrwfind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
-  }
   
   const classes=useStyles();
   const printPdf=(e) => {
@@ -275,10 +284,9 @@ const RwList=props => {
 
   };
 
-  const handleDelete=(e,rowRw, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowrwSelect(rowRw);
+  const handleDelete=(e,rowrwSelect) => {
+    deleteRw(rowrwSelect.id_rw)
+    getRw()
   };
 
   /* */
