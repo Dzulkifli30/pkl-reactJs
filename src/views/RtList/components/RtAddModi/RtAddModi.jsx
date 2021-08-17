@@ -442,10 +442,10 @@ const RtAddModi=props => {
     if (rowSelect.id_rt===undefined) {
       url=urlAddRt;
       varJson.CreatedBy = userName
-      varJson.LastModifiedby = userName
+      varJson.LastModifiedBy = userName
     } else {
       url=urlEditRt;
-      varJson.LastModifiedby = userName
+      varJson.LastModifiedBy = userName
 
     }
 
