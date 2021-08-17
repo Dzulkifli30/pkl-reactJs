@@ -159,11 +159,11 @@ const KelompokDataAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+    // alert(url);
     const response=fetch(url, requestOptions)
       .then(tester => {
         if (tester.status === 200) {
-          alert('berhasil')
+          // alert('berhasil')
        handleClose();
           return tester.json();
         }
@@ -172,10 +172,10 @@ const KelompokDataAddModi=props => {
 
       .then(tester => {
         console.log(tester)
-        alert(tester)
+        // alert(tester)
         getDataBackend();
-
-        alert("Sukses")
+      swal("Berhasil", "Sukses Menambah Data", "success",  )
+        // alert("Sukses")
         const data=tester;
       })
       .catch((e) => {

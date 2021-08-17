@@ -19,6 +19,12 @@ export const urlAddSetting=ulrport+'setting/storeSetting'
 export const urlEditSetting=ulrport+'setting/updateSetting'
 export const urlGetSetting=ulrport+'setting/getSetting'
 
+// targetKK
+export const urlShowTargetKk=ulrport+'target-kk/showTargetKk'
+export const urlAddTargetKk=ulrport+'target-kk/storeTargetKk'
+export const urlEditTargetKk=ulrport+'target-kk/updateTargetKk'
+export const urlGetTargetKk=ulrport+'target-kk/getTargetKk'
+
 // kel data
 export const urlShowKelompokData=ulrport+'kelompok-data/showKelompokData'
 export const urlAddKelompokData=ulrport+'kelompok-data/storeKelompokData'

@@ -54,7 +54,7 @@ const useStyles=makeStyles(theme => ({
   },
 }));
 
-const SettingAddModi=props => {
+const TargetKkAddModi=props => {
   const { className, setData, getDataBackend,getMockData, setRowSelect, rowSelect, title, ...rest }=props;
 
   const classes=useStyles();
@@ -409,8 +409,8 @@ const handling =()=>{
   );
 };
 
-SettingAddModi.propTypes={
+TargetKkAddModi.propTypes={
   className: PropTypes.string,
 };
 
-export default SettingAddModi;
+export default TargetKkAddModi;
