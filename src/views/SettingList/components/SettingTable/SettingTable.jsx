@@ -241,6 +241,7 @@ const SettingTable=props => {
       sortable: true,
     },
     {
+      name: 'Edit',
       button: true,
       cell: row =>
         <Button color="primary"
@@ -248,6 +249,7 @@ const SettingTable=props => {
       ,
     },
     {
+      name: 'Delete',
       button: true,
       cell: row =>
         <Button color="primary"
