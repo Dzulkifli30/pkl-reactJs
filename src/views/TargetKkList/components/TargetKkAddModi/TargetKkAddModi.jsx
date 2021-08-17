@@ -585,7 +585,7 @@ const handling =()=>{
       >
         <CardHeader
           subheader=""
-        title={rowSelect.id_rt == null ? "Tambah Target KK" : "Edit Target KK"}
+        title={"Edit Target KK"}
         />
         <Divider />
         <CardContent>

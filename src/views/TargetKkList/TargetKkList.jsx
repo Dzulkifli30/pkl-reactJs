@@ -55,7 +55,7 @@ const VuserList=props => {
 
   }
 
-  async function getSetting() {
+  async function getTargetKk() {
     const userId=localStorage.getItem('user_id');
     setFilteredItems(Vuser);
     setOpen(false);
@@ -252,7 +252,7 @@ const VuserList=props => {
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getSetting();
+    getTargetKk();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -328,7 +328,7 @@ const VuserList=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getSetting}
+      <ModalComponent getDataBackend={getTargetKk}
         handleChange={handleChange} setData={setData}
         open={open} setRowSelect={setRowVuserSelect} rowSelect={rowVuserSelect}
         title={title} datas={filteredItems} handleClose={handleClose} 
