@@ -38,7 +38,8 @@ import {
   LaporanKelurahan as LaporanKelurahanView,
   LaporanPerKelurahan as LaporanPerKelurahanView,
   SettingList as SettingListView,
-  KelompokDataList as KelompokDataListView
+  KelompokDataList as KelompokDataListView,
+  TargetKkList as TargetKkListView
 
 
 } from './views';
@@ -71,6 +72,12 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/kelompok-data"
+      />
+      <RouteWithLayout
+        component={TargetKkListView}
+        exact
+        layout={MainLayout}
+        path="/target-kk"
       />
 
 

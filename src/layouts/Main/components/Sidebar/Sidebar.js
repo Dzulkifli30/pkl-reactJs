@@ -162,6 +162,11 @@ const Sidebar=props => {
       href: '/kelompok-data'
 
     },
+    {
+      title: 'Target KK',
+      href: '/target-kk'
+
+    },
     
   ];
   return (

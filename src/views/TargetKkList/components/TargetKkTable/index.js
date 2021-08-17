@@ -1,1 +1,1 @@
-export { default } from './SettingTable';
+export { default } from './TargetKkTable';

@@ -5,11 +5,11 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { VuserToolbar, SettingTable, SettingAddModi, ViewMap } from './components';
+import { VuserToolbar, TargetKkTable, TargetKkAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKab,urlGetVuser,urlGetSetting } from '../../kumpulanUrl'
+import { urlKab,urlGetVuser,urlGetTargetKk } from '../../kumpulanUrl'
 
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
@@ -67,7 +67,7 @@ const VuserList=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let url=urlGetSetting
+    let url=urlGetTargetKk
     // eslint-disable-next-line no-useless-concat
     const response=await fetch(url, requestOptions)
       .then(res => {
@@ -352,7 +352,7 @@ const VuserList=props => {
       />
   {*/}
       <div className={classes.content}>
-        <SettingTable
+        <TargetKkTable
           handleOpenViewMap={handleOpenViewMap}
           getMockData={getMockData}
           Vuser = {Vuser}
@@ -375,7 +375,7 @@ const VuserList=props => {
         />
 
 
-      {popupComponen(SettingAddModi)}
+      {popupComponen(TargetKkAddModi)}
 
       </div>
 

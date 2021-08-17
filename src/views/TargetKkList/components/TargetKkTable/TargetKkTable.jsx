@@ -57,7 +57,7 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const SettingTable=props => {
+const TargetKkTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
@@ -204,18 +204,42 @@ const SettingTable=props => {
 
   const columns=[
     {
-      name: 'Kelompok Data',
-      selector: 'nama_kelompok_data',
+      name: 'Periode Sensus',
+      selector: 'Periode_Sensus',
       sortable: true,
     },
     {
-      name: 'Nama',
-      selector: 'nama',
+      name: 'Nama Provinsi',
+      selector: 'nama_provinsi',
       sortable: true,
     },
     {
-      name: 'Value Setting',
-      selector: 'value_setting',
+      name: 'Nama Kabupaten',
+      selector: 'nama_kabupaten',
+      sortable: true,
+    },
+    {
+      name: 'Nama Kecamatan',
+      selector: 'nama_kecamatan',
+      sortable: true,
+    },    {
+      name: 'Nama Kelurahan',
+      selector: 'nama_kelurahan',
+      sortable: true,
+    },
+    {
+      name: 'Nama Rw',
+      selector: 'nama_rw',
+      sortable: true,
+    },
+    {
+      name: 'Nama Rt',
+      selector: 'nama_rt',
+      sortable: true,
+    },
+    {
+      name: 'Target KK',
+      selector: 'Target_KK',
       sortable: true,
     },
  
@@ -354,7 +378,7 @@ const SettingTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Setting List"
+              title="Target KK"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
@@ -378,9 +402,9 @@ const SettingTable=props => {
   );
 };
 
-SettingTable.propTypes={
+TargetKkTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default SettingTable;
+export default TargetKkTable;
