@@ -9,7 +9,7 @@ import { VuserToolbar, VuserTable, VuserAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKab,urlGetVuser } from '../../kumpulanUrl'
+import { urlKab,urlGetVuser,urlDeleteUser } from '../../kumpulanUrl'
 
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
@@ -92,17 +92,36 @@ const VuserList=props => {
     setOpen(false);
   }
 
+  const deleteUser = async (id) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id: id
+      })
+    };
 
+    let url=urlDeleteUser
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
 
-  const deleteProv = async (id) => {
-    let url = urlDeleteProv;
-    try {
-      let response = await axios.delete(url+`${id}`);
-    } catch {
-      e=>{
-        alert("error")
-      }
-    }
+      .then(resJson => {
+        const data=resJson;
+        setVuser(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setVuser([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -299,10 +318,9 @@ const VuserList=props => {
 
   };
 
-  const handleDelete=(e,rowVuser, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowVuserSelect(rowVuser);
+  const handleDelete=(e,rowVuserSelect) => {
+    deleteUser(rowVuserSelect.id)
+    getVuser()
   };
 
   /* */
