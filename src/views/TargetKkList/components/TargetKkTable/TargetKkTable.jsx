@@ -209,32 +209,32 @@ const TargetKkTable=props => {
       sortable: true,
     },
     {
-      name: 'Nama Provinsi',
-      selector: 'nama_provinsi',
+      name: 'Id Provinsi',
+      selector: 'id_provinsi',
       sortable: true,
     },
     {
-      name: 'Nama Kabupaten',
-      selector: 'nama_kabupaten',
+      name: 'Id Kabupaten',
+      selector: 'id_kabupaten',
       sortable: true,
     },
     {
-      name: 'Nama Kecamatan',
-      selector: 'nama_kecamatan',
+      name: 'Id Kecamatan',
+      selector: 'id_kecamatan',
       sortable: true,
     },    {
-      name: 'Nama Kelurahan',
-      selector: 'nama_kelurahan',
+      name: 'Id Kelurahan',
+      selector: 'id_kelurahan',
       sortable: true,
     },
     {
-      name: 'Nama Rw',
-      selector: 'nama_rw',
+      name: 'Id Rw',
+      selector: 'id_rw',
       sortable: true,
     },
     {
-      name: 'Nama Rt',
-      selector: 'nama_rt',
+      name: 'Id Rt',
+      selector: 'id_rt',
       sortable: true,
     },
     {
@@ -268,7 +268,7 @@ const TargetKkTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Vuser")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Target Kk")}  ><EditIcon /></Button>
       ,
     },
     {
@@ -292,7 +292,7 @@ const TargetKkTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Vuser")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Target Kk")}>
           <AddIcon/>
         </Button>
 

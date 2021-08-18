@@ -25,19 +25,12 @@ import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 import swal from 'sweetalert';
 const schema={
-  Periode_Sensus: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    length: {
-      maximum: 200
-    }
-  },
   Target_KK: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
-    length: {
-      maximum: 200
-    }
+    // length: {
+    //   maximum: 200
+    // }
   },
   /**/
 };
@@ -467,6 +460,7 @@ const TargetKkAddModi=props => {
     });
   }
 
+
   const handleClose=() => {
     getDataBackend();
   }
@@ -485,13 +479,13 @@ const TargetKkAddModi=props => {
       "id_rw": rowSelect.id_rw,
     }
     let url=urlAddTargetKk;
-    if (rowSelect.id_setting===undefined) {
+    if (title=='Tambah Target Kk') {
       url=urlAddTargetKk;
       varJson.CreatedBy = userName
       varJson.LastModifiedBy = userName
     } else {
       url=urlEditTargetKk;
-      console.log("ide =",rowSelect.id_setting)
+      // console.log("ide =",rowSelect.id_rt)
 
       varJson.LastModifiedBy = userName
     }
@@ -511,7 +505,7 @@ const TargetKkAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    // alert(url);
+    alert(url);
     console.log(url)
     const response=fetch(url, requestOptions)
       .then(tester => {
@@ -544,6 +538,22 @@ const TargetKkAddModi=props => {
 
 
   }
+  const handling =()=>{
+    {
+      var tmp = [];
+      // alert(tmp) 
+      // alert( localStorage.getItem("Periode Sensus") - 5 )
+      var periode_sensus = parseInt(localStorage.getItem("Periode Sensus"));
+      for (var option = periode_sensus; option <= periode_sensus + 5; option++)
+       {tmp.push({"option" : option});}
+      console.log('temp =',tmp)
+      return tmp.map(option => (
+          <option value={option.option}>
+            {option.option}
+          </option>
+                   
+           ))}
+  }
 
 
 
@@ -553,24 +563,7 @@ const TargetKkAddModi=props => {
   const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
   }
-const handling =()=>{
-  {
-    var tmp = []; 
-    // alert( localStorage.getItem("Periode Sensus") - 5 )
-    for (var option = parseInt(localStorage.getItem("Periode Sensus")); option >= localStorage.getItem("Periode Sensus")-5; option--)
-     tmp.push({"option" : option})
-    console.log('temp =',tmp)
-    return  tmp.map(option => (
-      <div className="">
-        <option value={option.option}>
-          {option.option}
-        </option>
-      </div>
-                 
-         ))}
-    
-    
-}
+
 
 
   return (
@@ -585,7 +578,7 @@ const handling =()=>{
       >
         <CardHeader
           subheader=""
-        title={"Edit Target KK"}
+        title={title}
         />
         <Divider />
         <CardContent>
@@ -604,14 +597,12 @@ const handling =()=>{
                 margin="dense"
                 name="Periode_Sensus"
                 onChange={handleChange}
-                helperText={
-                  hasError('Periode_Sensus')? formState.errors.Periode_Sensus[0]:null
-                }
-
-                error={hasError('Periode_Sensus')}
-                defaultValue={rowSelect&&rowSelect.Periode_Sensus? rowSelect.Periode_Sensus:''}
+                select
                 variant="outlined"
-              />
+                value={rowSelect.Periode_Sensus}
+              >
+                {handling()}
+              </TextField>
             </Grid>
 
             <Grid

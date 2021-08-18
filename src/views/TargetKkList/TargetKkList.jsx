@@ -292,6 +292,7 @@ const VuserList=props => {
   const handleOpen=(e, rowVuser, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
+    // alert(MessageButton)
     setRowVuserSelect(rowVuser);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
