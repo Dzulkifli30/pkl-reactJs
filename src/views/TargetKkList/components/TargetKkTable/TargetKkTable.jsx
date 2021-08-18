@@ -268,7 +268,8 @@ const TargetKkTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Target Kk")}  ><EditIcon /></Button>
+        disabled={row.Periode_Sensus <= localStorage.getItem('Periode Sensus')}//={row.Periode_Sensus <= localStorage.getItem('Periode Sensus') ? "true" : "false"}
+          onClick={(e) => handleOpen(e, row, "Ubah Target Kk ") }  > {row.Periode_Sensus < parseInt(localStorage.getItem('Periode Sensus'))}<EditIcon /></Button>
       ,
     },
     {

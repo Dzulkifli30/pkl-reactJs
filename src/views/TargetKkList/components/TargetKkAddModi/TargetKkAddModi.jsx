@@ -437,6 +437,11 @@ const TargetKkAddModi=props => {
       errors: errors||{}
     }));
     console.log("formState", formState)
+    if (title!='Tambah Target Kk' && rowSelect.id_rt_old===undefined) {
+      rowSelect.id_rt_old=rowSelect.id_rt;
+      rowSelect.Periode_Sensus_old=rowSelect.Periode_Sensus;
+      console.log('rs = ',rowSelect)
+    }
     //   alert(setOpen)
   }, [rowSelect]);  // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
@@ -472,6 +477,8 @@ const TargetKkAddModi=props => {
       "Periode_Sensus": rowSelect.Periode_Sensus,
       "Target_KK": rowSelect.Target_KK,
       "id_rt":rowSelect.id_rt,
+      "id_rt_old":rowSelect.id_rt_old,
+      "Periode_Sensus_old":rowSelect.Periode_Sensus_old,
       "id_provinsi": rowSelect.id_provinsi,
       "id_kabupaten": rowSelect.id_kabupaten,
       "id_kecamatan": rowSelect.id_kecamatan,

@@ -153,7 +153,7 @@ const Sidebar=props => {
     },
 
     {
-      title: 'Setting User',
+      title: 'Setting Aplikasi',
       href: '/setting'
 
     },

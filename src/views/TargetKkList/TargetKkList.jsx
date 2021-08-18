@@ -355,6 +355,7 @@ const VuserList=props => {
       <div className={classes.content}>
         <TargetKkTable
           handleOpenViewMap={handleOpenViewMap}
+          rowSelect={rowVuserSelect}
           getMockData={getMockData}
           Vuser = {Vuser}
           handleDelete={handleDelete}
