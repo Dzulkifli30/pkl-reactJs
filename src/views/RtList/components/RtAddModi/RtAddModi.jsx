@@ -727,6 +727,7 @@ const RtAddModi=props => {
                 error={hasError('KodeRT')}
                 defaultValue={rowSelect&&rowSelect.KodeRT? rowSelect.KodeRT:''}
                 variant="outlined"
+                type="number"
               />
             </Grid>
             

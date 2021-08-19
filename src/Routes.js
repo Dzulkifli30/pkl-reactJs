@@ -37,6 +37,8 @@ import {
   LaporanPerProv as LaporanPerProvView,
   LaporanKelurahan as LaporanKelurahanView,
   LaporanPerKelurahan as LaporanPerKelurahanView,
+  LaporanSensusPerKelurahan as LaporanSensusPerKelurahanView,
+  LaporanSensusPerKecamatan as LaporanSensusPerKecamatanView,
   SettingList as SettingListView,
   KelompokDataList as KelompokDataListView,
   LaporanSensusIDList as LaporanSensusIDView,
@@ -227,6 +229,21 @@ const Routes=() => {
         path="/laporan-sensus-perprov"
       />
 
+      {/* Ending */}
+
+      {/* Beginning Laporan Sensus */}
+      <RouteWithLayout
+        component={LaporanSensusPerKelurahanView}
+        exact
+        layout={MainLayout}
+        path="/laporan-sensus-perkelurahan"
+      />
+      <RouteWithLayout
+        component={LaporanSensusPerKecamatanView}
+        exact
+        layout={MainLayout}
+        path="/laporan-sensus-perkecamatan"
+      />
       {/* Ending */}
 
       <RouteWithLayout

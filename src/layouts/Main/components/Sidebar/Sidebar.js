@@ -195,7 +195,20 @@ const Sidebar=props => {
       href: '/target-kk'
 
     },
-    
+    {
+      title: 'Laporan Target Sensus',
+      href: '/#',
+      items: [
+        {
+          title:'Laporan target Sensus PerKecamatan',
+          href:'/laporan-sensus-perkecamatan'
+        },
+        {
+          title:'Laporan target Sensus PerKelurahan',
+          href:'/laporan-sensus-perkelurahan'
+        },
+      ]
+    },
   ];
   return (
 
