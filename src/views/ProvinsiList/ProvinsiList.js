@@ -119,6 +119,7 @@ const ProvinsiList=props => {
         const data=resJson;
         setProvinsis(data.data);
         setFilteredItems(data.data);
+        getProv()
         //return false;
       })
       .catch(e => {
@@ -326,7 +327,7 @@ const ProvinsiList=props => {
 
   const handleDelete=(e,rowProvinsisSelect) => {
     deleteProv(rowProvinsisSelect.id_provinsi)
-    getProv()
+    
   };
 
   /* */

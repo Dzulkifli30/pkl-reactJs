@@ -12,7 +12,25 @@ export const urlEditVuser=ulrport+'vuser/updateUser'
 export const urlGetVuser=ulrport+'vuser/getUser'
 export const urlDeleteUser=ulrport+'vuser/deleteUser'
 
+// setting
+export const urlShowSetting=ulrport+'setting/showSetting'
+export const urlAddSetting=ulrport+'setting/storeSetting'
+export const urlEditSetting=ulrport+'setting/updateSetting'
+export const urlGetSetting=ulrport+'setting/getSetting'
+export const urlDeleteSetting=ulrport+'setting/deleteSetting'
 
+// kel data
+export const urlShowKelompokData=ulrport+'kelompok-data/showKelompokData'
+export const urlAddKelompokData=ulrport+'kelompok-data/storeKelompokData'
+export const urlEditKelompokData=ulrport+'kelompok-data/updateKelompokData'
+export const urlGetKelompokData=ulrport+'kelompok-data/getKelompokData'
+export const urlDeleteKelompokData=ulrport+'kelompok-data/deleteKelompokData'
+
+// targetKK
+export const urlShowTargetKk=ulrport+'target-kk/showTargetKk'
+export const urlAddTargetKk=ulrport+'target-kk/storeTargetKk'
+export const urlEditTargetKk=ulrport+'target-kk/updateTargetKk'
+export const urlGetTargetKk=ulrport+'target-kk/getTargetKk'
 
  //provinsi
 export const urlProv=ulrport+'provinsi/getProvinsi'
@@ -65,5 +83,8 @@ export const urlRt=ulrport+'rt/getRt'
 export const urlAddRt=ulrport+'rt/storeRt'
 export const urlEditRt=ulrport+'rt/updateRt'
 export const urlDeleteRt=ulrport +'rt/deleteRt'
+
+//LaporanSensus
+export const urlShowLaporanSensusID=ulrport +'laporan-sensus/indonesia'
 
 

@@ -429,12 +429,24 @@ const RtAddModi=props => {
   }
 
   const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
+    const userName=localStorage.getItem('username');
     let url=urlAddRt;
+    let varJson = {
+      "KodeRT": rowSelect.KodeRT,
+      "id_rt": rowSelect.id_rt,
+      "nama_rt": rowSelect.nama_rt,
+      "id_rw": rowSelect.id_rw,
+      "IsActive": rowSelect.IsActive,
+
+    }
     if (rowSelect.id_rt===undefined) {
       url=urlAddRt;
+      varJson.CreatedBy = userName
+      varJson.LastModifiedBy = userName
     } else {
       url=urlEditRt;
+      varJson.LastModifiedBy = userName
+
     }
 
     //console.log(body);
@@ -446,18 +458,14 @@ const RtAddModi=props => {
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeRT": rowSelect.KodeRT,
-        "id_rt": rowSelect.id_rt,
-        "nama_rt": rowSelect.nama_rt,
-        "id_rw": rowSelect.id_rw,
-        "IsActive": rowSelect.IsActive,
-      })
+      body: JSON.stringify(
+        varJson
+      )
     };
 
 
     ///let urlGetData=urlPostLogin
- 
+    alert(url);
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -466,7 +474,7 @@ const RtAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        
+        alert(res.message)
 
         handleClose();
         getDataBackend();

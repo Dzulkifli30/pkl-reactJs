@@ -172,35 +172,38 @@ const KabupatenAddModi=props => {
     getDataBackend();
   }
 
-  const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
+  const handleSave=() => {
+    const userName=localStorage.getItem('username');
     let url=urlAddKab;
+    let varJson = {
+      "KodeDepdagri": rowSelect.KodeDepdagri,
+      "id_provinsi": rowSelect.id_provinsi,
+      "id_kabupaten": rowSelect.id_kabupaten,
+      "nama_kabupaten": rowSelect.nama_kabupaten,
+      "IsActive": rowSelect.IsActive,
+    }
     if (rowSelect.id_kabupaten===undefined) {
       url=urlAddKab;
+      varJson.CreatedBy = userName
+      varJson.LastModifiedBy = userName
     } else {
       url=urlEditKab;
+      varJson.LastModifiedBy = userName
     }
 
     //console.log(body);
-
-
-
 
     const requestOptions={
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_provinsi": rowSelect.id_provinsi,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "nama_kabupaten": rowSelect.nama_kabupaten,
-        "IsActive": rowSelect.IsActive,
-      })
-    };
-
-
+      body: JSON.stringify(
+        varJson
+      )
+    }
+  
     ///let urlGetData=urlPostLogin
+    alert(url);
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -209,6 +212,7 @@ const KabupatenAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
+        alert(res.message)
 
         handleClose();
         getDataBackend();
@@ -223,10 +227,9 @@ const KabupatenAddModi=props => {
 
 
       });
-  }
+    }
 
-
-
+    
 
   //  const position=[currentLocation.lat, currentLocation.lng]
   const hasError=field => {

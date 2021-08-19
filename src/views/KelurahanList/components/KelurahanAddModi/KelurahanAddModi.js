@@ -311,13 +311,25 @@ async function showKab(id_provinsi) {
   }
 
   const handleSave = (event) => {
-    const userId = localStorage.getItem('user_id');
+    const userName = localStorage.getItem('username');
     let url = urlAddKel;
+    let varJson = {
+      "KodeDepdagri": rowSelect.KodeDepdagri,
+      "id_kelurahan": rowSelect.id_kelurahan,
+      "id_kecamatan": rowSelect.id_kecamatan,
+      "nama_kelurahan": rowSelect.nama_kelurahan,
+      "IsActive": rowSelect.IsActive,
+      
+    }
     if (rowSelect.id_kelurahan === undefined) {
       url = urlAddKel;
+      varJson.CreatedBy = userName
+      varJson.LastModifiedBy = userName
     } else {
       url = urlEditKel;
+      varJson.LastModifiedBy = userName
     }
+    console.log(varJson)
 
     //console.log(body);
 
@@ -328,21 +340,19 @@ async function showKab(id_provinsi) {
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kelurahan": rowSelect.id_kelurahan,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "nama_kelurahan": rowSelect.nama_kelurahan,
-        "IsActive": rowSelect.IsActive,
-      })
+      body: JSON.stringify(
+        varJson
+      )
     };
 
 
     ///let urlGetData=urlPostLogin
 
+    alert(url)
     const response = fetch(url, requestOptions)
       .then(res => {
         if (res === 200) {
+          alert('bisa')
           return res.json()
         }
         return res.json();
@@ -361,7 +371,7 @@ async function showKab(id_provinsi) {
         const data = res;
       })
       .catch((e) => {
-
+          alert(e.message)
         return false;
 
 

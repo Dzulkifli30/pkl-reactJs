@@ -100,6 +100,7 @@ const KecamatanList=props => {
         const data=resJson;
         setkecamatan(data.data);
         setFilteredItems(data.data);
+        getKec()
         //return false;
       })
       .catch(e => {
@@ -297,7 +298,7 @@ const KecamatanList=props => {
 
   const handleDelete=(e,rowkecamatanSelect) => {
     deleteKec(rowkecamatanSelect.id_kecamatan)
-    getKec()
+    
   };
 
   /* */

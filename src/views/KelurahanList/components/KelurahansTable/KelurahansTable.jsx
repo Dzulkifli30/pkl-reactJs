@@ -238,16 +238,8 @@ const deleteKel = async (e,selectedKelurahans) => {
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
-      name: 'Edit Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="edit"
-          onClick={(e) => handleOpen(e, row, "Ubah Kelurahan")}  ><EditIcon /></Button>
-      ,
-    },
-    {
       name: 'CreatedBy',
-      selector: 'NamaLengkap',
+      selector: 'CreatedBy',
       sortable: true,
     },
     {
@@ -256,9 +248,22 @@ const deleteKel = async (e,selectedKelurahans) => {
       sortable: true,
     },
     {
-      name: 'LastModifiedBy',
-      selector: 'NamaLengkap',
+      name: 'LastModified',
+      selector: 'LastModified',
       sortable: true,
+    },
+    {
+      name: 'LastModifiedBy',
+      selector: 'LastModifiedBy',
+      sortable: true,
+    },
+    {
+      name: 'Edit Kelurahan',
+      button: true,
+      cell: row =>
+        <Button color="primary" id="edit"
+          onClick={(e) => handleOpen(e, row, "Ubah Kelurahan")}  ><EditIcon /></Button>
+      ,
     },
     {
       name: 'Hapus Kelurahan',
@@ -368,7 +373,7 @@ const deleteKel = async (e,selectedKelurahans) => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Kelrahan List"
+              title="Kelurahan List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}

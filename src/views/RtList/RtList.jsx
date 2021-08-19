@@ -92,6 +92,7 @@ const RtList=props => {
         const data=resJson;
         setrt(data.data);
         setFilteredItems(data.data);
+        getRt()
         //return false;
       })
       .catch(e => {
@@ -239,7 +240,7 @@ const RtList=props => {
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getRt();
+    getRt()
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -288,7 +289,7 @@ const RtList=props => {
 
   const handleDelete=(e,rowrtSelect) => {
     deleteRt(rowrtSelect.id_rt)
-    getRt()
+    
   };
 
   /* */

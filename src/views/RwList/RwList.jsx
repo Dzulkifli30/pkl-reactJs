@@ -99,6 +99,7 @@ const RwList=props => {
         const data=resJson;
         setrw(data.data);
         setFilteredItems(data.data);
+        getRw()
         //return false;
       })
       .catch(e => {
@@ -296,7 +297,7 @@ const RwList=props => {
 
   const handleDelete=(e,rowrwSelect) => {
     deleteRw(rowrwSelect.id_rw)
-    getRw()
+    
   };
 
   /* */

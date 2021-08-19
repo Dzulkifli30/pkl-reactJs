@@ -36,7 +36,15 @@ import {
   LaporanProvID as LaporanProvIDView,
   LaporanPerProv as LaporanPerProvView,
   LaporanKelurahan as LaporanKelurahanView,
-  LaporanPerKelurahan as LaporanPerKelurahanView
+  LaporanPerKelurahan as LaporanPerKelurahanView,
+  SettingList as SettingListView,
+  KelompokDataList as KelompokDataListView,
+  LaporanSensusIDList as LaporanSensusIDView,
+  TargetKkList as TargetKkListView,
+  LaporanSensusPerKab as LaporanSensusPerKabVIew,
+  LaporanSensusPerProv as LaporanSensusPerProvView,
+  LaporanSensusPerProv
+
 
 
 } from './views';
@@ -51,6 +59,19 @@ const Routes=() => {
         to="/beranda"
       />
 
+<RouteWithLayout
+        component={SettingListView}
+        exact
+        layout={MainLayout}
+        path="/setting"
+      />
+      <RouteWithLayout
+        component={KelompokDataListView}
+        exact
+        layout={MainLayout}
+        path="/kelompok-data"
+      />
+
 
       <RouteWithLayout
         component={DashboardView}
@@ -63,6 +84,12 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/vuser"
+      />
+       <RouteWithLayout
+        component={TargetKkListView}
+        exact
+        layout={MainLayout}
+        path="/target-kk"
       />
 
 
@@ -169,7 +196,26 @@ const Routes=() => {
         layout={MainLayout}
         path="/laporan-perkelurahan"
       />
-      {/* Ennding */}
+      <RouteWithLayout
+        component={LaporanSensusIDView}
+        exact
+        layout={MainLayout}
+        path="/laporan-sensus-indonesia"
+      />
+      <RouteWithLayout
+        component={LaporanSensusPerKabVIew}
+        exact
+        layout={MainLayout}
+        path="/laporan-sensus-perkab"
+      />
+      <RouteWithLayout
+        component={LaporanSensusPerProv}
+        exact
+        layout={MainLayout}
+        path="/laporan-sensus-perprov"
+      />
+
+      {/* Ending */}
 
       <RouteWithLayout
         component={SignUpView}

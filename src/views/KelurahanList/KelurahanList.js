@@ -103,6 +103,7 @@ const KelurahanList=props => {
         const data=resJson;
         setKelurahans(data.data);
         setFilteredItems(data.data);
+        getKel()
         //return false;
       })
       .catch(e => {
@@ -322,7 +323,7 @@ const KelurahanList=props => {
 
   const handleDelete=(e, rowKelurahansSelect)=>{
     deleteKel(rowKelurahansSelect.id_kelurahan)
-    getKel()
+    
   }
 
   /**/

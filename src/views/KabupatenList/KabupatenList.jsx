@@ -92,6 +92,7 @@ const KabupatenList=props => {
         const data=resJson;
         setkabupaten(data.data);
         setFilteredItems(data.data);
+        getKab()
         //return false;
       })
       .catch(e => {
@@ -290,7 +291,7 @@ const KabupatenList=props => {
 
   const handleDelete=(e,rowkabupatenSelect) => {
     deleteKab(rowkabupatenSelect.id_kabupaten)
-    getKab()
+    
   };
 
   /* */

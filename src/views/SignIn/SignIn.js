@@ -176,12 +176,13 @@ const SignIn=props => {
           //console.log(data.data);
           if (data.code=="00") {
             //{ userId: "A6B433CD8F15397BE05314B5A8C00F89" }
-            localStorage.setItem('user_id', data.data[0].userId);
+            localStorage.setItem('username', data.data[0].UserName);
             localStorage.setItem('NamaLengkap', data.data[0].NamaLengkap);
             localStorage.setItem('roleName', data.data[0].roleName);
             localStorage.setItem('accessId', data.data[0].accessId);
             localStorage.setItem('Jabatan', data.data[0].Jabatan);
             localStorage.setItem('Foto', data.data[0].Foto);
+            localStorage.setItem('Periode Sensus', data.data2[0].value_setting);
             window.location='/beranda';
             //history.push('/beranda');
 

@@ -144,12 +144,21 @@ const ProvinsiAddModi=props => {
   }
 
   const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
+    const userName=localStorage.getItem('username');
+    let varJson = {
+      "KodeDepdagri": rowSelect.KodeDepdagri,
+      "id_provinsi": rowSelect.id_provinsi,
+      "nama_provinsi": rowSelect.nama_provinsi,
+      "IsActive": rowSelect.IsActive,
+    }
     let url=urlAddProv;
     if (rowSelect.id_provinsi===undefined) {
       url=urlAddProv;
+      varJson.CreatedBy = userName
+      varJson.LastModifiedBy = userName
     } else {
       url=urlEditProv;
+      varJson.LastModifiedBy = userName
     }
 
     //console.log(body);
@@ -160,12 +169,9 @@ const ProvinsiAddModi=props => {
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_provinsi": rowSelect.id_provinsi,
-        "nama_provinsi": rowSelect.nama_provinsi,
-        "IsActive": rowSelect.IsActive,
-      })
+      body: JSON.stringify(
+        varJson,
+      )
     };
 
 
@@ -174,6 +180,7 @@ const ProvinsiAddModi=props => {
     const response=fetch(url, requestOptions)
       .then(tester => {
         if (tester.status === 200) {
+          alert('berhasil')
        handleClose();
           return tester.json();
         }
@@ -182,20 +189,21 @@ const ProvinsiAddModi=props => {
 
       .then(tester => {
         console.log(tester)
+        alert(tester.message)
         getDataBackend();
 
+        alert("Sukses")
         const data=tester;
       })
       .catch((e) => {
 
-        console.log(e)
+        alert(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
 
         return false;
 
 
       });
-
 
   }
 

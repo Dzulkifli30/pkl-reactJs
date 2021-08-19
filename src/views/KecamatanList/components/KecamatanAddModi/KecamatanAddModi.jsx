@@ -236,12 +236,23 @@ const KecamatanAddModi=props => {
   }
 
   const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
+    const userName=localStorage.getItem('username');
     let url=urlAddKec;
+    let varJson = {
+      "KodeDepdagri": rowSelect.KodeDepdagri,
+      "id_kecamatan": rowSelect.id_kecamatan,
+      "id_kabupaten": rowSelect.id_kabupaten,
+      "id_provinsi": rowSelect.id_provinsi,
+      "nama_kecamatan": rowSelect.nama_kecamatan,
+      "IsActive": rowSelect.IsActive,
+    }
     if (rowSelect.id_kecamatan===undefined) {
       url=urlAddKec;
+      varJson.CreatedBy = userName
+      varJson.LastModifiedBy = userName
     } else {
       url=urlEditKec;
+      varJson.LastModifiedBy = userName
     }
 
     //console.log(body);
@@ -250,36 +261,37 @@ const KecamatanAddModi=props => {
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "id_provinsi": rowSelect.id_provinsi,
-        "nama_kecamatan": rowSelect.nama_kecamatan,
-        "IsActive": rowSelect.IsActive,
-      })
+      body: JSON.stringify(
+        varJson
+      )
     };
 
 
-    ///let urlGetData=urlPostLogi
-    const response=fetch(url, requestOptions)
+    ///let urlGetData=urlPostLogin
+    alert(url);
+    const response = fetch(url, requestOptions)
       .then(res => {
+        if (res === 200) {
+          alert('bisa')
+          return res.json()
+        }
         return res.json();
       })/**/
 
       .then(res => {
         //console.log(res)
         //console.log(res.data)
+        // alert(res.message)
 
-        handleClose();
+        swal("Berhasil Tambah data", "berhasil", "success").then(
+        handleClose()
+        )
         getDataBackend();
-        //alert("Sukses")
-        const data=res;
+        // alert("Sukses")
+        const data = res;
       })
       .catch((e) => {
-
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
+          alert(e.message)
         return false;
 
 
