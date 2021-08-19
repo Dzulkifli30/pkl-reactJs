@@ -18,7 +18,6 @@ import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
 import { async } from 'validate.js';
-import { urlDeleteProv } from '../../kumpulanUrl';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -98,11 +97,7 @@ const ProvinsiList=props => {
 
 
 
-<<<<<<< HEAD
-  const deleteProv = async (id_provinsi) => {
-=======
   const deleteProv = async (id_provinsi) => {  /* */
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
     const requestOptions={
       method: 'POST',
       mode: "cors",
@@ -123,10 +118,7 @@ const ProvinsiList=props => {
         const data=resJson;
         setProvinsis(data.data);
         setFilteredItems(data.data);
-<<<<<<< HEAD
-=======
         getProv()
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         //return false;
       })
       .catch(e => {
@@ -334,11 +326,7 @@ const ProvinsiList=props => {
 
   const handleDelete=(e,rowProvinsisSelect) => {
     deleteProv(rowProvinsisSelect.id_provinsi)
-<<<<<<< HEAD
-    getProv()
-=======
     
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   };
 
   /* */

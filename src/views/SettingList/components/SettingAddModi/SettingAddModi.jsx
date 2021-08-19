@@ -112,42 +112,6 @@ const SettingAddModi=props => {
       });
   }
 
-<<<<<<< HEAD
-  async function showKelData(Id_kelompok_data) {
-    /* */
-    const requestOptions={
-      method: 'POST',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "Id_kelompok_data": Id_kelompok_data,
-      })
-    };
-
-    let urlShow=urlShowKelompokData
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlShow, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        console.log('kelData =',data.data)
-        setKelompokData(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setKelompokData([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-
-
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   ///  const mapRef=createRef();
 
   useEffect(() => {
@@ -273,27 +237,6 @@ const SettingAddModi=props => {
   const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
   }
-<<<<<<< HEAD
-const handling =()=>{
-  {
-    var tmp = []; 
-    // alert( localStorage.getItem("Periode Sensus") - 5 )
-    for (var option = parseInt(localStorage.getItem("Periode Sensus")); option >= localStorage.getItem("Periode Sensus")-5; option--)
-     tmp.push({"option" : option})
-    console.log('temp =',tmp)
-    return  tmp.map(option => (
-      <div className="">
-        <option value={option.option}>
-          {option.option}
-        </option>
-      </div>
-                 
-         ))}
-    
-    
-}
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 
   return (
@@ -308,11 +251,7 @@ const handling =()=>{
       >
         <CardHeader
           subheader=""
-<<<<<<< HEAD
-        title={rowSelect.nama == null ? "Tambah Setting" : "Edit Setting"}
-=======
         title="Setting"
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         />
         <Divider />
         <CardContent>
@@ -361,10 +300,6 @@ const handling =()=>{
                 variant="outlined"
               />
             </Grid>
-<<<<<<< HEAD
-=======
-
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
             <Grid
               item
               md={6}

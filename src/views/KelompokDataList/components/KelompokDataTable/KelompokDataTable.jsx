@@ -191,20 +191,6 @@ const KelompokDataTable=props => {
     },
   };
 
-<<<<<<< HEAD
-  const deleteProv = async (e,selectedVuser) => {
-    let url = urlDeleteProv
-    let response = axios.delete(url + `/${selectedVuser.id_Vuser}`)
-    console.log(selectedVuser.id_Vuser)
-
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-    }
-
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   const columns=[
     // {
     //   name: 'Vuser ID',
@@ -244,11 +230,7 @@ const KelompokDataTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-<<<<<<< HEAD
-          onClick={(e) => deleteProv(e)} ><DeleteIcon /></Button>
-=======
           onClick={(e) => handleDelete(e,row)} ><DeleteIcon /></Button>
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       ,
     },
   ];

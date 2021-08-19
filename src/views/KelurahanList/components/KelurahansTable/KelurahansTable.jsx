@@ -61,10 +61,6 @@ const useStyles=makeStyles(theme => ({
 const KelurahansTable =props => {
   const {
     handleOpenViewMap,
-<<<<<<< HEAD
-    handleDelete,
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
     className,
     handleDelete,
     textfind,
@@ -242,27 +238,7 @@ const deleteKel = async (e,selectedKelurahans) => {
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
-<<<<<<< HEAD
-      name: 'Edit Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="edit"
-          onClick={(e) => handleOpen(e, row, "Ubah Kelurahan")}  ><EditIcon /></Button>
-      ,
-    },
-    {
-      name: 'Hapus Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="delete"
-          onClick={(e) => handleDelete(e, row)}  ><p>Hapus</p></Button>
-      ,
-    },
-    {
-      name: 'Created By',
-=======
       name: 'CreatedBy',
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       selector: 'CreatedBy',
       sortable: true,
     },
@@ -274,14 +250,6 @@ const deleteKel = async (e,selectedKelurahans) => {
     {
       name: 'LastModified',
       selector: 'LastModified',
-<<<<<<< HEAD
-      sortable: true,
-    },
-    {
-      name: 'LastModifiedBy',
-      selector: 'LastModifiedBy',
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       sortable: true,
     },
     {

@@ -10,11 +10,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-<<<<<<< HEAD
-import { urlDeleteKab,urlKab,urlProv } from '../../kumpulanUrl'
-=======
 import { urlDeleteKab, urlKab,urlProv } from '../../kumpulanUrl'
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -96,10 +92,7 @@ const KabupatenList=props => {
         const data=resJson;
         setkabupaten(data.data);
         setFilteredItems(data.data);
-<<<<<<< HEAD
-=======
         getKab()
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         //return false;
       })
       .catch(e => {
@@ -298,11 +291,7 @@ const KabupatenList=props => {
 
   const handleDelete=(e,rowkabupatenSelect) => {
     deleteKab(rowkabupatenSelect.id_kabupaten)
-<<<<<<< HEAD
-    getKab()
-=======
     
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   };
 
   /* */

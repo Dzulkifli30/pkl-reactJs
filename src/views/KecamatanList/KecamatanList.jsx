@@ -96,34 +96,11 @@ const KecamatanList=props => {
         return res.json();
       })
 
-<<<<<<< HEAD
-  const deleteKec = async (id_kecamatan) => {  /* */
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body:JSON.stringify({
-        id_kecamatan: id_kecamatan
-      })
-    };
-
-    let url=urlDeleteKec
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       .then(resJson => {
         const data=resJson;
         setkecamatan(data.data);
         setFilteredItems(data.data);
-<<<<<<< HEAD
-=======
         getKec()
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         //return false;
       })
       .catch(e => {
@@ -308,11 +285,7 @@ const KecamatanList=props => {
 
   const handleDelete=(e,rowkecamatanSelect) => {
     deleteKec(rowkecamatanSelect.id_kecamatan)
-<<<<<<< HEAD
-    getKec()
-=======
     
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   };
 
   /* */

@@ -18,22 +18,7 @@ export const urlShowSetting=ulrport+'setting/showSetting'
 export const urlAddSetting=ulrport+'setting/storeSetting'
 export const urlEditSetting=ulrport+'setting/updateSetting'
 export const urlGetSetting=ulrport+'setting/getSetting'
-<<<<<<< HEAD
-
-// targetKK
-export const urlShowTargetKk=ulrport+'target-kk/showTargetKk'
-export const urlAddTargetKk=ulrport+'target-kk/storeTargetKk'
-export const urlEditTargetKk=ulrport+'target-kk/updateTargetKk'
-export const urlGetTargetKk=ulrport+'target-kk/getTargetKk'
-
-// kel data
-export const urlShowKelompokData=ulrport+'kelompok-data/showKelompokData'
-export const urlAddKelompokData=ulrport+'kelompok-data/storeKelompokData'
-export const urlEditKelompokData=ulrport+'kelompok-data/updateKelompokData'
-export const urlGetKelompokData=ulrport+'kelompok-data/getKelompokData'
-=======
 export const urlDeleteSetting=ulrport+'setting/deleteSetting'
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 // kel data
 export const urlShowKelompokData=ulrport+'kelompok-data/showKelompokData'
@@ -98,13 +83,9 @@ export const urlShowRt=ulrport+'rt/showRt'
 export const urlRt=ulrport+'rt/getRt'
 export const urlAddRt=ulrport+'rt/storeRt'
 export const urlEditRt=ulrport+'rt/updateRt'
-<<<<<<< HEAD
-export const urlDeleteRt=ulrport +'rt/deleteRt'
-=======
 export const urlDeleteRt=ulrport +'rt/deleteRt'
 
 //LaporanSensus
 export const urlShowLaporanSensusID=ulrport +'laporan-sensus/indonesia'
 
 
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c

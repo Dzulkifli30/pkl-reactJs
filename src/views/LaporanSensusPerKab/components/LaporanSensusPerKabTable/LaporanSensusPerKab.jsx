@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { PeriodeSensus } from 'components';
+// import { PeriodeSensus } from 'components';
 
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -307,13 +307,13 @@ const LaporanSensusPerKab=props => {
       }
     };
   return <div class="form-group">
-       <div className="col-md-6 my-5">
+       {/* <div className="col-md-6 my-5">
           <PeriodeSensus
           getDataBackend={getDataBackend}
           rowSelect={rowSelect}
           setRowSelect={setRowSelect}>
           </PeriodeSensus>
-      </div>
+      </div> */}
   </div>
 
 

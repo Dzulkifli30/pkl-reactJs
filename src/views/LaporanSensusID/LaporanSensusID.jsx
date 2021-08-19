@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import {SensusIDSearchModi,LaporanSensusIDTable} from '../LaporanSensusID/components';
+import {PencarianLaporan,LaporanSensusIDTable} from '../LaporanSensusID/components';
 import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
@@ -42,32 +42,33 @@ const LaporanSensusID=props => {
     const requestOptions={
       method: 'POST',
       mode: "cors",
-        body: JSON.stringify({
-          "Periode_Sensus": rowsensusIDSelect.Periode_Sensus,
-          // "id_sensusID": rowsensusIDSelect.id_sensusID,
-        }),
-      
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "Periode_Sensus": rowsensusIDSelect.Periode_Sensus,
+        // "id_sensusID": rowsensusIDSelect.id_sensusID,
+      }),
     };
 
     let url=urlShowLaporanSensusID
     // eslint-disable-next-line no-useless-concat
-    // alert()
+    alert(urlShowLaporanSensusID)
     const response=await fetch(url, requestOptions)
       .then(res => {
-
+        console.log('res = ',res)
         return res.json();
         
       })
 
       .then(resJson => {
+        alert('in')
         const data=resJson;
+        console.log('data sens =', data.data)
         setSensusID(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        alert(e);
         setSensusID([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -330,6 +331,13 @@ const LaporanSensusID=props => {
 
       />
   {*/}
+        <PencarianLaporan
+          getDataBackend={showTargetKK}
+          setSensusID={setSensusID}
+          handleChange={handleChange} setData={setData}
+          open={open} setRowSelect={setRowsensusIDSelect} rowSelect={rowsensusIDSelect}
+          title={title} datas={filteredItems}
+        />
       <div className={classes.content}>
         <LaporanSensusIDTable
           handleOpenViewMap={handleOpenViewMap}

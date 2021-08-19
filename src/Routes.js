@@ -39,16 +39,12 @@ import {
   LaporanPerKelurahan as LaporanPerKelurahanView,
   SettingList as SettingListView,
   KelompokDataList as KelompokDataListView,
-<<<<<<< HEAD
-  TargetKkList as TargetKkListView
-=======
   LaporanSensusIDList as LaporanSensusIDView,
   TargetKkList as TargetKkListView,
   LaporanSensusPerKab as LaporanSensusPerKabVIew,
   LaporanSensusPerProv as LaporanSensusPerProvView,
   LaporanSensusPerProv
 
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 
 } from './views';

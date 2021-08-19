@@ -11,11 +11,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-<<<<<<< HEAD
-import { urlRw,urlshowRw,urlDeleteRw } from '../../kumpulanUrl'
-=======
 import { urlDeleteRw, urlRw,urlshowRw } from '../../kumpulanUrl'
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -99,34 +95,11 @@ const RwList=props => {
         return res.json();
       })
 
-<<<<<<< HEAD
-  const deleteRw = async (id_rw) => {  /* */
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body:JSON.stringify({
-        id_rw: id_rw
-      })
-    };
-
-    let url=urlDeleteRw
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       .then(resJson => {
         const data=resJson;
         setrw(data.data);
         setFilteredItems(data.data);
-<<<<<<< HEAD
-=======
         getRw()
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         //return false;
       })
       .catch(e => {
@@ -312,11 +285,7 @@ const RwList=props => {
 
   const handleDelete=(e,rowrwSelect) => {
     deleteRw(rowrwSelect.id_rw)
-<<<<<<< HEAD
-    getRw()
-=======
     
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   };
 
   /* */

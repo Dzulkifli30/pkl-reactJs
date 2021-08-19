@@ -246,11 +246,7 @@ const ProvinsisTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-<<<<<<< HEAD
-          onClick={(e) => handleDelete(e, row)} ><DeleteIcon /></Button>
-=======
           onClick={(e) => handleDelete(e, row, "Hapus Provinsi")} ><DeleteIcon /></Button>
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       ,
     },
     {

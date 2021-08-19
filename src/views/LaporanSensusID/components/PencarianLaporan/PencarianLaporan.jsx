@@ -1,9 +1,10 @@
 import React, { createRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { urlGetSetting, urlShowTargetKk } from '../../kumpulanUrl'
+import { urlGetSetting, urlShowTargetKk } from '../../../../kumpulanUrl'
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import {LapPeriode} from '../../../../components';
 import {
   Card,
   CardHeader,
@@ -47,7 +48,7 @@ const useStyles=makeStyles(theme => ({
   }));
 
 
-const PeriodeSensus=props => {
+const PencarianLaporan=props => {
   const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest }=props;
   const classes=useStyles();
   const schema = {
@@ -96,33 +97,25 @@ const PeriodeSensus=props => {
 const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
   }
-  // const pencarian = (paramProv, id_set) => {
-  //   let value = id_set
-  //   let result = [];
-  //   // alert(value)
-  //   result = paramProv.filter((entry) => {
-  //     return entry&&entry.id_setting &&(entry.id_setting === value) 
-  //   });
-  //   // alert("result = " + result[0].value_setting)
-  //   return result[0].value_setting
-  // }
-  
   const handleChange=event => {
-    
+  alert('masuk')    
     //    event.persist();
-
-    const errors=validate(rowSelect, schema);
-
+// if (event != undefined) {
+  const errors=validate(rowSelect, schema);
     setFormState(formState => ({
       ...rowSelect,
       isValid: errors? false:true,
       errors: errors||{}
     }));
+      setRowSelect({
+        ...rowSelect,
+        [event.target.name]: event.target.value
+      }); 
+// }
+
     
-    setRowSelect({
-      ...rowSelect,
-      [event.target.name]: event.target.value
-    });
+    
+ 
     // let nama = event.target.name.replace("id","nama")
     // if (event.target.name == "id_setting") {
     //   setRowSelect({
@@ -132,23 +125,6 @@ const hasError=field => {
     //   });
     //   // console.log("Ket Setting =", Setting)
     // }
-  }
-
-  const handling =()=>{
-    {
-      var tmp = [];
-      // alert(tmp) 
-      // alert( localStorage.getItem("Periode Sensus") - 5 )
-      var periode_sensus = localStorage.getItem("Periode Sensus");
-      for (var option = periode_sensus; option >= periode_sensus - 5; option--)
-       {tmp.push({"option" : option});}
-      console.log('temp =',tmp)
-      return tmp.map(option => (
-          <option value={option.option}>
-            {option.option}
-          </option>
-                   
-           ))}
   }
 
   return (
@@ -161,18 +137,10 @@ const hasError=field => {
         autoComplete="off"
         noValidate
       >
-               <TextField
-                fullWidth
-                label="Periode Sensus"
-                margin="dense"
-                name="Periode_Sensus"
-                onChange={handleChange}
-                select
-                variant="outlined"
-                value={rowSelect.Periode_Sensus}
-              >
-                {handling()}
-              </TextField>
+         <LapPeriode
+              onChange={handleChange}
+              rowSelect={rowSelect}
+            />
      
          {!formState.isValid}
           <Button
@@ -189,10 +157,10 @@ const hasError=field => {
   );
 };
 
-PeriodeSensus.propTypes={
+PencarianLaporan.propTypes={
   className: PropTypes.string,
   onChange: PropTypes.func,
   style: PropTypes.object
 };
 
-export default PeriodeSensus;
+export default PencarianLaporan;

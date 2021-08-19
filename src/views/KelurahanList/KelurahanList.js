@@ -103,10 +103,7 @@ const KelurahanList=props => {
         const data=resJson;
         setKelurahans(data.data);
         setFilteredItems(data.data);
-<<<<<<< HEAD
-=======
         getKel()
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         //return false;
       })
       .catch(e => {
@@ -117,10 +114,6 @@ const KelurahanList=props => {
         //this.setState({ ...this.state, isFetching: false });
       });
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 
   const csvData=() => {
@@ -312,14 +305,9 @@ const KelurahanList=props => {
 
   const handleDelete=(e, rowKelurahansSelect)=>{
     deleteKel(rowKelurahansSelect.id_kelurahan)
-<<<<<<< HEAD
-    getKel()
-  }
-=======
     
   }
 
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   /**/
   //openPopup
   const handleClose=() => {
