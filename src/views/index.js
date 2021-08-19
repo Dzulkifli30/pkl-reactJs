@@ -13,6 +13,8 @@ export {default as LaporanPerKecamatan} from './LaporanPerKecamatan'
 export {default as LaporanKecamatan} from './LaporanKecamatan'
 export {default as LaporanKelurahan} from './LaporanKelurahan'
 export {default as LaporanPerKelurahan} from './LaporanPerKelurahan'
+export {default as LaporanSensusPerKelurahan} from './LaporanSensusPerKelurahan'
+export {default as LaporanSensusPerKecamatan} from './LaporanSensusPerKecamatan'
 export {default as KecamatanList} from './KecamatanList'
 export {default as KabupatenList} from './KabupatenList'
 export { default as LaporanProvID } from './LaporanProvID';

@@ -48,6 +48,7 @@ export const urlLaporanPerProv=ulrport+'provinsi/laporanPerProv'
  export const urlShowKecs=ulrport+'kecamatan/showKecamatans'
  export const urlDeleteKec=ulrport+'kecamatan/deleteKec'
  export const urlLaporanKec=ulrport+'kecamatan/laporanKec'
+ export const urlSensusPerKec=ulrport+'kecamatan/SensusKec'
  export const urlShowPerKec=ulrport+'kecamatan/show-per-kec'
 
 
