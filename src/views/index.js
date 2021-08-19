@@ -22,7 +22,14 @@ export {default as RwList} from './RwList'
 export {default as VuserList} from './VuserList'
 export {default as SettingList} from './SettingList'
 export {default as KelompokDataList} from './KelompokDataList'
+<<<<<<< HEAD
 export {default as TargetKkList} from './TargetKkList'
+=======
+export {default as LaporanSensusIDList} from './LaporanSensusID'
+export {default as TargetKkList} from './TargetKkList'
+export {default as LaporanSensusPerKab} from './LaporanSensusPerKab'
+export {default as LaporanSensusPerProv} from './LaporanSensusPerProv'
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 // export {default as RtList} from './RtList'
 // export {default as RwList} from './RwList'
 

@@ -189,7 +189,7 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+     
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -218,7 +218,6 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -246,7 +245,6 @@ async function showKab(id_provinsi) {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setProvinsi([]);
         //this.setState({ ...this.state, isFetching: false });
       });

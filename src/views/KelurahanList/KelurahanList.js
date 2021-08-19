@@ -16,6 +16,7 @@ import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
 import { async } from 'validate.js';
+import { get } from 'underscore';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -102,6 +103,10 @@ const KelurahanList=props => {
         const data=resJson;
         setKelurahans(data.data);
         setFilteredItems(data.data);
+<<<<<<< HEAD
+=======
+        getKel()
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         //return false;
       })
       .catch(e => {
@@ -112,6 +117,10 @@ const KelurahanList=props => {
         //this.setState({ ...this.state, isFetching: false });
       });
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 
   const csvData=() => {
@@ -303,8 +312,14 @@ const KelurahanList=props => {
 
   const handleDelete=(e, rowKelurahansSelect)=>{
     deleteKel(rowKelurahansSelect.id_kelurahan)
+<<<<<<< HEAD
     getKel()
   }
+=======
+    
+  }
+
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   /**/
   //openPopup
   const handleClose=() => {

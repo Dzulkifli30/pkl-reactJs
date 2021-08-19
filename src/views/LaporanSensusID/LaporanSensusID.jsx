@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 //import '../../assets/vendor/dist/css/datatable1.css';
 //import { ImportScript } from '../components';
@@ -5,36 +6,19 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { ProvinsisToolbar, ProvinsisTable, ProvinsiAddModi, ViewMap } from './components';
+import {SensusIDSearchModi,LaporanSensusIDTable} from '../LaporanSensusID/components';
 import { ModalComponent } from 'components';
-import mockData from './dataPropinsi';
+//import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import mockDataSettingProvinsi from './dataSettingprovinsi';
-import { urlProv,urlDeleteProv } from 'kumpulanUrl';
-
-
+import { urlShowLaporanSensusID, urlShowTargetKk } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
-import { async } from 'validate.js';
-import { urlDeleteProv } from '../../kumpulanUrl';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
 //import Fade from "@material-ui/core/Fade";
-
-const getMockData=() =>{
-  mockData.map(mock => {
-    return(
-      <h4>{mock}</h4>
-
-    )
-  })
-  console.log(mockData)
-
-  
-}
 
 const useStyles=makeStyles(theme => ({
   root: {
@@ -49,91 +33,42 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const ProvinsiList=props => {
-  //  componentWillMount() {
-  //    alert("fdfdf")
-  //  }
-  const { history }=props;
-  if (!localStorage.getItem("NamaLengkap")) {
-    history.push('/beranda');
+const LaporanSensusID=props => {
 
-  }
 
-  async function getProv() {
-    const userId=localStorage.getItem('user_id');
-    setFilteredItems(provinsis);
-    setOpen(false);
-
+  async function showTargetKK(rowsensusIDSelect) {
+    const userId=localStorage.getItem('Periode Sensus');
     /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let urlgetProv=urlProv
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlgetProv, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setProvinsis(data.data);
-        setFilteredItems(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setProvinsis([]);
-        setFilteredItems([]);
-        setOpen(false);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-
-    setOpen(false);
-  }
-
-
-
-<<<<<<< HEAD
-  const deleteProv = async (id_provinsi) => {
-=======
-  const deleteProv = async (id_provinsi) => {  /* */
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
     const requestOptions={
       method: 'POST',
       mode: "cors",
+        body: JSON.stringify({
+          "Periode_Sensus": rowsensusIDSelect.Periode_Sensus,
+          // "id_sensusID": rowsensusIDSelect.id_sensusID,
+        }),
+      
       headers: { 'Content-Type': 'application/json' },
-      body:JSON.stringify({
-        id_provinsi: id_provinsi
-      })
     };
 
-    let url=urlDeleteProv
+    let url=urlShowLaporanSensusID
     // eslint-disable-next-line no-useless-concat
+    // alert()
     const response=await fetch(url, requestOptions)
       .then(res => {
+
         return res.json();
+        
       })
 
       .then(resJson => {
         const data=resJson;
-        setProvinsis(data.data);
-        setFilteredItems(data.data);
-<<<<<<< HEAD
-=======
-        getProv()
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
+        setSensusID(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setProvinsis([]);
-        setFilteredItems([]);
+        setSensusID([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
@@ -157,23 +92,14 @@ const ProvinsiList=props => {
   }
 
 
-  
-
-  const deleteProvinsi=async (e, id) => {
-    const selectedProvinsis_string=selectedProvinsis.join("<batas></batas>");
-    let provinsis3=provinsis.filter(function (entry) {
-      return entry&&entry.id&&selectedProvinsis_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  const deletesensusID=(e) => {
+    const selectedsensusID_string=selectedsensusID.join("<batas></batas>");
+    let sensusID3=sensusID.filter(function (entry) {
+      return entry&&entry.id&&selectedsensusID_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-
-    let url=urlDeleteProv
-    if (url === 200) {
-      // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
-    }
-
-    setFilteredItems(provinsis3)
-    setProvinsis(provinsis3)
-    setProvinsifind('')
+    setFilteredItems(sensusID3)
+    setSensusID(sensusID3)
+    setSensusIDfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
@@ -181,13 +107,13 @@ const ProvinsiList=props => {
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setProvinsisExport(flteredItems);
+    setSensusIDExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
       doc.setProperties({ title: SettingProvinsi[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#provinsisExport' })
+      doc.autoTable({ html: '#sensusIDExport' })
       var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
       doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
 
@@ -205,20 +131,25 @@ const ProvinsiList=props => {
       status='Inactive'
     return status;
   }
+  const comboBox=(e) =>{
+    if (e.targer.value.length>=3) {
+      
+    }
+  }
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setProvinsifind(e.target.value)
-      let provinsis4=provinsis.filter(function (entry) {
-        return entry&&entry.nama_provinsi&&
-          ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+      setSensusIDfind(e.target.value)
+      let sensusID4=sensusID.filter(function (entry) {
+        return entry&&entry.Nama_sensusID&&
+          ((entry.Nama_sensusID!==null? entry.Nama_sensusID:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(provinsis4)? provinsis4:[provinsis4]);
+      setFilteredItems(Array.isArray(sensusID4)? sensusID4:[sensusID4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(provinsis);
+      setFilteredItems(sensusID);
     }
-    setProvinsifind(e.target.value)
+    setSensusIDfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -269,23 +200,24 @@ const ProvinsiList=props => {
   }
 
 
-  const [provinsis, setProvinsis]=useState([]);
+  const [sensusID, setSensusID]=useState([]);
+  const [kab, setKab]=useState([]);
+  // const [provinsiId, setProvinsiId]=useState(getKab());
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowProvinsisSelect, setRowProvinsisSelect]=useState({});
+  const [rowsensusIDSelect, setRowsensusIDSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedProvinsis, setSelectedProvinsis]=useState([]);
-  const [provinsisExport, setProvinsisExport]=useState([]);
-  const [provinsifind, setProvinsifind]=useState([]);
+  const [selectedsensusID, setSelectedsensusID]=useState([]);
+  const [sensusIDExport, setSensusIDExport]=useState([]);
+  const [sensusIDfind, setSensusIDfind]=useState([]);
   const [add,setAdd]=React.useState([])
-  const SettingProvinsi=useState(mockDataSettingProvinsi);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
-
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getProv();
+    // getKab();
+    // console.log('prov',provinsiId)
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -295,8 +227,8 @@ const ProvinsiList=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedProvinsis({
-      ...setSelectedProvinsis,
+    setSelectedsensusID({
+      ...setSelectedsensusID,
       [event.target.name]: event.target.value[0]
     });
 
@@ -304,8 +236,8 @@ const ProvinsiList=props => {
 
 
   const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowProvinsisSelect({
-      ...selectedProvinsis,
+    setRowsensusIDSelect({
+      ...selectedsensusID,
       [field1]: value1,
 
       [field2]: value2,
@@ -321,24 +253,47 @@ const ProvinsiList=props => {
 
   };
 
+  // async function showKab(id_provinsi) {
+  //   /* */
+  //   const requestOptions={
+  //     method: 'POST',
+  //     //mode: "cors",
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({
+  //       "id_provinsi": id_provinsi,
+  //     })
+  //   };
 
-  const handleOpen=(e, rowProvinsi, MessageButton) => {
+  //   let urlShow=urlShowKab
+  //   // eslint-disable-next-line no-useless-concat
+  //   const response=await fetch(urlShow, requestOptions)
+  //     .then(res => {
+  //       return res.json();
+  //     })
+
+  //     .then(resJson => {
+  //       const data=resJson;
+  //       console.log('sensusID =',data.data)
+  //       setSensusID(data.data);
+  //       //return false;
+  //     })
+  //     .catch(e => {
+  //       //console.log(e);
+  //       alert("Nextwork Error");
+  //       setSensusID([]);
+  //       //this.setState({ ...this.state, isFetching: false });
+  //     });
+  // } 
+
+
+  const handleOpen=(e, rowsensusID, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowProvinsisSelect(rowProvinsi);
+    setRowsensusIDSelect(rowsensusID);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
 
-  };
-
-  const handleDelete=(e,rowProvinsisSelect) => {
-    deleteProv(rowProvinsisSelect.id_provinsi)
-<<<<<<< HEAD
-    getProv()
-=======
-    
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   };
 
   /* */
@@ -346,7 +301,7 @@ const ProvinsiList=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowProvinsisSelect(rowProvinsi);
+    //setRowsensusIDSelect(rowsensusID);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -362,58 +317,41 @@ const ProvinsiList=props => {
   };
 
 
-  function popupComponen(componenPopup) {
-    return (
-      <ModalComponent getDataBackend={getProv}
-        handleChange={handleChange} setData={setData}
-        open={open} setRowSelect={setRowProvinsisSelect} rowSelect={rowProvinsisSelect}
-        title={title} datas={filteredItems} handleClose={handleClose} 
-        ComponenAddModi={componenPopup}>
-         </ModalComponent>
-
-    )
-  }
-
-
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Provinsi</h5>
+      <h5 style={{ color: 'black' }} className="font-poppins">Laporan Target Sensus di Indonesia</h5>
       {/*}
-      <ProvinsisToolbar
+      <sensusIDToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={provinsifind} deleteProvinsi={deleteProvinsi}
+        deleteProvinsi={deleteProvinsi}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        provinsis={provinsis}
+        sensusID={sensusID}
+
       />
   {*/}
       <div className={classes.content}>
-        <ProvinsisTable
+        <LaporanSensusIDTable
           handleOpenViewMap={handleOpenViewMap}
-          getMockData={getMockData}
-          provinsis = {provinsis}
-          handleDelete={handleDelete}
+          rowSelect={rowsensusIDSelect}
+          sensusID={sensusID}
+          getDataBackend={showTargetKK}
+        // textfind={sensusIDfind} 
           onChange={onChangefind}
-          deleteProvinsi={deleteProvinsi}
-          SettingProvinsi={SettingProvinsi}
-          provinsisExport={provinsisExport}
-          // deleteProv={deleteProv}
-          // deleteProvinsi={deleteProvinsi}
-          provinsifind={provinsifind}
+          // showKab={showKab}
+          sensusIDExport={sensusIDExport}
+          sensusIDfind={sensusIDfind}
           filteredItems={filteredItems}
-          selectedProvinsis={selectedProvinsis} 
-          provinsifind={provinsifind}
+          setRowSelect={setRowsensusIDSelect} rowSelect={rowsensusIDSelect}
+          selectedsensusID={selectedsensusID} 
+          sensusIDfind={sensusIDfind}
           handleOpen={handleOpen}
-          setSelectedProvinsis={setSelectedProvinsis}
+          setSelectedsensusID={setSelectedsensusID}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
 
         />
-
-
-      {popupComponen(ProvinsiAddModi)}
-
       </div>
 
     </div>
@@ -421,4 +359,4 @@ const ProvinsiList=props => {
   );
 };
 
-export default ProvinsiList;
+export default LaporanSensusID;

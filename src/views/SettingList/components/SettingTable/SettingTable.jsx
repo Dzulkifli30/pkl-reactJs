@@ -191,6 +191,7 @@ const SettingTable=props => {
     },
   };
 
+<<<<<<< HEAD
   const deleteProv = async (e,selectedVuser) => {
     let url = urlDeleteProv
     let response = axios.delete(url + `/${selectedVuser.id_Vuser}`)
@@ -209,6 +210,10 @@ const SettingTable=props => {
       sortable: true,
     },
     {
+=======
+  const columns=[
+    {
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       name: 'Nama',
       selector: 'nama',
       sortable: true,
@@ -218,7 +223,10 @@ const SettingTable=props => {
       selector: 'value_setting',
       sortable: true,
     },
+<<<<<<< HEAD
  
+=======
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
     {
       name: 'CreatedBy',
       selector: 'CreatedBy',
@@ -241,7 +249,10 @@ const SettingTable=props => {
       sortable: true,
     },
     {
+<<<<<<< HEAD
       name: 'Edit',
+=======
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       button: true,
       cell: row =>
         <Button color="primary"
@@ -249,11 +260,18 @@ const SettingTable=props => {
       ,
     },
     {
+<<<<<<< HEAD
       name: 'Delete',
       button: true,
       cell: row =>
         <Button color="primary"
           onClick={(e) => deleteProv(e)} ><DeleteIcon /></Button>
+=======
+      button: true,
+      cell: row =>
+        <Button color="primary"
+          onClick={(e) => handleDelete(e,row)} ><DeleteIcon /></Button>
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       ,
     },
   ];

@@ -10,7 +10,11 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+<<<<<<< HEAD
 import { urlRt,urlShowRt,urlDeleteRt } from '../../kumpulanUrl'
+=======
+import { urlDeleteRt, urlRt,urlShowRt } from '../../kumpulanUrl'
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -71,8 +75,6 @@ const RtList=props => {
     setOpen(false);
   }
 
-
-
   const deleteRt = async (id_rt) => {  /* */
     const requestOptions={
       method: 'POST',
@@ -90,10 +92,34 @@ const RtList=props => {
         return res.json();
       })
 
+<<<<<<< HEAD
+  const deleteRt = async (id_rt) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_rt: id_rt
+      })
+    };
+
+    let url=urlDeleteRt
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+=======
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       .then(resJson => {
         const data=resJson;
         setrt(data.data);
         setFilteredItems(data.data);
+<<<<<<< HEAD
+=======
+        getRt()
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         //return false;
       })
       .catch(e => {
@@ -229,7 +255,7 @@ const RtList=props => {
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getRt();
+    getRt()
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -278,7 +304,11 @@ const RtList=props => {
 
   const handleDelete=(e,rowrtSelect) => {
     deleteRt(rowrtSelect.id_rt)
+<<<<<<< HEAD
     getRt()
+=======
+    
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   };
 
   /* */

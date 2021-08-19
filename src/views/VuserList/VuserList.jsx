@@ -9,7 +9,11 @@ import { VuserToolbar, VuserTable, VuserAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+<<<<<<< HEAD
 import { urlKab,urlGetVuser,urlDeleteUser } from '../../kumpulanUrl'
+=======
+import { urlKab,urlGetVuser, urlEditVuser, urlDeleteUser } from '../../kumpulanUrl'
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';

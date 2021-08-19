@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 //import styled from 'styled-components';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { SearchInput } from 'components';
-import { urlDeleteKel } from 'kumpulanUrl';
+import { PeriodeSensus } from 'components';
+
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
+import { urlProv,urlShowKab } from '../../../../kumpulanUrl';
 import DataTable from 'react-data-table-component';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 
 import {
+  rowSelect,
   Card,
   CardActions,
   CardContent,
   Avatar,
+  TextField,
   Checkbox,
   Table,
   TableBody,
@@ -33,8 +35,6 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
-import { async } from 'validate.js';
-import { array } from 'yargs';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -52,51 +52,109 @@ const useStyles=makeStyles(theme => ({
   avatar: {
     marginRight: theme.spacing(2)
   },
+  fontFamily:{
+    fontFamily: 'font-poppins'
+  },
   actions: {
     justifyContent: 'flex-end'
   }, importButton: {
     marginRight: theme.spacing(1)
   },
 }));
-const KelurahansTable =props => {
+const LaporanSensusPerKab=props => {
   const {
-    handleOpenViewMap,
-<<<<<<< HEAD
-    handleDelete,
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
-    className,
-    handleDelete,
-    textfind,
-    order, orderBy, SettingKelurahan,
-    provinsisExport, filteredItems, handleOpen, selectedKelurahans,
-    setSelectedKelurahans,
+    kab,
+    setKab,
+    className,handleDelete,
+    textfind,kabupatenfind,
+    order, orderBy,
+    provinsisExport, filteredItems, handleOpen, selectedkabupaten,
+    setselectedkabupaten,
     Export,
     convertArrayOfObjectsToCSV,
-    downloadCSV
+    downloadCSV,
+    rowSelect,
+    getDataBackend,
+    setRowSelect,
+    // setFormState,
+    onChangeFind
 
     , ...rest }=props;
 
+  
   const [filterText, setFilterText]=React.useState('');
   const [resetPaginationToggle, setResetPaginationToggle]=React.useState(false);
   const classes=useStyles();
 
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
+  const[laporKab,setLaporKab]=useState([])
+  const [prov, setProv]=useState([]);
+  const [formState, setFormState]=useState({
+    isValid: false,
+    values: {},
+    touched: {},
+    errors: {}
+  });
 
-const deleteKel = async (e,selectedKelurahans) => {
-  let url = urlDeleteKel;
-  let response = axios.delete(url + `/${selectedKelurahans.id_kelurahan}`)
-  console.log(selectedKelurahans.id_kelurahan)
 
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
+
+
+  const handleSearch=(event) => {
+    const userId=localStorage.getItem('user_id');
+    let url=urlAddKec;
+    if (rowSelect.id_kecamatan===undefined) {
+      url=urlShowKab;
+    }
+
+    //console.log(body);
+
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "KodeDepdagri": rowSelect.KodeDepdagri,
+        "id_kecamatan": rowSelect.id_kecamatan,
+        "id_kabupaten": rowSelect.id_kabupaten,
+        "nama_kabupaten": rowSelect.nama_kabupaten,
+        "IsActive": rowSelect.IsActive,
+      })
+    };
+
+
+    ///let urlGetData=urlPostLogin
+    alert(url);
+    const response=fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })/**/
+
+      .then(res => {
+        //console.log(res)
+        //console.log(res.data)
+        alert(res.message)
+
+        handleClose();
+        getDataBackend();
+        //alert("Sukses")
+        const data=res;
+      })
+      .catch((e) => {
+
+        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+
+        return false;
+
+
+      });
+
+
   }
-  
 
 
-}
+
+
 
   const customStyles={
     header: {
@@ -200,7 +258,7 @@ const deleteKel = async (e,selectedKelurahans) => {
 
         }
 
-
+        
 
 
       },
@@ -208,102 +266,36 @@ const deleteKel = async (e,selectedKelurahans) => {
     },
   };
 
-
-
   const columns=[
+    // {
+    //   name: 'Kode Depdagri',
+    //   selector: 'KodeDepdagri',
+    //   sortable: true,
+    // },
     {
-      name: 'Kode Depdagri',
-      selector: 'KodeDepdagri',
+      name: 'Kabupaten',
+      selector: 'Nama_Kabupaten',
+      font:'Poppins',
+      sortable: true,
+    }, 
+    {
+      name: 'Jumlah Kecamatan',
+      selector: 'Jumlah_Kecamatan',
       sortable: true,
     },
     {
-      name:'Nama Provinsi',
-      selector:'nama_provinsi',
-      sortable:true,
+      name: 'Jumlah Kelurahan',
+      selector: 'Jumlah_Kelurahan',
+      sortable: true,
+    },
+    {
+      name: 'Jumlah Rw',
+      selector: 'Jumlah_RW',
+      sortable: true,
     },    {
-      name:'Nama Kabupaten',
-      selector:'nama_kabupaten',
-      sortable:true,
-    },
-    {
-      name:'Nama Kecamatan',
-      selector:'nama_kecamatan',
-      sortable:true,
-    },
-    {
-      name: 'Nama Kelurahan',
-      selector: 'nama_kelurahan',
-      sortable: true, 
-    },
-    {
-      name: 'Keterangan',
-      selector: 'IsActive',
+      name: 'Jumlah Rt',
+      selector: 'Jumlah_RT',
       sortable: true,
-      cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
-    },
-    {
-<<<<<<< HEAD
-      name: 'Edit Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="edit"
-          onClick={(e) => handleOpen(e, row, "Ubah Kelurahan")}  ><EditIcon /></Button>
-      ,
-    },
-    {
-      name: 'Hapus Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="delete"
-          onClick={(e) => handleDelete(e, row)}  ><p>Hapus</p></Button>
-      ,
-    },
-    {
-      name: 'Created By',
-=======
-      name: 'CreatedBy',
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
-      selector: 'CreatedBy',
-      sortable: true,
-    },
-    {
-      name: 'Created',
-      selector: 'Created',
-      sortable: true,
-    },
-    {
-      name: 'LastModified',
-      selector: 'LastModified',
-<<<<<<< HEAD
-      sortable: true,
-    },
-    {
-      name: 'LastModifiedBy',
-      selector: 'LastModifiedBy',
-=======
->>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
-      sortable: true,
-    },
-    {
-      name: 'LastModifiedBy',
-      selector: 'LastModifiedBy',
-      sortable: true,
-    },
-    {
-      name: 'Edit Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="edit"
-          onClick={(e) => handleOpen(e, row, "Ubah Kelurahan")}  ><EditIcon /></Button>
-      ,
-    },
-    {
-      name: 'Hapus Kelurahan',
-      button: true,
-      cell: row =>
-        <Button color="primary" id="delete"
-          onClick={(e) => handleDelete(e, row, "Hapus Kelurahan")}  ><DeleteIcon /></Button>
-      ,
     },
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
@@ -314,25 +306,15 @@ const deleteKel = async (e,selectedKelurahans) => {
         setFilterText('');
       }
     };
-    return <div class="form-group">
-      <div class="col-md-6">
-        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
-          <img src="/img/xls.jpeg" />
-        </Button>
-        <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Kelurahan")}>
-        <AddIcon />
-        </Button>
-
+  return <div class="form-group">
+       <div className="col-md-6 my-5">
+          <PeriodeSensus
+          getDataBackend={getDataBackend}
+          rowSelect={rowSelect}
+          setRowSelect={setRowSelect}>
+          </PeriodeSensus>
       </div>
-
-      <div class="col-md-6">
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search Kelurahan"
-          textfind={textfind}
-        />
-      </div>
-    </div>
+  </div>
 
 
 
@@ -352,36 +334,36 @@ const deleteKel = async (e,selectedKelurahans) => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedKelurahans_var;
+    let selectedkabupaten_var;
 
     if (event.target.checked) {
-      selectedKelurahans_var=provinsis.map(provinsi => id);
+      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedKelurahans_var=[];
+      selectedkabupaten_var=[];
     }
 
-    setSelectedKelurahans(selectedKelurahans_var);
+    setselectedkabupaten(selectedkabupaten_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedKelurahans.indexOf(id);
-    let newSelectedKelurahans=[];
+    const selectedIndex=selectedkabupaten.indexOf(id);
+    let newselectedkabupaten=[];
 
     if (selectedIndex===-1) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans, id);
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
     } else if (selectedIndex===0) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans.slice(1));
-    } else if (selectedIndex===selectedKelurahans.length-1) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans.slice(0, -1));
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
+    } else if (selectedIndex===selectedkabupaten.length-1) {
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(
-        selectedKelurahans.slice(0, selectedIndex),
-        selectedKelurahans.slice(selectedIndex+1)
+      newselectedkabupaten=newselectedkabupaten.concat(
+        selectedkabupaten.slice(0, selectedIndex),
+        selectedkabupaten.slice(selectedIndex+1)
       );
     }
 
-    setSelectedKelurahans(newSelectedKelurahans);
+    setselectedkabupaten(newselectedkabupaten);
     //console.log(selectedUsers);
   };
 
@@ -405,11 +387,12 @@ const deleteKel = async (e,selectedKelurahans) => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Kelurahan List"
+            font="Poppins"
+              title={'Search Laporan Target Periode Sensus'}
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_kelurahan"
+              keyField="nama_kabupaten"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -429,9 +412,9 @@ const deleteKel = async (e,selectedKelurahans) => {
   );
 };
 
-KelurahansTable.propTypes={
+LaporanSensusPerKab.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KelurahansTable;
+export default LaporanSensusPerKab;

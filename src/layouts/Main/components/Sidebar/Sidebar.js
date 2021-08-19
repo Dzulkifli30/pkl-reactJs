@@ -117,41 +117,59 @@ const Sidebar=props => {
       href:'/#',
       items : [
         {
-          title: 'Jumlah Wilayah Provinsi di Indonesia',
+          title: 'Laporan Wilayah Provinsi di Indonesia',
           href: '/laporan/provinsiID'
         },
         {
-          title: 'Jumlah Wilayah di Provinsi',
+          title: 'Laporan Wilayah di Provinsi',
           href: '/laporan/perProvTable'
         },
         {
-          title:'Laporan Kabupaten',
+          title:'Laporan Wilayah di Kabupaten',
           href:'/laporan-kabupaten',
         
         },
         {
-          title:'Laporan Per Kabupaten',
+          title:'Laporan Wilayah Per Kabupaten',
           href:'laporan-per-kabupaten',
         },
         {
-          title:'Laporan Kecamatan',
+          title:'Laporan Wilayah di Kecamatan',
           href:'/laporan-kecamatan'
         },        
         {
-          title:'Laporan Per Kecamatan',
+          title:'Laporan Wilayah Per Kecamatan',
           href:'/laporan-per-kecamatan'
         },
         {
-          title:'Laporan Kelurahan',
+          title:'Laporan Wilayah di Kelurahan',
           href:'/laporan-kelurahan'
         },
         {
-          title:'Laporan PerKelurahan',
+          title:'Laporan Wilayah Per Kelurahan',
           href:'/laporan-perkelurahan'
-        }
+        },
       ]
     },
 
+    {
+      title: 'Laporan Target Sensus',
+      href:'/#',
+      items : [
+        {
+          title:'Laporan Target Sensus di Indonesia',
+          href:'/laporan-sensus-indonesia'
+        },
+        {
+          title:'Laporan Target Sensus Per Provinsi',
+          href:'/laporan-sensus-perprov'
+        },
+        {
+          title:'Laporan Target Sensus Per Kabupaten',
+          href:'/laporan-sensus-perkab'
+        }
+      ]
+    },
     {
       title: 'Setting Aplikasi',
       href: '/setting'
@@ -163,11 +181,27 @@ const Sidebar=props => {
 
     },
     {
+      title: 'Setting Aplikasi',
+      href: '/setting'
+
+    },
+    {
+<<<<<<< HEAD
+      title: 'Kelompok Data',
+      href: '/kelompok-data'
+
+    },
+    {
+=======
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       title: 'Target KK',
       href: '/target-kk'
 
     },
+<<<<<<< HEAD
     
+=======
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   ];
   return (
 

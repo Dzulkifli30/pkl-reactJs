@@ -229,6 +229,26 @@ const RwTable=props => {
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
+      name: 'CreatedBy',
+      selector: 'CreatedBy',
+      sortable: true,
+    },
+    {
+      name: 'Created',
+      selector: 'Created',
+      sortable: true,
+    },
+    {
+      name: 'LastModified',
+      selector: 'LastModified',
+      sortable: true,
+    },
+    {
+      name: 'LastModifiedBy',
+      selector: 'LastModifiedBy',
+      sortable: true,
+    },
+    {
       name: 'Edit Rw',
       button: true,
       cell: row =>

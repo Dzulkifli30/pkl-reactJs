@@ -112,6 +112,7 @@ const SettingAddModi=props => {
       });
   }
 
+<<<<<<< HEAD
   async function showKelData(Id_kelompok_data) {
     /* */
     const requestOptions={
@@ -145,6 +146,8 @@ const SettingAddModi=props => {
   }
 
 
+=======
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   ///  const mapRef=createRef();
 
   useEffect(() => {
@@ -270,6 +273,7 @@ const SettingAddModi=props => {
   const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
   }
+<<<<<<< HEAD
 const handling =()=>{
   {
     var tmp = []; 
@@ -288,6 +292,8 @@ const handling =()=>{
     
     
 }
+=======
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 
   return (
@@ -302,7 +308,11 @@ const handling =()=>{
       >
         <CardHeader
           subheader=""
+<<<<<<< HEAD
         title={rowSelect.nama == null ? "Tambah Setting" : "Edit Setting"}
+=======
+        title="Setting"
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
         />
         <Divider />
         <CardContent>
@@ -351,6 +361,10 @@ const handling =()=>{
                 variant="outlined"
               />
             </Grid>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
             <Grid
               item
               md={6}

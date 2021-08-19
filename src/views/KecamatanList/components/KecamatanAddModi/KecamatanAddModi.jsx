@@ -122,7 +122,6 @@ const KecamatanAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -150,7 +149,6 @@ const KecamatanAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -178,7 +176,6 @@ const KecamatanAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });

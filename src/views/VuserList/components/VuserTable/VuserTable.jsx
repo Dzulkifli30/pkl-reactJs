@@ -191,17 +191,6 @@ const VuserTable=props => {
     },
   };
 
-  const deleteProv = async (e,selectedVuser) => {
-    let url = urlDeleteProv
-    let response = axios.delete(url + `/${selectedVuser.id_Vuser}`)
-    console.log(selectedVuser.id_Vuser)
-
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-    }
-
   const columns=[
     {
       name: 'Vuser ID',
@@ -216,6 +205,16 @@ const VuserTable=props => {
     {
       name: 'Nama Lengkap',
       selector: 'NamaLengkap',
+      sortable: true,
+    },
+    {
+      name: 'Created At',
+      selector: 'CreatedDate',
+      sortable: true,
+    },
+    {
+      name: 'Last Modified',
+      selector: 'LastModified',
       sortable: true,
     },
     {
@@ -236,18 +235,12 @@ const VuserTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
+<<<<<<< HEAD
           onClick={(e) => handleDelete(e,row)} ><DeleteIcon /></Button>
+=======
+          onClick={(e) => handleDelete(e, row, "Delete Vuser")} ><DeleteIcon /></Button>
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       ,
-    },
-    {
-      name: 'Dibuat pada Tanggal',
-      selector: 'CreatedDate',
-      sortable: true,
-    },
-    {
-      name: 'Terakhir Di Edit',
-      selector: 'LastModified',
-      sortable: true,
     },
   ];
   // const filteredItems=Vuser.filter(item => item.nama_Vuser&&item.nama_Vuser.toLowerCase().includes(filterText.toLowerCase()));

@@ -9,7 +9,11 @@ import { VuserToolbar, SettingTable, SettingAddModi, ViewMap } from './component
 import { ModalComponent } from 'components';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+<<<<<<< HEAD
 import { urlKab,urlGetVuser,urlGetSetting } from '../../kumpulanUrl'
+=======
+import { urlKab,urlGetVuser,urlGetSetting, urlDeleteSetting } from '../../kumpulanUrl'
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
@@ -92,6 +96,7 @@ const VuserList=props => {
     setOpen(false);
   }
 
+<<<<<<< HEAD
 
 
   const deleteProv = async (id) => {
@@ -103,6 +108,41 @@ const VuserList=props => {
         alert("error")
       }
     }
+=======
+  async function deleteSetting(id_setting) {
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id_setting: id_setting
+      })
+    };
+
+    let url=urlDeleteSetting
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setVuser(data.data);
+        setFilteredItems(data.data);
+        getSetting()
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setVuser([]);
+        setFilteredItems([]);
+        setOpen(false);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   }
 
   const csvData=() => {
@@ -299,10 +339,16 @@ const VuserList=props => {
 
   };
 
+<<<<<<< HEAD
   const handleDelete=(e,rowVuser, MessageButton) => {
     setTitle(MessageButton);
     deleteProv()
     setRowVuserSelect(rowVuser);
+=======
+  const handleDelete=(e,rowVuserSelect) => {
+    deleteSetting(rowVuserSelect.id_setting)
+    
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   };
 
   /* */

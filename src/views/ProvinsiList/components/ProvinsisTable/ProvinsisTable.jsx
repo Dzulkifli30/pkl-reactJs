@@ -191,17 +191,6 @@ const ProvinsisTable=props => {
     },
   };
 
-  const deleteProv = async (e,selectedProvinsis) => {
-    let url = urlDeleteProv
-    let response = axios.delete(url + `/${selectedProvinsis.id_provinsi}`)
-    console.log(selectedProvinsis.id_provinsi)
-
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-    }
-
   const columns=[
     {
       name: 'Provinsi ID',
@@ -225,6 +214,26 @@ const ProvinsisTable=props => {
       cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
     {
+      name: 'CreatedBy',
+      selector: 'CreatedBy',
+      sortable: true,
+    },
+    {
+      name: 'Created',
+      selector: 'Created',
+      sortable: true,
+    },
+    {
+      name: 'LastModified',
+      selector: 'LastModified',
+      sortable: true,
+    },
+    {
+      name: 'LastModifiedBy',
+      selector: 'LastModifiedBy',
+      sortable: true,
+    },
+    {
       name: 'Edit Provinsi',
       button: true,
       cell: row =>
@@ -237,7 +246,11 @@ const ProvinsisTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
+<<<<<<< HEAD
           onClick={(e) => handleDelete(e, row)} ><DeleteIcon /></Button>
+=======
+          onClick={(e) => handleDelete(e, row, "Hapus Provinsi")} ><DeleteIcon /></Button>
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
       ,
     },
     {

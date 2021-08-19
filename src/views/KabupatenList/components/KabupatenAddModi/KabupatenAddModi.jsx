@@ -128,7 +128,6 @@ const KabupatenAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -173,7 +172,11 @@ const KabupatenAddModi=props => {
     getDataBackend();
   }
 
+<<<<<<< HEAD
   const handleSave=(event) => {
+=======
+  const handleSave=() => {
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
     const userName=localStorage.getItem('username');
     let url=urlAddKab;
     let varJson = {
@@ -194,9 +197,6 @@ const KabupatenAddModi=props => {
 
     //console.log(body);
 
-
-
-
     const requestOptions={
       method: 'POST',
       mode: "cors",
@@ -204,9 +204,14 @@ const KabupatenAddModi=props => {
       body: JSON.stringify(
         varJson
       )
+<<<<<<< HEAD
     };
 
 
+=======
+    }
+  
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
     ///let urlGetData=urlPostLogin
     alert(url);
     const response=fetch(url, requestOptions)
@@ -232,10 +237,9 @@ const KabupatenAddModi=props => {
 
 
       });
-  }
+    }
 
-
-
+    
 
   //  const position=[currentLocation.lat, currentLocation.lng]
   const hasError=field => {

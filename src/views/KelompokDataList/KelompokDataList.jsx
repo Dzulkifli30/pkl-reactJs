@@ -9,7 +9,11 @@ import { VuserToolbar, KelompokDataTable, KelompokDataAddModi, V, KelompokDataAd
 import { ModalComponent } from 'components';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+<<<<<<< HEAD
 import { urlKab,urlGetVuser,urlGetKelompokData } from '../../kumpulanUrl'
+=======
+import { urlKab,urlGetVuser,urlGetKelompokData, urlDeleteKelompokData } from '../../kumpulanUrl'
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
 
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
@@ -94,6 +98,7 @@ const KelompokDataList=props => {
 
 
 
+<<<<<<< HEAD
   const deleteProv = async (id) => {
     let url = urlDeleteProv;
     try {
@@ -103,6 +108,41 @@ const KelompokDataList=props => {
         alert("error")
       }
     }
+=======
+  async function deleteKelompokData(Id_kelompok_data) {
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        Id_kelompok_data: Id_kelompok_data
+      })
+    };
+
+    let url=urlDeleteKelompokData
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setVuser(data.data);
+        setFilteredItems(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setVuser([]);
+        setFilteredItems([]);
+        setOpen(false);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+
+    setOpen(false);
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   }
 
   const csvData=() => {
@@ -299,10 +339,16 @@ const KelompokDataList=props => {
 
   };
 
+<<<<<<< HEAD
   const handleDelete=(e,rowVuser, MessageButton) => {
     setTitle(MessageButton);
     deleteProv()
     setRowVuserSelect(rowVuser);
+=======
+  const handleDelete=(e,rowVuserSelect) => {
+    deleteKelompokData(rowVuserSelect.Id_kelompok_data)
+    getKelompokData()
+>>>>>>> d25e4bde1e22e854a6d49b10262aee6821568b6c
   };
 
   /* */
