@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { SearchInput,PeriodeSensus } from 'components';
 
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -63,8 +62,8 @@ const useStyles=makeStyles(theme => ({
 }));
 const LaporanSensusID=props => {
   const {
-    kab,
-    setKab,
+    sensusID,
+    setSensusID,
     className,handleDelete,
     textfind,kabupatenfind,
     order, orderBy,
@@ -237,14 +236,7 @@ const LaporanSensusID=props => {
       }
     };
   return <div class="form-group">
-      <div className="col-md-6 my-5">
-          <PeriodeSensus
-          className={classes.PeriodeSensus}
-          getDataBackend={getDataBackend}
-          rowSelect={rowSelect}
-          setRowSelect={setRowSelect}>
-          </PeriodeSensus>
-      </div>
+    
   </div>
 
 
@@ -319,10 +311,10 @@ const LaporanSensusID=props => {
           <div className={classes.inner}>
             <DataTable
             font="Poppins"
-              title={rowSelect.nama_setting == undefined ? "Search Laporan Target Periode Sensus " : "Search Laporan Target Periode Sensus " + rowSelect.nama_setting }
+              title={'Search Laporan Target Sensus'}
               customStyles={customStyles}
               columns={columns}
-              data={filteredItems}
+              data={sensusID}
               keyField="Periode_Sensus"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1

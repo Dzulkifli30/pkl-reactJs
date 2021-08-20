@@ -28,9 +28,11 @@ export const urlDeleteKelompokData=ulrport+'kelompok-data/deleteKelompokData'
 
 // targetKK
 export const urlShowTargetKk=ulrport+'target-kk/showTargetKk'
+export const urlShowTargetKkPerProv=ulrport+'target-kk/showTargetKkPerProv'
 export const urlAddTargetKk=ulrport+'target-kk/storeTargetKk'
 export const urlEditTargetKk=ulrport+'target-kk/updateTargetKk'
 export const urlGetTargetKk=ulrport+'target-kk/getTargetKk'
+export const urlDeleteTargetkk=ulrport+'target-kk/deleteTargetKk'
 
  //provinsi
 export const urlProv=ulrport+'provinsi/getProvinsi'
@@ -86,5 +88,7 @@ export const urlDeleteRt=ulrport +'rt/deleteRt'
 
 //LaporanSensus
 export const urlShowLaporanSensusID=ulrport +'laporan-sensus/indonesia'
+export const urlShowLaporanSensusPerProv=ulrport +'laporan-sensus/perprov'
+export const urlShowLaporanSensusPerKab=ulrport +'laporan-sensus/perkab'
 
 

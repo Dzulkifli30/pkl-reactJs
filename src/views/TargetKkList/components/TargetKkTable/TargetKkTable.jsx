@@ -191,17 +191,6 @@ const TargetKkTable=props => {
     },
   };
 
-  const deleteProv = async (e,selectedVuser) => {
-    let url = urlDeleteProv
-    let response = axios.delete(url + `/${selectedVuser.id_Vuser}`)
-    console.log(selectedVuser.id_Vuser)
-
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-    }
-
   const columns=[
     {
       name: 'Periode Sensus',
@@ -276,7 +265,7 @@ const TargetKkTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => deleteProv(e)} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e,row)} ><DeleteIcon /></Button>
       ,
     },
   ];

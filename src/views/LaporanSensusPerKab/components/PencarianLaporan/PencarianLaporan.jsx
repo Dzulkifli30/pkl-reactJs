@@ -1,7 +1,7 @@
 import React, { createRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { urlGetSetting, urlShowTargetKk } from '../../kumpulanUrl'
+import { urlGetSetting, urlShowKab, urlShowTargetKk, urlShowTargetKkPerProv } from '../../../../kumpulanUrl'
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import {
@@ -21,6 +21,7 @@ import axios from 'axios';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
+import { LapPeriode } from 'components';
 
 const useStyles=makeStyles(theme => ({
     root: {},
@@ -47,7 +48,7 @@ const useStyles=makeStyles(theme => ({
   }));
 
 
-const PeriodeSensus=props => {
+const PencarianLaporan=props => {
   const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest }=props;
   const classes=useStyles();
   const schema = {
@@ -56,8 +57,8 @@ const PeriodeSensus=props => {
     // },
   };
 
-  const[setting, setSetting]=([])
-
+  const [kab, setKab]=useState([])
+  const [prov, setProv]=useState([])
   const [formState, setFormState]=useState({
     isValid: false,
     values: {},
@@ -65,16 +66,70 @@ const PeriodeSensus=props => {
     errors: {}
   });
 
+  async function showTargetKkPerProv(Periode_Sensus) {
+    /* */
+    const requestOptions = {
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "Periode_Sensus": Periode_Sensus,
+      })
+    };
+
+    let urlShow = urlShowTargetKkPerProv
+    // eslint-disable-next-line no-useless-concat
+    const response = await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data = resJson;
+        setProv(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("err");
+        setProv([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function showKab(id_provinsi) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_provinsi": id_provinsi,
+      })
+    };
+
+    let urlShow=urlShowKab
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        console.log('kabupaten =',data.data)
+        setKab(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        setKab([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
 
   useEffect(() => {
-    // rowSelect.Periode_Sensus = localStorage.getItem("Periode Sensus")
-    /*
-    if (rowSelect.IsActive==='1') {
-      rowSelect.status='Active'
-    } else if (rowSelect.status==='0') {
-      rowSelect.status='Non Activw'
-    }*/
-    // alert('ini pro')
     const errors=validate(rowSelect,schema);
 
     setFormState(formState => ({
@@ -96,16 +151,6 @@ const PeriodeSensus=props => {
 const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
   }
-  // const pencarian = (paramProv, id_set) => {
-  //   let value = id_set
-  //   let result = [];
-  //   // alert(value)
-  //   result = paramProv.filter((entry) => {
-  //     return entry&&entry.id_setting &&(entry.id_setting === value) 
-  //   });
-  //   // alert("result = " + result[0].value_setting)
-  //   return result[0].value_setting
-  // }
   
   const handleChange=event => {
     
@@ -118,21 +163,24 @@ const hasError=field => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    
+
+
     setRowSelect({
       ...rowSelect,
       [event.target.name]: event.target.value
     });
-    // let nama = event.target.name.replace("id","nama")
-    // if (event.target.name == "id_setting") {
-    //   setRowSelect({
-    //     ...rowSelect,
-    //      [nama]:pencarian(Setting,event.target.value),
-    //      [event.target.name]: event.target.value,
-    //   });
-    //   // console.log("Ket Setting =", Setting)
-    // }
   }
+
+  const handleChange2 = event => {
+    handleChange(event)
+    showTargetKkPerProv(event.target.value)
+  }
+
+  const handleChange3 = event => {
+    handleChange(event)
+    showKab(event.target.value)
+  }
+  
 
   const handling =()=>{
     {
@@ -161,17 +209,50 @@ const hasError=field => {
         autoComplete="off"
         noValidate
       >
-               <TextField
+              <LapPeriode 
+              onChange={handleChange2}
+              rowSelect={rowSelect}/>
+
+            <TextField
                 fullWidth
-                label="Periode Sensus"
+                label="Pilih Provinsi"
                 margin="dense"
-                name="Periode_Sensus"
+                name="id_provinsi"
+                onChange={handleChange3}
+                select
+                value={rowSelect.id_provinsi}
+                variant="outlined"
+              >
+                {prov.map(option => (
+                  <option
+                    key={option.id_provinsi}
+                    value={option.id_provinsi}
+                  >
+                    {option.nama_provinsi}
+                  </option>
+                ))}
+
+              </TextField>
+
+              <TextField
+                fullWidth
+                label="Pilih Kabupaten"
+                margin="dense"
+                name="id_kabupaten"
                 onChange={handleChange}
                 select
+                value={rowSelect.id_kabupaten}
                 variant="outlined"
-                value={rowSelect.Periode_Sensus}
               >
-                {handling()}
+                {kab.map(option => (
+                  <option
+                    key={option.id_kabupaten}
+                    value={option.id_kabupaten}
+                  >
+                    {option.nama_kabupaten}
+                  </option>
+                ))}
+
               </TextField>
      
          {!formState.isValid}
@@ -189,10 +270,10 @@ const hasError=field => {
   );
 };
 
-PeriodeSensus.propTypes={
+PencarianLaporan.propTypes={
   className: PropTypes.string,
   onChange: PropTypes.func,
   style: PropTypes.object
 };
 
-export default PeriodeSensus;
+export default PencarianLaporan;

@@ -167,7 +167,7 @@ const Sidebar=props => {
         {
           title:'Laporan Target Sensus Per Kabupaten',
           href:'/laporan-sensus-perkab'
-        }
+        },
       ]
     },
     {

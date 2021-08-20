@@ -6,12 +6,12 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { LaporanSensusPerProvTable} from './components';
+import { LaporanSensusPerProvTable, PencarianLaporan} from './components';
 import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKab,urlLaporanKab,urlShowsKab,urlShowKab } from '../../kumpulanUrl'
+import { urlKab,urlLaporanKab,urlShowsKab,urlShowKab, urlShowLaporanSensusPerProv } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -35,28 +35,25 @@ const useStyles=makeStyles(theme => ({
 
 const LaporanSensusPerProv=props => {
 
-
-  async function showKab(rowkabupatenSelect) {
-    const userId=localStorage.getItem('user_id');
-    // setFilteredItems(kabupaten);
-    setOpen(false);
+  async function showLaporanSensusID(rowsensusIDSelect) {
+    // const userId=localStorage.getItem('Periode Sensus');
     /* */
     const requestOptions={
       method: 'POST',
       mode: "cors",
         body: JSON.stringify({
-          "id_provinsi": rowkabupatenSelect.id_provinsi,
-          // "id_kabupaten": rowkabupatenSelect.id_kabupaten,
+          "Periode_Sensus": rowsensusIDSelect.Periode_Sensus,
+          "id_provinsi": rowsensusIDSelect.id_provinsi,
+          // "id_sensusID": rowsensusIDSelect.id_sensusID,
         }),
       
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetKab=urlShowsKab
-    console.log(urlgetKab)
+    let url=urlShowLaporanSensusPerProv
     // eslint-disable-next-line no-useless-concat
     // alert()
-    const response=await fetch(urlgetKab, requestOptions)
+    const response=await fetch(url, requestOptions)
       .then(res => {
 
         return res.json();
@@ -65,31 +62,15 @@ const LaporanSensusPerProv=props => {
 
       .then(resJson => {
         const data=resJson;
-        setkabupaten(data.data);
-        setFilteredItems(data.data);
+        setSensus(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("Nextwork Error");
-        setkabupaten([]);
-        setFilteredItems([]);
-        setOpen(false);
+        setSensus([]);
         //this.setState({ ...this.state, isFetching: false });
       });
-
-    setOpen(false);
-  }
-
-  const deleteProv = async (id) => {
-    // let url = urlDeleteProv;
-    // try {
-    //   let response = await axios.delete(url+`${id}`);
-    // } catch {
-    //   e=>{
-    //     alert("error")
-    //   }
-    // }
   }
 
   const csvData=() => {
@@ -111,14 +92,14 @@ const LaporanSensusPerProv=props => {
   }
 
 
-  const deleteKabupaten=(e) => {
-    const selectedkabupaten_string=selectedkabupaten.join("<batas></batas>");
-    let kabupaten3=kabupaten.filter(function (entry) {
-      return entry&&entry.id&&selectedkabupaten_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
+  const deletesensus=(e) => {
+    const selectedsensus_string=selectedsensus.join("<batas></batas>");
+    let sensus3=sensus.filter(function (entry) {
+      return entry&&entry.id&&selectedsensus_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
     });
-    setFilteredItems(kabupaten3)
-    setkabupaten(kabupaten3)
-    setkabupatenfind('')
+    setFilteredItems(sensus3)
+    setSensus(sensus3)
+    setSensusfind('')
     //console.log("groups3",groups3);
     //findData(groupfind)
   }
@@ -126,13 +107,13 @@ const LaporanSensusPerProv=props => {
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setkabupatenExport(flteredItems);
+    setSensusExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
       doc.setProperties({ title: SettingProvinsi[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#kabupatenExport' })
+      doc.autoTable({ html: '#sensusExport' })
       var posis_x=(doc.previousAutoTable.width-(SettingProvinsi[0].TitleModule).length)/2
       doc.text(SettingProvinsi[0].TitleModule, posis_x, 6);
 
@@ -158,17 +139,17 @@ const LaporanSensusPerProv=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setkabupatenfind(e.target.value)
-      let kabupaten4=kabupaten.filter(function (entry) {
-        return entry&&entry.Nama_Kabupaten&&
-          ((entry.Nama_Kabupaten!==null? entry.Nama_Kabupaten:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+      setSensusfind(e.target.value)
+      let sensus4=sensus.filter(function (entry) {
+        return entry&&entry.Nama_sensus&&
+          ((entry.Nama_sensus!==null? entry.Nama_sensus:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(kabupaten4)? kabupaten4:[kabupaten4]);
+      setFilteredItems(Array.isArray(sensus4)? sensus4:[sensus4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(kabupaten);
+      setFilteredItems(sensus);
     }
-    setkabupatenfind(e.target.value)
+    setSensusfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -219,16 +200,16 @@ const LaporanSensusPerProv=props => {
   }
 
 
-  const [kabupaten, setkabupaten]=useState([]);
+  const [sensus, setSensus]=useState([]);
   const [kab, setKab]=useState([]);
   // const [provinsiId, setProvinsiId]=useState(getKab());
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowkabupatenSelect, setRowkabupatenSelect]=useState({});
+  const [rowsensusSelect, setRowsensusSelect]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedkabupaten, setSelectedkabupaten]=useState([]);
-  const [kabupatenExport, setkabupatenExport]=useState([]);
-  const [kabupatenfind, setkabupatenfind]=useState([]);
+  const [selectedsensus, setSelectedsensus]=useState([]);
+  const [sensusExport, setSensusExport]=useState([]);
+  const [sensusfind, setSensusfind]=useState([]);
   const [add,setAdd]=React.useState([])
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
@@ -246,8 +227,8 @@ const LaporanSensusPerProv=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedkabupaten({
-      ...setSelectedkabupaten,
+    setSelectedsensus({
+      ...setSelectedsensus,
       [event.target.name]: event.target.value[0]
     });
 
@@ -255,8 +236,8 @@ const LaporanSensusPerProv=props => {
 
 
   const setData=(field1, value1, field2, value2, nmProvinsi, kdProvinsi, status, keyId) => {
-    setRowkabupatenSelect({
-      ...selectedkabupaten,
+    setRowsensusSelect({
+      ...selectedsensus,
       [field1]: value1,
 
       [field2]: value2,
@@ -292,33 +273,33 @@ const LaporanSensusPerProv=props => {
 
   //     .then(resJson => {
   //       const data=resJson;
-  //       console.log('kabupaten =',data.data)
-  //       setkabupaten(data.data);
+  //       console.log('sensus =',data.data)
+  //       setSensus(data.data);
   //       //return false;
   //     })
   //     .catch(e => {
   //       //console.log(e);
   //       alert("Nextwork Error");
-  //       setkabupaten([]);
+  //       setSensus([]);
   //       //this.setState({ ...this.state, isFetching: false });
   //     });
   // } 
 
 
-  const handleOpen=(e, rowKabupaten, MessageButton) => {
+  const handleOpen=(e, rowsensus, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
-    setRowkabupatenSelect(rowKabupaten);
+    setRowsensusSelect(rowsensus);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
 
   };
 
-  const handleDelete=(e,rowKabupaten, MessageButton) => {
+  const handleDelete=(e,rowsensus, MessageButton) => {
     setTitle(MessageButton);
     deleteProv()
-    setRowkabupatenSelect(rowKabupaten);
+    setRowsensusSelect(rowsensus);
   };
 
   /* */
@@ -326,7 +307,7 @@ const LaporanSensusPerProv=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowkabupatenSelect(rowKabupaten);
+    //setRowsensusSelect(rowsensus);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -343,37 +324,41 @@ const LaporanSensusPerProv=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }} className="font-poppins">Kabupaten</h5>
+      <h5 style={{ color: 'black' }} className="font-poppins">sensus</h5>
       {/*}
-      <kabupatenToolbar
+      <sensusToolbar
         handleOpenViewMap={handleOpenViewMap}
         deleteProvinsi={deleteProvinsi}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        kabupaten={kabupaten}
+        sensus={sensus}
 
       />
   {*/}
+      <PencarianLaporan
+         getDataBackend={showLaporanSensusID}
+         setSensus={setSensus}
+         handleChange={handleChange} setData={setData}
+         open={open} setRowSelect={setRowsensusSelect} 
+         rowSelect={rowsensusSelect}
+         title={title} datas={filteredItems}>
+      </PencarianLaporan>
       <div className={classes.content}>
         <LaporanSensusPerProvTable
           handleOpenViewMap={handleOpenViewMap}
-          rowSelect={rowkabupatenSelect}
-          kabupaten={kabupaten}
-          kab={kab}
-          setKab={setKab}
-          handleDelete={handleDelete}
-          getDataBackend={''}
-        // textfind={kabupatenfind} 
+          rowSelect={rowsensusSelect}
+          sensus={sensus}
+        // textfind={sensusfind} 
           onChange={onChangefind}
           // showKab={showKab}
-          kabupatenExport={kabupatenExport}
-          kabupatenfind={kabupatenfind}
+          sensusExport={sensusExport}
+          sensusfind={sensusfind}
           filteredItems={filteredItems}
-          setRowSelect={setRowkabupatenSelect} rowSelect={rowkabupatenSelect}
-          selectedkabupaten={selectedkabupaten} 
-          kabupatenfind={kabupatenfind}
+          setRowSelect={setRowsensusSelect} rowSelect={rowsensusSelect}
+          selectedsensus={selectedsensus} 
+          sensusfind={sensusfind}
           handleOpen={handleOpen}
-          setSelectedkabupaten={setSelectedkabupaten}
+          setSelectedsensus={setSelectedsensus}
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}

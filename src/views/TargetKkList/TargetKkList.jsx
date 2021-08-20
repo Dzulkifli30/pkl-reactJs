@@ -9,7 +9,7 @@ import { VuserToolbar, TargetKkTable, TargetKkAddModi, ViewMap } from './compone
 import { ModalComponent } from 'components';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKab,urlGetVuser,urlGetTargetKk } from '../../kumpulanUrl'
+import { urlKab,urlGetVuser,urlGetTargetKk, urlDeleteTargetkk } from '../../kumpulanUrl'
 
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
@@ -94,15 +94,37 @@ const VuserList=props => {
 
 
 
-  const deleteProv = async (id) => {
-    let url = urlDeleteProv;
-    try {
-      let response = await axios.delete(url+`${id}`);
-    } catch {
-      e=>{
-        alert("error")
-      }
-    }
+  const deleteTargetKk = async (id_rt) => {  /* */
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        id_rt: id_rt
+      })
+    };
+
+    let url=urlDeleteTargetkk
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setVuser(data.data);
+        setFilteredItems(data.data);
+        getTargetKk()
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("Nextwork Error");
+        setVuser([]);
+        setFilteredItems([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
   }
 
   const csvData=() => {
@@ -300,10 +322,8 @@ const VuserList=props => {
 
   };
 
-  const handleDelete=(e,rowVuser, MessageButton) => {
-    setTitle(MessageButton);
-    deleteProv()
-    setRowVuserSelect(rowVuser);
+  const handleDelete=(e,RowVuserSelect) => {
+    deleteTargetKk(RowVuserSelect.id_rt)
   };
 
   /* */

@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import {SensusIDSearchModi,LaporanSensusIDTable} from '../LaporanSensusID/components';
+import {PeriodeSensus,LaporanSensusIDTable, PencarianLaporan} from '../LaporanSensusID/components';
 import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
@@ -37,7 +37,7 @@ const LaporanSensusID=props => {
 
 
   async function showTargetKK(rowsensusIDSelect) {
-    const userId=localStorage.getItem('Periode Sensus');
+    // const userId=localStorage.getItem('Periode Sensus');
     /* */
     const requestOptions={
       method: 'POST',
@@ -319,7 +319,7 @@ const LaporanSensusID=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }} className="font-poppins">Laporan Target Sensus di Indonesia</h5>
+      <h5 style={{ color: 'black' }} className="font-poppins">Laporan Sensus di Indonesia</h5>
       {/*}
       <sensusIDToolbar
         handleOpenViewMap={handleOpenViewMap}
@@ -330,6 +330,14 @@ const LaporanSensusID=props => {
 
       />
   {*/}
+      <PencarianLaporan
+         getDataBackend={showTargetKK}
+         setSensusID={setSensusID}
+         handleChange={handleChange} setData={setData}
+         open={open} setRowSelect={setRowsensusIDSelect} 
+         rowSelect={rowsensusIDSelect}
+         title={title} datas={filteredItems}>
+      </PencarianLaporan>
       <div className={classes.content}>
         <LaporanSensusIDTable
           handleOpenViewMap={handleOpenViewMap}
