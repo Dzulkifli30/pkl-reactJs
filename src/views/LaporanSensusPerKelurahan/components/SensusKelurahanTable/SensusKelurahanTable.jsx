@@ -197,17 +197,17 @@ const SensusKelurahanTable=props => {
   const columns=[   
     {
       name: 'Target KK',
-      selector: '',
-      sortable: true,
-    },
-    {
-      name: 'Jumlah RT',
-      selector: 'Jumlah_RT',
+      selector: 'KK',
       sortable: true,
     },
     {
       name: 'Jumlah RW',
-      selector: 'Jumlah_RW',
+      selector: 'jumRW',
+      sortable: true,
+    },
+    {
+      name: 'Jumlah RT',
+      selector: 'jumRT',
       sortable: true,
     },
 

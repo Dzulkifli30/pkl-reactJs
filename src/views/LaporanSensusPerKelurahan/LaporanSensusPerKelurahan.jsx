@@ -11,7 +11,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKel,urlAddKel,urlEditKel,urlLaporanPerKel,urlShowKel } from '../../kumpulanUrl'
+import { urlKel,urlAddKel,urlEditKel,urlSensusPerKel,urlShowKel } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -56,7 +56,7 @@ const LaporanSensusPerKelurahan=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetKel=urlLaporanPerKel
+    let urlgetKel=urlSensusPerKel
     // eslint-disable-next-line no-useless-concat
     const response=await fetch(urlgetKel, requestOptions)
       .then(res => {
@@ -90,13 +90,14 @@ const LaporanSensusPerKelurahan=props => {
       method: 'POST',
       mode: "cors",
         body: JSON.stringify({
-          "id_kecamatan": rowPerkelurahanSelect.id_kecamatan,
+          "Periode_Sensus": rowPerkelurahanSelect.Periode_Sensus,
+          "id_kelurahan": rowPerkelurahanSelect.id_kelurahan,
         }),
       
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetKel=urlLaporanPerKel
+    let urlgetKel=urlSensusPerKel
     alert(urlgetKel)
     // eslint-disable-next-line no-useless-concat
     // alert()

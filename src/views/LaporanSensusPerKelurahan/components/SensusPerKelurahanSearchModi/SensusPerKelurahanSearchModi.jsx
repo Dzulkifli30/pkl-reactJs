@@ -19,6 +19,7 @@ import { urlAddKel, urlEditKel, urlKec, urlKab, urlProv, urlShowKab, urlShowKec,
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
+import { LapPeriode } from '../../../../components';
 const schema = {
 
 
@@ -319,23 +320,6 @@ const SensusPerKelurahanSearchModi = props => {
     return result[0].nama_kelurahan
   }
 
-  const handling = () => {
-    {
-      var tmp = [];
-      // alert(tmp) 
-      // alert( localStorage.getItem("Periode Sensus") - 5 )
-      var periode_sensus = parseInt(localStorage.getItem("Periode Sensus"));
-      for (var option = periode_sensus; option <= periode_sensus + 5; option++) { tmp.push({ "option": option }); }
-      console.log('temp =', tmp)
-      return tmp.map(option => (
-        <option value={option.option}>
-          {option.option}
-        </option>
-      )
-      )
-    }
-  }
-
   //  const position=[currentLocation.lat, currentLocation.lng]
   const hasError = field => {
     return formState && formState.errors && formState.errors[field] ? true : false;
@@ -367,18 +351,10 @@ const SensusPerKelurahanSearchModi = props => {
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Periode Sensus"
-                margin="dense"
-                name="Periode_Sensus"
+              <LapPeriode
                 onChange={handleChange}
-                select
-                variant="outlined"
-                value={rowSelect.Periode_Sensus}
-              >
-                {handling()}
-              </TextField>
+                rowSelect={rowSelect}
+              />
             </Grid>
 
             <Grid

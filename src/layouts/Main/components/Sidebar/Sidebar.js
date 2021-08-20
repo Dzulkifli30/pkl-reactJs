@@ -167,18 +167,16 @@ const Sidebar=props => {
         {
           title:'Laporan Target Sensus Per Kabupaten',
           href:'/laporan-sensus-perkab'
-        }
+        },
+        {
+          title:'Laporan target Sensus PerKecamatan',
+          href:'/laporan-sensus-perkecamatan'
+        },
+        {
+          title:'Laporan target Sensus PerKelurahan',
+          href:'/laporan-sensus-perkelurahan'
+        },
       ]
-    },
-    {
-      title: 'Setting Aplikasi',
-      href: '/setting'
-
-    },
-    {
-      title: 'Kelompok Data',
-      href: '/kelompok-data'
-
     },
     {
       title: 'Setting Aplikasi',
@@ -194,20 +192,6 @@ const Sidebar=props => {
       title: 'Target KK',
       href: '/target-kk'
 
-    },
-    {
-      title: 'Laporan Target Sensus',
-      href: '/#',
-      items: [
-        {
-          title:'Laporan target Sensus PerKecamatan',
-          href:'/laporan-sensus-perkecamatan'
-        },
-        {
-          title:'Laporan target Sensus PerKelurahan',
-          href:'/laporan-sensus-perkelurahan'
-        },
-      ]
     },
   ];
   return (

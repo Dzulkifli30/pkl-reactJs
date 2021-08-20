@@ -61,6 +61,7 @@ export const urlShowKel = ulrport + '/kelurahan/showKel'
 export const urlDeleteKel = ulrport+'kelurahan/deleteKel'
 export const urlLaporanKel=ulrport+'kelurahan/laporanKel'
 export const urlLaporanPerKel=ulrport+'kelurahan/laporanPerKel'
+export const urlSensusPerKel=ulrport+'kelurahan/SensusKel'
 
 //Kabupaten
 export const urlShowKab=ulrport+'kabupaten/showKabupaten'

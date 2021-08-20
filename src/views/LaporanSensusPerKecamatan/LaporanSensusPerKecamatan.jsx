@@ -90,6 +90,7 @@ const LaporanSensusPerKecamatan=props => {
       method: 'POST',
       mode: "cors",
         body: JSON.stringify({
+          "id_kecamatan": rowPerKecamatanSelect.id_kecamatan,
           "Periode_Sensus": rowPerKecamatanSelect.Periode_Sensus,
         }),
       

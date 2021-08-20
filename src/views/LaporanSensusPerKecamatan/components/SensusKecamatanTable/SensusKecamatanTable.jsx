@@ -194,7 +194,7 @@ const SensusKecamatanTable=props => {
   const columns=[
     {
       name: 'Nama kelurahan',
-      selector: 'Nama_Kelurahan',
+      selector: 'nama_kelurahan',
       sortable: true,
     },    
     {
