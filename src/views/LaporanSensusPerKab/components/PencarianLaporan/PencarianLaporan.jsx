@@ -52,9 +52,9 @@ const PencarianLaporan=props => {
   const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest }=props;
   const classes=useStyles();
   const schema = {
-    // Periode_Sensus: {
-    //   presence: { allowEmpty: false, message: 'harus diisi' },
-    // },
+    id_kabupaten: {
+      presence: { allowEmpty: false, message: 'harus diisi' },
+    },
   };
 
   const [kab, setKab]=useState([])
@@ -91,7 +91,7 @@ const PencarianLaporan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("err");
+
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });

@@ -90,7 +90,7 @@ const PencarianLaporan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("err");
+  
         setKab([]);
         //this.setState({ ...this.state, isFetching: false });
       });

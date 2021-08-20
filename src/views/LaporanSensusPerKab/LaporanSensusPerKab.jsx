@@ -68,7 +68,6 @@ const LaporanSensusPerKab=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setSensus([]);
         //this.setState({ ...this.state, isFetching: false });
       });

@@ -67,7 +67,7 @@ const LaporanSensusID=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+
         setSensusID([]);
         //this.setState({ ...this.state, isFetching: false });
       });
