@@ -162,8 +162,8 @@ const KecamatanList=props => {
     if (e.target.value.length>=3) {
       setProvinsifind(e.target.value)
       let kecamatan4=kecamatan.filter(function (entry) {
-        return entry&&entry.nama_provinsi&&
-          ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+        return entry&&entry.nama_kecamatan&&
+          ((entry.nama_kecamatan!==null? entry.nama_kecamatan:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
       setFilteredItems(Array.isArray(kecamatan4)? kecamatan4:[kecamatan4]);
 
@@ -345,7 +345,6 @@ const KecamatanList=props => {
           provinsifind={provinsifind}
           filteredItems={filteredItems}
           selectedkecamatan={selectedkecamatan} 
-          provinsifind={provinsifind}
           handleOpen={handleOpen}
           setSelectedkecamatan={setSelectedkecamatan}
           Export={Export}

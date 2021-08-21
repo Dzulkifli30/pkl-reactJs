@@ -168,8 +168,8 @@ const KelurahanList=props => {
     if (e.target.value.length>=3) {
       setKelurahanfind(e.target.value)
       let kelurahans4=kelurahans.filter(function (entry) {
-        return entry&&entry.nama_provinsi&&
-          ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+        return entry&&entry.nama_kelurahan&&
+          ((entry.nama_kelurahan!==null? entry.nama_kelurahan:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
       setFilteredItems(Array.isArray(kelurahans4)? kelurahans4:[kelurahans4]);
 
