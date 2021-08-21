@@ -51,6 +51,11 @@ const SensusPerKelurahanSearchModi = props => {
   const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest } = props;
 
   const classes = useStyles();
+  const schema={
+    id_kelurahan: {
+      presence: { allowEmpty: false, message: 'harus diisi' },
+    },
+  }
 
   const [values, setValues] = useState({});
   const [getStatus, setStatus] = useState([]);
