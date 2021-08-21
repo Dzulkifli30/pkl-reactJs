@@ -138,7 +138,7 @@ const Main=props => {
                     {children}
                   </main>
 
-                  Welcome to <strong>System Point Reward Application</strong>
+                  Welcome to <strong>System Informasi Sensus</strong>
                 </div>{/*<!-- /.box-body -->*/}
               </div>{/*<!-- /.box -->*/}
             </section>
@@ -149,7 +149,7 @@ const Main=props => {
         {/*<!-- /.content-wrapper -->*/}
         <footer className="main-footer">
           <div className="container">
-            Copyright &copy; 2016. Central Sentosa Finance. All rights reserved.
+            Copyright &copy; 2021. BKKBN. All rights reserved.
           </div>
           {/*<!-- /.container -->*/}
         </footer>

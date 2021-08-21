@@ -23,7 +23,7 @@ const Footer=props => {
       className={clsx(classes.root, className)}
     >
       <Typography variant="body1">
-        &copy;{' 2020. Transparansi APBN - BackOffice       '}
+        &copy;{' 2021. Transparansi APBN - BackOffice       '}
       </Typography>
       <Typography variant="caption">
       </Typography>

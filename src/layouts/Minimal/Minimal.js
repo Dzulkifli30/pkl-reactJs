@@ -26,7 +26,10 @@ const Minimal=props => {
   return (
 
     <div className="login-box">
-      <div className="login-logo"> <img src="/assets/dist/img/bkkbn-logo-sm.png" width="253" height="62" /><h3>System Point Reward</h3>
+      <div className="login-logo"> 
+        <img src="/assets/dist/img/bkkbn-logo-sm.png" width="253" height="62" />
+        <h3>System Informasi Sensus</h3>
+        <h3>Ruang Administrasi</h3>
       </div>
       {/*<!-- /.login-logo -->*/}
       <div className="login-box-body">

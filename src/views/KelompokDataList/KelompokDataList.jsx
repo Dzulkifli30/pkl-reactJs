@@ -360,7 +360,6 @@ const KelompokDataList=props => {
           Vuser = {Vuser}
           handleDelete={handleDelete}
           onChange={onChangefind}
-          deleteVuser={deleteVuser}
           // SettingVuser={SettingVuser}
           VuserExport={VuserExport}
           // deleteProv={deleteProv}
