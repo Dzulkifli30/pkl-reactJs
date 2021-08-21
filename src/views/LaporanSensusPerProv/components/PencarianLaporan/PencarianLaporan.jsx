@@ -1,7 +1,7 @@
 import React, { createRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { urlGetSetting, urlShowTargetKk } from '../../../../kumpulanUrl'
+import { urlProv, urlShowTargetKkPerProv } from '../../../../kumpulanUrl'
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import {
@@ -52,11 +52,12 @@ const PencarianLaporan=props => {
   const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest }=props;
   const classes=useStyles();
   const schema = {
-    // Periode_Sensus: {
-    //   presence: { allowEmpty: false, message: 'harus diisi' },
-    // },
+    id_provinsi: {
+      presence: { allowEmpty: false, message: 'harus diisi' },
+    },
   };
 
+  const[kab, setKab]=useState([])
   const [formState, setFormState]=useState({
     isValid: false,
     values: {},
@@ -64,16 +65,39 @@ const PencarianLaporan=props => {
     errors: {}
   });
 
+  async function showTargetKkPerProv(Periode_Sensus) {
+    /* */
+    const requestOptions = {
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "Periode_Sensus": Periode_Sensus,
+      })
+    };
+
+    let urlShow = urlShowTargetKkPerProv
+    // eslint-disable-next-line no-useless-concat
+    const response = await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data = resJson;
+        setKab(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+  
+        setKab([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
 
   useEffect(() => {
-    // rowSelect.Periode_Sensus = localStorage.getItem("Periode Sensus")
-    /*
-    if (rowSelect.IsActive==='1') {
-      rowSelect.status='Active'
-    } else if (rowSelect.status==='0') {
-      rowSelect.status='Non Activw'
-    }*/
-    // alert('ini pro')
     const errors=validate(rowSelect,schema);
 
     setFormState(formState => ({
@@ -95,16 +119,6 @@ const PencarianLaporan=props => {
 const hasError=field => {
     return formState&&formState.errors&&formState.errors[field]? true:false;
   }
-  // const pencarian = (paramProv, id_set) => {
-  //   let value = id_set
-  //   let result = [];
-  //   // alert(value)
-  //   result = paramProv.filter((entry) => {
-  //     return entry&&entry.id_setting &&(entry.id_setting === value) 
-  //   });
-  //   // alert("result = " + result[0].value_setting)
-  //   return result[0].value_setting
-  // }
   
   const handleChange=event => {
     
@@ -123,33 +137,12 @@ const hasError=field => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
-    // let nama = event.target.name.replace("id","nama")
-    // if (event.target.name == "id_setting") {
-    //   setRowSelect({
-    //     ...rowSelect,
-    //      [nama]:pencarian(Setting,event.target.value),
-    //      [event.target.name]: event.target.value,
-    //   });
-    //   // console.log("Ket Setting =", Setting)
-    // }
   }
-  
 
-  const handling =()=>{
-    {
-      var tmp = [];
-      // alert(tmp) 
-      // alert( localStorage.getItem("Periode Sensus") - 5 )
-      var periode_sensus = localStorage.getItem("Periode Sensus");
-      for (var option = periode_sensus; option >= periode_sensus - 5; option--)
-       {tmp.push({"option" : option});}
-      console.log('temp =',tmp)
-      return tmp.map(option => (
-          <option value={option.option}>
-            {option.option}
-          </option>
-                   
-           ))}
+
+  const handleChange2 = event => {
+    handleChange(event)
+    showTargetKkPerProv(event.target.value)
   }
 
   return (
@@ -163,9 +156,31 @@ const hasError=field => {
         noValidate
       >
               <LapPeriode 
-              onChange={handleChange}
+              onChange={handleChange2}
               rowSelect={rowSelect}/>
-     
+
+
+              <TextField
+                fullWidth
+                label="Pilih Provinsi"
+                margin="dense"
+                name="id_provinsi"
+                onChange={handleChange}
+                select
+                value={rowSelect.id_provinsi}
+                variant="outlined"
+              >
+                {kab.map(option => (
+                  <option
+                    key={option.id_provinsi}
+                    value={option.id_provinsi}
+                  >
+                    {option.nama_provinsi}
+                  </option>
+                ))}
+
+              </TextField>
+
          {!formState.isValid}
           <Button
             color="primary"

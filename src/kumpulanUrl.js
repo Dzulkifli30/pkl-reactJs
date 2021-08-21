@@ -6,7 +6,6 @@ let ulrportRefresh="http://localhost:8000/";
  //let ulrport="http://36.89.25.220:15002/"
 
 
-// v_user
 export const urlPostLogin=ulrport+'vuser/showUser'
 export const urlAddVuser=ulrport+'vuser/storeUser'
 export const urlEditVuser=ulrport+'vuser/updateUser'
@@ -29,9 +28,11 @@ export const urlDeleteKelompokData=ulrport+'kelompok-data/deleteKelompokData'
 
 // targetKK
 export const urlShowTargetKk=ulrport+'target-kk/showTargetKk'
+export const urlShowTargetKkPerProv=ulrport+'target-kk/showTargetKkPerProv'
 export const urlAddTargetKk=ulrport+'target-kk/storeTargetKk'
 export const urlEditTargetKk=ulrport+'target-kk/updateTargetKk'
 export const urlGetTargetKk=ulrport+'target-kk/getTargetKk'
+export const urlDeleteTargetkk=ulrport+'target-kk/deleteTargetKk'
 
  //provinsi
 export const urlProv=ulrport+'provinsi/getProvinsi'
@@ -49,7 +50,6 @@ export const urlLaporanPerProv=ulrport+'provinsi/laporanPerProv'
  export const urlShowKecs=ulrport+'kecamatan/showKecamatans'
  export const urlDeleteKec=ulrport+'kecamatan/deleteKec'
  export const urlLaporanKec=ulrport+'kecamatan/laporanKec'
- export const urlSensusPerKec=ulrport+'kecamatan/SensusKec'
  export const urlShowPerKec=ulrport+'kecamatan/show-per-kec'
 
 
@@ -61,7 +61,6 @@ export const urlShowKel = ulrport + '/kelurahan/showKel'
 export const urlDeleteKel = ulrport+'kelurahan/deleteKel'
 export const urlLaporanKel=ulrport+'kelurahan/laporanKel'
 export const urlLaporanPerKel=ulrport+'kelurahan/laporanPerKel'
-export const urlSensusPerKel=ulrport+'kelurahan/SensusKel'
 
 //Kabupaten
 export const urlShowKab=ulrport+'kabupaten/showKabupaten'
@@ -89,5 +88,7 @@ export const urlDeleteRt=ulrport +'rt/deleteRt'
 
 //LaporanSensus
 export const urlShowLaporanSensusID=ulrport +'laporan-sensus/indonesia'
-
-
+export const urlShowLaporanSensusPerProv=ulrport +'laporan-sensus/perprov'
+export const urlShowLaporanSensusPerKab=ulrport +'laporan-sensus/perkab'
+export const urlShowLaporanSensusPerKec=ulrport +'laporan-sensus/perkec'
+export const urlShowLaporanSensusPerKel=ulrport +'laporan-sensus/perkel'

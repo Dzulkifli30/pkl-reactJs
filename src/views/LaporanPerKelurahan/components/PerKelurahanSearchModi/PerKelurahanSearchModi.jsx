@@ -98,13 +98,13 @@ const PerKelurahanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kelurahan =',data.data)
+        // console.log('kelurahan =',data.data)
         setkelurahan(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkelurahan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -130,13 +130,13 @@ const PerKelurahanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kecamatan =',data.data)
+        // console.log('kecamatan =',data.data)
         setkecamatan(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -162,13 +162,13 @@ const PerKelurahanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setkabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -196,7 +196,7 @@ const PerKelurahanSearchModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -224,7 +224,7 @@ const PerKelurahanSearchModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -249,7 +249,7 @@ const PerKelurahanSearchModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -294,7 +294,7 @@ const PerKelurahanSearchModi=props => {
          [nama]:pencarian(kelurahan,event.target.value),
          [event.target.name]: event.target.value,
       });
-      console.log("Ket Kelurahan =", kelurahan)
+      // console.log("Ket Kelurahan =", kelurahan)
     }
   }
 
@@ -314,7 +314,7 @@ const PerKelurahanSearchModi=props => {
     result = paramKab.filter((entry) => {
       return entry&&entry.id_kelurahan &&(entry.id_kelurahan === value) 
     });
-    console.log("result =",result[0].nama_kelurahan)
+    // console.log("result =",result[0].nama_kelurahan)
     // alert("result = " + result[0].nama_kelurahan)
     return result[0].nama_kelurahan
   }

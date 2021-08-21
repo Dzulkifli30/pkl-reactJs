@@ -125,7 +125,7 @@ async function showKab(id_provinsi) {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setKabupaten(data.data);
         //return false;
       })
@@ -156,7 +156,7 @@ async function showKab(id_provinsi) {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kecamatan =', data.data)
+        // console.log('kecamatan =', data.data)
         setKecamatan(data.data);
         //return false;
       })
@@ -271,16 +271,16 @@ async function showKab(id_provinsi) {
       rowSelect.status='Non Activw'
     }*/
     const errors = validate(rowSelect, schema);
-    console.log(errors)
-    console.log("rowSelect", rowSelect)
-    console.log("schema", schema)
+    // console.log(errors)
+    // console.log("rowSelect", rowSelect)
+    // console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
       isValid: errors ? false : true,
       errors: errors || {}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -329,7 +329,7 @@ async function showKab(id_provinsi) {
       url = urlEditKel;
       varJson.LastModifiedBy = userName
     }
-    console.log(varJson)
+    // console.log(varJson)
 
     //console.log(body);
 

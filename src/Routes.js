@@ -210,6 +210,10 @@ const Routes=() => {
         layout={MainLayout}
         path="/laporan-perkelurahan"
       />
+
+      {/* Ending */}
+
+      {/* Beginning Laporan Sensus */}
       <RouteWithLayout
         component={LaporanSensusIDView}
         exact
@@ -228,10 +232,6 @@ const Routes=() => {
         layout={MainLayout}
         path="/laporan-sensus-perprov"
       />
-
-      {/* Ending */}
-
-      {/* Beginning Laporan Sensus */}
       <RouteWithLayout
         component={LaporanSensusPerKelurahanView}
         exact

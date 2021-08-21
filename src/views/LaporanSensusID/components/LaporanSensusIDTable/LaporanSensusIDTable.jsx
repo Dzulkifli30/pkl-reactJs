@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { SearchInput } from 'components';
 
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -63,8 +62,8 @@ const useStyles=makeStyles(theme => ({
 }));
 const LaporanSensusID=props => {
   const {
-    kab,
-    setKab,
+    sensusID,
+    setSensusID,
     className,handleDelete,
     textfind,kabupatenfind,
     order, orderBy,
@@ -75,10 +74,9 @@ const LaporanSensusID=props => {
     downloadCSV,
     rowSelect,
     setRowSelect,
-    sensusID,
     getDataBackend,
     // setFormState,
-    onChangeFind  
+    onChangeFind
 
     , ...rest }=props;
 
@@ -237,7 +235,9 @@ const LaporanSensusID=props => {
         setFilterText('');
       }
     };
-  return 
+  return <div class="form-group">
+    
+  </div>
 
 
 
@@ -311,7 +311,7 @@ const LaporanSensusID=props => {
           <div className={classes.inner}>
             <DataTable
             font="Poppins"
-              title={"Search Laporan Target Periode Sensus "}
+              title={'Search Laporan Target Sensus'}
               customStyles={customStyles}
               columns={columns}
               data={sensusID}

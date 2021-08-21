@@ -71,7 +71,7 @@ const LaporanKabupaten=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         setFilteredItems([]);
         setOpen(false);

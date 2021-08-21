@@ -11,7 +11,7 @@ import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKec,urlAddKec,urlEditKec,urlSensusPerKec, } from '../../kumpulanUrl'
+import { urlKec,urlAddKec,urlEditKec,urlShowLaporanSensusPerKec, } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
@@ -56,7 +56,7 @@ const LaporanSensusPerKecamatan=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let urlgetKec=urlSensusPerKec
+    let urlgetKec=urlShowLaporanSensusPerKec
     // eslint-disable-next-line no-useless-concat
     const response=await fetch(urlgetKec, requestOptions)
       .then(res => {
@@ -71,7 +71,7 @@ const LaporanSensusPerKecamatan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setPerKecamatan([]);
         setFilteredItems([]);
         setOpen(false);
@@ -97,8 +97,8 @@ const LaporanSensusPerKecamatan=props => {
       headers: { 'Content-Type': 'application/json' },
     };
 
-    let url=urlSensusPerKec
-    console.log(url)
+    let url=urlShowLaporanSensusPerKec
+    // console.log(url)
     // eslint-disable-next-line no-useless-concat
     // alert()
     const response=await fetch(url, requestOptions)
@@ -116,7 +116,7 @@ const LaporanSensusPerKecamatan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setPerKecamatan([]);
         setFilteredItems([]);
         setOpen(false);

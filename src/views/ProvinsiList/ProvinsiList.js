@@ -30,7 +30,7 @@ const getMockData=() =>{
 
     )
   })
-  console.log(mockData)
+  // console.log(mockData)
 
   
 }
@@ -85,7 +85,7 @@ const ProvinsiList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProvinsis([]);
         setFilteredItems([]);
         setOpen(false);
@@ -123,7 +123,7 @@ const ProvinsiList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProvinsis([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -160,7 +160,7 @@ const ProvinsiList=props => {
     let url=urlDeleteProv
     if (url === 200) {
       // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
+      // console.log(url.data.message)
     }
 
     setFilteredItems(provinsis3)

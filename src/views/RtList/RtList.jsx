@@ -61,7 +61,7 @@ const RtList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setrt([]);
         setFilteredItems([]);
         setOpen(false);
@@ -97,7 +97,7 @@ const RtList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setrt([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });

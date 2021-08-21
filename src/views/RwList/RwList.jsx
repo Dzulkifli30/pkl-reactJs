@@ -68,7 +68,7 @@ const RwList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setrw([]);
         setFilteredItems([]);
         setOpen(false);
@@ -104,7 +104,7 @@ const RwList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setrw([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });

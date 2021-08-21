@@ -97,14 +97,14 @@ const PerKabupatenSearchModi = props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kabupaten =', data.data)
+        // console.log('kabupaten =', data.data)
         setKab(data.data);
         setKabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("err");
+        // alert("err");
         setKab([]);
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -131,13 +131,13 @@ const PerKabupatenSearchModi = props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kabupaten =', data.data)
+        // console.log('kabupaten =', data.data)
         setPerKabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("err");
+        // alert("err");
         setPerKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -165,7 +165,7 @@ const PerKabupatenSearchModi = props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setPerKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -193,7 +193,7 @@ const PerKabupatenSearchModi = props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -218,7 +218,7 @@ const PerKabupatenSearchModi = props => {
       isValid: errors ? false : true,
       errors: errors || {}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -252,7 +252,7 @@ const PerKabupatenSearchModi = props => {
          [nama]:pencarian(kabupaten,event.target.value),
          [event.target.name]: event.target.value,
       });
-      console.log("Ket Kabupaten =", kabupaten)
+      // console.log("Ket Kabupaten =", kabupaten)
     }
   }
 
@@ -273,7 +273,7 @@ const PerKabupatenSearchModi = props => {
     result = paramKab.filter((entry) => {
       return entry&&entry.id_kabupaten &&(entry.id_kabupaten === value) 
     });
-    console.log("result =",result[0].nama_kabupaten)
+    // console.log("result =",result[0].nama_kabupaten)
     // alert("result = " + result[0].nama_kabupaten)
     return result[0].nama_kabupaten
   }

@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import {PencarianLaporan,LaporanSensusIDTable} from '../LaporanSensusID/components';
+import {PeriodeSensus,LaporanSensusIDTable, PencarianLaporan} from '../LaporanSensusID/components';
 import { ModalComponent } from 'components';
 //import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
@@ -37,38 +37,37 @@ const LaporanSensusID=props => {
 
 
   async function showTargetKK(rowsensusIDSelect) {
-    const userId=localStorage.getItem('Periode Sensus');
+    // const userId=localStorage.getItem('Periode Sensus');
     /* */
     const requestOptions={
       method: 'POST',
       mode: "cors",
+        body: JSON.stringify({
+          "Periode_Sensus": rowsensusIDSelect.Periode_Sensus,
+          // "id_sensusID": rowsensusIDSelect.id_sensusID,
+        }),
+      
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "Periode_Sensus": rowsensusIDSelect.Periode_Sensus,
-        // "id_sensusID": rowsensusIDSelect.id_sensusID,
-      }),
     };
 
     let url=urlShowLaporanSensusID
     // eslint-disable-next-line no-useless-concat
-    alert(urlShowLaporanSensusID)
+    // alert()
     const response=await fetch(url, requestOptions)
       .then(res => {
-        console.log('res = ',res)
+
         return res.json();
         
       })
 
       .then(resJson => {
-        alert('in')
         const data=resJson;
-        console.log('data sens =', data.data)
         setSensusID(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert(e);
+
         setSensusID([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -320,7 +319,7 @@ const LaporanSensusID=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }} className="font-poppins">Laporan Target Sensus di Indonesia</h5>
+      <h5 style={{ color: 'black' }} className="font-poppins">Laporan Sensus di Indonesia</h5>
       {/*}
       <sensusIDToolbar
         handleOpenViewMap={handleOpenViewMap}
@@ -331,13 +330,14 @@ const LaporanSensusID=props => {
 
       />
   {*/}
-        <PencarianLaporan
-          getDataBackend={showTargetKK}
-          setSensusID={setSensusID}
-          handleChange={handleChange} setData={setData}
-          open={open} setRowSelect={setRowsensusIDSelect} rowSelect={rowsensusIDSelect}
-          title={title} datas={filteredItems}
-        />
+      <PencarianLaporan
+         getDataBackend={showTargetKK}
+         setSensusID={setSensusID}
+         handleChange={handleChange} setData={setData}
+         open={open} setRowSelect={setRowsensusIDSelect} 
+         rowSelect={rowsensusIDSelect}
+         title={title} datas={filteredItems}>
+      </PencarianLaporan>
       <div className={classes.content}>
         <LaporanSensusIDTable
           handleOpenViewMap={handleOpenViewMap}

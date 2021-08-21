@@ -99,14 +99,14 @@ const PerKecamatanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kecamatan =',data.data)
+        // console.log('kecamatan =',data.data)
         setKec(data.data);
         setKecamatan(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("err");
+        // alert("err");
         setKec([]);
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -133,14 +133,14 @@ const PerKecamatanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setKec(data.data);
         setKabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("err");
+        // alert("err");
         setKec([]);
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -167,13 +167,13 @@ const PerKecamatanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('Kecamatan =',data.data)
+        // console.log('Kecamatan =',data.data)
         setPerKecamatan(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("err");
+        // alert("err");
         setPerKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -229,7 +229,7 @@ const PerKecamatanSearchModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -254,7 +254,7 @@ const PerKecamatanSearchModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -291,7 +291,7 @@ const PerKecamatanSearchModi=props => {
          [nama]:pencarian(kecamatan,event.target.value),
          [event.target.name]: event.target.value,
       });
-      console.log("Ket kecamatan =", kecamatan)
+      // console.log("Ket kecamatan =", kecamatan)
     }
   }
 
@@ -311,7 +311,7 @@ const PerKecamatanSearchModi=props => {
     result = paramKec.filter((entry) => {
       return entry&&entry.id_kecamatan &&(entry.id_kecamatan === value) 
     });
-    console.log("result =",result[0].nama_kecamatan)
+    // console.log("result =",result[0].nama_kecamatan)
     // alert("result = " + result[0].nama_kecamatan)
     return result[0].nama_kecamatan
   }

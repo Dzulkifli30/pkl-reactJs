@@ -63,8 +63,7 @@ const useStyles=makeStyles(theme => ({
 }));
 const LaporanSensusPerProvTable=props => {
   const {
-    kab,
-    setKab,
+    sensus,
     className,handleDelete,
     textfind,kabupatenfind,
     order, orderBy,
@@ -88,73 +87,6 @@ const LaporanSensusPerProvTable=props => {
 
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
-  const[laporKab,setLaporKab]=useState([])
-  const [prov, setProv]=useState([]);
-  const [formState, setFormState]=useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {}
-  });
-
-
-
-
-  const handleSearch=(event) => {
-    const userId=localStorage.getItem('user_id');
-    let url=urlAddKec;
-    if (rowSelect.id_kecamatan===undefined) {
-      url=urlShowKab;
-    }
-
-    //console.log(body);
-
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "nama_kabupaten": rowSelect.nama_kabupaten,
-        "IsActive": rowSelect.IsActive,
-      })
-    };
-
-
-    ///let urlGetData=urlPostLogin
-    alert(url);
-    const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })/**/
-
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        alert(res.message)
-
-        handleClose();
-        getDataBackend();
-        //alert("Sukses")
-        const data=res;
-      })
-      .catch((e) => {
-
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
-        return false;
-
-
-      });
-
-
-  }
-
-
-
-
 
   const customStyles={
     header: {
@@ -266,123 +198,26 @@ const LaporanSensusPerProvTable=props => {
     },
   };
 
-
-  const handleChangeProvinsi=event=> {
-    handleChange(event)
-    alert('kabupaten')
-    showKab(event.target.value)
-  }
-  const handleChange=event => {
-
-    //    event.persist();
-
-    // const errors=validate(rowSelect, schema);
-
-    setFormState(formState => ({
-      ...rowSelect,
-      // isValid: errors? false:true,
-      // errors: errors||{}
-    }));
-
-
-    setRowSelect({
-      ...rowSelect,
-      [event.target.name]: event.target.value
-    });
-    // showKab(event.target.value)
-  }
- 
-
-  async function getLaporanKab() {
-    const requestOptions={
-      method: 'get',
-      // mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let url=urlShowKab
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setLaporKab(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert(e);
-        setLaporKab([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  } 
-
-
-
-
-  async function getProv() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let url=urlProv
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setProv(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Network Error");
-        setProv([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-  useEffect(() => {
-    getProv()
-    // alert('ini prov')
-  }, [rowSelect])
   const columns=[
-    // {
-    //   name: 'Kode Depdagri',
-    //   selector: 'KodeDepdagri',
-    //   sortable: true,
-    // },
     {
       name: 'Kabupaten',
-      selector: 'Nama_Kabupaten',
+      selector: 'nama_kabupaten',
       font:'Poppins',
       sortable: true,
     }, 
     {
+      name: 'Target KK',
+      selector: 'KK',
+      sortable: true,
+    },
+    {
       name: 'Jumlah Kecamatan',
-      selector: 'Jumlah_Kecamatan',
+      selector: 'jumKec',
       sortable: true,
     },
     {
       name: 'Jumlah Kelurahan',
-      selector: 'Jumlah_Kelurahan',
-      sortable: true,
-    },
-    {
-      name: 'Jumlah Rw',
-      selector: 'Jumlah_RW',
-      sortable: true,
-    },    {
-      name: 'Jumlah Rt',
-      selector: 'Jumlah_RT',
+      selector: 'jumKel',
       sortable: true,
     },
   ];
@@ -395,22 +230,7 @@ const LaporanSensusPerProvTable=props => {
       }
     };
   return <div class="form-group">
-      <div className="col-md-4 mx-0 my-10">
-      <form
-        autoComplete="off"
-        noValidate
-      >
-         
-      </form>
-      
-                    
-      </div>
-
-              <div className="col-md-4 mx-0 my-10">
-              
-              </div>
-      <div class="col-md-4 mx-0 my-10 flex">
-        </div>
+  
   </div>
 
 
@@ -485,11 +305,11 @@ const LaporanSensusPerProvTable=props => {
           <div className={classes.inner}>
             <DataTable
             font="Poppins"
-              title={rowSelect.nama_provinsi == undefined ? "Jumlah Wilayah" : "Jumlah Wilayah Di " + rowSelect.nama_provinsi }
+              title={"Search Laporan Target Periode Sensus "}
               customStyles={customStyles}
               columns={columns}
-              data={filteredItems}
-              keyField="nama_kabupaten"
+              data={sensus}
+              keyField="Periode_sensus"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader

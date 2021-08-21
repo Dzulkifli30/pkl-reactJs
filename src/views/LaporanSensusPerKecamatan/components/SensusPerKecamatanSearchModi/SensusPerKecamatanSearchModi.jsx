@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddKec, urlEditKec, urlKab, urlProv, urlShowKab, urlLaporanPerKab, urlShowPerKec, urlShowKec } from '../../../../kumpulanUrl';
+import { urlAddKec, urlEditKec, urlKab, urlProv, urlShowKab, urlShowKec, urlShowTargetKkPerProv } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -100,14 +100,14 @@ const SensusPerKecamatanSearchModi = props => {
 
             .then(resJson => {
                 const data = resJson;
-                console.log('kecamatan =', data.data)
+                // console.log('kecamatan =', data.data)
                 setKec(data.data);
                 setKecamatan(data.data);
                 //return false;
             })
             .catch(e => {
                 //console.log(e);
-                alert("err");
+                // alert("err");
                 setKec([]);
                 setKecamatan([]);
                 //this.setState({ ...this.state, isFetching: false });
@@ -134,51 +134,50 @@ const SensusPerKecamatanSearchModi = props => {
 
             .then(resJson => {
                 const data = resJson;
-                console.log('kabupaten =', data.data)
+                // console.log('kabupaten =', data.data)
                 setKec(data.data);
                 setKabupaten(data.data);
                 //return false;
             })
             .catch(e => {
                 //console.log(e);
-                alert("err");
+                // alert("err");
                 setKec([]);
                 setKabupaten([]);
                 //this.setState({ ...this.state, isFetching: false });
             });
     }
 
-    async function showPerKec(id_kecamatan) {
+    async function showTargetKkPerProv(Periode_Sensus) {
         /* */
         const requestOptions = {
-            method: 'POST',
-            //mode: "cors",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "id_kecamatan": id_kecamatan,
-            })
+          method: 'POST',
+          mode: "cors",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            "Periode_Sensus": Periode_Sensus,
+          })
         };
-
-        let urlShow = urlShowPerKec
+    
+        let urlShow = urlShowTargetKkPerProv
         // eslint-disable-next-line no-useless-concat
         const response = await fetch(urlShow, requestOptions)
-            .then(res => {
-                return res.json();
-            })
-
-            .then(resJson => {
-                const data = resJson;
-                console.log('Kecamatan =', data.data)
-                setPerKecamatan(data.data);
-                //return false;
-            })
-            .catch(e => {
-                //console.log(e);
-                alert("err");
-                setPerKecamatan([]);
-                //this.setState({ ...this.state, isFetching: false });
-            });
-    }
+          .then(res => {
+            return res.json();
+          })
+    
+          .then(resJson => {
+            const data = resJson;
+            setProv(data.data);
+            //return false;
+          })
+          .catch(e => {
+            //console.log(e);
+    
+            setProv([]);
+            //this.setState({ ...this.state, isFetching: false });
+          });
+      }
 
     // async function getKab() {
     //   /* */
@@ -208,46 +207,10 @@ const SensusPerKecamatanSearchModi = props => {
     //     });
     // }
 
-    async function getProv() {
-        /* */
-        const requestOptions = {
-            method: 'get',
-            //mode: "cors",
-            headers: { 'Content-Type': 'application/json' },
-        };
-
-        let urlGetProv = urlProv
-        // eslint-disable-next-line no-useless-concat
-        const response = await fetch(urlGetProv, requestOptions)
-            .then(res => {
-                return res.json();
-            })
-
-            .then(resJson => {
-                const data = resJson;
-                setProv(data.data);
-                //return false;
-            })
-            .catch(e => {
-                //console.log(e);
-                alert("Nextwork Error");
-                setProv([]);
-                //this.setState({ ...this.state, isFetching: false });
-            });
-    }
-
 
     ///  const mapRef=createRef();
 
     useEffect(() => {
-        // getKab()  
-        getProv()
-        /*
-        if (rowSelect.IsActive==='1') {
-          rowSelect.status='Active'
-        } else if (rowSelect.status==='0') {
-          rowSelect.status='Non Activw'
-        }*/
         const errors = validate(rowSelect, schema);
 
         setFormState(formState => ({
@@ -255,12 +218,16 @@ const SensusPerKecamatanSearchModi = props => {
             isValid: errors ? false : true,
             errors: errors || {}
         }));
-        console.log("formState", formState)
+        // console.log("formState", formState)
 
 
         //   alert(setOpen)
     }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
+    const handleChangePeriode = event => {
+        handleChange(event)
+        showTargetKkPerProv(event.target.value)
+    }
     const handleChangeProvinsi = event => {
         handleChange(event)
         showKab(event.target.value)
@@ -292,7 +259,7 @@ const SensusPerKecamatanSearchModi = props => {
                 [nama]: pencarian(kecamatan, event.target.value),
                 [event.target.name]: event.target.value,
             });
-            console.log("Ket kecamatan =", kecamatan)
+            // console.log("Ket kecamatan =", kecamatan)
         }
     }
 
@@ -312,7 +279,7 @@ const SensusPerKecamatanSearchModi = props => {
         result = paramKec.filter((entry) => {
             return entry && entry.id_kecamatan && (entry.id_kecamatan === value)
         });
-        console.log("result =", result[0].nama_kecamatan)
+        // console.log("result =", result[0].nama_kecamatan)
         // alert("result = " + result[0].nama_kecamatan)
         return result[0].nama_kecamatan
     }
@@ -351,7 +318,7 @@ const SensusPerKecamatanSearchModi = props => {
                             xs={12}
                         >
                             <LapPeriode
-                                onChange={handleChange}
+                                onChange={handleChangePeriode}
                                 rowSelect={rowSelect}
                             />
                         </Grid>

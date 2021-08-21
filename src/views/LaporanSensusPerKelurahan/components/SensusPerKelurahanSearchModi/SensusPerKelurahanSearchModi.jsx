@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddKel, urlEditKel, urlKec, urlKab, urlProv, urlShowKab, urlShowKec, urlShowKel } from '../../../../kumpulanUrl';
+import { urlAddKel, urlEditKel, urlKec, urlKab, urlProv, urlShowKab, urlShowKec, urlShowKel,urlShowTargetKkPerProv } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -99,13 +99,13 @@ const SensusPerKelurahanSearchModi = props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kelurahan =', data.data)
+        // console.log('kelurahan =', data.data)
         setkelurahan(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkelurahan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -131,13 +131,13 @@ const SensusPerKelurahanSearchModi = props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kecamatan =', data.data)
+        // console.log('kecamatan =', data.data)
         setkecamatan(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -163,57 +163,32 @@ const SensusPerKelurahanSearchModi = props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kabupaten =', data.data)
+        // console.log('kabupaten =', data.data)
         setkabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
 
-  async function getKab() {
+  async function showTargetKkPerProv(Periode_Sensus) {
     /* */
     const requestOptions = {
-      method: 'get',
-      //mode: "cors",
+      method: 'POST',
+      mode: "cors",
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "Periode_Sensus": Periode_Sensus,
+      })
     };
 
-    let urlGetKabAll = urlKab
+    let urlShow = urlShowTargetKkPerProv
     // eslint-disable-next-line no-useless-concat
-    const response = await fetch(urlGetKabAll, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data = resJson;
-        setkabupaten(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setkabupaten([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-
-  async function getProv() {
-    /* */
-    const requestOptions = {
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let urlGetProv = urlProv
-    // eslint-disable-next-line no-useless-concat
-    const response = await fetch(urlGetProv, requestOptions)
+    const response = await fetch(urlShow, requestOptions)
       .then(res => {
         return res.json();
       })
@@ -225,7 +200,7 @@ const SensusPerKelurahanSearchModi = props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -235,14 +210,6 @@ const SensusPerKelurahanSearchModi = props => {
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    // getKab()
-    getProv()
-    /*
-    if (rowSelect.IsActive==='1') {
-      rowSelect.status='Active'
-    } else if (rowSelect.status==='0') {
-      rowSelect.status='Non Activw'
-    }*/
     const errors = validate(rowSelect, schema);
 
     setFormState(formState => ({
@@ -250,11 +217,16 @@ const SensusPerKelurahanSearchModi = props => {
       isValid: errors ? false : true,
       errors: errors || {}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
+
+  const handleChangePeriode = event => {
+      handleChange(event)
+      showTargetKkPerProv(event.target.value)
+  }
 
   const handleChangeProvinsi = event => {
     handleChange(event)
@@ -295,7 +267,7 @@ const SensusPerKelurahanSearchModi = props => {
         [nama]: pencarian(kelurahan, event.target.value),
         [event.target.name]: event.target.value,
       });
-      console.log("Ket Kelurahan =", kelurahan)
+      // console.log("Ket Kelurahan =", kelurahan)
     }
   }
 
@@ -315,7 +287,7 @@ const SensusPerKelurahanSearchModi = props => {
     result = paramKab.filter((entry) => {
       return entry && entry.id_kelurahan && (entry.id_kelurahan === value)
     });
-    console.log("result =", result[0].nama_kelurahan)
+    // console.log("result =", result[0].nama_kelurahan)
     // alert("result = " + result[0].nama_kelurahan)
     return result[0].nama_kelurahan
   }
@@ -352,7 +324,7 @@ const SensusPerKelurahanSearchModi = props => {
               xs={12}
             >
               <LapPeriode
-                onChange={handleChange}
+                onChange={handleChangePeriode}
                 rowSelect={rowSelect}
               />
             </Grid>

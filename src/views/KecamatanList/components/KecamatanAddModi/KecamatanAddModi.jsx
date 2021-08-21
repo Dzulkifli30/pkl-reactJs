@@ -116,7 +116,7 @@ const KecamatanAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setkabupaten(data.data);
         //return false;
       })
@@ -201,7 +201,7 @@ const KecamatanAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -268,11 +268,11 @@ const KecamatanAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+    // alert(url);
     const response = fetch(url, requestOptions)
       .then(res => {
         if (res === 200) {
-          alert('bisa')
+          // alert('bisa')
           return res.json()
         }
         return res.json();
@@ -291,7 +291,7 @@ const KecamatanAddModi=props => {
         const data = res;
       })
       .catch((e) => {
-          alert(e.message)
+          // alert(e.message)
         return false;
 
 

@@ -69,7 +69,7 @@ const KecamatanList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         setFilteredItems([]);
         setOpen(false);
@@ -105,7 +105,7 @@ const KecamatanList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });

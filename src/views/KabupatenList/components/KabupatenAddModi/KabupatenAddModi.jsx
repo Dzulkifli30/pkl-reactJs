@@ -144,7 +144,7 @@ const KabupatenAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
@@ -203,7 +203,7 @@ const KabupatenAddModi=props => {
     }
   
     ///let urlGetData=urlPostLogin
-    alert(url);
+    // alert(url);
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -212,16 +212,18 @@ const KabupatenAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        alert(res.message)
+        // alert(res.message)
 
-        handleClose();
+        swal("Berhasil Tambah data", "berhasil", "success").then(
+          handleClose()
+          )
         getDataBackend();
         //alert("Sukses")
         const data=res;
       })
       .catch((e) => {
 
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+        // swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
 
         return false;
 

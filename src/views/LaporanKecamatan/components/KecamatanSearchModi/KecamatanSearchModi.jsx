@@ -96,13 +96,13 @@ const KecamatanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setkabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -130,7 +130,7 @@ const KecamatanSearchModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -158,7 +158,7 @@ const KecamatanSearchModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -183,7 +183,7 @@ const KecamatanSearchModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -218,7 +218,7 @@ const KecamatanSearchModi=props => {
          [nama]:pencarian(kabupaten,event.target.value),
          [event.target.name]: event.target.value,
       });
-      console.log("Ket Kabupaten =", kabupaten)
+      // console.log("Ket Kabupaten =", kabupaten)
     }
   }
 
@@ -227,7 +227,7 @@ const KecamatanSearchModi=props => {
   }
 
   const handleSave=(event) => {
-    console.log("Rs =".rowSelect)
+    // console.log("Rs =".rowSelect)
     getDataBackend(rowSelect)
   }
 
@@ -239,7 +239,7 @@ const KecamatanSearchModi=props => {
     result = paramKab.filter((entry) => {
       return entry&&entry.id_kabupaten &&(entry.id_kabupaten === value) 
     });
-    console.log("result =",result[0].nama_kabupaten)
+    // console.log("result =",result[0].nama_kabupaten)
     // alert("result = " + result[0].nama_kabupaten)
     return result[0].nama_kabupaten
   }

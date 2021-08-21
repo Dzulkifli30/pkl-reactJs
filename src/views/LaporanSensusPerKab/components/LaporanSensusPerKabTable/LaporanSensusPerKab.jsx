@@ -63,8 +63,8 @@ const useStyles=makeStyles(theme => ({
 }));
 const LaporanSensusPerKab=props => {
   const {
-    kab,
-    setKab,
+    sensus,
+    setSensus,
     className,handleDelete,
     textfind,kabupatenfind,
     order, orderBy,
@@ -96,65 +96,6 @@ const LaporanSensusPerKab=props => {
     touched: {},
     errors: {}
   });
-
-
-
-
-  const handleSearch=(event) => {
-    const userId=localStorage.getItem('user_id');
-    let url=urlAddKec;
-    if (rowSelect.id_kecamatan===undefined) {
-      url=urlShowKab;
-    }
-
-    //console.log(body);
-
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "KodeDepdagri": rowSelect.KodeDepdagri,
-        "id_kecamatan": rowSelect.id_kecamatan,
-        "id_kabupaten": rowSelect.id_kabupaten,
-        "nama_kabupaten": rowSelect.nama_kabupaten,
-        "IsActive": rowSelect.IsActive,
-      })
-    };
-
-
-    ///let urlGetData=urlPostLogin
-    alert(url);
-    const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })/**/
-
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        alert(res.message)
-
-        handleClose();
-        getDataBackend();
-        //alert("Sukses")
-        const data=res;
-      })
-      .catch((e) => {
-
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
-        return false;
-
-
-      });
-
-
-  }
-
-
-
-
 
   const customStyles={
     header: {
@@ -273,28 +214,19 @@ const LaporanSensusPerKab=props => {
     //   sortable: true,
     // },
     {
-      name: 'Kabupaten',
-      selector: 'Nama_Kabupaten',
+      name: 'Kecamatan',
+      selector: 'nama_kecamatan',
       font:'Poppins',
       sortable: true,
     }, 
     {
-      name: 'Jumlah Kecamatan',
-      selector: 'Jumlah_Kecamatan',
+      name: 'Target KK',
+      selector: 'KK',
       sortable: true,
     },
     {
       name: 'Jumlah Kelurahan',
-      selector: 'Jumlah_Kelurahan',
-      sortable: true,
-    },
-    {
-      name: 'Jumlah Rw',
-      selector: 'Jumlah_RW',
-      sortable: true,
-    },    {
-      name: 'Jumlah Rt',
-      selector: 'Jumlah_RT',
+      selector: 'jumKel',
       sortable: true,
     },
   ];
@@ -307,13 +239,7 @@ const LaporanSensusPerKab=props => {
       }
     };
   return <div class="form-group">
-       {/* <div className="col-md-6 my-5">
-          <PeriodeSensus
-          getDataBackend={getDataBackend}
-          rowSelect={rowSelect}
-          setRowSelect={setRowSelect}>
-          </PeriodeSensus>
-      </div> */}
+
   </div>
 
 
@@ -391,7 +317,7 @@ const LaporanSensusPerKab=props => {
               title={'Search Laporan Target Periode Sensus'}
               customStyles={customStyles}
               columns={columns}
-              data={filteredItems}
+              data={sensus}
               keyField="nama_kabupaten"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1

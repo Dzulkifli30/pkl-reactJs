@@ -61,7 +61,7 @@ const KabupatenList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         setFilteredItems([]);
         setOpen(false);
@@ -97,7 +97,7 @@ const KabupatenList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });

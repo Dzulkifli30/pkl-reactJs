@@ -113,6 +113,7 @@ const VuserList=props => {
         const data=resJson;
         setVuser(data.data);
         setFilteredItems(data.data);
+        getVuser()
         //return false;
       })
       .catch(e => {
@@ -320,7 +321,6 @@ const VuserList=props => {
 
   const handleDelete=(e,rowVuserSelect) => {
     deleteUser(rowVuserSelect.id)
-    getVuser()
   };
 
   /* */

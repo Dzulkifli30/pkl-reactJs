@@ -71,7 +71,7 @@ const LaporanPerKabupaten=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setPerKabupaten([]);
         setFilteredItems([]);
         setOpen(false);
@@ -97,7 +97,7 @@ const LaporanPerKabupaten=props => {
     };
 // Menggunakan Having Clause Di Back-end
     let urlgetKec=urlLaporanPerKab
-    console.log(urlgetKec)
+    // console.log(urlgetKec)
     // eslint-disable-next-line no-useless-concat
     // alert()
     const response=await fetch(urlgetKec, requestOptions)
@@ -115,7 +115,7 @@ const LaporanPerKabupaten=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setPerKabupaten([]);
         setFilteredItems([]);
         setOpen(false);

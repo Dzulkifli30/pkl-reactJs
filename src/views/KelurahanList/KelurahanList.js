@@ -72,7 +72,7 @@ const KelurahanList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setKelurahans([]);
         setFilteredItems([]);
         setOpen(false);
@@ -108,7 +108,7 @@ const KelurahanList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setKelurahans([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });
