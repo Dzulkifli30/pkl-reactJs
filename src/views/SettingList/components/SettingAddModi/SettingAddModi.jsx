@@ -106,7 +106,7 @@ const SettingAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setKelompokData([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -129,7 +129,7 @@ const SettingAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -175,12 +175,12 @@ const SettingAddModi=props => {
       varJson.LastModifiedBy = userName
     } else {
       url=urlEditSetting;
-      console.log("ide =",rowSelect.id_setting)
+      // console.log("ide =",rowSelect.id_setting)
 
       varJson.LastModifiedBy = userName
     }
 
-    console.log("var json =",varJson);
+    // console.log("var json =",varJson);
 
 
 
@@ -196,7 +196,7 @@ const SettingAddModi=props => {
 
     ///let urlGetData=urlPostLogin
     // alert(url);
-    console.log(url)
+    // console.log(url)
     const response=fetch(url, requestOptions)
       .then(tester => {
         if (tester.status === 200) {  
@@ -207,7 +207,7 @@ const SettingAddModi=props => {
       })/**/
 
       .then(tester => {
-        console.log(tester)
+        // console.log(tester)
         // alert(tester)
       getDataBackend();if (url = urlAddSetting) {
         swal("Berhasil", "Sukses Menambah Data", "success",  )
@@ -219,7 +219,7 @@ const SettingAddModi=props => {
         const data=tester;
       })
       .catch((e) => {
-        alert(e)
+        // alert(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
         return false;
 
@@ -300,7 +300,6 @@ const SettingAddModi=props => {
                 variant="outlined"
               />
             </Grid>
-
             <Grid
               item
               md={6}

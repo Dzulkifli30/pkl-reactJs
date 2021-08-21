@@ -71,7 +71,7 @@ const LaporanPerKelurahan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setPerkelurahan([]);
         setFilteredItems([]);
         setOpen(false);
@@ -115,7 +115,7 @@ const LaporanPerKelurahan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setPerkelurahan([]);
         setFilteredItems([]);
         setOpen(false);

@@ -71,7 +71,7 @@ const LaporanKelurahan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkelurahan([]);
         setFilteredItems([]);
         setOpen(false);
@@ -97,7 +97,7 @@ const LaporanKelurahan=props => {
     };
 
     let urlgetKel=urlLaporanKel
-    alert(urlgetKel)
+    // alert(urlgetKel)
     // eslint-disable-next-line no-useless-concat
     // alert()
     const response=await fetch(urlgetKel, requestOptions)
@@ -115,7 +115,7 @@ const LaporanKelurahan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkelurahan([]);
         setFilteredItems([]);
         setOpen(false);

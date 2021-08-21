@@ -132,7 +132,7 @@ const RtAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setKabupaten(data.data);
         //return false;
       })
@@ -165,7 +165,7 @@ const RtAddModi=props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kecamatan =', data.data)
+        // console.log('kecamatan =', data.data)
         setKecamatan(data.data);
         //return false;
       })
@@ -198,7 +198,7 @@ const RtAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kelurahan =',data.data)
+        // console.log('kelurahan =',data.data)
         setKel(data.data);
         //return false;
       })
@@ -230,7 +230,7 @@ const RtAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('Rw =',data.data)
+        // console.log('Rw =',data.data)
         setRw(data.data);
         //return false;
       })
@@ -238,90 +238,6 @@ const RtAddModi=props => {
         //console.log(e);
         //
         setRw([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-
-  async function getKel() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let url=urlKel
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setKel(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        //
-        setKel([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-
-  async function getKec() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let urlGetKecAll=urlKec
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlGetKecAll, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setKecamatan(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-      
-        setKecamatan([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-
-  async function getKab() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let urlGetKabAll=urlKab
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlGetKabAll, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setKabupaten(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-      
-        setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
@@ -391,16 +307,16 @@ const RtAddModi=props => {
     showRw(rowSelect.id_kelurahan);
 
     const errors=validate(rowSelect, schema);
-    console.log(errors)
-    console.log("rowSelect", rowSelect)
-    console.log("schema", schema)
+    // console.log(errors)
+    // console.log("rowSelect", rowSelect)
+    // console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
@@ -465,7 +381,7 @@ const RtAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+    // alert(url);
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -474,9 +390,11 @@ const RtAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        alert(res.message)
+        // alert(res.message)
 
-        handleClose();
+        swal("Berhasil Tambah data", "berhasil", "success").then(
+          handleClose()
+          )
         getDataBackend();
         //alert("Sukses")
         const data=res;
@@ -727,6 +645,7 @@ const RtAddModi=props => {
                 error={hasError('KodeRT')}
                 defaultValue={rowSelect&&rowSelect.KodeRT? rowSelect.KodeRT:''}
                 variant="outlined"
+                type="number"
               />
             </Grid>
             

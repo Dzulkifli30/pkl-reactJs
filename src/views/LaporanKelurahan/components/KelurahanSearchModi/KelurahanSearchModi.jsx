@@ -97,13 +97,13 @@ const KelurahanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kecamatan =',data.data)
+        // console.log('kecamatan =',data.data)
         setkecamatan(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -129,13 +129,13 @@ const KelurahanSearchModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setkabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -163,7 +163,7 @@ const KelurahanSearchModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -191,7 +191,7 @@ const KelurahanSearchModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -216,7 +216,7 @@ const KelurahanSearchModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)

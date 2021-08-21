@@ -27,7 +27,7 @@ const getMockData=() =>{
 
     )
   })
-  console.log(mockData)
+  // console.log(mockData)
 
   
 }
@@ -82,7 +82,7 @@ const KelompokDataList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setVuser([]);
         setFilteredItems([]);
         setOpen(false);
@@ -115,11 +115,12 @@ const KelompokDataList=props => {
         const data=resJson;
         setVuser(data.data);
         setFilteredItems(data.data);
+        getKelompokData()
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setVuser([]);
         setFilteredItems([]);
         setOpen(false);
@@ -145,28 +146,6 @@ const KelompokDataList=props => {
 
 
     return tempCsv
-  }
-
-
-  
-
-  const deleteVuser=async (e, id) => {
-    const selectedVuser_string=selectedVuser.join("<batas></batas>");
-    let Vuser3=Vuser.filter(function (entry) {
-      return entry&&entry.id&&selectedVuser_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-
-    let url=urlDeleteProv
-    if (url === 200) {
-      // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
-    }
-
-    setFilteredItems(Vuser3)
-    setVuser(Vuser3)
-    setVuserfind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
   }
   
   const classes=useStyles();
@@ -325,7 +304,7 @@ const KelompokDataList=props => {
 
   const handleDelete=(e,rowVuserSelect) => {
     deleteKelompokData(rowVuserSelect.Id_kelompok_data)
-    getKelompokData()
+    
   };
 
   /* */

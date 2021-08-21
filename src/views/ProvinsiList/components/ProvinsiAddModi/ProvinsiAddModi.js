@@ -113,7 +113,7 @@ const ProvinsiAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -179,25 +179,22 @@ const ProvinsiAddModi=props => {
     // alert(url);
     const response=fetch(url, requestOptions)
       .then(tester => {
-        if (tester.status === 200) {
-          alert('berhasil')
-       handleClose();
-          return tester.json();
-        }
-       
+        return tester.json();
       })/**/
 
       .then(tester => {
-        console.log(tester)
-        alert(tester.message)
+        // console.log(tester)
+        // alert(tester.message)
         getDataBackend();
-
-        alert("Sukses")
+        swal("Berhasil Tambah data", "berhasil", "success").then(
+          handleClose()
+          )
+        // alert("Sukses")
         const data=tester;
       })
       .catch((e) => {
 
-        alert(e)
+        // alert(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
 
         return false;

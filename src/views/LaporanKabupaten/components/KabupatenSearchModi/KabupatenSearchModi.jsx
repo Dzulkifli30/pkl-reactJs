@@ -116,13 +116,13 @@ const KecamatanAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setkabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -151,7 +151,7 @@ const KecamatanAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -177,7 +177,7 @@ const KecamatanAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -212,7 +212,7 @@ const KecamatanAddModi=props => {
          [nama]:pencarian(prov,event.target.value),
          [event.target.name]: event.target.value,
       });
-      console.log("Ket Provinsi =", prov)
+      // console.log("Ket Provinsi =", prov)
     }
   }
 
@@ -241,7 +241,7 @@ const KecamatanAddModi=props => {
     result = paramProv.filter((entry) => {
       return entry&&entry.id_provinsi &&(entry.id_provinsi === value) 
     });
-    console.log("result =",result[0].nama_provinsi)
+    // console.log("result =",result[0].nama_provinsi)
     // alert("result = " + result[0].nama_provinsi)
     return result[0].nama_provinsi
   }

@@ -69,7 +69,7 @@ const KecamatanList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         setFilteredItems([]);
         setOpen(false);
@@ -105,7 +105,7 @@ const KecamatanList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -128,19 +128,6 @@ const KecamatanList=props => {
 
 
     return tempCsv
-  }
-
-
-  const deleteKecamatan=(e) => {
-    const selectedkecamatan_string=selectedkecamatan.join("<batas></batas>");
-    let kecamatan3=kecamatan.filter(function (entry) {
-      return entry&&entry.id&&selectedkecamatan_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-    setFilteredItems(kecamatan3)
-    setkecamatan(kecamatan3)
-    setProvinsifind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
   }
   
   const classes=useStyles();

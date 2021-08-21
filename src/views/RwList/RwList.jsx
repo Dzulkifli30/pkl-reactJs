@@ -68,7 +68,7 @@ const RwList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setrw([]);
         setFilteredItems([]);
         setOpen(false);
@@ -104,7 +104,7 @@ const RwList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setrw([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -129,18 +129,6 @@ const RwList=props => {
     return tempCsv
   }
 
-
-  const deleterw=(e) => {
-    const selectedrw_string=selectedrw.join("<batas></batas>");
-    let rw3=rw.filter(function (entry) {
-      return entry&&entry.id&&selectedrw_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-    setFilteredItems(rw3)
-    setrw(rw3)
-    setrwfind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
-  }
   
   const classes=useStyles();
   const printPdf=(e) => {

@@ -193,18 +193,33 @@ const RwTable=props => {
 
   const columns=[
     {
-      name: 'Nama Rw',
-      selector: 'nama_rw',
-      sortable: true,
-    },
-    {
       name: 'Kode Depdagri',
       selector: 'KodeDepdagri',
       sortable: true,
     },
     {
+      name: 'Nama Provinsi',
+      selector: 'nama_provinsi',
+      sortable: true,
+    },
+    {
+      name: 'Nama Kabupaten/Kota',
+      selector: 'nama_kabupaten',
+      sortable: true,
+    },
+    {
+      name: 'Nama Kecamatan',
+      selector: 'nama_kecamatan',
+      sortable: true,
+    },
+    {
       name: 'Nama Kelurahan',
       selector: 'nama_kelurahan',
+      sortable: true,
+    },
+    {
+      name: 'Nama Rw',
+      selector: 'nama_rw',
       sortable: true,
     },
     {
@@ -248,6 +263,26 @@ const RwTable=props => {
         <Button color="primary"
           onClick={(e) => handleDelete(e, row, "Hapus Rw")} ><DeleteIcon /></Button>
       ,
+    },
+    {
+      name: 'CreatedBy',
+      selector: 'CreatedBy',
+      sortable: true,
+    },
+    {
+      name: 'Created',
+      selector: 'Created',
+      sortable: true,
+    },
+    {
+      name: 'LastModified',
+      selector: 'LastModified',
+      sortable: true,
+    },
+    {
+      name: 'LastModifiedBy',
+      selector: 'LastModifiedBy',
+      sortable: true,
     },
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));

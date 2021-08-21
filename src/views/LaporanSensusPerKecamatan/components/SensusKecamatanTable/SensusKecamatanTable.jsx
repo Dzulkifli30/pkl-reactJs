@@ -12,7 +12,7 @@ import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
 import DataTable from 'react-data-table-component';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddIcon from '@material-ui/icons/Add';
+import SearchIcon from '@material-ui/icons/Search';
 
 import {
   Card,
@@ -32,6 +32,7 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
+// import SensusKecamatanTable from '.';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -55,17 +56,20 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const KabupatenTable=props => {
+const SensusKecamatanTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
-    textfind,kabupatenfind,
+    textfind,kecamatanfind,
     order, orderBy,
-    provinsisExport, filteredItems, handleOpen, selectedkabupaten,
-    setselectedkabupaten,
+    kecamatanExport, filteredItems, handleOpen, selectedkecamatan,
+    rowSelect,setRowSelect,
+    setselectedkecamatan,
     Export,
     convertArrayOfObjectsToCSV,
-    downloadCSV
+    downloadCSV,
+    setKab,
+    kab
 
     , ...rest }=props;
 
@@ -180,10 +184,6 @@ const KabupatenTable=props => {
           minHeight: '30px', // override the row heigh
 
         }
-
-
-
-
       },
 
     },
@@ -193,82 +193,16 @@ const KabupatenTable=props => {
 
   const columns=[
     {
-      name: 'Kode Depdagri',
-      selector: 'KodeDepdagri',
+      name: 'Nama kelurahan',
+      selector: 'nama_kelurahan',
+      sortable: true,
+    },    
+    {
+      name: 'Target KK',
+      selector: 'KK',
       sortable: true,
     },
-    {
-      name: 'Nama Provinsi',
-      selector: 'nama_provinsi',
-      sortable: true,
-    },
-    {
-      name: 'Nama Kabupaten',
-      selector: 'nama_kabupaten',
-      sortable: true,
-    },
-    {
-      name: 'Keterangan',
-      selector: 'IsActive',
-      sortable: true,
-      cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
-    },
-    {
-      name: 'CreatedBy',
-      selector: 'CreatedBy',
-      sortable: true,
-    },
-    {
-      name: 'Created',
-      selector: 'Created',
-      sortable: true,
-    },
-    {
-      name: 'LastModified',
-      selector: 'LastModified',
-      sortable: true,
-    },
-    {
-      name: 'LastModifiedBy',
-      selector: 'LastModifiedBy',
-      sortable: true,
-    },
-    {
-      name: 'Edit Kabupaten',
-      button: true,
-      cell: row =>
-        <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Kabupaten")}  ><EditIcon /></Button>
-      ,
-    },
-    {
-      name: 'Hapus Kabupaten',
-      button: true,
-      cell: row =>
-        <Button color="primary"
-          onClick={(e) => handleDelete(e, row, "Hapus Kabupaten")} ><DeleteIcon /></Button>
-      ,
-    },
-    {
-      name: 'CreatedBy',
-      selector: 'CreatedBy',
-      sortable: true,
-    },
-    {
-      name: 'Created',
-      selector: 'Created',
-      sortable: true,
-    },
-    {
-      name: 'LastModified',
-      selector: 'LastModified',
-      sortable: true,
-    },
-    {
-      name: 'LastModifiedBy',
-      selector: 'LastModifiedBy',
-      sortable: true,
-    },
+
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -283,18 +217,7 @@ const KabupatenTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Kabupaten")}>
-          <AddIcon/>
-        </Button>
 
-      </div>
-
-      <div class="col-md-6">
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search Kabupaten"
-          textfind={textfind}
-        />
       </div>
     </div>
 
@@ -316,36 +239,36 @@ const KabupatenTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedkabupaten_var;
+    let selectedkecamatan_var;
 
     if (event.target.checked) {
-      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
+      selectedkecamatan_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedkabupaten_var=[];
+      selectedkecamatan_var=[];
     }
 
-    setselectedkabupaten(selectedkabupaten_var);
+    setselectedkecamatan(selectedkecamatan_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedkabupaten.indexOf(id);
-    let newselectedkabupaten=[];
+    const selectedIndex=selectedkecamatan.indexOf(id);
+    let newselectedkecamatan=[];
 
     if (selectedIndex===-1) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan, id);
     } else if (selectedIndex===0) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
-    } else if (selectedIndex===selectedkabupaten.length-1) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(1));
+    } else if (selectedIndex===selectedkecamatan.length-1) {
+      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(0, -1));
     } else if (selectedIndex>0) {
-      newselectedkabupaten=newselectedkabupaten.concat(
-        selectedkabupaten.slice(0, selectedIndex),
-        selectedkabupaten.slice(selectedIndex+1)
+      newselectedkecamatan=newselectedkecamatan.concat(
+        selectedkecamatan.slice(0, selectedIndex),
+        selectedkecamatan.slice(selectedIndex+1)
       );
     }
 
-    setselectedkabupaten(newselectedkabupaten);
+    setselectedkecamatan(newselectedkecamatan);
     //console.log(selectedUsers);
   };
 
@@ -356,8 +279,6 @@ const KabupatenTable=props => {
   const handleRowsPerPageChange=event => {
     setRowsPerPage(event.target.value);
   };
-  //  const filteredItems=provinsis;
-  //const actionsMemo=React.useMemo(() => <Export onExport={() => downloadCSV()} />, []);
 
   return (
     <Card
@@ -366,10 +287,9 @@ const KabupatenTable=props => {
     >
       <CardContent className={classes.content}>
         <PerfectScrollbar>
-
           <div className={classes.inner}>
             <DataTable
-              title="Kabupaten List"
+              title={rowSelect.nama_kecamatan == undefined ? "laporan Target Sensus di Kecamatan" : "laporan Target Sensus di Kecamatan " +rowSelect.nama_kecamatan}
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
@@ -382,8 +302,6 @@ const KabupatenTable=props => {
               persistTableHead
               dense
             />
-
-
           </div>
 
 
@@ -393,9 +311,9 @@ const KabupatenTable=props => {
   );
 };
 
-KabupatenTable.propTypes={
+SensusKecamatanTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KabupatenTable;
+export default SensusKecamatanTable;

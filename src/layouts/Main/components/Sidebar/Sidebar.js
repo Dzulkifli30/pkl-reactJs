@@ -168,6 +168,14 @@ const Sidebar=props => {
           title:'Laporan Target Sensus Per Kabupaten',
           href:'/laporan-sensus-perkab'
         },
+        {
+          title:'Laporan target Sensus PerKecamatan',
+          href:'/laporan-sensus-perkecamatan'
+        },
+        {
+          title:'Laporan target Sensus PerKelurahan',
+          href:'/laporan-sensus-perkelurahan'
+        },
       ]
     },
     {
@@ -178,11 +186,6 @@ const Sidebar=props => {
     {
       title: 'Kelompok Data',
       href: '/kelompok-data'
-
-    },
-    {
-      title: 'Visitor User',
-      href: '/vuser'
 
     },
     {

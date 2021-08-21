@@ -27,7 +27,7 @@ const getMockData=() =>{
 
     )
   })
-  console.log(mockData)
+  // console.log(mockData)
 
   
 }
@@ -82,7 +82,7 @@ const VuserList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setVuser([]);
         setFilteredItems([]);
         setOpen(false);
@@ -118,7 +118,7 @@ const VuserList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setVuser([]);
         setFilteredItems([]);
         setOpen(false);
@@ -157,7 +157,7 @@ const VuserList=props => {
     let url=urlDeleteProv
     if (url === 200) {
       // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
+      // console.log(url.data.message)
     }
 
     setFilteredItems(Vuser3)

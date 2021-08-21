@@ -50,6 +50,11 @@ const useStyles=makeStyles(theme => ({
 const LapPeriode=props => {
   const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest }=props;
   const classes=useStyles();
+  const schema = {
+    // Periode_Sensus: {
+    //   presence: { allowEmpty: false, message: 'harus diisi' },
+    // },
+  };
 
   const [formState, setFormState]=useState({
     isValid: false,
@@ -68,7 +73,7 @@ const LapPeriode=props => {
       rowSelect.status='Non Activw'
     }*/
     // alert('ini pro')
-    const errors=validate(rowSelect);
+    const errors=validate(rowSelect,schema);
 
     setFormState(formState => ({
       ...rowSelect,
@@ -81,12 +86,21 @@ const LapPeriode=props => {
     //   alert(setOpen)
   }, [rowSelect]); 
 
-  
+//   const handleChange=event => {
+    
+//     const errors=validate(rowSelect, schema);
 
-const hasError=field => {
-    return formState&&formState.errors&&formState.errors[field]? true:false;
-  }
-  
+//     setFormState(formState => ({
+//       ...rowSelect,
+//       isValid: errors? false:true,
+//       errors: errors||{}
+//     }));
+    
+//     setRowSelect({
+//       ...rowSelect,
+//       [event.target.name]: event.target.value
+//     });
+//   }
 
   const handling =()=>{
     {

@@ -11,14 +11,13 @@ import mockData from './dataPropinsi';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import mockDataSettingProvinsi from './dataSettingprovinsi';
-import { urlProv } from 'kumpulanUrl';
+import { urlProv,urlDeleteProv } from 'kumpulanUrl';
 
 
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
 import { async } from 'validate.js';
-import { urlDeleteProv } from '../../kumpulanUrl';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -31,7 +30,7 @@ const getMockData=() =>{
 
     )
   })
-  console.log(mockData)
+  // console.log(mockData)
 
   
 }
@@ -86,7 +85,7 @@ const ProvinsiList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProvinsis([]);
         setFilteredItems([]);
         setOpen(false);
@@ -124,7 +123,7 @@ const ProvinsiList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setProvinsis([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -161,7 +160,7 @@ const ProvinsiList=props => {
     let url=urlDeleteProv
     if (url === 200) {
       // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
+      // console.log(url.data.message)
     }
 
     setFilteredItems(provinsis3)

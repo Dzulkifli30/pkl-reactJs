@@ -71,7 +71,7 @@ const LaporanKecamatan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         setFilteredItems([]);
         setOpen(false);
@@ -97,7 +97,7 @@ const LaporanKecamatan=props => {
     };
 
     let urlgetKec=urlShowKecs
-    console.log(urlgetKec)
+    // console.log(urlgetKec)
     // eslint-disable-next-line no-useless-concat
     // alert()
     const response=await fetch(urlgetKec, requestOptions)
@@ -115,7 +115,7 @@ const LaporanKecamatan=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setkecamatan([]);
         setFilteredItems([]);
         setOpen(false);

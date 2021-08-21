@@ -90,5 +90,5 @@ export const urlDeleteRt=ulrport +'rt/deleteRt'
 export const urlShowLaporanSensusID=ulrport +'laporan-sensus/indonesia'
 export const urlShowLaporanSensusPerProv=ulrport +'laporan-sensus/perprov'
 export const urlShowLaporanSensusPerKab=ulrport +'laporan-sensus/perkab'
-
-
+export const urlShowLaporanSensusPerKec=ulrport +'laporan-sensus/perkec'
+export const urlShowLaporanSensusPerKel=ulrport +'laporan-sensus/perkel'

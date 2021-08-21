@@ -72,7 +72,7 @@ const KelurahanList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setKelurahans([]);
         setFilteredItems([]);
         setOpen(false);
@@ -108,13 +108,12 @@ const KelurahanList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setKelurahans([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
-
 
 
   const csvData=() => {
@@ -137,23 +136,6 @@ const KelurahanList=props => {
 
 
   
-
-  const deleteKelurahan=async (e, id) => {
-    const selectedKelurahans_string=selectedKelurahans.join("<batas></batas>");
-    let kelurahans3=kelurahans.filter(function (entry) {
-      return entry&&entry.id&&selectedKelurahans_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-    let url=urlDeleteProv
-    if (url === 200) {
-      // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
-    }
-    setFilteredItems(kelurahans3)
-    setKelurahans(kelurahans3)
-    setKelurahanfind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
-  }
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")

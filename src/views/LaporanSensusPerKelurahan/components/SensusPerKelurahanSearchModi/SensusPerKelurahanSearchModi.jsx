@@ -10,41 +10,22 @@ import {
   Divider,
   Grid,
   Button,
-  TextField
+  TextField,
+
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddKec, urlEditKec, urlKab, urlProv, urlShowKab } from '../../../../kumpulanUrl';
+import { urlAddKel, urlEditKel, urlKec, urlKab, urlProv, urlShowKab, urlShowKec, urlShowKel,urlShowTargetKkPerProv } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
-const schema={
-  KodeDepdagri: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    length: {
-      maximum: 200
-    }
-  },
-  nama_kecamatan: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    length: {
-      maximum: 200
-    }
-  },
-  IsActive: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    /* length: {
-       maximum: 1
-     }*/
-  },
-  /**/
+import { LapPeriode } from '../../../../components';
+const schema = {
+
 
 };
 
-const useStyles=makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   buttonSuccess: {
     color: theme.palette.white,
@@ -66,18 +47,20 @@ const useStyles=makeStyles(theme => ({
   },
 }));
 
-const KecamatanAddModi=props => {
-  const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest }=props;
+const SensusPerKelurahanSearchModi = props => {
+  const { className, setData, getDataBackend, setRowSelect, rowSelect, title, ...rest } = props;
 
-  const classes=useStyles();
+  const classes = useStyles();
 
-  const [values, setValues]=useState({});
-  const [getStatus, setStatus]=useState([]);
-  const [getKeyId, setKeyId]=useState([]);
-  const [kabupaten, setkabupaten]=useState([]);
-  const [prov, setProv]=useState([]);
+  const [values, setValues] = useState({});
+  const [getStatus, setStatus] = useState([]);
+  const [getKeyId, setKeyId] = useState([]);
+  const [kelurahan, setkelurahan] = useState([]);
+  const [kecamatan, setkecamatan] = useState([]);
+  const [kabupaten, setkabupaten] = useState([]);
+  const [prov, setProv] = useState([]);
 
-  const status=[
+  const status = [
     {
       value: '1',
       label: 'Active'
@@ -89,16 +72,80 @@ const KecamatanAddModi=props => {
 
 
   ];
-  const [formState, setFormState]=useState({
+  const [formState, setFormState] = useState({
     isValid: false,
     values: {},
     touched: {},
     errors: {}
   });
 
+  async function showKel(id_kecamatan) {
+    /* */
+    const requestOptions = {
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_kecamatan": id_kecamatan,
+      })
+    };
+
+    let urlShow = urlShowKel
+    // eslint-disable-next-line no-useless-concat
+    const response = await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data = resJson;
+        // console.log('kelurahan =', data.data)
+        setkelurahan(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setkelurahan([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
+  async function showKec(id_kabupaten) {
+    /* */
+    const requestOptions = {
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "id_kabupaten": id_kabupaten,
+      })
+    };
+
+    let urlShow = urlShowKec
+    // eslint-disable-next-line no-useless-concat
+    const response = await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data = resJson;
+        // console.log('kecamatan =', data.data)
+        setkecamatan(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        // alert("Nextwork Error");
+        setkecamatan([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
+
   async function showKab(id_provinsi) {
     /* */
-    const requestOptions={
+    const requestOptions = {
       method: 'POST',
       //mode: "cors",
       headers: { 'Content-Type': 'application/json' },
@@ -107,75 +154,53 @@ const KecamatanAddModi=props => {
       })
     };
 
-    let urlShow=urlShowKab
+    let urlShow = urlShowKab
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlShow, requestOptions)
+    const response = await fetch(urlShow, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
-        const data=resJson;
-        // console.log('kabupaten =',data.data)
+        const data = resJson;
+        // console.log('kabupaten =', data.data)
         setkabupaten(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
+        // alert("Nextwork Error");
         setkabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
 
-  async function getKab() {
+  async function showTargetKkPerProv(Periode_Sensus) {
     /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
+    const requestOptions = {
+      method: 'POST',
+      mode: "cors",
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "Periode_Sensus": Periode_Sensus,
+      })
     };
 
-    let urlGetKabAll=urlKab
+    let urlShow = urlShowTargetKkPerProv
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlGetKabAll, requestOptions)
+    const response = await fetch(urlShow, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
-        const data=resJson;
-        setkabupaten(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        setkabupaten([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
-
-  async function getProv() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let urlGetProv=urlProv
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlGetProv, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
+        const data = resJson;
         setProv(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
+
         setProv([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -185,21 +210,12 @@ const KecamatanAddModi=props => {
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    // getKab()
-    getProv();
-    showKab(rowSelect.id_provinsi)
-    /*
-    if (rowSelect.IsActive==='1') {
-      rowSelect.status='Active'
-    } else if (rowSelect.status==='0') {
-      rowSelect.status='Non Activw'
-    }*/
-    const errors=validate(rowSelect, schema);
+    const errors = validate(rowSelect, schema);
 
     setFormState(formState => ({
       ...rowSelect,
-      isValid: errors? false:true,
-      errors: errors||{}
+      isValid: errors ? false : true,
+      errors: errors || {}
     }));
     // console.log("formState", formState)
 
@@ -207,21 +223,36 @@ const KecamatanAddModi=props => {
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
-  const handleChangeProvinsi=event=> {
+  const handleChangePeriode = event => {
+      handleChange(event)
+      showTargetKkPerProv(event.target.value)
+  }
+
+  const handleChangeProvinsi = event => {
     handleChange(event)
     showKab(event.target.value)
   }
 
-  const handleChange=event => {
+  const handleChangeKabupaten = event => {
+    handleChange(event)
+    showKec(event.target.value)
+  }
+
+  const handleChangeKecamatan = event => {
+    handleChange(event)
+    showKel(event.target.value)
+  }
+
+  const handleChange = event => {
 
     //    event.persist();
 
-    const errors=validate(rowSelect, schema);
+    const errors = validate(rowSelect, schema);
 
     setFormState(formState => ({
       ...rowSelect,
-      isValid: errors? false:true,
-      errors: errors||{}
+      isValid: errors ? false : true,
+      errors: errors || {}
     }));
 
 
@@ -229,85 +260,41 @@ const KecamatanAddModi=props => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
+    let nama = event.target.name.replace("id", "nama")
+    if (event.target.name == "id_kelurahan") {
+      setRowSelect({
+        ...rowSelect,
+        [nama]: pencarian(kelurahan, event.target.value),
+        [event.target.name]: event.target.value,
+      });
+      // console.log("Ket Kelurahan =", kelurahan)
+    }
   }
 
-  const handleClose=() => {
+  const handleClose = () => {
     getDataBackend();
   }
 
-  const handleSave=(event) => {
-    const userName=localStorage.getItem('username');
-    let url=urlAddKec;
-    let varJson = {
-      "KodeDepdagri": rowSelect.KodeDepdagri,
-      "id_kecamatan": rowSelect.id_kecamatan,
-      "id_kabupaten": rowSelect.id_kabupaten,
-      "id_provinsi": rowSelect.id_provinsi,
-      "nama_kecamatan": rowSelect.nama_kecamatan,
-      "IsActive": rowSelect.IsActive,
-    }
-    if (rowSelect.id_kecamatan===undefined) {
-      url=urlAddKec;
-      varJson.CreatedBy = userName
-      varJson.LastModifiedBy = userName
-    } else {
-      url=urlEditKec;
-      varJson.LastModifiedBy = userName
-    }
-
+  const handleSave = (event) => {
     //console.log(body);
-
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        varJson
-      )
-    };
-
-
-    ///let urlGetData=urlPostLogin
-    // alert(url);
-    const response = fetch(url, requestOptions)
-      .then(res => {
-        if (res === 200) {
-          // alert('bisa')
-          return res.json()
-        }
-        return res.json();
-      })/**/
-
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        // alert(res.message)
-
-        swal("Berhasil Tambah data", "berhasil", "success").then(
-        handleClose()
-        )
-        getDataBackend();
-        // alert("Sukses")
-        const data = res;
-      })
-      .catch((e) => {
-          // alert(e.message)
-        return false;
-
-
-      });
-
-
+    getDataBackend(rowSelect)
   }
 
-  
-
-
-
+  const pencarian = (paramKab, id_kel) => {
+    let value = id_kel
+    let result = [];
+    // alert(value)
+    result = paramKab.filter((entry) => {
+      return entry && entry.id_kelurahan && (entry.id_kelurahan === value)
+    });
+    // console.log("result =", result[0].nama_kelurahan)
+    // alert("result = " + result[0].nama_kelurahan)
+    return result[0].nama_kelurahan
+  }
 
   //  const position=[currentLocation.lat, currentLocation.lng]
-  const hasError=field => {
-    return formState&&formState.errors&&formState.errors[field]? true:false;
+  const hasError = field => {
+    return formState && formState.errors && formState.errors[field] ? true : false;
   }
 
   return (
@@ -322,7 +309,7 @@ const KecamatanAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title={rowSelect.id_kecamatan == undefined ? "Tambah Kecamatan" : "Ubah Kecamatan"}
+          title="Search Wilayah"
         />
         <Divider />
         <CardContent>
@@ -330,24 +317,15 @@ const KecamatanAddModi=props => {
             container
             spacing={3}
           >
+
             <Grid
               item
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Kode Depdagri"
-                margin="dense"
-                name="KodeDepdagri"
-                onChange={handleChange}
-                helperText={
-                  hasError('KodeDepdagri')? formState.errors.KodeDepdagri[0]:null
-                }
-
-                error={hasError('KodeDepdagri')}
-                defaultValue={rowSelect&&rowSelect.KodeDepdagri? rowSelect.KodeDepdagri:''}
-                variant="outlined"
+              <LapPeriode
+                onChange={handleChangePeriode}
+                rowSelect={rowSelect}
               />
             </Grid>
 
@@ -383,7 +361,7 @@ const KecamatanAddModi=props => {
               </TextField>
 
             </Grid>
-            
+
             <Grid
               item
               md={6}
@@ -394,7 +372,7 @@ const KecamatanAddModi=props => {
                 label="Pilih Kabupaten"
                 margin="dense"
                 name="id_kabupaten"
-                onChange={handleChange}
+                onChange={handleChangeKabupaten}
                 //required
                 select
                 // eslint-disable-next-line react/jsx-sort-props
@@ -416,43 +394,48 @@ const KecamatanAddModi=props => {
               </TextField>
 
             </Grid>
-
             <Grid
               item
               md={6}
               xs={12}
             >
-
               <TextField
                 fullWidth
-                label="Nama Kecamatan"
+                label="Pilih Kecamatan"
                 margin="dense"
-                name="nama_kecamatan"
-                onChange={handleChange}
-                helperText={
-                  hasError('nama_kecamatan')? formState.errors.nama_kecamatan[0]:null
-                }
+                name="id_kecamatan"
+                onChange={handleChangeKecamatan}
+                //required
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                //SelectProps={{ native: true }}
 
-                error={hasError('nama_kecamatan')}
-
-                defaultValue={rowSelect&&rowSelect.nama_kecamatan? rowSelect.nama_kecamatan:''}
+                //defaultValue={rowSelect.IsActive}
+                value={rowSelect.id_kecamatan}
                 variant="outlined"
-              />
+              >
+                {kecamatan.map(option => (
+                  <option
+                    key={option.id_kecamatan}
+                    value={option.id_kecamatan}
+                  >
+                    {option.nama_kecamatan}
+                  </option>
+                ))}
+
+              </TextField>
+
             </Grid>
-
-
-
             <Grid
               item
               md={6}
               xs={12}
             >
-
               <TextField
                 fullWidth
-                label="Select aktiv"
+                label="Pilih Kelurahan"
                 margin="dense"
-                name="IsActive"
+                name="id_kelurahan"
                 onChange={handleChange}
                 //required
                 select
@@ -460,15 +443,15 @@ const KecamatanAddModi=props => {
                 //SelectProps={{ native: true }}
 
                 //defaultValue={rowSelect.IsActive}
-                value={rowSelect&&rowSelect.IsActive? rowSelect.IsActive:''}
+                value={rowSelect.id_kelurahan}
                 variant="outlined"
               >
-                {status.map(option => (
+                {kelurahan.map(option => (
                   <option
-                    key={option.value}
-                    value={option.value}
+                    key={option.id_kelurahan}
+                    value={option.id_kelurahan}
                   >
-                    {option.label}
+                    {option.nama_kelurahan}
                   </option>
                 ))}
 
@@ -479,7 +462,7 @@ const KecamatanAddModi=props => {
         </CardContent>
         <Divider />
         <CardActions>
-         {!formState.isValid}
+          {!formState.isValid}
           <Button
             color="primary"
             className={classes.buttonSuccess}
@@ -488,13 +471,8 @@ const KecamatanAddModi=props => {
             disabled={!formState.isValid}
 
           >
-            Simpan
+            Search
           </Button>
-
-          <Button color="primary"
-            className={classes.buttonCancel}
-            variant="contained"
-            onClick={handleClose} >Batal</Button>
 
         </CardActions>
       </form>
@@ -502,8 +480,8 @@ const KecamatanAddModi=props => {
   );
 };
 
-KecamatanAddModi.propTypes={
+SensusPerKelurahanSearchModi.propTypes = {
   className: PropTypes.string
 };
 
-export default KecamatanAddModi;
+export default SensusPerKelurahanSearchModi;

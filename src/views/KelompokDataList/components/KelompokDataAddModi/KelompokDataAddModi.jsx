@@ -180,7 +180,7 @@ const KelompokDataAddModi=props => {
       })
       .catch((e) => {
 
-        alert(e)
+        // alert(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
 
         return false;

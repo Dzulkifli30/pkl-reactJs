@@ -131,7 +131,7 @@ const RwAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setKabupaten(data.data);
         //return false;
       })
@@ -163,7 +163,7 @@ const RwAddModi=props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kecamatan =', data.data)
+        // console.log('kecamatan =', data.data)
         setKecamatan(data.data);
         //return false;
       })
@@ -195,7 +195,7 @@ const RwAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kelurahan =',data.data)
+        // console.log('kelurahan =',data.data)
         setKelurahan(data.data);
         //return false;
       })
@@ -328,16 +328,16 @@ const RwAddModi=props => {
     showKel(rowSelect.id_kecamatan);
     
     const errors=validate(rowSelect, schema);
-    console.log(errors)
-    console.log("rowSelect", rowSelect)
-    console.log("schema", schema)
+    // console.log(errors)
+    // console.log("rowSelect", rowSelect)
+    // console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -402,7 +402,7 @@ const RwAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+    // alert(url);
     const response=fetch(url, requestOptions)
       .then(res => {
         return res.json();
@@ -411,16 +411,18 @@ const RwAddModi=props => {
       .then(res => {
         //console.log(res)
         //console.log(res.data)
-        alert(res.message)
+        // alert(res.message)
 
-        handleClose();
+        swal("Berhasil Tambah data", "berhasil", "success").then(
+          handleClose()
+          )
         getDataBackend();
-        alert("Sukses")
+        // alert("Sukses")
         const data=res;
       })
       .catch((e) => {
 
-        swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+        // swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
 
         return false;
 

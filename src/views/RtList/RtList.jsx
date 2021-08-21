@@ -61,7 +61,7 @@ const RtList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setrt([]);
         setFilteredItems([]);
         setOpen(false);
@@ -97,7 +97,7 @@ const RtList=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+        // alert("Nextwork Error");
         setrt([]);
         setFilteredItems([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -121,18 +121,6 @@ const RtList=props => {
     return tempCsv
   }
 
-
-  const deletert=(e) => {
-    const selectedrt_string=selectedrt.join("<batas></batas>");
-    let rt3=rt.filter(function (entry) {
-      return entry&&entry.id&&selectedrt_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-    setFilteredItems(rt3)
-    setrt(rt3)
-    setrtfind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
-  }
   
   const classes=useStyles();
   const printPdf=(e) => {
