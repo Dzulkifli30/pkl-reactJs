@@ -23,41 +23,41 @@ import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 import { LapPeriode } from 'components';
 
-const useStyles=makeStyles(theme => ({
-    root: {},
-    buttonSuccess: {
-      color: theme.palette.white,
-      backgroundColor: theme.palette.green,
-      '&:hover': {
-        backgroundColor: '#4caf50',
-        borderColor: '#66bb6a',
-        boxShadow: 'none',
-      },
-      marginTop: '10px',
-      marginBottom: '10px',
+const useStyles = makeStyles(theme => ({
+  root: {},
+  buttonSuccess: {
+    color: theme.palette.white,
+    backgroundColor: theme.palette.green,
+    '&:hover': {
+      backgroundColor: '#4caf50',
+      borderColor: '#66bb6a',
+      boxShadow: 'none',
     },
-    buttonCancel: {
-      color: theme.palette.white,
-      backgroundColor: theme.palette.red,
-      '&:hover': {
-        backgroundColor: '#f44336',
-        borderColor: '#ef5350',
-        boxShadow: 'none',
-      },
+    marginTop: '10px',
+    marginBottom: '10px',
+  },
+  buttonCancel: {
+    color: theme.palette.white,
+    backgroundColor: theme.palette.red,
+    '&:hover': {
+      backgroundColor: '#f44336',
+      borderColor: '#ef5350',
+      boxShadow: 'none',
     },
-  }));
+  },
+}));
 
 
-const PencarianLaporan=props => {
-  const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest }=props;
-  const classes=useStyles();
+const PencarianLaporan = props => {
+  const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest } = props;
+  const classes = useStyles();
   const schema = {
     // Periode_Sensus: {
     //   presence: { allowEmpty: false, message: 'harus diisi' },
     // },
   };
 
-  const [formState, setFormState]=useState({
+  const [formState, setFormState] = useState({
     isValid: false,
     values: {},
     touched: {},
@@ -74,26 +74,26 @@ const PencarianLaporan=props => {
       rowSelect.status='Non Activw'
     }*/
     // alert('ini pro')
-    const errors=validate(rowSelect,schema);
+    const errors = validate(rowSelect, schema);
 
     setFormState(formState => ({
       ...rowSelect,
-      isValid: errors? false:true,
-      errors: errors||{}
+      isValid: errors ? false : true,
+      errors: errors || {}
     }));
     console.log("formState", formState)
 
 
     //   alert(setOpen)
-  }, [rowSelect]); 
+  }, [rowSelect]);
 
-  const handleSave=() => {
+  const handleSave = () => {
     getDataBackend(rowSelect)
     console.log(rowSelect.Periode_Sensus)
   }
 
-const hasError=field => {
-    return formState&&formState.errors&&formState.errors[field]? true:false;
+  const hasError = field => {
+    return formState && formState.errors && formState.errors[field] ? true : false;
   }
   // const pencarian = (paramProv, id_set) => {
   //   let value = id_set
@@ -105,17 +105,17 @@ const hasError=field => {
   //   // alert("result = " + result[0].value_setting)
   //   return result[0].value_setting
   // }
-  
-  const handleChange=event => {
-    
+
+  const handleChange = event => {
+
     //    event.persist();
 
-    const errors=validate(rowSelect, schema);
+    const errors = validate(rowSelect, schema);
 
     setFormState(formState => ({
       ...rowSelect,
-      isValid: errors? false:true,
-      errors: errors||{}
+      isValid: errors ? false : true,
+      errors: errors || {}
     }));
 
 
@@ -133,40 +133,63 @@ const hasError=field => {
     //   // console.log("Ket Setting =", Setting)
     // }
   }
-  
 
-  const handling =()=>{
+
+  const handling = () => {
     {
       var tmp = [];
       // alert(tmp) 
       // alert( localStorage.getItem("Periode Sensus") - 5 )
       var periode_sensus = localStorage.getItem("Periode Sensus");
-      for (var option = periode_sensus; option >= periode_sensus - 5; option--)
-       {tmp.push({"option" : option});}
-      console.log('temp =',tmp)
+      for (var option = periode_sensus; option >= periode_sensus - 5; option--) { tmp.push({ "option": option }); }
+      console.log('temp =', tmp)
       return tmp.map(option => (
-          <option value={option.option}>
-            {option.option}
-          </option>
-                   
-           ))}
+        <option value={option.option}>
+          {option.option}
+        </option>
+
+      ))
+    }
   }
 
   return (
     <Card
       {...rest}
       className={clsx(classes.root, className)}
-      style={style}
     >
-                <form
+
+      <form
         autoComplete="off"
         noValidate
       >
-              <LapPeriode 
-              onChange={handleChange}
-              rowSelect={rowSelect}/>
-     
-         {!formState.isValid}
+        <CardHeader
+
+          subheader=""
+          title="Search Laporan Sensus"
+        />
+        <Divider />
+        <CardContent>
+          <Grid
+            container
+            spacing={3}
+          >
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <LapPeriode
+                onChange={handleChange}
+                rowSelect={rowSelect} />
+
+
+            </Grid>
+          </Grid>
+        </CardContent>
+        <Divider />
+        <CardActions>
+          {!formState.isValid}
           <Button
             color="primary"
             className={classes.buttonSuccess}
@@ -176,12 +199,14 @@ const hasError=field => {
           >
             Search
           </Button>
+
+        </CardActions>
       </form>
     </Card>
   );
 };
 
-PencarianLaporan.propTypes={
+PencarianLaporan.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func,
   style: PropTypes.object

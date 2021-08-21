@@ -196,7 +196,7 @@ const hasError=field => {
           let result = [];
           // alert(value)
           result = paramKec.filter((entry) => {
-              return entry && entry.id_kabupaten && (entry.id_kabupaten === value)
+              return entry && entry.id && (entry.id === value)
           });
           // console.log("result =", result[0].nama_kecamatan)
           // alert("result = " + result[0].nama_kecamatan)
@@ -222,19 +222,44 @@ const hasError=field => {
 
   return (
     <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-      style={style}
-    >
-                <form
-        autoComplete="off"
-        noValidate
-      >
-              <LapPeriode 
+            {...rest}
+            className={clsx(classes.root, className)}
+        >
+
+            <form
+                autoComplete="off"
+                noValidate
+            >
+                <CardHeader
+
+                    subheader=""
+                    title="Search Laporan Sensus"
+                />
+                <Divider />
+                <CardContent>
+                    <Grid
+                        container
+                        spacing={3}
+                    >
+
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                           <LapPeriode 
               onChange={handleChange2}
               rowSelect={rowSelect}/>
 
-            <TextField
+           
+                        </Grid>
+
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                           <TextField
                 fullWidth
                 label="Pilih Provinsi"
                 margin="dense"
@@ -255,39 +280,25 @@ const hasError=field => {
 
               </TextField>
 
-              <TextField
-                fullWidth
-                label="Pilih Kabupaten"
-                margin="dense"
-                name="id_kabupaten"
-                onChange={handleChange}
-                select
-                value={rowSelect.id_kabupaten}
-                variant="outlined"
-              >
-                {kab.map(option => (
-                  <option
-                    key={option.id_kabupaten}
-                    value={option.id_kabupaten}
-                  >
-                    {option.nama_kabupaten}
-                  </option>
-                ))}
+                        </Grid>
+                    </Grid>
+                </CardContent>
+                <Divider />
+                <CardActions>
+                    {!formState.isValid}
+                    <Button
+                        color="primary"
+                        className={classes.buttonSuccess}
+                        variant="contained"
+                        onClick={handleSave}
+                        disabled={!formState.isValid}
+                    >
+                        Search
+                    </Button>
 
-              </TextField>
-     
-         {!formState.isValid}
-          <Button
-            color="primary"
-            className={classes.buttonSuccess}
-            variant="contained"
-            onClick={handleSave}
-            disabled={!formState.isValid}
-          >
-            Search
-          </Button>
-      </form>
-    </Card>
+                </CardActions>
+            </form>
+        </Card>
   );
 };
 

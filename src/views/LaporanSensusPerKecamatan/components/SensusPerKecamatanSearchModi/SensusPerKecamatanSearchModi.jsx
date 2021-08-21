@@ -304,7 +304,7 @@ const SensusPerKecamatanSearchModi = props => {
                 <CardHeader
 
                     subheader=""
-                    title="Search Wilayah"
+                    title="Search Laporan Sensus"
                 />
                 <Divider />
                 <CardContent>

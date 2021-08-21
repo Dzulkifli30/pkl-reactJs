@@ -171,17 +171,38 @@ const hasError=field => {
     <Card
       {...rest}
       className={clsx(classes.root, className)}
-      style={style}
     >
-                <form
+
+      <form
         autoComplete="off"
         noValidate
       >
-              <LapPeriode 
+        <CardHeader
+          subheader=""
+          title="Search Laporan Sensus"
+        />
+        <Divider />
+        <CardContent>
+          <Grid
+            container
+            spacing={3}
+          >
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+               <LapPeriode 
               onChange={handleChange2}
               rowSelect={rowSelect}/>
+            </Grid>
 
-
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
               <TextField
                 fullWidth
                 label="Pilih Provinsi"
@@ -203,16 +224,24 @@ const hasError=field => {
 
               </TextField>
 
-         {!formState.isValid}
+            </Grid>
+          </Grid>
+        </CardContent>
+        <Divider />
+        <CardActions>
+          {!formState.isValid}
           <Button
             color="primary"
             className={classes.buttonSuccess}
             variant="contained"
             onClick={handleSave}
             disabled={!formState.isValid}
+
           >
             Search
           </Button>
+
+        </CardActions>
       </form>
     </Card>
   );
