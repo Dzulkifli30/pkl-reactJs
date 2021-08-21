@@ -45,7 +45,6 @@ import {
   TargetKkList as TargetKkListView,
   LaporanSensusPerKab as LaporanSensusPerKabVIew,
   LaporanSensusPerProv as LaporanSensusPerProvView,
-  LaporanSensusPerProv
 
 
 
@@ -227,7 +226,7 @@ const Routes=() => {
         path="/laporan-sensus-perkab"
       />
       <RouteWithLayout
-        component={LaporanSensusPerProv}
+        component={LaporanSensusPerProvView}
         exact
         layout={MainLayout}
         path="/laporan-sensus-perprov"

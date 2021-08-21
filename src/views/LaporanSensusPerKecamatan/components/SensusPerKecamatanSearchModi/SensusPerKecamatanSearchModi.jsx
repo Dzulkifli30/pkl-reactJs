@@ -21,8 +21,9 @@ import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 import { LapPeriode } from '../../../../components';
 const schema = {
-
-
+    id_kecamatan: {
+        presence: { allowEmpty: false, message: 'harus diisi' },
+      },
 };
 
 const useStyles = makeStyles(theme => ({
@@ -303,7 +304,7 @@ const SensusPerKecamatanSearchModi = props => {
                 <CardHeader
 
                     subheader=""
-                    title="Search Wilayah"
+                    title="Search Laporan Sensus"
                 />
                 <Divider />
                 <CardContent>

@@ -376,14 +376,14 @@ const LaporanSensusPerKecamatan=props => {
 
       />
   {*/}
-      <div className={classes.content}>
-        <SensusPerKecamatanSearchModi
+      <SensusPerKecamatanSearchModi
           getDataBackend={showPerKec}
           setKec={setKec}
           handleChange={handleChange} setData={setData}
           open={open} setRowSelect={setRowPerKecamatanSelect} rowSelect={rowPerKecamatanSelect}
           title={title} datas={filteredItems}
         />
+      <div className={classes.content}>
         <SensusKecamatanTable
           handleOpenViewMap={handleOpenViewMap}
           setKec={setKec}

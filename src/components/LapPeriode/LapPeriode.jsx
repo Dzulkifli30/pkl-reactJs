@@ -1,13 +1,26 @@
 import React, { createRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { urlGetSetting, urlShowTargetKk } from '../../kumpulanUrl'
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import {
-//   Button,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Divider,
+  Grid,
+  Button,
   TextField,
+  Paper
 } from '@material-ui/core';
+import L from 'leaflet';
+import axios from 'axios';
+// import { urlGetKelompokData, urlGetSetting, urlShowKelompokData, urlShowSetting } from '../../../../kumpulanUrl';
+//import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
+import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 
 const useStyles=makeStyles(theme => ({
     root: {},
@@ -102,20 +115,21 @@ const LapPeriode=props => {
           <option value={option.option}>
             {option.option}
           </option>
-                   
-           ))}
+                   
+           ))}
   }
 
   return (
-             <TextField
-              fullWidth
-              label="Periode Sensus"
-              margin="dense"
-              name="Periode_Sensus"
+
+               <TextField
+                fullWidth
+                label="Periode Sensus"
+                margin="dense"
+                name="Periode_Sensus"
                 onChange={onChange}
                 select
                 variant="outlined"
-                value={rowSelect.Periode_Sensus}    
+                value={rowSelect.Periode_Sensus}
               >
                 {handling()}
               </TextField>

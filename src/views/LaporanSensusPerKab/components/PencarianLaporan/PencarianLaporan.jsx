@@ -169,6 +169,16 @@ const hasError=field => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
+
+    let nama = event.target.name.replace("id", "nama")
+        if (event.target.name == "id_kabupaten") {
+            setRowSelect({
+                ...rowSelect,
+                [nama]: pencarian(kab, event.target.value),
+                [event.target.name]: event.target.value,
+            });
+            // console.log("Ket kecamatan =", kecamatan)
+    }
   }
 
   const handleChange2 = event => {
@@ -180,7 +190,18 @@ const hasError=field => {
     handleChange(event)
     showKab(event.target.value)
   }
-  
+
+    const pencarian = (paramKec, id_kab) => {
+          let value = id_kab
+          let result = [];
+          // alert(value)
+          result = paramKec.filter((entry) => {
+              return entry && entry.id && (entry.id === value)
+          });
+          // console.log("result =", result[0].nama_kecamatan)
+          // alert("result = " + result[0].nama_kecamatan)
+          return result[0].nama_kabupaten
+    }
 
   const handling =()=>{
     {
@@ -201,19 +222,44 @@ const hasError=field => {
 
   return (
     <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-      style={style}
-    >
-                <form
-        autoComplete="off"
-        noValidate
-      >
-              <LapPeriode 
+            {...rest}
+            className={clsx(classes.root, className)}
+        >
+
+            <form
+                autoComplete="off"
+                noValidate
+            >
+                <CardHeader
+
+                    subheader=""
+                    title="Search Laporan Sensus"
+                />
+                <Divider />
+                <CardContent>
+                    <Grid
+                        container
+                        spacing={3}
+                    >
+
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                           <LapPeriode 
               onChange={handleChange2}
               rowSelect={rowSelect}/>
 
-            <TextField
+           
+                        </Grid>
+
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                           <TextField
                 fullWidth
                 label="Pilih Provinsi"
                 margin="dense"
@@ -234,39 +280,25 @@ const hasError=field => {
 
               </TextField>
 
-              <TextField
-                fullWidth
-                label="Pilih Kabupaten"
-                margin="dense"
-                name="id_kabupaten"
-                onChange={handleChange}
-                select
-                value={rowSelect.id_kabupaten}
-                variant="outlined"
-              >
-                {kab.map(option => (
-                  <option
-                    key={option.id_kabupaten}
-                    value={option.id_kabupaten}
-                  >
-                    {option.nama_kabupaten}
-                  </option>
-                ))}
+                        </Grid>
+                    </Grid>
+                </CardContent>
+                <Divider />
+                <CardActions>
+                    {!formState.isValid}
+                    <Button
+                        color="primary"
+                        className={classes.buttonSuccess}
+                        variant="contained"
+                        onClick={handleSave}
+                        disabled={!formState.isValid}
+                    >
+                        Search
+                    </Button>
 
-              </TextField>
-     
-         {!formState.isValid}
-          <Button
-            color="primary"
-            className={classes.buttonSuccess}
-            variant="contained"
-            onClick={handleSave}
-            disabled={!formState.isValid}
-          >
-            Search
-          </Button>
-      </form>
-    </Card>
+                </CardActions>
+            </form>
+        </Card>
   );
 };
 

@@ -321,6 +321,7 @@ const VuserList=props => {
 
   const handleDelete=(e,rowVuserSelect) => {
     deleteUser(rowVuserSelect.id)
+    
   };
 
   /* */
