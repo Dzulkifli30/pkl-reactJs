@@ -169,6 +169,16 @@ const hasError=field => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
+
+    let nama = event.target.name.replace("id", "nama")
+        if (event.target.name == "id_kabupaten") {
+            setRowSelect({
+                ...rowSelect,
+                [nama]: pencarian(kab, event.target.value),
+                [event.target.name]: event.target.value,
+            });
+            // console.log("Ket kecamatan =", kecamatan)
+    }
   }
 
   const handleChange2 = event => {
@@ -180,7 +190,18 @@ const hasError=field => {
     handleChange(event)
     showKab(event.target.value)
   }
-  
+
+    const pencarian = (paramKec, id_kab) => {
+          let value = id_kab
+          let result = [];
+          // alert(value)
+          result = paramKec.filter((entry) => {
+              return entry && entry.id_kabupaten && (entry.id_kabupaten === value)
+          });
+          // console.log("result =", result[0].nama_kecamatan)
+          // alert("result = " + result[0].nama_kecamatan)
+          return result[0].nama_kabupaten
+    }
 
   const handling =()=>{
     {

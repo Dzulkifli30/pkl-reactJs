@@ -137,12 +137,34 @@ const hasError=field => {
       ...rowSelect,
       [event.target.name]: event.target.value
     });
+
+    let nama = event.target.name.replace("id", "nama")
+    if (event.target.name == "id_provinsi") {
+        setRowSelect({
+            ...rowSelect,
+            [nama]: pencarian(kab, event.target.value),
+            [event.target.name]: event.target.value,
+        });
+        // console.log("Ket kecamatan =", kecamatan)
+    }
   }
 
 
   const handleChange2 = event => {
     handleChange(event)
     showTargetKkPerProv(event.target.value)
+  }
+
+  const pencarian = (paramKec, id_prov) => {
+    let value = id_prov
+    let result = [];
+    // alert(value)
+    result = paramKec.filter((entry) => {
+        return entry && entry.id_provinsi && (entry.id_provinsi === value)
+    });
+    // console.log("result =", result[0].nama_kecamatan)
+    // alert("result = " + result[0].nama_kecamatan)
+    return result[0].nama_provinsi
   }
 
   return (
