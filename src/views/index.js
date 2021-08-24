@@ -3,6 +3,7 @@ export { default as NotFound } from './NotFound';
 export { default as SignIn } from './SignIn';
 export { default as Signout } from './Signout';
 export { default as SignUp } from './SignUp';
+export {default as Profile } from './Profile';
 
 export {default as VisitorUser} from './Dashboard/components/VisitorUser/';
 export {default as ProvinsiList} from './ProvinsiList'

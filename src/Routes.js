@@ -45,6 +45,7 @@ import {
   TargetKkList as TargetKkListView,
   LaporanSensusPerKab as LaporanSensusPerKabVIew,
   LaporanSensusPerProv as LaporanSensusPerProvView,
+  Profile as ProfileView,
 
 
 
@@ -66,6 +67,12 @@ const Routes=() => {
         layout={MainLayout}
         path="/setting"
       />
+      <RouteWithLayout
+      component={ProfileView}
+      exact
+      layout={MainLayout}
+      path="/profile"
+    />
       <RouteWithLayout
         component={KelompokDataListView}
         exact

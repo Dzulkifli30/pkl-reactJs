@@ -105,7 +105,7 @@ const Main=props => {
                           <a href="/logout" className="btn btn-default btn-flat">Log out</a>
                         </div>
                         <div className="pull-right">
-                          <a href="#" className="btn btn-default btn-flat">Profile</a>
+                          <a href="/profile" className="btn btn-default btn-flat">Profile</a>
                         </div>
                       </li>
                     </ul>
