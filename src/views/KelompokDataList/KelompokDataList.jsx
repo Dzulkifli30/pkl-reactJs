@@ -15,6 +15,7 @@ import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
 import { async } from 'validate.js';
+import Swal from 'sweetalert2';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -303,7 +304,11 @@ const KelompokDataList=props => {
   };
 
   const handleDelete=(e,rowVuserSelect) => {
-    deleteKelompokData(rowVuserSelect.Id_kelompok_data)
+    deleteKelompokData(rowVuserSelect.Id_kelompok_data).then( Swal.fire( {position: 'center',
+    icon: 'success',
+    title: 'Sukses Menambah Data',
+    showConfirmButton: false,
+    timer: 1000}))
     
   };
 

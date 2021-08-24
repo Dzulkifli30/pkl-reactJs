@@ -12,6 +12,7 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import mockDataSettingProvinsi from './dataSettingprovinsi';
 import { urlProv,urlDeleteProv } from 'kumpulanUrl';
+import Swal from 'sweetalert2';
 
 
 import '../../assets/vendor/dist/css/datatable.css';
@@ -325,7 +326,13 @@ const ProvinsiList=props => {
   };
 
   const handleDelete=(e,rowProvinsisSelect) => {
-    deleteProv(rowProvinsisSelect.id_provinsi)
+    deleteProv(rowProvinsisSelect.id_provinsi).then(Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Data Berhasil Dihapus',
+      showConfirmButton: false,
+      timer: 1000
+    }))
     
   };
 

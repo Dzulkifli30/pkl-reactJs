@@ -228,11 +228,11 @@ const LaporanKelurahanTable=props => {
       </div>
 
       <div class="col-md-6">
-        <SearchInput
+        {/* <SearchInput
           className={classes.searchInput}
           placeholder="Search Kelurahan"
           textfind={textfind}
-        />
+        /> */}
       </div>
     </div>
 

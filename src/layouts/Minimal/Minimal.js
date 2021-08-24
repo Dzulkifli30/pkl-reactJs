@@ -7,6 +7,7 @@ import '../../../src/assets/vendor/dist/font-awesome-4.1.0/css/font-awesome.css'
 import '../../../src/assets/vendor/dist/css/AdminLTE.min.css';
 import '../../../src/assets/vendor/plugins/iCheck/square/blue.css';
 import '../../../src/assets/vendor/dist/css/custom.css';
+import { bg_login } from 'assets/img_master_backup';
 
 const useStyles=makeStyles(() => ({
   root: {
@@ -25,8 +26,12 @@ const Minimal=props => {
 
   return (
 
+    
     <div className="login-box">
-      <div className="login-logo"> <img src="/assets/dist/img/bkkbn-logo-sm.png" width="253" height="62" /><h3>System Point Reward</h3>
+      <div className="login-logo"> 
+        <img src="/assets/dist/img/bkkbn-logo-sm.png" width="253" height="62" />
+        <h3>System Informasi Sensus</h3>
+        <h3>Ruang Administrasi</h3>
       </div>
       {/*<!-- /.login-logo -->*/}
       <div className="login-box-body">
@@ -47,7 +52,9 @@ const Minimal=props => {
       {
         ImportScript("/assets/dist/js/changebodyMinimal.js")
       }
+      
     </div>
+    
 
 
   );

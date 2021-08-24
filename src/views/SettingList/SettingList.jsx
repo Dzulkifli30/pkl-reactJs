@@ -14,6 +14,7 @@ import { urlKab,urlGetVuser,urlGetSetting, urlDeleteSetting } from '../../kumpul
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { async } from 'validate.js';
 
 //import Modal from "@material-ui/core/Modal";
@@ -23,7 +24,7 @@ import { async } from 'validate.js';
 const getMockData=() =>{
   mockData.map(mock => {
     return(
-      <h4>{mock}</h4>
+      <h4>Setting</h4>
 
     )
   })
@@ -322,7 +323,13 @@ const VuserList=props => {
   };
 
   const handleDelete=(e,rowVuserSelect) => {
-    deleteSetting(rowVuserSelect.id_setting)
+    deleteSetting(rowVuserSelect.id_setting).then(  Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your work has been saved',  
+      showConfirmButton: false,
+      timer: 1500
+    }))
     
   };
 
@@ -362,7 +369,7 @@ const VuserList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Vuser</h5>
+      <h5 className="font-poppins align-middle font-medium" style={{ color: 'black' }}>Setting</h5>
       {/*}
       <VuserToolbar
         handleOpenViewMap={handleOpenViewMap}

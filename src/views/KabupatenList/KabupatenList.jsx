@@ -167,8 +167,8 @@ const KabupatenList=props => {
     if (e.target.value.length>=3) {
       setkabupatenfind(e.target.value)
       let kabupaten4=kabupaten.filter(function (entry) {
-        return entry&&entry.nama_provinsi&&
-          ((entry.nama_provinsi!==null? entry.nama_provinsi:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
+        return entry&&entry.nama_kabupaten&&
+          ((entry.nama_kabupaten!==null? entry.nama_kabupaten:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
       setFilteredItems(Array.isArray(kabupaten4)? kabupaten4:[kabupaten4]);
 
@@ -330,7 +330,7 @@ const KabupatenList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Kabupaten</h5>
+      <h5 style={{ color: 'black' }} className="font-poppins">Kabupaten</h5>
       {/*}
       <kabupatenToolbar
         handleOpenViewMap={handleOpenViewMap}

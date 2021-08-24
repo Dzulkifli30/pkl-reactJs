@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { useMediaQuery } from '@material-ui/core';
-
+import { Link } from 'react-router-dom';
+import { urlProv,urlKab,urlKec,urlKel,urlRw,urlRt,urlGetVuser } from 'kumpulanUrl';
 import { Sidebar, Topbar, Footer, ImportScript } from './components';
 import '../../../src/assets/vendor/bootstrap/css/bootstrap.min.css';
 import '../../../src/assets/vendor/dist/font-awesome-4.1.0/css/font-awesome.css';
 import '../../../src/assets/vendor/dist/css/AdminLTE.min.css';
 import '../../../src/assets/vendor/dist/css/skins/_all-skins.min.css';
 import '../../../src/assets/vendor/dist/css/custom.css';
+import { select } from 'underscore';
 
 /**/
 const useStyles=makeStyles(theme => ({
@@ -31,13 +33,14 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const Main=props => {
-  const { children }=props;
+  const { children,rowSelect }=props;
 
   const classes=useStyles();
   const theme=useTheme();
   const isDesktop=useMediaQuery(theme.breakpoints.up('lg'), {
     defaultMatches: true
   });
+
 
   const [openSidebar, setOpenSidebar]=useState(false);
 
@@ -56,10 +59,10 @@ const Main=props => {
       <div className="wrapper">
 
         <header className="main-header">
-          <nav className="navbar navbar-static-top">
+          <nav className="navbar navbar-static-top  ">
             <div className="container">
               <div className="navbar-header">
-                <a href="index2.html" className="navbar-brand"><img src="assets/dist/img/bkkbn-logo-sm.png" height="auto" width="220px" className="img-responsive" /></a>
+                <a href="/beranda" className="navbar-brand"><img src="assets/dist/img/bkkbn-logo-sm.png" height="auto" width="130px" className="img-responsive" /></a>
                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                   <i className="fa fa-bars"></i>
                 </button>
@@ -83,7 +86,7 @@ const Main=props => {
                       {/*<!-- The user image in the navbar-->*/}
                       {/*<!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->*/}
                       {/*<!-- hidden-xs hides the username on small devices so only the image appears. --> */}
-                      <span className="hidden-xs">User aktif &gt; <b>{localStorage.getItem("NamaLengkap")}</b></span>
+                      <span className="hidden-xs"><b>{localStorage.getItem("NamaLengkap")}</b></span>
                     </a>
                     <ul className="dropdown-menu">
                       {/*<!-- The user image in the menu -->*/}
@@ -114,8 +117,8 @@ const Main=props => {
           </nav>
         </header>
         {/*<!-- Full Width Column -->*/}
-        <div className="content-wrapper">
-          <div className="container">
+        <div className="content-wrapper font-poppins" >
+          <div className="container font-poppins">
             {/*<!-- Content Header (Page header) -->*/}
             <section className="content-header">
               <h1>&nbsp;
@@ -128,17 +131,17 @@ const Main=props => {
             </section>
 
             {/*<!-- Main content -->*/}
-            <section className="content">
+            <section className="content ">
               <div className="box box-default">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Homepage</h3>
+                  <h3 className="box-title font-poppins">Periode {localStorage.getItem("Periode Sensus")}</h3>
                 </div>
-                <div className="box-body">
+                <div className="box-body font-poppins">
                   <main id="main">
                     {children}
                   </main>
 
-                  Welcome to <strong>System Point Reward Application</strong>
+                {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}!! to Periode Sensus Tahun {localStorage.getItem("Periode Sensus")}
                 </div>{/*<!-- /.box-body -->*/}
               </div>{/*<!-- /.box -->*/}
             </section>
@@ -149,7 +152,7 @@ const Main=props => {
         {/*<!-- /.content-wrapper -->*/}
         <footer className="main-footer">
           <div className="container">
-            Copyright &copy; 2016. Central Sentosa Finance. All rights reserved.
+            Copyright &copy; {localStorage.getItem("Periode Sensus")}. BKKBN. All rights reserved.
           </div>
           {/*<!-- /.container -->*/}
         </footer>

@@ -9,7 +9,7 @@ const RouteWithLayout=props => {
     <Route
       {...rest}
       render={matchProps => (
-        <Layout>
+        <Layout className="font-poppins">
           <Component {...matchProps} />
         </Layout>
       )}

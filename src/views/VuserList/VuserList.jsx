@@ -15,6 +15,7 @@ import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
 import axios from 'axios';
 import { async } from 'validate.js';
+import Swal from 'sweetalert2';
 
 //import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
@@ -320,7 +321,13 @@ const VuserList=props => {
   };
 
   const handleDelete=(e,rowVuserSelect) => {
-    deleteUser(rowVuserSelect.id)
+    deleteUser(rowVuserSelect.id).then(Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Data Berhasil Dihapus',
+      showConfirmButton: false,
+      timer: 1000
+    }))
     
   };
 

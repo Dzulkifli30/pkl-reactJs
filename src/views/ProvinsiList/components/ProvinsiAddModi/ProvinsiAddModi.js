@@ -19,7 +19,7 @@ import { urlAddProv, urlEditProv } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 const schema={
   KodeDepdagri: {
     presence: { allowEmpty: false, message: 'harus diisi' },
@@ -186,7 +186,24 @@ const ProvinsiAddModi=props => {
         // console.log(tester)
         // alert(tester.message)
         getDataBackend();
-        swal("Berhasil Tambah data", "berhasil", "success").then(
+        if (url == urlAddProv) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Menambah Data',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }if(url == urlEditProv){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Memperbarui Data',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }
+        then(
           handleClose()
           )
         // alert("Sukses")

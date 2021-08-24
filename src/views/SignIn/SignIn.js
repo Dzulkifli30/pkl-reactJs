@@ -6,7 +6,7 @@ import validate from 'validate.js';
 import md5 from 'md5'
 import swal from '@sweetalert/with-react';
 import '../../assets/css_swal/cssSwal.css';
-
+import {bg_login} from '../../assets/img_master_backup/index'
 import { makeStyles } from '@material-ui/styles';
 import {
   Grid,
@@ -183,6 +183,7 @@ const SignIn=props => {
             localStorage.setItem('Jabatan', data.data[0].Jabatan);
             localStorage.setItem('Foto', data.data[0].Foto);
             localStorage.setItem('Periode Sensus', data.data2[0].value_setting);
+            localStorage.setItem('Setting Label', data.data3[0].value_setting);
             window.location='/beranda';
             //history.push('/beranda');
 
@@ -267,7 +268,8 @@ const SignIn=props => {
           xs={12}
         >
           <div className={classes.content}>
-            <div className={classes.contentBody} style={{ width: '100%' }}>
+            {/* <div>{bg_login}</div> */}
+            <div className="d-md flex" style={{ width: '100%' }}>
               <form
                 className={classes.form}
                 onSubmit={handleSignIn}
@@ -292,7 +294,7 @@ const SignIn=props => {
                       variant="h6"
                       margin="normal"
                     >
-                      ID Pengguna
+                      Username Pengguna
                     </Typography>
                   </Grid>
                   <Grid
@@ -382,6 +384,7 @@ const SignIn=props => {
         </Grid>
       </Grid>
     </div>
+    
   );
 };
 

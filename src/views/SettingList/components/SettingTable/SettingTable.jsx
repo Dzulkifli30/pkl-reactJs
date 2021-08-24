@@ -227,7 +227,7 @@ const SettingTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Vuser")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Setting")}  ><EditIcon /></Button>
       ,
     },
     {
@@ -251,7 +251,7 @@ const SettingTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Vuser")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Setting")}>
           <AddIcon/>
         </Button>
 
@@ -260,7 +260,7 @@ const SettingTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Vuser"
+          placeholder="Search Setting"
           textfind={textfind}
         />
       </div>

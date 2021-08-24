@@ -19,7 +19,7 @@ import { urlAddKelompokData, urlEditKelompokData } from '../../../../kumpulanUrl
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2'
 const schema={
   nama_kelompok_data: {
     presence: { allowEmpty: false, message: 'harus diisi' },
@@ -31,6 +31,7 @@ const schema={
   /**/
 
 };
+// const Swal = require('sweetalert2')
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -132,15 +133,18 @@ const KelompokDataAddModi=props => {
   const handleSave=(event) => {
     const userName=localStorage.getItem('username');
     let varJson = {
-      "nama_kelompok_data": rowSelect.nama_kelompok_data,
+      "nama_kelompok_data":rowSelect.nama_kelompok_data,
+      "Id_kelompok_data":rowSelect.Id_kelompok_data,
     }
     let url=urlAddKelompokData;
-    if (rowSelect.id_provinsi===undefined) {
+    if (title=='Tambah Kelompok Data') {
       url=urlAddKelompokData;
       varJson.CreatedBy = userName
       varJson.LastModifiedBy = userName
     } else {
       url=urlEditKelompokData;
+      // console.log("ide =",rowSelect.id_rt)
+
       varJson.LastModifiedBy = userName
     }
 
@@ -160,10 +164,10 @@ const KelompokDataAddModi=props => {
 
     ///let urlGetData=urlPostLogin
     // alert(url);
+    console.log(url)
     const response=fetch(url, requestOptions)
       .then(tester => {
-        if (tester.status === 200) {
-          // alert('berhasil')
+        if (tester.status === 200) {  
        handleClose();
           return tester.json();
         }
@@ -173,16 +177,30 @@ const KelompokDataAddModi=props => {
       .then(tester => {
         console.log(tester)
         // alert(tester)
-        getDataBackend();
-      swal("Berhasil", "Sukses Menambah Data", "success",  )
+      getDataBackend();if (url == urlAddKelompokData) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditKelompokData){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
         // alert("Sukses")
         const data=tester;
       })
       .catch((e) => {
-
-        // alert(e)
+        alert(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
-
         return false;
 
 
@@ -213,7 +231,7 @@ const KelompokDataAddModi=props => {
       >
         <CardHeader
           subheader=""
-        title="Kelompok Data"
+        title={title}
         />
         <Divider />
         <CardContent>

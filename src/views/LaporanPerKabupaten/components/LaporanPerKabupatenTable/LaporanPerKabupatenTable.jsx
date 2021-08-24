@@ -228,7 +228,7 @@ const LaporanPerKabupatenTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-
+    
       </div>
     </div>
 

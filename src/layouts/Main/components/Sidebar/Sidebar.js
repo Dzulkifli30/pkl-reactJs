@@ -66,7 +66,7 @@ const Sidebar=props => {
 
 
 
-  const pages=[
+  const pages=[ 
     {
       title: 'Beranda',
       href: '/beranda',
@@ -197,10 +197,13 @@ const Sidebar=props => {
   return (
 
     /*<!-- ======= Header======= -->*/
+    
     <SidebarNav
       className={classes.nav}
       pages={pages}
     />
+    
+    
 
 
     /*<!-- End Header -->*/
