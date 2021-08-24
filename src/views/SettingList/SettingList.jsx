@@ -23,7 +23,7 @@ import { async } from 'validate.js';
 const getMockData=() =>{
   mockData.map(mock => {
     return(
-      <h4>{mock}</h4>
+      <h4>Setting</h4>
 
     )
   })

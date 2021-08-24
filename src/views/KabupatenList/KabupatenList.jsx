@@ -330,7 +330,7 @@ const KabupatenList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Kabupaten</h5>
+      <h5 style={{ color: 'black' }} className="font-poppins">Kabupaten</h5>
       {/*}
       <kabupatenToolbar
         handleOpenViewMap={handleOpenViewMap}

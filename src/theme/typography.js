@@ -59,6 +59,7 @@ export default {
   body1: {
     color: palette.text.primary,
     fontSize: '14px',
+    // fontFamily:'Poppins',
     letterSpacing: '-0.05px',
     lineHeight: '21px'
   },
@@ -66,6 +67,7 @@ export default {
     color: palette.text.secondary,
     fontSize: '12px',
     letterSpacing: '-0.04px',
+    // fontFamily:'Poppins',
     lineHeight: '18px'
   },
   button: {
