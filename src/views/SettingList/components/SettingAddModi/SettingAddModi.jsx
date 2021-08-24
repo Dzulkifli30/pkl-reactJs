@@ -19,7 +19,7 @@ import { urlAddSetting, urlEditSetting,urlGetKelompokData,urlShowKelompokData } 
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 const schema={
   nama: {
     presence: { allowEmpty: false, message: 'harus diisi' },
@@ -198,36 +198,51 @@ const SettingAddModi=props => {
     // alert(url);
     // console.log(url)
     const response=fetch(url, requestOptions)
-      .then(tester => {
-        if (tester.status === 200) {  
-       handleClose();
-          return tester.json();
-        }
-       
-      })/**/
-
-      .then(tester => {
-        // console.log(tester)
-        // alert(tester)
-      getDataBackend();if (url = urlAddSetting) {
-        swal("Berhasil", "Sukses Menambah Data", "success",  )
-      }if(url = urlEditSetting){
-        swal("Berhasil", "Sukses Mengupdate Data", "success",  )
+    .then(tester => {
+      if (tester.status === 200) {
+        // alert('berhasil')
+     handleClose();
+        return tester.json();
       }
+     
+    })/**/
 
-        // alert("Sukses")
-        const data=tester;
-      })
-      .catch((e) => {
-        // alert(e)
-        // swal("Gagal Login!", "Gagal Login", "error",  )
-        return false;
+    .then(tester => {
+      console.log(tester)
+      // alert(tester)
+      getDataBackend();
+      if (url == urlAddSetting) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditSetting){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+      // alert("Sukses")
+      const data=tester;
+    })
+    .catch((e) => {
+
+      // alert(e)
+      // swal("Gagal Login!", "Gagal Login", "error",  )
+
+      return false;
 
 
-      });
+    });
 
 
-  }
+}
 
 
 
@@ -251,7 +266,7 @@ const SettingAddModi=props => {
       >
         <CardHeader
           subheader=""
-        title="Setting"
+        title={title}
         />
         <Divider />
         <CardContent>

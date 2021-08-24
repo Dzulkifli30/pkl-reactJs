@@ -19,7 +19,7 @@ import { urlAddVuser, urlEditVuser } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 const schema={
   UserName: {
     presence: { allowEmpty: false, message: 'harus diisi' },
@@ -191,6 +191,23 @@ const VuserAddModi=props => {
       .then(res => {
         console.log(res)
         getDataBackend();
+        if (url == urlAddVuser) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Menambah Data',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }if(url == urlEditVuser){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Memperbarui Data',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }
 
 
         const data=res;

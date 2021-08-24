@@ -223,7 +223,7 @@ const KelompokDataTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Kelompok Data")}  ><EditIcon /></Button>
       ,
     },
     {
@@ -247,7 +247,7 @@ const KelompokDataTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Vuser")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Kelompok Data")}>
           <AddIcon/>
         </Button>
 
@@ -256,7 +256,7 @@ const KelompokDataTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Vuser"
+          placeholder="Search Kelompok Data"
           textfind={textfind}
         />
       </div>

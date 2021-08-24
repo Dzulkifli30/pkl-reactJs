@@ -1,19 +1,19 @@
-.swal-icon:first-child {
-    margin-top: 5px;
+/* .swal-icon:first-child {
+    margin-top: 10px;
 }
 .swal-icon {
     width: 80px;
     height: 80px;
-    border-width: 4px;
+    border-width: 2px;
     border-style: solid;
     border-radius: 50%;
     padding: 1px;
     position: relative;
     box-sizing: content-box;
-    margin: 8px auto;
+    margin: 10px auto;
 }
 .swal-button {
-    background-color: #7cd1f9;
+    background-color: #2ef57a;
     color: #fff;
     border: none;
     box-shadow: none;
@@ -31,11 +31,11 @@
     height: 144px;
 }
 .swal-modal {
-    width: 278px;
+    width: 250px;
     opacity: 0;
     height: 200px;
     pointer-events: none;
-    background-color:rgb(206,234,245);
+    background-color:rgb(145, 159, 240);
     text-align: center;
     border-radius: 5px;
     position: static;
@@ -54,7 +54,7 @@
 .swal-icon img{
   width: 50px;
   height: 50px;
-}
+} */
 
 /*
 .swal-icon:first-child {
@@ -109,4 +109,4 @@
     opacity: 1;
     pointer-events: auto;
 }
-*/
+ */ 

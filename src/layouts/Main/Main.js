@@ -117,8 +117,8 @@ const Main=props => {
           </nav>
         </header>
         {/*<!-- Full Width Column -->*/}
-        <div className="content-wrapper">
-          <div className="container">
+        <div className="content-wrapper font-poppins" >
+          <div className="container font-poppins">
             {/*<!-- Content Header (Page header) -->*/}
             <section className="content-header">
               <h1>&nbsp;
@@ -131,17 +131,17 @@ const Main=props => {
             </section>
 
             {/*<!-- Main content -->*/}
-            <section className="content">
+            <section className="content ">
               <div className="box box-default">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Homepage</h3>
+                  <h3 className="box-title font-poppins">Periode {localStorage.getItem("Periode Sensus")}</h3>
                 </div>
                 <div className="box-body font-poppins">
                   <main id="main">
                     {children}
                   </main>
 
-                 Welcome {localStorage.getItem("NamaLengkap")} to Periode Sensus Tahun {localStorage.getItem("Periode Sensus")}
+                {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}!! to Periode Sensus Tahun {localStorage.getItem("Periode Sensus")}
                 </div>{/*<!-- /.box-body -->*/}
               </div>{/*<!-- /.box -->*/}
             </section>

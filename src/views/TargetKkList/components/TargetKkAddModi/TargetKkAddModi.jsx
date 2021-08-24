@@ -23,7 +23,7 @@ urlRw, urlKel, urlKec, urlKab, urlProv, urlShowKab, urlShowKec, urlShowKel, urlS
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 const schema={
   Target_KK: {
     presence: { allowEmpty: false, message: 'harus diisi' },
@@ -512,7 +512,7 @@ const TargetKkAddModi=props => {
 
 
     ///let urlGetData=urlPostLogin
-    alert(url);
+    // alert(url);
     console.log(url)
     const response=fetch(url, requestOptions)
       .then(tester => {
@@ -526,10 +526,23 @@ const TargetKkAddModi=props => {
       .then(tester => {
         console.log(tester)
         // alert(tester)
-      getDataBackend();if (url = urlAddTargetKk) {
-        swal("Berhasil", "Sukses Menambah Data", "success",  )
-      }if(url = urlEditTargetKk){
-        swal("Berhasil", "Sukses Mengupdate Data", "success",  )
+      getDataBackend();
+      if (url == urlAddKelompokData) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditKelompokData){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
       }
 
         // alert("Sukses")
