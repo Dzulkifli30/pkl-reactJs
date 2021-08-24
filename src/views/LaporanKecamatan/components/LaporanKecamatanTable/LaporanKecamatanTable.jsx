@@ -230,18 +230,18 @@ const LaporanKecamatanTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [],)}>
+        {/* <Button onClick={(e) => handleOpen(e, [],)}>
           <SearchIcon/>
-        </Button>
+        </Button> */}
 
       </div>
 
       <div class="col-md-6">
-        <SearchInput
+        {/* <SearchInput
           className={classes.searchInput}
           placeholder="Search Kecamatan"
           textfind={textfind}
-        />
+        /> */}
       </div>
     </div>
 
