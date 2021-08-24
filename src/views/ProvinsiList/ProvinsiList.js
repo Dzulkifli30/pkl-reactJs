@@ -365,7 +365,6 @@ const ProvinsiList=props => {
         title={title} datas={filteredItems} handleClose={handleClose} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
-
     )
   }
 
