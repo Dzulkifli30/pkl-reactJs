@@ -363,7 +363,12 @@ const VuserAddModi=props => {
                 variant="outlined"
               />
             </Grid>
-                          <TextField
+                         
+            <Grid
+             item
+             md={6}
+             xs={12}>
+              <TextField
                 fullWidth
                 label="Password"
                 type="password"
@@ -378,6 +383,7 @@ const VuserAddModi=props => {
                 defaultValue={rowSelect&&rowSelect.Password? rowSelect.Password:''}
                 variant="outlined"
               />
+            </Grid>
           </Grid>
         </CardContent>
         <Divider />
