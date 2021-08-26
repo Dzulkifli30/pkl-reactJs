@@ -9,6 +9,7 @@ let ulrportRefresh="http://localhost:8000/";
 export const urlPostLogin=ulrport+'vuser/showUser'
 export const urlAddVuser=ulrport+'vuser/storeUser'
 export const urlEditVuser=ulrport+'vuser/updateUser'
+export const urlUbahPassword=ulrport+'vuser/ubahPassword'
 export const urlGetVuser=ulrport+'vuser/getUser'
 export const urlDeleteUser=ulrport+'vuser/deleteUser'
 

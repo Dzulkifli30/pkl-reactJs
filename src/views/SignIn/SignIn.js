@@ -7,6 +7,7 @@ import md5 from 'md5'
 import swal from '@sweetalert/with-react';
 import '../../assets/css_swal/cssSwal.css';
 import {bg_login} from '../../assets/img_master_backup/index'
+import Swal from 'sweetalert2';
 import { makeStyles } from '@material-ui/styles';
 import {
   Grid,
@@ -179,15 +180,17 @@ const SignIn=props => {
             localStorage.setItem('username', data.data[0].UserName);
             localStorage.setItem('NamaLengkap', data.data[0].NamaLengkap);
             localStorage.setItem('roleName', data.data[0].roleName);
-            localStorage.setItem('accessId', data.data[0].accessId);
+            localStorage.setItem('id', data.data[0].id);
             localStorage.setItem('Jabatan', data.data[0].Jabatan);
+            localStorage.setItem('Alamat', data.data[0].Alamat);
+            localStorage.setItem('NIK', data.data[0].NIK);
             localStorage.setItem('Foto', data.data[0].Foto);
             localStorage.setItem('Periode Sensus', data.data2[0].value_setting);
             localStorage.setItem('Setting Label', data.data3[0].value_setting);
             window.location='/beranda';
             //history.push('/beranda');
 
-          } else {
+          } else {  
             console.log(data);
             setFormState(formState => ({
               ...formState,
@@ -198,12 +201,14 @@ const SignIn=props => {
               isValid: false,
               errors: true
             }));
-            swal(
-              <div>
-                <img src='/assets/images/error.png' width='40px' height='40px'></img>
-                <h3>{data.code} sasa</h3>
-              </div>
-            )
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Login Tidak Sesuai  ',
+              showConfirmButton: false,
+              timer: 1000
+            })
+            
             return false;
           }
         })
@@ -216,7 +221,7 @@ const SignIn=props => {
             errors: false
           }));
 
-          swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+          swal("Gagal Login!", "Gagal Login", "error")
 
           return false;
 

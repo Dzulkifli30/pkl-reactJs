@@ -57,14 +57,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const VuserTable=props => {
+const ProfileTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
-    textfind,Vuserfind,
-    order, orderBy, SettingVuser,
-    VuserExport, filteredItems, handleOpen, selectedVuser,
-    setSelectedVuser,
+    textfind,provinsifind,
+    order, orderBy, SettingProvinsi,
+    provinsisExport, filteredItems, handleOpen, selectedProvinsis,
+    setSelectedProvinsis,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -193,63 +193,48 @@ const VuserTable=props => {
 
   const columns=[
     {
-      name: 'Vuser ID',
-      selector: 'id',
+      name: 'Provinsi ID',
+      selector: 'id_provinsi',
       sortable: true,
     },
     {
-      name: 'Nama User',
-      selector: 'UserName',
+      name: 'Edit Provinsi',
+      button: true,
+      cell: row =>
+        <Button color="primary"
+          onClick={(e) => handleOpen(e, row, "Ubah Provinsi")}  ><EditIcon /></Button>
+      ,
+    },
+    {
+      name: 'Hapus Provinsi',
+      button: true,
+      cell: row =>
+        <Button color="primary"
+          onClick={(e) => handleDelete(e, row, "Hapus Provinsi")} ><DeleteIcon /></Button>
+      ,
+    },
+    {
+      name: 'CreatedBy',
+      selector: 'CreatedBy',
       sortable: true,
     },
     {
-      name: 'Nama Lengkap',
-      selector: 'NamaLengkap',
+      name: 'Created',
+      selector: 'Created',
       sortable: true,
     },
     {
-      name: 'Alamat',
-      selector: 'Alamat',
-      sortable: true,
-    },
-    {
-      name: 'NIK',
-      selector: 'NIK',
-      sortable: true,
-    },
-    {
-      name: 'Created At',
-      selector: 'CreatedDate',
-      sortable: true,
-    },
-    {
-      name: 'Last Modified',
+      name: 'LastModified',
       selector: 'LastModified',
       sortable: true,
     },
     {
-      name: 'Jabatan',
-      selector: 'Jabatan',
+      name: 'LastModifiedBy',
+      selector: 'LastModifiedBy',
       sortable: true,
     },
-    {
-      name: 'Edit Vuser',
-      button: true,
-      cell: row =>
-        <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Vuser")}  ><EditIcon /></Button>
-      ,
-    },
-    {
-      name: 'Hapus Vuser',
-      button: true,
-      cell: row =>
-        <Button color="primary"
-          onClick={(e) => handleDelete(e, row, "Delete Vuser")} ><DeleteIcon /></Button>
-      ,
-    },
   ];
-  // const filteredItems=Vuser.filter(item => item.nama_Vuser&&item.nama_Vuser.toLowerCase().includes(filterText.toLowerCase()));
+  // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
     const handleClear=() => {
       if (filterText) {
@@ -262,7 +247,7 @@ const VuserTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Vuser")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambahah Provinsi")}>
           <AddIcon/>
         </Button>
 
@@ -271,7 +256,7 @@ const VuserTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Vuser"
+          placeholder="Search Provinsi"
           textfind={textfind}
         />
       </div>
@@ -295,36 +280,36 @@ const VuserTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedVuser_var;
+    let selectedProvinsis_var;
 
     if (event.target.checked) {
-      selectedVuser_var=Vuser.map(Vuser => Vuser.id);
+      selectedProvinsis_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedVuser_var=[];
+      selectedProvinsis_var=[];
     }
 
-    setSelectedVuser(selectedVuser_var);
+    setSelectedProvinsis(selectedProvinsis_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedVuser.indexOf(id);
-    let newSelectedVuser=[];
+    const selectedIndex=selectedProvinsis.indexOf(id);
+    let newSelectedProvinsis=[];
 
     if (selectedIndex===-1) {
-      newSelectedVuser=newSelectedVuser.concat(selectedVuser, id);
+      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis, id);
     } else if (selectedIndex===0) {
-      newSelectedVuser=newSelectedVuser.concat(selectedVuser.slice(1));
-    } else if (selectedIndex===selectedVuser.length-1) {
-      newSelectedVuser=newSelectedVuser.concat(selectedVuser.slice(0, -1));
+      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(1));
+    } else if (selectedIndex===selectedProvinsis.length-1) {
+      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedVuser=newSelectedVuser.concat(
-        selectedVuser.slice(0, selectedIndex),
-        selectedVuser.slice(selectedIndex+1)
+      newSelectedProvinsis=newSelectedProvinsis.concat(
+        selectedProvinsis.slice(0, selectedIndex),
+        selectedProvinsis.slice(selectedIndex+1)
       );
     }
 
-    setSelectedVuser(newSelectedVuser);
+    setSelectedProvinsis(newSelectedProvinsis);
     //console.log(selectedUsers);
   };
 
@@ -335,7 +320,7 @@ const VuserTable=props => {
   const handleRowsPerPageChange=event => {
     setRowsPerPage(event.target.value);
   };
-  //  const filteredItems=Vuser;
+  //  const filteredItems=provinsis;
   //const actionsMemo=React.useMemo(() => <Export onExport={() => downloadCSV()} />, []);
 
   return (
@@ -348,11 +333,11 @@ const VuserTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Vuser List"
+              title="Provinsi List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="UserName"
+              keyField="nama_provinsi"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -372,9 +357,9 @@ const VuserTable=props => {
   );
 };
 
-VuserTable.propTypes={
+ProfileTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default VuserTable;
+export default ProfileTable;

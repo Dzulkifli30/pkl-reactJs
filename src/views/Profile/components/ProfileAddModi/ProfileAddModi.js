@@ -15,39 +15,32 @@ import {
 } from '@material-ui/core';
 import L from 'leaflet';
 import axios from 'axios';
-import { urlAddVuser, urlEditVuser } from '../../../../kumpulanUrl';
+import { urlAddProv, urlEditProv, urlU, urlUbahPassword } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 import Swal from 'sweetalert2';
 const schema={
-  UserName: {
+  KodeDepdagri: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
       maximum: 200
     }
   },
-  NamaLengkap: {
+  nama_provinsi: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     length: {
       maximum: 200
     }
   },
-  Jabatan: {
+  IsActive: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
-    length: {
-      maximum: 200
-    }
-  },
-  Password: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    length: {
-      maximum: 200
-    }
+    /* length: {
+       maximum: 1
+     }*/
   },
   /**/
 
@@ -75,7 +68,7 @@ const useStyles=makeStyles(theme => ({
   },
 }));
 
-const VuserAddModi=props => {
+const ProfileAddModi=props => {
   const { className, setData, getDataBackend,getMockData, setRowSelect, rowSelect, title, ...rest }=props;
 
   const classes=useStyles();
@@ -108,7 +101,7 @@ const VuserAddModi=props => {
 
   useEffect(() => {
     /*
-    if (rowSelect.Password==='1') {
+    if (rowSelect.IsActive==='1') {
       rowSelect.status='Active'
     } else if (rowSelect.status==='0') {
       rowSelect.status='Non Activw'
@@ -120,7 +113,7 @@ const VuserAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -151,13 +144,15 @@ const VuserAddModi=props => {
   }
 
   const handleSave=(event) => {
-    const userId=localStorage.getItem('user_id');
-    let url=urlAddVuser;
-    if (rowSelect.id===undefined) {
-      url=urlAddVuser;
-    } else {
-      url=urlEditVuser;
+    const userName=localStorage.getItem('username');
+    let varJson = {
+      "Password": rowSelect.Password,
+      "confirmPassword": rowSelect.confirmPassword,
+      "id": rowSelect.id,
     }
+    let url=urlUbahPassword;
+    // alert(url)
+    varJson.LastModifiedBy = userName;
 
     //console.log(body);
 
@@ -167,63 +162,37 @@ const VuserAddModi=props => {
       method: 'POST',
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "UserName": rowSelect.UserName,
-        "id": rowSelect.id,
-        "NamaLengkap": rowSelect.NamaLengkap,
-        "NIK": rowSelect.NIK,
-        "Alamat": rowSelect.Alamat,
-        "Jabatan": rowSelect.Jabatan,
-        "Password": rowSelect.Password,
-      })
+      body: JSON.stringify(
+        varJson,
+      )
     };
 
 
     ///let urlGetData=urlPostLogin
     // alert(url);
     const response=fetch(url, requestOptions)
-      .then(res => {
-        if (res.status === 200) {
-       handleClose();
-          return res.json();
-        }
-       
+      .then(tester => {
+
+        return tester.json();
       })/**/
-
-      .then(res => {
-        console.log(res)
-        getDataBackend();
-        if (url == urlAddVuser) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Sukses Menambah Data',
-            showConfirmButton: false,
-            timer: 1000
-          })
-        }if(url == urlEditVuser){
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Sukses Memperbarui Data',
-            showConfirmButton: false,
-            timer: 1000
-          })
-        }
-
-
-        const data=res;
-      })
+      .then(
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      )
       .catch((e) => {
 
-    
+        // alert(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
 
         return false;
 
 
       });
-
 
   }
 
@@ -249,8 +218,7 @@ const VuserAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title= {rowSelect.id === 1 ? "Edit User" : "Tambah User"}
-          title={rowSelect.id == undefined ? "Tambah User" : "Ubah User"}
+
         />
         <Divider />
         <CardContent>
@@ -265,16 +233,17 @@ const VuserAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="Nama Pengguna"
+                label="Password"
+                type="password"
                 margin="dense"
-                name="UserName"
+                name="Password"
                 onChange={handleChange}
                 helperText={
-                  hasError('UserName')? formState.errors.UserName[0]:null
+                  hasError('Password')? formState.errors.Password[0]:null
                 }
 
-                error={hasError('UserName')}
-                defaultValue={rowSelect&&rowSelect.UserName? rowSelect.UserName:''}
+                error={hasError('Password')}
+                defaultValue={rowSelect&&rowSelect.Password? rowSelect.Password:''}
                 variant="outlined"
               />
             </Grid>
@@ -285,82 +254,18 @@ const VuserAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="Nomor Induk"
+                label="Confirm Password"
                 margin="dense"
-                name="NIK"
+                type="password"
+                name="confirmPassword"
                 onChange={handleChange}
                 // helperText={
-                //   hasError('UserName')? formState.errors.UserName[0]:null
+                //   hasError('nama_provinsi')? formState.errors.nama_provinsi[0]:null
                 // }
 
-                // error={hasError('UserName')}
-                defaultValue={rowSelect&&rowSelect.NIK? rowSelect.NIK:''}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Alamat"
-                margin="dense"
-                name="Alamat"
-                onChange={handleChange}
-                // helperText={
-                //   hasError('UserName')? formState.errors.UserName[0]:null
-                // }
+                // error={hasError('nama_provinsi')}
 
-                // error={hasError('UserName')}
-                defaultValue={rowSelect&&rowSelect.Alamat? rowSelect.Alamat:''}
-                variant="outlined"
-              />
-            </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-
-              <TextField
-                fullWidth
-                label="Nama Lengkap"
-                margin="dense"
-                name="NamaLengkap"
-                onChange={handleChange}
-                helperText={
-                  hasError('NamaLengkap')? formState.errors.NamaLengkap[0]:null
-                }
-
-                error={hasError('NamaLengkap')}
-
-                defaultValue={rowSelect&&rowSelect.NamaLengkap? rowSelect.NamaLengkap:''}
-                variant="outlined"
-              />
-            </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-
-              <TextField
-                fullWidth
-                label="Jabatan"
-                margin="dense"
-                name="Jabatan"
-                onChange={handleChange}
-                helperText={
-                  hasError('Jabatan')? formState.errors.Jabatan[0]:null
-                }
-
-                error={hasError('Jabatan')}
-
-                defaultValue={rowSelect&&rowSelect.Jabatan? rowSelect.Jabatan:''}
+                defaultValue={rowSelect&&rowSelect.confirmPassword? rowSelect.confirmPassword:''}
                 variant="outlined"
               />
             </Grid>
@@ -368,23 +273,16 @@ const VuserAddModi=props => {
         </CardContent>
         <Divider />
         <CardActions>
-          {!formState.isValid}
-         {!formState.isValid}
           <Button
             color="primary"
             className={classes.buttonSuccess}
             variant="contained"
             onClick={handleSave}
-            disabled={!formState.isValid}
+            disabled={rowSelect.Password != rowSelect.confirmPassword}
 
           >
             Simpan
           </Button>
-
-          <Button color="primary"
-            className={classes.buttonCancel}
-            variant="contained"
-            onClick={handleClose} >Batal</Button>
 
         </CardActions>
       </form>
@@ -392,8 +290,8 @@ const VuserAddModi=props => {
   );
 };
 
-VuserAddModi.propTypes={
+ProfileAddModi.propTypes={
   className: PropTypes.string,
 };
 
-export default VuserAddModi;
+export default ProfileAddModi;
