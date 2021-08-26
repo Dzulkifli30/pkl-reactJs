@@ -149,6 +149,8 @@ const ProfileAddModi=props => {
       "Password": rowSelect.Password,
       "confirmPassword": rowSelect.confirmPassword,
       "id": rowSelect.id,
+      "NamaLengkap": rowSelect.NamaLengkap,
+      "Alamat": rowSelect.Alamat,
     }
     let url=urlUbahPassword;
     // alert(url)
@@ -183,7 +185,7 @@ const ProfileAddModi=props => {
           showConfirmButton: false,
           timer: 1000
         })
-      )
+      ).then(handleTutup)
       .catch((e) => {
 
         // alert(e)
@@ -205,7 +207,10 @@ const ProfileAddModi=props => {
   }
 
 
-
+  const [open, setOpen]=React.useState(false);
+const handleTutup = () => {
+  setOpen(false)
+}
   return (
     <Card
       {...rest}
@@ -226,6 +231,48 @@ const ProfileAddModi=props => {
             container
             spacing={3}
           >
+             <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Alamat"
+                margin="dense"
+                name="Alamat"
+                onChange={handleChange}
+                helperText={
+                  hasError('Alamat')? formState.errors.Alamat[0]:null
+                }
+
+                error={hasError('Alamat')}
+                defaultValue={rowSelect&&rowSelect.Alamat? rowSelect.Alamat:''}
+                variant="outlined"
+              />
+            </Grid>
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="NamaLengkap"
+                margin="dense"
+                name="NamaLengkap"
+                onChange={handleChange}
+                helperText={
+                  hasError('NamaLengkap')? formState.errors.NamaLengkap[0]:null
+                }
+
+                error={hasError('NamaLengkap')}
+                defaultValue={rowSelect&&rowSelect.NamaLengkap? rowSelect.NamaLengkap:''}
+                variant="outlined"
+              />
+            </Grid>
+
             <Grid
               item
               md={6}
@@ -269,6 +316,7 @@ const ProfileAddModi=props => {
                 variant="outlined"
               />
             </Grid>
+
           </Grid>
         </CardContent>
         <Divider />
