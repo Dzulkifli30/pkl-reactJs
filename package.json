@@ -65,6 +65,7 @@
     "serve": "^11.3.0",
     "styled-components": "^5.3.0",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.1.4",
     "underscore": "^1.9.1",
     "use-state-with-callback": "^1.0.18",
     "uuid": "^3.3.2",

@@ -46,6 +46,7 @@ import {
   LaporanSensusPerKab as LaporanSensusPerKabVIew,
   LaporanSensusPerProv as LaporanSensusPerProvView,
   Profile as ProfileView,
+  UserAccessSurveyList as UserAccessSurveyListView
 
 
 
@@ -155,11 +156,17 @@ const Routes=() => {
         layout={MainLayout}
         path="/rt"
       />
-            <RouteWithLayout
+      <RouteWithLayout
         component={RwListView}
         exact
         layout={MainLayout}
         path="/rw"
+      />
+      <RouteWithLayout
+        component={UserAccessSurveyListView}
+        exact
+        layout={MainLayout}
+        path="/user-access-survey"
       />
    
        {/*End Of Input Data  */}
