@@ -26,8 +26,8 @@ const Profile = () => {
                 <CardHeader
                     subheader=""
                     title={
-                        <div className="border-red-500">
-                            <p>{localStorage.getItem("NamaLengkap")}</p>
+                        <div className="  font-poppins ">
+                            <p className="text-center">{localStorage.getItem("NamaLengkap")}</p>
                         </div>
                     }
                 />
@@ -85,7 +85,7 @@ const Profile = () => {
 
                             </DialogContent>
                             
-                <Popup  trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah Password</button>}>
+                <Popup  trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah Profile</button>}>
                 <ProfileAddModi
                 rowSelect={rowSelect}
                 setRowSelect={setRowSelect}
