@@ -249,8 +249,7 @@ const VuserAddModi=props => {
       >
         <CardHeader
           subheader=""
-          title= {rowSelect.id === 1 ? "Edit User" : "Tambah User"}
-          title={rowSelect.id == undefined ? "Tambah User" : "Ubah User"}
+          title= {title}
         />
         <Divider />
         <CardContent>
@@ -364,6 +363,21 @@ const VuserAddModi=props => {
                 variant="outlined"
               />
             </Grid>
+                          <TextField
+                fullWidth
+                label="Password"
+                type="password"
+                margin="dense"
+                name="Password"
+                onChange={handleChange}
+                helperText={
+                  hasError('Password')? formState.errors.Password[0]:null
+                }
+              disabled={title == 'Ubah Vuser'}
+                error={hasError('Password')}
+                defaultValue={rowSelect&&rowSelect.Password? rowSelect.Password:''}
+                variant="outlined"
+              />
           </Grid>
         </CardContent>
         <Divider />

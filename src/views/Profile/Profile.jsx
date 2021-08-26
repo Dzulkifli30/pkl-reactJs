@@ -2,6 +2,7 @@ import React from "react"
 import { ModalComponent } from 'components';
 import ProfileAddModi from "./components/ProfileAddModi";
 import Swal from "sweetalert2";
+import Popup from 'reactjs-popup'
 import {
     Card,
     CardHeader,
@@ -24,10 +25,14 @@ const Profile = () => {
             <Card>
                 <CardHeader
                     subheader=""
-                    title={localStorage.getItem("username")}
+                    title={
+                        <div className="  font-poppins ">
+                            <p className="text-center">{localStorage.getItem("NamaLengkap")}</p>
+                        </div>
+                    }
                 />
                 <Divider />
-                <CardContent className="bg-blue-700">
+                <CardContent className="bg-blue-900 text-white">
                     <Grid
                         container
                         spacing={0}
@@ -79,16 +84,19 @@ const Profile = () => {
 
 
                             </DialogContent>
+                            
+                <Popup  trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah Profile</button>}>
+                <ProfileAddModi
+                rowSelect={rowSelect}
+                setRowSelect={setRowSelect}
+                />
+                </Popup>
 
 
                         </Grid>
                     </Grid>
                 </CardContent>
 
-                <ProfileAddModi
-                rowSelect={rowSelect}
-                setRowSelect={setRowSelect}
-                />
 
             </Card>
 
