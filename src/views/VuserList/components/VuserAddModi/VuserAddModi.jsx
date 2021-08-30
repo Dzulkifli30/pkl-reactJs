@@ -175,6 +175,7 @@ const VuserAddModi=props => {
         "Alamat": rowSelect.Alamat,
         "Jabatan": rowSelect.Jabatan,
         "Password": rowSelect.Password,
+        "Email": rowSelect.Email,
       })
     };
 
@@ -363,6 +364,30 @@ const VuserAddModi=props => {
                 variant="outlined"
               />
             </Grid>
+
+            <Grid
+             item
+             md={6}
+             xs={12}>
+              <TextField
+                fullWidth
+                label="Email"
+                margin="dense"
+                name="Email"
+                onChange={handleChange}
+                helperText={
+                  hasError('Email')? formState.errors.Email[0]:null
+                }
+                error={hasError('Email')}
+                defaultValue={rowSelect&&rowSelect.Email? rowSelect.Email:''}
+                variant="outlined"
+              />
+            </Grid>
+                         
+            <Grid
+             item
+             md={6}
+             xs={12}>
               <TextField
                 fullWidth
                 label="Password"
@@ -378,7 +403,7 @@ const VuserAddModi=props => {
                 defaultValue={rowSelect&&rowSelect.Password? rowSelect.Password:''}
                 variant="outlined"
               />
-              
+            </Grid>
           </Grid>
         </CardContent>
         <Divider />

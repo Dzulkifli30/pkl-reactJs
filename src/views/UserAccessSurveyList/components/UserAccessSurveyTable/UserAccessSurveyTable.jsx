@@ -55,14 +55,14 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const KecamatanTable=props => {
+const UserAccessSurveyTable=props => {
   const {
     handleOpenViewMap,
     className,handleDelete,
-    textfind,kecamatanfind,
+    textfind,kabupatenfind,
     order, orderBy,
-    kecamatanExport, filteredItems, handleOpen, selectedkecamatan,
-    setselectedkecamatan,
+    provinsisExport, filteredItems, handleOpen, selectedkabupaten,
+    setselectedkabupaten,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -193,29 +193,44 @@ const KecamatanTable=props => {
 
   const columns=[
     {
-      name: 'Kode Depdagri',
-      selector: 'KodeDepdagri',
-      sortable: true,
-    },    {
-      name: 'Nama Provinsi',
-      selector: 'nama_provinsi',
+      name: 'Nama User',
+      selector: 'NamaLengkap',
       sortable: true,
     },
     {
-      name: 'Nama Kabupaten',
-      selector: 'nama_kabupaten',
+      name: 'ID Provinsi',
+      selector: 'id_provinsi',
       sortable: true,
     },
     {
-      name: 'Nama Kecamatan',
-      selector: 'nama_kecamatan',
+      name: 'ID Kabupaten',
+      selector: 'id_kabupaten',
       sortable: true,
     },
     {
-      name: 'Keterangan',
-      selector: 'IsActive',
+      name: 'ID Kecamatan',
+      selector: 'id_kecamatan',
       sortable: true,
-      cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
+    },
+    {
+      name: 'ID kelurahan',
+      selector: 'id_kelurahan',
+      sortable: true,
+    },
+    {
+      name: 'ID Rw',
+      selector: 'id_rw',
+      sortable: true,
+    },
+    {
+      name: 'ID Rt',
+      selector: 'id_rt',
+      sortable: true,
+    },
+    {
+      name: 'Periode Sensus',
+      selector: 'Periode_Sensus',
+      sortable: true,
     },
     {
       name: 'CreatedBy',
@@ -228,31 +243,31 @@ const KecamatanTable=props => {
       sortable: true,
     },
     {
-      name: 'LastModified',
-      selector: 'LastModified',
-      sortable: true,
-    },
-    {
       name: 'LastModifiedBy',
       selector: 'LastModifiedBy',
       sortable: true,
     },
     {
-      name: 'Edit Kecamatan',
+      name: 'LastModified',
+      selector: 'LastModified',
+      sortable: true,
+    },
+    {
+      name: 'Edit User Access Survey',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleOpen(e, row, "Ubah Kecamatan")}  ><EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Kabupaten")}  ><EditIcon /></Button>
       ,
     },
     {
-      name: 'Hapus Kecamatan',
+      name: 'Hapus User Access Survey',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleDelete(e, row, "Hapus Kecamatan")} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e, row, "Hapus Kabupaten")} ><DeleteIcon /></Button>
       ,
-    }
+    },
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
@@ -267,7 +282,7 @@ const KecamatanTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Kecamatan")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah User Access Survey")}>
           <AddIcon/>
         </Button>
 
@@ -276,7 +291,7 @@ const KecamatanTable=props => {
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Kecamatan"
+          placeholder="Search User Access Survey"
           textfind={textfind}
         />
       </div>
@@ -300,36 +315,36 @@ const KecamatanTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedkecamatan_var;
+    let selectedkabupaten_var;
 
     if (event.target.checked) {
-      selectedkecamatan_var=provinsis.map(provinsi => provinsi.id);
+      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedkecamatan_var=[];
+      selectedkabupaten_var=[];
     }
 
-    setselectedkecamatan(selectedkecamatan_var);
+    setselectedkabupaten(selectedkabupaten_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedkecamatan.indexOf(id);
-    let newselectedkecamatan=[];
+    const selectedIndex=selectedkabupaten.indexOf(id);
+    let newselectedkabupaten=[];
 
     if (selectedIndex===-1) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan, id);
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
     } else if (selectedIndex===0) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(1));
-    } else if (selectedIndex===selectedkecamatan.length-1) {
-      newselectedkecamatan=newselectedkecamatan.concat(selectedkecamatan.slice(0, -1));
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
+    } else if (selectedIndex===selectedkabupaten.length-1) {
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
     } else if (selectedIndex>0) {
-      newselectedkecamatan=newselectedkecamatan.concat(
-        selectedkecamatan.slice(0, selectedIndex),
-        selectedkecamatan.slice(selectedIndex+1)
+      newselectedkabupaten=newselectedkabupaten.concat(
+        selectedkabupaten.slice(0, selectedIndex),
+        selectedkabupaten.slice(selectedIndex+1)
       );
     }
 
-    setselectedkecamatan(newselectedkecamatan);
+    setselectedkabupaten(newselectedkabupaten);
     //console.log(selectedUsers);
   };
 
@@ -353,11 +368,11 @@ const KecamatanTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="Kecamatan List"
+              title="User Access Survey List"
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_kecamatan"
+              keyField=""
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -377,9 +392,9 @@ const KecamatanTable=props => {
   );
 };
 
-KecamatanTable.propTypes={
+UserAccessSurveyTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KecamatanTable;
+export default UserAccessSurveyTable;

@@ -73,7 +73,7 @@ const useStyles=makeStyles(theme => ({
     paddingRight: theme.spacing(2)/**/
   },
   logoImage: {
-    //marginLeft: theme.spacing(4)
+    // marginLeft: theme.spacing(4)
   },
   contentBody: {
     //flexGrow: 1,
@@ -184,6 +184,7 @@ const SignIn=props => {
             localStorage.setItem('Jabatan', data.data[0].Jabatan);
             localStorage.setItem('Alamat', data.data[0].Alamat);
             localStorage.setItem('NIK', data.data[0].NIK);
+            localStorage.setItem('Email', data.data[0].Email);
             localStorage.setItem('Foto', data.data[0].Foto);
             localStorage.setItem('Periode Sensus', data.data2[0].value_setting);
             localStorage.setItem('Setting Label', data.data3[0].value_setting);

@@ -93,3 +93,9 @@ export const urlShowLaporanSensusPerProv=ulrport +'laporan-sensus/perprov'
 export const urlShowLaporanSensusPerKab=ulrport +'laporan-sensus/perkab'
 export const urlShowLaporanSensusPerKec=ulrport +'laporan-sensus/perkec'
 export const urlShowLaporanSensusPerKel=ulrport +'laporan-sensus/perkel'
+
+//User Access Survey
+export const urlGetUserAccessSurvey = ulrport + '/user-access-survey/get'
+export const urlAddUserAccessSurvey = ulrport + '/user-access-survey/store'
+export const urlEditUserAccessSurvey = ulrport + '/user-access-survey/update'
+export const urlDeleteUserAccessSurvey = ulrport + '/user-access-survey/delete'

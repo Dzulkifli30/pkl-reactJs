@@ -208,6 +208,11 @@ const VuserTable=props => {
       sortable: true,
     },
     {
+      name: 'Email',
+      selector: 'Email',
+      sortable: true,
+    },
+    {
       name: 'Alamat',
       selector: 'Alamat',
       sortable: true,

@@ -178,6 +178,8 @@ const ProfileAddModi=props => {
         return tester.json();
       })/**/
       .then(
+        localStorage.setItem("NamaLengkap",rowSelect.NamaLengkap),
+        localStorage.setItem("Alamat",rowSelect.Alamat),
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -185,7 +187,7 @@ const ProfileAddModi=props => {
           showConfirmButton: false,
           timer: 1000
         })
-      ).then(handleTutup)
+      ).then(window.location.reload())
       .catch((e) => {
 
         // alert(e)

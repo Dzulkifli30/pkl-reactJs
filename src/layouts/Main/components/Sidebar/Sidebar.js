@@ -108,7 +108,10 @@ const Sidebar=props => {
           title: 'Rt',
           href: '/rt',
         } ,
-
+        {
+          title: 'User Access Survey',
+          href: '/user-access-survey',
+        } ,
       ]
     },
 
