@@ -176,6 +176,9 @@ const VuserAddModi=props => {
         "Jabatan": rowSelect.Jabatan,
         "Password": rowSelect.Password,
         "Email": rowSelect.Email,
+        "Title Email": localStorage.getItem('Title Email'),
+        "body": localStorage.getItem('body'),
+        "url": localStorage.getItem('url'),
       })
     };
 

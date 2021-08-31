@@ -188,6 +188,9 @@ const SignIn=props => {
             localStorage.setItem('Foto', data.data[0].Foto);
             localStorage.setItem('Periode Sensus', data.data2[0].value_setting);
             localStorage.setItem('Setting Label', data.data3[0].value_setting);
+            localStorage.setItem('Title Email', data.data4[0].value_setting);
+            localStorage.setItem('body', data.data4[1].value_setting);
+            localStorage.setItem('url', data.data4[2].value_setting);
             window.location='/beranda';
             //history.push('/beranda');
 
