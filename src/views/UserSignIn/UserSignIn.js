@@ -180,18 +180,18 @@ const UserSignIn=props => {
             localStorage.setItem('username', data.data[0].UserName);
             localStorage.setItem('UserName', data.data[0].UserName);
             localStorage.setItem('NamaLengkap', data.data[0].NamaLengkap);
-            // localStorage.setItem('roleName', data.data[0].roleName);
+            localStorage.setItem('roleName', data.data[0].roleName);
             localStorage.setItem('id', data.data[0].id);
-            // localStorage.setItem('Jabatan', data.data[0].Jabatan);
-            // localStorage.setItem('Alamat', data.data[0].Alamat);
-            // localStorage.setItem('NIK', data.data[0].NIK);
-            // localStorage.setItem('Email', data.data[0].Email);
-            // localStorage.setItem('Foto', data.data[0].Foto);
+            localStorage.setItem('Jabatan', data.data[0].Jabatan);
+            localStorage.setItem('Alamat', data.data[0].Alamat);
+            localStorage.setItem('NIK', data.data[0].NIK);
+            localStorage.setItem('Email', data.data[0].Email);
+            localStorage.setItem('Foto', data.data[0].Foto);
             localStorage.setItem('Periode Sensus', data.data2[0].value_setting);
-            // localStorage.setItem('Setting Label', data.data3[0].value_setting);
-            // localStorage.setItem('Title Email', data.data4[0].value_setting);
-            // localStorage.setItem('body', data.data4[1].value_setting);
-            // localStorage.setItem('url', data.data4[2].value_setting);
+            localStorage.setItem('Setting Label', data.data3[0].value_setting);
+            localStorage.setItem('Title Email', data.data4[0].value_setting);
+            localStorage.setItem('body', data.data4[1].value_setting);
+            localStorage.setItem('url', data.data4[2].value_setting);
             window.location='/beranda';
             //history.push('/beranda');
 
