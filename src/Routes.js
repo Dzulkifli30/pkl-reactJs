@@ -2,7 +2,12 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
-import { Main as MainLayout, Minimal as MinimalLayout,MinimalUser as MinimalUserLayout } from './layouts';
+import { 
+  Main as MainLayout, 
+  Minimal as MinimalLayout,
+  MinimalUser as MinimalUserLayout,
+  MainUser as MainUserLayout,
+} from './layouts';
 
 import {
   Team as TeamView,
@@ -63,6 +68,13 @@ const Routes=() => {
         to="/beranda"
       />
 
+    <Redirect
+        exact
+        from="/"
+        to="/beranda-user"
+      />
+      
+
 <RouteWithLayout
         component={SettingListView}
         exact
@@ -88,6 +100,12 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/beranda"
+      />
+            <RouteWithLayout
+        component={DashboardView}
+        exact
+        layout={MainUserLayout}
+        path="/beranda-user"
       />
       <RouteWithLayout
         component={SettingListView}
@@ -292,6 +310,7 @@ const Routes=() => {
       />
       <Redirect to="/not-found" />
     </Switch>
+
   );
 };
 
