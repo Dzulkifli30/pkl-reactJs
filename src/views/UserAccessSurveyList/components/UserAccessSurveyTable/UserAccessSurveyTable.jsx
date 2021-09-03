@@ -233,6 +233,11 @@ const UserAccessSurveyTable=props => {
       sortable: true,
     },
     {
+      name: 'Password',
+      selector: 'Password',
+      sortable: true,
+    },
+    {
       name: 'CreatedBy',
       selector: 'CreatedBy',
       sortable: true,

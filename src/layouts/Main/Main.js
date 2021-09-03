@@ -128,7 +128,7 @@ const Main=props => {
               <ol className="breadcrumb">
                 <li className="active"><i className="fa fa-home"></i> Home</li>
               </ol>
-            </section>
+            </section>  
 
             {/*<!-- Main content -->*/}
             <section className="content ">
@@ -136,6 +136,7 @@ const Main=props => {
                 <div className="box-header with-border">
                   <h3 className="box-title font-poppins">Periode {localStorage.getItem("Periode Sensus")}</h3>
                 </div>
+                
                 <div className="box-body font-poppins">
                   <main id="main">
                     {children}

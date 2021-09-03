@@ -6,6 +6,8 @@ let ulrportRefresh="http://localhost:8000/";
  //let ulrport="http://36.89.25.220:15002/"
 
 
+
+ // Vuser
 export const urlPostLogin=ulrport+'vuser/showUser'
 export const urlAddVuser=ulrport+'vuser/storeUser'
 export const urlEditVuser=ulrport+'vuser/updateUser'
@@ -96,6 +98,7 @@ export const urlShowLaporanSensusPerKel=ulrport +'laporan-sensus/perkel'
 
 //User Access Survey
 export const urlGetUserAccessSurvey = ulrport + '/user-access-survey/get'
+export const urlPostLoginUser = ulrport + '/user-access-survey/showUAS'
 export const urlAddUserAccessSurvey = ulrport + '/user-access-survey/store'
 export const urlEditUserAccessSurvey = ulrport + '/user-access-survey/update'
 export const urlDeleteUserAccessSurvey = ulrport + '/user-access-survey/delete'

@@ -2,10 +2,11 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
-import { Main as MainLayout, Minimal as MinimalLayout,Master as MasterLayout } from './layouts';
+import { Main as MainLayout, Minimal as MinimalLayout,MinimalUser as MinimalUserLayout } from './layouts';
 
 import {
   Team as TeamView,
+  UserSignIn as UserSignInView,
   ContactUs as ContactUsView,
   Portfolio as PortfolioView,
   Services as ServicesView,
@@ -270,6 +271,12 @@ const Routes=() => {
         exact
         layout={MinimalLayout}
         path="/login"
+      />
+      <RouteWithLayout
+        component={UserSignInView}
+        exact
+        layout={MinimalUserLayout}
+        path="/login-user"
       />
       <RouteWithLayout
         component={SignoutView}
