@@ -192,7 +192,7 @@ const UserSignIn=props => {
             localStorage.setItem('Title Email', data.data4[0].value_setting);
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
-            window.location='/beranda';
+            window.location='/beranda-user';
             //history.push('/beranda');
 
           } else {  

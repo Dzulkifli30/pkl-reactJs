@@ -5,6 +5,7 @@ export { default as UserSignIn } from './UserSignIn';
 export { default as Signout } from './Signout';
 export { default as SignUp } from './SignUp';
 export {default as Profile } from './Profile';
+export {default as LoginSlider } from './LoginSlider';
 
 export {default as VisitorUser} from './Dashboard/components/VisitorUser/';
 export {default as ProvinsiList} from './ProvinsiList'
@@ -31,6 +32,7 @@ export {default as TargetKkList} from './TargetKkList'
 export {default as LaporanSensusPerKab} from './LaporanSensusPerKab'
 export {default as LaporanSensusPerProv} from './LaporanSensusPerProv'
 export {default as UserAccessSurveyList} from './UserAccessSurveyList'
+export {default as FormSurvey} from './FormSurvey'
 // export {default as RtList} from './RtList'
 // export {default as RwList} from './RwList'
 

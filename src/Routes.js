@@ -2,7 +2,12 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
-import { Main as MainLayout, Minimal as MinimalLayout,MinimalUser as MinimalUserLayout } from './layouts';
+import { 
+  Main as MainLayout, 
+  Minimal as MinimalLayout,
+  MinimalUser as MinimalUserLayout,
+  MainUser as MainUserLayout,
+} from './layouts';
 
 import {
   Team as TeamView,
@@ -47,7 +52,9 @@ import {
   LaporanSensusPerKab as LaporanSensusPerKabVIew,
   LaporanSensusPerProv as LaporanSensusPerProvView,
   Profile as ProfileView,
-  UserAccessSurveyList as UserAccessSurveyListView
+  UserAccessSurveyList as UserAccessSurveyListView,
+  LoginSlider as LoginSliderView,
+  FormSurvey as FormSurveyView
 
 
 
@@ -62,6 +69,13 @@ const Routes=() => {
         from="/"
         to="/beranda"
       />
+
+    <Redirect
+        exact
+        from="/"
+        to="/beranda-user"
+      />
+      
 
 <RouteWithLayout
         component={SettingListView}
@@ -90,6 +104,12 @@ const Routes=() => {
         path="/beranda"
       />
       <RouteWithLayout
+        component={DashboardView}
+        exact
+        layout={MainUserLayout}
+        path="/beranda-user"
+      />
+      <RouteWithLayout
         component={SettingListView}
         exact
         layout={MainLayout}
@@ -113,6 +133,15 @@ const Routes=() => {
         layout={MainLayout}
         path="/target-kk"
       />
+
+    {/* Beginning of user page */}
+    <RouteWithLayout
+        component={FormSurveyView}
+        exact
+        layout={MainUserLayout}
+        path="/form-survey"
+    />
+    {/* Ending of user page */}
 
 
     {/* Beginning Of Input Data */}
@@ -267,22 +296,16 @@ const Routes=() => {
         path="/sign-up"
       />  
       <RouteWithLayout
-        component={SignInView}
-        exact
-        layout={MinimalLayout}
-        path="/login"
-      />
-      <RouteWithLayout
-        component={UserSignInView}
-        exact
-        layout={MinimalUserLayout}
-        path="/login-user"
-      />
-      <RouteWithLayout
         component={SignoutView}
         exact
         layout={MinimalLayout}
         path="/logout"
+      />
+      <RouteWithLayout
+      component={LoginSliderView}
+      exact
+      layout={MinimalLayout}
+      path="/login"
       />
       <RouteWithLayout
         component={NotFoundView}
@@ -292,6 +315,7 @@ const Routes=() => {
       />
       <Redirect to="/not-found" />
     </Switch>
+
   );
 };
 
