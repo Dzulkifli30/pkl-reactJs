@@ -265,7 +265,7 @@ const UserSignIn=props => {
     formState.touched[field]&&formState.errors[field]? true:false;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root,"font-poppins"}>
       <Grid
         className={classes.grid}
         container
