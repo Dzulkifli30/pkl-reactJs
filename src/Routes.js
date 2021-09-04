@@ -92,7 +92,7 @@ const Routes=() => {
       component={LoginSliderView}
       exact
       layout={MinimalLayout}
-      path="/login-slider"
+      path="/login"
     />
       <RouteWithLayout
         component={KelompokDataListView}
@@ -291,7 +291,7 @@ const Routes=() => {
         layout={MinimalLayout}
         path="/sign-up"
       />  
-      <RouteWithLayout
+      {/* <RouteWithLayout
         component={SignInView}
         exact
         layout={MinimalLayout}
@@ -302,7 +302,7 @@ const Routes=() => {
         exact
         layout={MinimalUserLayout}
         path="/login-user"
-      />
+      /> */}
       <RouteWithLayout
         component={SignoutView}
         exact

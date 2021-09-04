@@ -12,6 +12,8 @@ import { Carousel } from 'react-responsive-carousel';
 import Slider from "react-slick";
 import { MinimalUser } from 'layouts';
 import { bg_login } from 'assets/img_master_backup';
+// import "animate.css"
+import {Animated} from "react-animated-css";
 
 const useStyles=makeStyles(() => ({
   root: {
@@ -36,12 +38,11 @@ const Minimal=props => {
     };
   return (
 
-
-    <div className="login-box">
+<Animated animationIn="fadeInUp" animationOut="fadeOut" isVisible={true}>
+    <div className="login-box h-fu ">
       <div className="login-logo"> 
         <img src="/assets/dist/img/bkkbn-logo-sm.png" width="253" height="62" />
         <h3>System Informasi Sensus</h3>
-        <h3>Ruang Administrasi</h3>
       </div>
       {/*<!-- /.login-logo -->*/}
       <div className="login-box-body">
@@ -66,7 +67,7 @@ const Minimal=props => {
       }
       
     </div>
-    
+    </Animated>
 
   );
 };
