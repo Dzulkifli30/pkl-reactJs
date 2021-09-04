@@ -37,8 +37,8 @@ const Minimal=props => {
     };
   return (
 
-<Animated animationIn="fadeInUp" animationOut="fadeOut" isVisible={true}>
-    <div className="login-box h-fu ">
+    <Animated animationIn="fadeInUp" animationOut="fadeOut" isVisible={true}>
+    <div className="login-box">
       <div className="login-logo"> 
         <img src="/assets/dist/img/bkkbn-logo-sm.png" width="253" height="62" />
         <h3>System Informasi Sensus</h3>
@@ -49,9 +49,6 @@ const Minimal=props => {
         <main className={classes.content}>
           {children}
         </main>
-        {/*  */}
-
-
       </div>{/*<!-- /.login-box-body -->*/}
 
       {/*<!-- jQuery 2.1.4 --> */}
