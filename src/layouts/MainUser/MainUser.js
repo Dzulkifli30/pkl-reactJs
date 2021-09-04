@@ -62,7 +62,7 @@ const MainUser=props => {
           <nav className="navbar navbar-static-top  ">
             <div className="container">
               <div className="navbar-header">
-                <a href="/beranda" className="navbar-brand"><img src="assets/dist/img/bkkbn-logo-sm.png" height="auto" width="130px" className="img-responsive" /></a>
+                <a href="/beranda-user" className="navbar-brand"><img src="assets/dist/img/bkkbn-logo-sm.png" height="auto" width="130px" className="img-responsive" /></a>
                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                   <i className="fa fa-bars"></i>
                 </button>

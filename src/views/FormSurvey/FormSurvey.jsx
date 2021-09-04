@@ -2,14 +2,17 @@ import React from 'react'
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import './styles.css'
+import './animation.css'
+import ProvinsiList from '../ProvinsiList'
+import KabupatenList from '../KabupatenList'
 
 const FormSurvey = () => {
     const content = [
         {
-          title: "Pencatatan Kartu Keluarga 1",
+          title:<ProvinsiList/>,
         },
         {
-          title: "Pencatatan Kartu Keluarga 2",
+          title: <KabupatenList/>,
         },
         {
           title: "Pencatatan Kartu Keluarga 3",
@@ -23,18 +26,18 @@ const FormSurvey = () => {
       ];
     return(
         <div>
-            <Slider className="slider-wrapper">
-            {content.map((item, index) => (
+            <Slider className="slider-wrapper">    
+              {content.map((con, i)=>(
                 <div
-                key={index}
+                key={i}
                 className="slider-content"
                 style={{ background: `no-repeat center center` }}
                 >
                 <div className="inner">
-                    <h1>{item.title}</h1>
+                  <h1> {con.title}</h1>
                 </div>
                 </div>
-            ))}
+              ))}
             </Slider>
         </div>
     )

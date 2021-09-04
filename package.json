@@ -34,6 +34,7 @@
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.2.1",
     "@sweetalert/with-react": "^0.1.1",
+    "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "chalk": "^4.0.0",
     "chart.js": "^2.8.0",
