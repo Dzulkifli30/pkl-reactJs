@@ -292,7 +292,7 @@ const SignIn=props => {
           lg={12}
           xs={12}
         >
-          <div className={classes.content}>
+          <div className={classes.content,"font-poppins"}>
             {/* <div>{bg_login}</div> */}
             <div className="d-md flex" style={{ width: '100%' }}>
               <form
