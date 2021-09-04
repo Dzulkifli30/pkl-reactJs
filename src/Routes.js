@@ -52,7 +52,8 @@ import {
   LaporanSensusPerKab as LaporanSensusPerKabVIew,
   LaporanSensusPerProv as LaporanSensusPerProvView,
   Profile as ProfileView,
-  UserAccessSurveyList as UserAccessSurveyListView
+  UserAccessSurveyList as UserAccessSurveyListView,
+  LoginSlider as LoginSliderView
 
 
 
@@ -86,6 +87,12 @@ const Routes=() => {
       exact
       layout={MainLayout}
       path="/profile"
+    />
+    <RouteWithLayout
+      component={LoginSliderView}
+      exact
+      layout={MinimalLayout}
+      path="/login-slider"
     />
       <RouteWithLayout
         component={KelompokDataListView}

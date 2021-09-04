@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { UserSignIn } from 'views';
 import validate from 'validate.js';
 //import mockDataUser from '../UserList/datauser';
 import md5 from 'md5'
 import swal from '@sweetalert/with-react';
 import '../../assets/css_swal/cssSwal.css';
+// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import Slider from 'react-slick/lib/slider';
 import {bg_login} from '../../assets/img_master_backup/index'
 import Swal from 'sweetalert2';
 import { makeStyles } from '@material-ui/styles';
@@ -22,6 +26,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
 import { urlPostLogin } from '../../kumpulanUrl'
 import UsersByDevice from 'views/Dashboard/components/UsersByDevice';
+
 
 const schema={
   user_name: {
@@ -147,6 +152,13 @@ const SignIn=props => {
       }
     }));
   };
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    }
 
   const handleSignIn=event => {
     //event.preventDefault();
@@ -264,7 +276,11 @@ const SignIn=props => {
     formState.touched[field]&&formState.errors[field]? true:false;
 
   return (
-    <div className={classes.root}>
+
+    <div>
+
+    
+    <div className={classes.root  }>
       <Grid
         className={classes.grid}
         container
@@ -393,7 +409,8 @@ const SignIn=props => {
         </Grid>
       </Grid>
     </div>
-    
+    </div>
+
   );
 };
 
