@@ -135,14 +135,14 @@ const MainUser=props => {
               <div className="box box-default">
                 <div className="box-header with-border">
                   <h3 className="box-title font-poppins">Periode {localStorage.getItem("Periode Sensus")}</h3>
-                  <p className="mt-10">  {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}</p>
+                 
                 </div>
                 
                 <div className="box-body font-poppins">
                   <main id="main">
                     {children}
                   </main>
-
+                  <p className="mt-10">  {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}</p>
                 {/* {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}!! to Periode Sensus Tahun {localStorage.getItem("Periode Sensus")} */}
                 </div>{/*<!-- /.box-body -->*/}
               </div>{/*<!-- /.box -->*/}

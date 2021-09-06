@@ -173,18 +173,25 @@ const UserSignIn=props => {
         })/**/
 
         .then(res => {
-
           const data=res;
+
+
           //console.log(data.data);
           if (data.code=="00") {
             //{ userId: "A6B433CD8F15397BE05314B5A8C00F89" }
-            localStorage.setItem('id_provinsi', data.data[0].id_provinsi);
             localStorage.setItem('nama_provinsi', data.data[0].nama_provinsi);
             localStorage.setItem('nama_kabupaten', data.data[0].nama_kabupaten);
             localStorage.setItem('nama_kecamatan', data.data[0].nama_kecamatan);
             localStorage.setItem('nama_kelurahan', data.data[0].nama_kelurahan);
             localStorage.setItem('nama_rw', data.data[0].nama_rw);
             localStorage.setItem('nama_rt', data.data[0].nama_rt);
+            localStorage.setItem('id_provinsi', data.data[0].id_provinsi);
+            localStorage.setItem('id_kabupaten', data.data[0].id_kabupaten);
+            localStorage.setItem('id_kecamatan', data.data[0].id_kecamatan);
+            localStorage.setItem('id_kelurahan', data.data[0].id_kelurahan);
+            localStorage.setItem('id_rw', data.data[0].id_rw);
+            localStorage.setItem('id_rt', data.data[0].id_rt);
+            // localStorage.setItem('Format RT : ',{id_rt});
             localStorage.setItem('username', data.data[0].UserName);
             localStorage.setItem('NamaLengkap', data.data[0].NamaLengkap);
             localStorage.setItem('roleName', data.data[0].roleName);
@@ -199,8 +206,9 @@ const UserSignIn=props => {
             localStorage.setItem('Title Email', data.data4[0].value_setting);
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
-
             window.location='/beranda-user';
+          // alert('id rt anda : '.localStorage.getItem('id_rt', data.data[0].id_rt));
+
             //history.push('/beranda');
 
           } else {  

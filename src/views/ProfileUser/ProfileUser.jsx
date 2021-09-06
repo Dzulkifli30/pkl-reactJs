@@ -53,7 +53,7 @@ const ProfileUser = () => {
                             <DialogContent>
                                 Nama Lengkap : {localStorage.getItem('NamaLengkap')}
                             </DialogContent>
- 
+
                             <DialogContent
 
                             >
@@ -74,6 +74,14 @@ const ProfileUser = () => {
 
                             >
                                 Kecamatan : {localStorage.getItem('nama_kecamatan')}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Id Rt : {localStorage.getItem('id_rt')}
 
 
 
@@ -101,14 +109,15 @@ const ProfileUser = () => {
 
 
                             </DialogContent>
+
                             <DialogContent
 
->
-    Nomor Induk : {localStorage.getItem('NIK')}
+                            >
+                                Nomor Induk : {localStorage.getItem('NIK')}
 
 
-</DialogContent>
-                            
+                            </DialogContent>
+
                             <DialogContent
 
                             >
@@ -142,11 +151,11 @@ const ProfileUser = () => {
 
                 </CardContent>
                 <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah ProfileUser</button>}>
-                                <ProfileAddModi
-                                    rowSelect={rowSelect}
-                                    setRowSelect={setRowSelect}
-                                />
-                            </Popup>
+                    <ProfileAddModi
+                        rowSelect={rowSelect}
+                        setRowSelect={setRowSelect}
+                    />
+                </Popup>
 
             </Card>
 
