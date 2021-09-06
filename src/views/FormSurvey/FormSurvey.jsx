@@ -1,45 +1,54 @@
 import React from 'react'
-import Slider from 'react-animated-slider';
-import 'react-animated-slider/build/horizontal.css';
-import './styles.css'
-import './animation.css'
 import ProvinsiList from '../ProvinsiList'
 import KabupatenList from '../KabupatenList'
+import Slider from "react-slick"; 
+import "./slick/slick.css"; 
+import "./slick/slick-theme.css";
+import {Animated} from "react-animated-css";
+// function SampleNextArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{ ...style}}
+//       onClick={onClick}
+//       ></div>
+//   );
+// }
+
+// function SamplePrevArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{ ...style}}
+//       onClick={onClick}
+//     />
+//   );
+// }
 
 const FormSurvey = () => {
-    const content = [
-        {
-          title:<ProvinsiList/>,
-        },
-        {
-          title: <KabupatenList/>,
-        },
-        {
-          title: "Pencatatan Kartu Keluarga 3",
-        },
-        {
-          title: "Pencatatan Kartu Keluarga 4",
-        },
-        {
-          title: "Pencatatan Kartu Keluarga 5",
-        },
-      ];
+      const settings = {
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      //   nextArrow: <SampleNextArrow />,
+      // prevArrow: <SamplePrevArrow />
+      };
     return(
-        <div>
-            <Slider className="slider-wrapper">    
-              {content.map((con, i)=>(
-                <div
-                key={i}
-                className="slider-content"
-                style={{ background: `no-repeat center center` }}
-                >
-                <div className="inner">
-                  <h1> {con.title}</h1>
-                </div>
-                </div>
-              ))}
-            </Slider>
+      <Animated animationIn="zoomIn" isVisible={true}>
+        <div className="mb-6">
+          <Slider {...settings}>
+              <div>
+              <ProvinsiList/>
+              </div>
+              <div>
+              <KabupatenList/>
+              </div>
+          </Slider>
         </div>
+      </Animated>
     )
 }
 
