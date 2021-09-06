@@ -105,7 +105,7 @@ const MainUser=props => {
                           <a href="/logout" className="btn btn-default btn-flat">Log out</a>
                         </div>
                         <div className="pull-right">
-                          <a href="/profile" className="btn btn-default btn-flat">Profile</a>
+                          <a href="/profile-user" className="btn btn-default btn-flat">Profile</a>
                         </div>
                       </li>
                     </ul>
@@ -135,6 +135,7 @@ const MainUser=props => {
               <div className="box box-default">
                 <div className="box-header with-border">
                   <h3 className="box-title font-poppins">Periode {localStorage.getItem("Periode Sensus")}</h3>
+                  <p className="mt-10">  {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}</p>
                 </div>
                 
                 <div className="box-body font-poppins">

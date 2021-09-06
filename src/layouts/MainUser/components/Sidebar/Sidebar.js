@@ -71,6 +71,10 @@ const Sidebar=props => {
       title: 'Beranda',
       href: '/beranda-user',
     },
+    {
+      title: 'Form Survey',
+      href: '/form-survey',
+    },
 
     // {
 

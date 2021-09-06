@@ -53,6 +53,8 @@ import {
   LaporanSensusPerProv as LaporanSensusPerProvView,
   Profile as ProfileView,
   UserAccessSurveyList as UserAccessSurveyListView,
+  FormSurvey as FormSurveyView,
+  ProfileUser as ProfileUserView,
   LoginSlider as LoginSliderView
 
 
@@ -88,6 +90,12 @@ const Routes=() => {
       layout={MainLayout}
       path="/profile"
     />
+          <RouteWithLayout
+      component={ProfileUserView}
+      exact
+      layout={MainUserLayout}
+      path="/profile-user"
+    />
     <RouteWithLayout
       component={LoginSliderView}
       exact
@@ -99,6 +107,12 @@ const Routes=() => {
         exact
         layout={MainLayout}
         path="/kelompok-data"
+      />
+      <RouteWithLayout
+        component={FormSurveyView}
+        exact
+        layout={MainUserLayout}
+        path="/form-survey"
       />
 
 

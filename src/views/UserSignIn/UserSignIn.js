@@ -166,6 +166,7 @@ const UserSignIn=props => {
 
 
       let urlGetData=urlPostLoginUser
+      
       const response=await fetch(urlGetData, requestOptions)
         .then(res => {
           return res.json();
@@ -177,8 +178,14 @@ const UserSignIn=props => {
           //console.log(data.data);
           if (data.code=="00") {
             //{ userId: "A6B433CD8F15397BE05314B5A8C00F89" }
+            localStorage.setItem('id_provinsi', data.data[0].id_provinsi);
+            localStorage.setItem('nama_provinsi', data.data[0].nama_provinsi);
+            localStorage.setItem('nama_kabupaten', data.data[0].nama_kabupaten);
+            localStorage.setItem('nama_kecamatan', data.data[0].nama_kecamatan);
+            localStorage.setItem('nama_kelurahan', data.data[0].nama_kelurahan);
+            localStorage.setItem('nama_rw', data.data[0].nama_rw);
+            localStorage.setItem('nama_rt', data.data[0].nama_rt);
             localStorage.setItem('username', data.data[0].UserName);
-            localStorage.setItem('UserName', data.data[0].UserName);
             localStorage.setItem('NamaLengkap', data.data[0].NamaLengkap);
             localStorage.setItem('roleName', data.data[0].roleName);
             localStorage.setItem('id', data.data[0].id);
@@ -192,6 +199,7 @@ const UserSignIn=props => {
             localStorage.setItem('Title Email', data.data4[0].value_setting);
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
+
             window.location='/beranda-user';
             //history.push('/beranda');
 
