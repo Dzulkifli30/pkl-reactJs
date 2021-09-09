@@ -15,7 +15,7 @@ import {
     DialogContent
 } from '@material-ui/core';
 const ProfileUser = () => {
-
+    let wilayah = JSON.parse(localStorage.getItem("nama wilayah"));
 
     const [rowSelect, setRowSelect] = React.useState({})
     rowSelect.id = localStorage.getItem('id')
@@ -33,7 +33,7 @@ const ProfileUser = () => {
                 />
                 <Divider />
                 <CardContent className="bg-indigo-900 text-white">
-                    <Grid
+                    {/* <Grid
                         container
                         spacing={0}
                     >
@@ -147,8 +147,51 @@ const ProfileUser = () => {
 
 
                         </Grid>
-                    </Grid>
+                    </Grid> */}
+                    <DialogContent>
+                        Tugas anda Berada di Wilayah
+                    </DialogContent>
+                    <Grid
+                        container
+                        spacing={0}
+                    >
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                            <DialogContent>
+                                Provinsi : {wilayah[0].nama_provinsi}
+                            </DialogContent>
 
+                            <DialogContent>
+                                Kecamatan : {wilayah[0].nama_kecamatan}
+                            </DialogContent>
+
+                            <DialogContent>
+                                Rw : {wilayah[0].nama_rw}
+                            </DialogContent>
+
+                        </Grid>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                            <DialogContent>
+                                Kabupaten : {wilayah[0].nama_kabupaten}
+                            </DialogContent>
+
+                            <DialogContent>
+                                Kelurahan : {wilayah[0].nama_kelurahan}
+                            </DialogContent>
+
+                            <DialogContent>
+                                Rt : {wilayah[0].nama_rt}
+                            </DialogContent>
+
+                        </Grid>
+                    </Grid>
                 </CardContent>
                 <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah ProfileUser</button>}>
                     <ProfileAddModi

@@ -206,6 +206,9 @@ const UserSignIn=props => {
             localStorage.setItem('Title Email', data.data4[0].value_setting);
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
+            localStorage.setItem('nama wilayah', JSON.stringify(data.data5));
+            localStorage.setItem('form rt', JSON.stringify(data.data6));
+            localStorage.setItem('rt', data.data5[0].nama_rt);
             window.location='/beranda-user';
           // alert('id rt anda : '.localStorage.getItem('id_rt', data.data[0].id_rt));
 
