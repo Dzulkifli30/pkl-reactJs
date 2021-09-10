@@ -1,6 +1,7 @@
 import React from "react"
 import { ModalComponent } from 'components';
 import ProfileAddModi from "./components/ProfileUserAddModi";
+import ProfileTugas from "./components/ProfileTugas";
 import Swal from "sweetalert2";
 import Popup from 'reactjs-popup'
 import {
@@ -16,9 +17,25 @@ import {
 } from '@material-ui/core';
 const ProfileUser = () => {
     let wilayah = JSON.parse(localStorage.getItem("nama wilayah"));
+    let rt = JSON.parse(localStorage.getItem("form rt"));
 
     const [rowSelect, setRowSelect] = React.useState({})
+    const [open, setOpen]=React.useState(false);
+
+    const handleOpen=(e) => {
+        setOpen(true);
+    };
+    const handleClose=(e) => {
+        setOpen(false);
+    };
     rowSelect.id = localStorage.getItem('id')
+    function popupComponen(componenPopup) {
+        return (
+            <ModalComponent
+                open={open} ComponenAddModi={componenPopup} setData={wilayah} getDataBackend={handleClose}>
+            </ModalComponent>
+        )
+      }
 
     return (
         <div className=" justify-center text-center mb-96  bg-indigo-700  ">
@@ -33,7 +50,7 @@ const ProfileUser = () => {
                 />
                 <Divider />
                 <CardContent className="bg-indigo-900 text-white">
-                    {/* <Grid
+                    <Grid
                         container
                         spacing={0}
                     >
@@ -57,7 +74,7 @@ const ProfileUser = () => {
                             <DialogContent
 
                             >
-                                Provinsi : {localStorage.getItem('nama_provinsi')}
+                                Provinsi : {wilayah[0].nama_provinsi}
 
 
 
@@ -65,7 +82,7 @@ const ProfileUser = () => {
                             <DialogContent
 
                             >
-                                Kabupaten : {localStorage.getItem('nama_kabupaten')}
+                                Kabupaten : {wilayah[0].nama_kabupaten}
 
 
 
@@ -73,7 +90,7 @@ const ProfileUser = () => {
                             <DialogContent
 
                             >
-                                Kecamatan : {localStorage.getItem('nama_kecamatan')}
+                                Kecamatan : {wilayah[0].nama_kecamatan}
 
 
 
@@ -81,7 +98,7 @@ const ProfileUser = () => {
                             <DialogContent
 
                             >
-                                Id Rt : {localStorage.getItem('id_rt')}
+                                Id Rt : {localStorage.getItem('rt')}
 
 
 
@@ -121,78 +138,42 @@ const ProfileUser = () => {
                             <DialogContent
 
                             >
-                                Kelurahan : {localStorage.getItem('nama_kelurahan')}
-
-
-
-                            </DialogContent>
-                            <DialogContent
-
-                            >
-                                Rw : {localStorage.getItem('nama_rw')}
-
-
-
-                            </DialogContent>
-                            <DialogContent
-
-                            >
-                                Rt : {localStorage.getItem('nama_rt')}
-
-
-
-                            </DialogContent>
-
-
-
-
-                        </Grid>
-                    </Grid> */}
-                    <DialogContent>
-                        Tugas anda Berada di Wilayah
-                    </DialogContent>
-                    <Grid
-                        container
-                        spacing={0}
-                    >
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
-                            <DialogContent>
-                                Provinsi : {wilayah[0].nama_provinsi}
-                            </DialogContent>
-
-                            <DialogContent>
-                                Kecamatan : {wilayah[0].nama_kecamatan}
-                            </DialogContent>
-
-                            <DialogContent>
-                                Rw : {wilayah[0].nama_rw}
-                            </DialogContent>
-
-                        </Grid>
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
-                            <DialogContent>
-                                Kabupaten : {wilayah[0].nama_kabupaten}
-                            </DialogContent>
-
-                            <DialogContent>
                                 Kelurahan : {wilayah[0].nama_kelurahan}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Rw : {wilayah[0].nama_rw}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Rt : {rt[0].nama_rt}
+
+
+
                             </DialogContent>
 
-                            <DialogContent>
-                                Rt : {wilayah[0].nama_rt}
-                            </DialogContent>
+
+
 
                         </Grid>
                     </Grid>
+                    
+                    
                 </CardContent>
+                <button
+                    onClick={handleOpen}
+                    className="btn btn-md btn-warning"
+                >
+                    Tugas anda 
+                </button>
                 <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah ProfileUser</button>}>
                     <ProfileAddModi
                         rowSelect={rowSelect}
@@ -200,6 +181,7 @@ const ProfileUser = () => {
                     />
                 </Popup>
 
+                {popupComponen(ProfileTugas)}
             </Card>
 
             {/* <div className="row">

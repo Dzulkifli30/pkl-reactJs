@@ -362,7 +362,7 @@ const ProvinsiList=props => {
       <ModalComponent getDataBackend={getProv}
         handleChange={handleChange} setData={setData}
         open={open} setRowSelect={setRowProvinsisSelect} rowSelect={rowProvinsisSelect}
-        title={title} datas={filteredItems} handleClose={handleClose} 
+        title={title} datas={filteredItems} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
     )
