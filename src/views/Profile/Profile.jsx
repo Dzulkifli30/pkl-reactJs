@@ -17,7 +17,7 @@ import {
 const Profile = () => {
 
 
-    const [rowSelect,setRowSelect] = React.useState({})
+    const [rowSelect, setRowSelect] = React.useState({})
     rowSelect.id = localStorage.getItem('id')
 
     return (
@@ -84,13 +84,14 @@ const Profile = () => {
 
 
                             </DialogContent>
-                            
-                <Popup  trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah Profile</button>}>
-                <ProfileAddModi
-                rowSelect={rowSelect}
-                setRowSelect={setRowSelect}
-                />
-                </Popup>
+
+
+                            <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah Profile</button>}>
+                                <ProfileAddModi
+                                    rowSelect={rowSelect}
+                                    setRowSelect={setRowSelect}
+                                />
+                            </Popup>
 
 
                         </Grid>

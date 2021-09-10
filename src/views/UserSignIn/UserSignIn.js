@@ -175,7 +175,6 @@ const UserSignIn=props => {
         .then(res => {
           const data=res;
 
-
           //console.log(data.data);
           if (data.code=="00") {
             //{ userId: "A6B433CD8F15397BE05314B5A8C00F89" }
@@ -204,10 +203,12 @@ const UserSignIn=props => {
             localStorage.setItem('Periode Sensus', data.data2[0].value_setting);
             localStorage.setItem('Setting Label', data.data3[0].value_setting);
             localStorage.setItem('Title Email', data.data4[0].value_setting);
+            localStorage.setItem('Data Wilayah', JSON.stringify(data.wilayah));
+            localStorage.setItem('Form Rt', JSON.stringify(data.rt));
+            localStorage.setItem('Period', JSON.stringify(data.data5));
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
             window.location='/beranda-user';
-          // alert('id rt anda : '.localStorage.getItem('id_rt', data.data[0].id_rt));
 
             //history.push('/beranda');
 
@@ -255,7 +256,7 @@ const UserSignIn=props => {
 
     }
 
-    getData();
+    getData()
     /**/
 
 

@@ -15,10 +15,28 @@ import {
     DialogContent
 } from '@material-ui/core';
 const ProfileUser = () => {
-
-
+    
     const [rowSelect, setRowSelect] = React.useState({})
     rowSelect.id = localStorage.getItem('id')
+    let retrievedData = localStorage.getItem("Form Rt");
+    let retrievedDatas = localStorage.getItem("Period");
+
+const getLocal = () =>{
+    let rts =JSON.parse(retrievedData);
+    let periods =JSON.parse(retrievedDatas);
+    if (rowSelect.id == localStorage.getItem("id")) {
+        
+      return  <p>{periods[0].nama_rt}</p>
+
+    }
+    console.log("Rt anda adalah",rts[0].nama_rt)
+    
+}
+// const handleParam = (getLocal) => {
+//     console.log("enak",getLocal())
+    
+// }
+
 
     return (
         <div className=" justify-center text-center mb-96  bg-indigo-700  ">
@@ -28,6 +46,7 @@ const ProfileUser = () => {
                     title={
                         <div className="  font-poppins ">
                             <p className="text-center">{localStorage.getItem("NamaLengkap")}</p>
+                            {getLocal}
                         </div>
                     }
                 />
@@ -138,6 +157,14 @@ const ProfileUser = () => {
 
                             >
                                 Rt : {localStorage.getItem('nama_rt')}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Form Rt : {getLocal()}
 
 
 
