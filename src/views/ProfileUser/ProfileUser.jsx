@@ -1,6 +1,7 @@
 import React from "react"
 import { ModalComponent } from 'components';
 import ProfileAddModi from "./components/ProfileUserAddModi";
+import ProfileTugas from "./components/ProfileTugas";
 import Swal from "sweetalert2";
 import Popup from 'reactjs-popup'
 import ProfileF from './components/ProfileF'
@@ -16,29 +17,26 @@ import {
     DialogContent
 } from '@material-ui/core';
 const ProfileUser = () => {
-    let periods = JSON.parse(localStorage.getItem("Period"));
+    let wilayah = JSON.parse(localStorage.getItem("nama wilayah"));
+    let rt = JSON.parse(localStorage.getItem("form rt"));
 
     const [rowSelect, setRowSelect] = React.useState({})
+    const [open, setOpen]=React.useState(false);
+
+    const handleOpen=(e) => {
+        setOpen(true);
+    };
+    const handleClose=(e) => {
+        setOpen(false);
+    };
     rowSelect.id = localStorage.getItem('id')
-    let retrievedData = localStorage.getItem("Form Rt");
-    let retrievedDatas = localStorage.getItem("Period");
-
-const getLocal = () =>{
-    let rts =JSON.parse(retrievedData);
-    let periods =JSON.parse(retrievedDatas);
-    if (rowSelect.id == localStorage.getItem("id")) {
-        
-      return  <p>{periods[0].nama_rt}</p>
-
-    }
-    console.log("Rt anda adalah",rts[0].nama_rt)
-    
-}
-// const handleParam = (getLocal) => {
-//     console.log("enak",getLocal())
-    
-// }
-
+    function popupComponen(componenPopup) {
+        return (
+            <ModalComponent
+                open={open} ComponenAddModi={componenPopup} setData={wilayah} getDataBackend={handleClose}>
+            </ModalComponent>
+        )
+      }
 
     return (
         <div className=" justify-center text-center mb-96  bg-indigo-700  ">
@@ -54,9 +52,6 @@ const getLocal = () =>{
                 />
                 <Divider />
                 <CardContent className="bg-indigo-900 text-white">
-                    <DialogContent>
-                        Tugas anda Berada di Wilayah
-                    </DialogContent>
                     <Grid
                         container
                         spacing={0}
@@ -66,43 +61,121 @@ const getLocal = () =>{
                             md={6}
                             xs={12}
                         >
+                            <DialogContent
+
+                            >
+                                Username : {localStorage.getItem('username')}
+
+
+
+                            </DialogContent>
                             <DialogContent>
-                                Provinsi : {periods[0].nama_provinsi}
+                                Nama Lengkap : {localStorage.getItem('NamaLengkap')}
                             </DialogContent>
 
-                            <DialogContent>
-                                Kecamatan : {periods[0].nama_kecamatan}
-                            </DialogContent>
+                            <DialogContent
 
-                            <DialogContent>
-                                Rw : {periods[0].nama_rw}
+                            >
+                                Provinsi : {wilayah[0].nama_provinsi}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Kabupaten : {wilayah[0].nama_kabupaten}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Kecamatan : {wilayah[0].nama_kecamatan}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Id Rt : {localStorage.getItem('rt')}
+
+
+
                             </DialogContent>
 
                         </Grid>
                         <Grid
                             item
-                            md={6}
+                            md={3}
                             xs={12}
                         >
-                            <DialogContent>
-                                Kabupaten : {periods[0].nama_kabupaten}
+                            <DialogContent
+
+                            >
+                                Jabatan : {localStorage.getItem('Jabatan')}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Alamat : {localStorage.getItem('Alamat')}
+
+
+
                             </DialogContent>
 
-                            <DialogContent>
-                                Kelurahan : {periods[0].nama_kelurahan}
+                            <DialogContent
+
+                            >
+                                Nomor Induk : {localStorage.getItem('NIK')}
+
+
                             </DialogContent>
 
-                            <DialogContent>
-                                Rt : {periods[0].nama_rt}
+                            <DialogContent
+
+                            >
+                                Kelurahan : {wilayah[0].nama_kelurahan}
+
+
+
                             </DialogContent>
+                            <DialogContent
+
+                            >
+                                Rw : {wilayah[0].nama_rw}
+
+
+
+                            </DialogContent>
+                            <DialogContent
+
+                            >
+                                Rt : {rt[0].nama_rt}
+
+
+
+                            </DialogContent>
+
+
+
 
                         </Grid>
-                        {/* <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Lihat Daerah Tugas Anda</button>}>
-                    <ProfileF
-                    />
-                </Popup> */}
                     </Grid>
+                    
+                    
                 </CardContent>
+                <button
+                    onClick={handleOpen}
+                    className="btn btn-md btn-warning"
+                >
+                    Tugas anda 
+                </button>
                 <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah ProfileUser</button>}>
                     <ProfileAddModi
                         rowSelect={rowSelect}
@@ -110,6 +183,7 @@ const getLocal = () =>{
                     />
                 </Popup>
 
+                {popupComponen(ProfileTugas)}
             </Card>
 
             {/* <div className="row">
