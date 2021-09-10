@@ -15,7 +15,8 @@ import {
     DialogContent
 } from '@material-ui/core';
 const ProfileUser = () => {
-    
+    // let periods = JSON.parse(localStorage.getItem("nama wilayah"));
+
     const [rowSelect, setRowSelect] = React.useState({})
     rowSelect.id = localStorage.getItem('id')
     let retrievedData = localStorage.getItem("Form Rt");
@@ -52,6 +53,9 @@ const getLocal = () =>{
                 />
                 <Divider />
                 <CardContent className="bg-indigo-900 text-white">
+                    <DialogContent>
+                        Tugas anda Berada di Wilayah
+                    </DialogContent>
                     <Grid
                         container
                         spacing={0}
@@ -61,121 +65,38 @@ const getLocal = () =>{
                             md={6}
                             xs={12}
                         >
-                            <DialogContent
-
-                            >
-                                Username : {localStorage.getItem('username')}
-
-
-
-                            </DialogContent>
                             <DialogContent>
-                                Nama Lengkap : {localStorage.getItem('NamaLengkap')}
+                                Provinsi : {periods[0].nama_provinsi}
                             </DialogContent>
 
-                            <DialogContent
-
-                            >
-                                Provinsi : {localStorage.getItem('nama_provinsi')}
-
-
-
+                            <DialogContent>
+                                Kecamatan : {periods[0].nama_kecamatan}
                             </DialogContent>
-                            <DialogContent
 
-                            >
-                                Kabupaten : {localStorage.getItem('nama_kabupaten')}
-
-
-
-                            </DialogContent>
-                            <DialogContent
-
-                            >
-                                Kecamatan : {localStorage.getItem('nama_kecamatan')}
-
-
-
-                            </DialogContent>
-                            <DialogContent
-
-                            >
-                                Id Rt : {localStorage.getItem('id_rt')}
-
-
-
+                            <DialogContent>
+                                Rw : {periods[0].nama_rw}
                             </DialogContent>
 
                         </Grid>
                         <Grid
                             item
-                            md={3}
+                            md={6}
                             xs={12}
                         >
-                            <DialogContent
-
-                            >
-                                Jabatan : {localStorage.getItem('Jabatan')}
-
-
-
-                            </DialogContent>
-                            <DialogContent
-
-                            >
-                                Alamat : {localStorage.getItem('Alamat')}
-
-
-
+                            <DialogContent>
+                                Kabupaten : {periods[0].nama_kabupaten}
                             </DialogContent>
 
-                            <DialogContent
-
-                            >
-                                Nomor Induk : {localStorage.getItem('NIK')}
-
-
+                            <DialogContent>
+                                Kelurahan : {periods[0].nama_kelurahan}
                             </DialogContent>
 
-                            <DialogContent
-
-                            >
-                                Kelurahan : {localStorage.getItem('nama_kelurahan')}
-
-
-
+                            <DialogContent>
+                                Rt : {periods[0].nama_rt}
                             </DialogContent>
-                            <DialogContent
-
-                            >
-                                Rw : {localStorage.getItem('nama_rw')}
-
-
-
-                            </DialogContent>
-                            <DialogContent
-
-                            >
-                                Rt : {localStorage.getItem('nama_rt')}
-
-
-
-                            </DialogContent>
-                            <DialogContent
-
-                            >
-                                Form Rt : {getLocal()}
-
-
-
-                            </DialogContent>
-
-
-
 
                         </Grid>
                     </Grid>
-
                 </CardContent>
                 <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah ProfileUser</button>}>
                     <ProfileAddModi

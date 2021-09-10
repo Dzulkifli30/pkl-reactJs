@@ -208,6 +208,9 @@ const UserSignIn=props => {
             localStorage.setItem('Period', JSON.stringify(data.data5));
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
+            localStorage.setItem('nama wilayah', JSON.stringify(data.data5));
+            localStorage.setItem('form rt', JSON.stringify(data.data6));
+            localStorage.setItem('rt', data.data5[0].nama_rt);
             window.location='/beranda-user';
 
             //history.push('/beranda');

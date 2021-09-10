@@ -352,6 +352,10 @@ const RtAddModi=props => {
       "id_rt": rowSelect.id_rt,
       "nama_rt": rowSelect.nama_rt,
       "id_rw": rowSelect.id_rw,
+      "id_kelurahan": rowSelect.id_kelurahan,
+      "id_kecamatan": rowSelect.id_kecamatan,
+      "id_kabupaten": rowSelect.id_kabupaten,
+      "id_provinsi": rowSelect.id_provinsi,
       "IsActive": rowSelect.IsActive,
 
     }
