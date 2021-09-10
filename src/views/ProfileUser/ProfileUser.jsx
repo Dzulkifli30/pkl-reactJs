@@ -3,6 +3,7 @@ import { ModalComponent } from 'components';
 import ProfileAddModi from "./components/ProfileUserAddModi";
 import Swal from "sweetalert2";
 import Popup from 'reactjs-popup'
+import ProfileF from './components/ProfileF'
 import {
     Card,
     CardHeader,
@@ -15,7 +16,7 @@ import {
     DialogContent
 } from '@material-ui/core';
 const ProfileUser = () => {
-    // let periods = JSON.parse(localStorage.getItem("nama wilayah"));
+    let periods = JSON.parse(localStorage.getItem("Period"));
 
     const [rowSelect, setRowSelect] = React.useState({})
     rowSelect.id = localStorage.getItem('id')
@@ -96,6 +97,10 @@ const getLocal = () =>{
                             </DialogContent>
 
                         </Grid>
+                        {/* <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Lihat Daerah Tugas Anda</button>}>
+                    <ProfileF
+                    />
+                </Popup> */}
                     </Grid>
                 </CardContent>
                 <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah ProfileUser</button>}>

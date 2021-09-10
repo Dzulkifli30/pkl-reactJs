@@ -20,23 +20,24 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
-import { urlPostLoginUser } from '../../kumpulanUrl'
+import { urlPostLoginUser } from '../../kumpulanUrl';
+
 import UsersByDevice from 'views/Dashboard/components/UsersByDevice';
 
 const schema={
-  // UserName: {
-  //   presence: { allowEmpty: false, message: 'is required' },
-  //   //email: true,
-  //   length: {
-  //     maximum: 64
-  //   }
-  // },
-  // password: {
-  //   presence: { allowEmpty: false, message: 'is required' },
-  //   length: {
-  //     maximum: 128
-  //   }
-  // }
+  UserName: {
+    presence: { allowEmpty: false, message: 'is required' },
+    //email: true,
+    length: {
+      maximum: 64
+    }
+  },
+  password: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 128
+    }
+  }
 };
 
 const useStyles=makeStyles(theme => ({
@@ -178,18 +179,18 @@ const UserSignIn=props => {
           //console.log(data.data);
           if (data.code=="00") {
             //{ userId: "A6B433CD8F15397BE05314B5A8C00F89" }
-            localStorage.setItem('nama_provinsi', data.data[0].nama_provinsi);
-            localStorage.setItem('nama_kabupaten', data.data[0].nama_kabupaten);
-            localStorage.setItem('nama_kecamatan', data.data[0].nama_kecamatan);
-            localStorage.setItem('nama_kelurahan', data.data[0].nama_kelurahan);
-            localStorage.setItem('nama_rw', data.data[0].nama_rw);
-            localStorage.setItem('nama_rt', data.data[0].nama_rt);
-            localStorage.setItem('id_provinsi', data.data[0].id_provinsi);
-            localStorage.setItem('id_kabupaten', data.data[0].id_kabupaten);
-            localStorage.setItem('id_kecamatan', data.data[0].id_kecamatan);
-            localStorage.setItem('id_kelurahan', data.data[0].id_kelurahan);
-            localStorage.setItem('id_rw', data.data[0].id_rw);
-            localStorage.setItem('id_rt', data.data[0].id_rt);
+            // localStorage.setItem('nama_provinsi', data.data[0].nama_provinsi);
+            // localStorage.setItem('nama_kabupaten', data.data[0].nama_kabupaten);
+            // localStorage.setItem('nama_kecamatan', data.data[0].nama_kecamatan);
+            // localStorage.setItem('nama_kelurahan', data.data[0].nama_kelurahan);
+            // localStorage.setItem('nama_rw', data.data[0].nama_rw);
+            // localStorage.setItem('nama_rt', data.data[0].nama_rt);
+            // localStorage.setItem('id_provinsi', data.data[0].id_provinsi);
+            // localStorage.setItem('id_kabupaten', data.data[0].id_kabupaten);
+            // localStorage.setItem('id_kecamatan', data.data[0].id_kecamatan);
+            // localStorage.setItem('id_kelurahan', data.data[0].id_kelurahan);
+            // localStorage.setItem('id_rw', data.data[0].id_rw);
+            // localStorage.setItem('id_rt', data.data[0].id_rt);
             // localStorage.setItem('Format RT : ',{id_rt});
             localStorage.setItem('username', data.data[0].UserName);
             localStorage.setItem('NamaLengkap', data.data[0].NamaLengkap);
@@ -209,23 +210,28 @@ const UserSignIn=props => {
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
             localStorage.setItem('nama wilayah', JSON.stringify(data.data5));
-            localStorage.setItem('form rt', JSON.stringify(data.data6));
+            // localStorage.setItem('form rt', JSON.stringify(data.data6));
             localStorage.setItem('rt', data.data5[0].nama_rt);
             window.location='/beranda-user';
 
             //history.push('/beranda');
 
-          } else {  
+          } else{  
             console.log(data);
             setFormState(formState => ({
               ...formState,
-              values: {
-                UserName: '',
-                password: ''
-              },
               isValid: false,
-              errors: true
+              errors: false
             }));
+            // setFormState(formState => ({
+            //   ...formState,
+            //   values: {
+            //     UserName: '',
+            //     password: ''
+            //   },
+            //   isValid: false,
+            //   errors: true
+            // }));
             Swal.fire({
               position: 'center',
               icon: 'error',
@@ -239,15 +245,14 @@ const UserSignIn=props => {
         })
         .catch((e) => {
           console.log(e)
-          alert("err");
+          alert("Anda Tidak mempunyai akses");
           setFormState(formState => ({
             ...formState,
             isValid: false,
             errors: false
           }));
 
-          swal("Gagal Login!", "Gagal Login", "error")
-
+          swal("Gagal Login!", "Anda Tidak Mempunyai UserAccess", "error")
           return false;
 
 
@@ -336,15 +341,14 @@ const UserSignIn=props => {
 
                     <TextField
                       className="form-control"
-                      error={hasError('email')}
                       fullWidth
                       margin="dense"
 
-                      /*
+                      error={hasError('UserName')}
+                      fullWidth
                       helperText={
-                        hasError('email')? formState.errors.email[0]:null
-                      }*/
-                      //label="User Name"
+                        hasError('UserName')? formState.errors.UserName[0]:null
+                      }
                       name="UserName"
                       onChange={handleChange}
                       type="text"
