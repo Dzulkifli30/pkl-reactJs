@@ -4,7 +4,6 @@ import ProfileAddModi from "./components/ProfileUserAddModi";
 import ProfileTugas from "./components/ProfileTugas";
 import Swal from "sweetalert2";
 import Popup from 'reactjs-popup'
-import ProfileF from './components/ProfileF'
 import {
     Card,
     CardHeader,
@@ -46,7 +45,6 @@ const ProfileUser = () => {
                     title={
                         <div className="  font-poppins ">
                             <p className="text-center">{localStorage.getItem("NamaLengkap")}</p>
-                            {getLocal}
                         </div>
                     }
                 />
@@ -170,9 +168,10 @@ const ProfileUser = () => {
                     
                     
                 </CardContent>
-                <button
+                    <div className="justify-around">
+                    <button
                     onClick={handleOpen}
-                    className="btn btn-md btn-warning"
+                    className="btn btn-md btn-warning mr-10 mt-2"
                 >
                     Tugas anda 
                 </button>
@@ -182,6 +181,7 @@ const ProfileUser = () => {
                         setRowSelect={setRowSelect}
                     />
                 </Popup>
+                    </div>
 
                 {popupComponen(ProfileTugas)}
             </Card>

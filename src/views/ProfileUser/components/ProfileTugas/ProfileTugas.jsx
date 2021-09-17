@@ -135,10 +135,18 @@ const ProfileTugas = props => {
             {...rest}
             className={clsx(classes.root, className)}
         >
-
+    <button
+                className="btn btn-md bg-red-600 text-white"
+                onClick={() => {
+                    getDataBackend();
+                }}
+            >
+                X
+            </button>
             <CardContent
                 className="bg-indigo-900 text-white"
             >
+                
                 <DialogContent>
                     Tugas anda Berada di
                 </DialogContent>
@@ -146,15 +154,9 @@ const ProfileTugas = props => {
                     columns={columns}
                     data={setData}
                 />
+                
             </CardContent>
-            <button
-                className="button"
-                onClick={() => {
-                    getDataBackend();
-                }}
-            >
-                close modal
-            </button>
+
         </Card>
     );
 };

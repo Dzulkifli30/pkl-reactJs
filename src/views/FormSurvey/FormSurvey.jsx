@@ -1,6 +1,7 @@
 import React from 'react'
 import ProvinsiList from '../ProvinsiList'
 import KabupatenList from '../KabupatenList'
+// import KabupatenAddModi from '../KabupatenList/components/KabupatenAddModi'
 import KecamatanList from '../KecamatanList'
 import RwList from '../RwList'
 import KelurahanList from '../KelurahanList'
