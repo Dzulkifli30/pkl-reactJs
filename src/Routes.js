@@ -65,11 +65,11 @@ const Routes=() => {
 
   return (
     <Switch>
-      <Redirect
+      {/* <Redirect
         exact
         from="/"
         to="/beranda"
-      />
+      /> */}
 
     <Redirect
         exact

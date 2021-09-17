@@ -148,7 +148,7 @@ const ProfileTugas = props => {
                 />
             </CardContent>
             <button
-                className="button"
+                className="btn btn-danger btn-md"
                 onClick={() => {
                     getDataBackend();
                 }}
