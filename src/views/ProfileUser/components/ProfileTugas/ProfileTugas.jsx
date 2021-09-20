@@ -156,7 +156,6 @@ const ProfileTugas = props => {
                 />
                 
             </CardContent>
-
         </Card>
     );
 };

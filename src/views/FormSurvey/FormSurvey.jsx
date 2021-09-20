@@ -1,11 +1,9 @@
-import React from 'react'
-import ProvinsiList from '../ProvinsiList'
-import KabupatenList from '../KabupatenList'
-// import KabupatenAddModi from '../KabupatenList/components/KabupatenAddModi'
-import KecamatanList from '../KecamatanList'
-import RwList from '../RwList'
-import KelurahanList from '../KelurahanList'
-import RtList from '../RtList'
+import React, {useRef} from 'react'
+import FormKK from '../FormKK'
+import FormAnggota from '../FormAnggota'
+import FormPekerjaan from '../FormPekerjaan'
+import FormPendidikan from '../FormPendidikan'
+import FormPendapatan from '../FormPendapatan'
 import Slider from "react-slick"; 
 import "./slick/slick.css"; 
 import "./slick/slick-theme.css";
@@ -35,33 +33,44 @@ import {Animated} from "react-animated-css";
 const FormSurvey = () => {
       const settings = {
         infinite: true,
-        speed: 500,
+        speed: 800,
         slidesToShow: 1,
         slidesToScroll: 1,
       //   nextArrow: <SampleNextArrow />,
       // prevArrow: <SamplePrevArrow />
       };
+      const gotoNext = () => {
+        sliderRef.current.slickNext();
+      }
+      const sliderRef = useRef();
     return(
       <Animated animationIn="zoomIn" isVisible={true}>
         <div className="mb-6">
-          <Slider {...settings}>
+          <Slider className="sliderMain" ref={sliderRef} {...settings}>
               <div>
-              <ProvinsiList/>
+              <FormKK
+              gotoNext={gotoNext}
+              />
               </div>
               <div>
-              <KabupatenList/>
+              <FormAnggota
+              gotoNext={gotoNext}
+              />
               </div>
               <div>
-              <KecamatanList/>
+              <FormPendidikan
+              gotoNext={gotoNext}
+              />
               </div>
               <div>
-              <KelurahanList/>
+              <FormPekerjaan
+              gotoNext={gotoNext}
+              />
               </div>
               <div>
-              <RwList/>
-              </div>
-              <div>
-              <RtList/>
+              <FormPendapatan
+              gotoNext={gotoNext}
+              />
               </div>
           </Slider>
         </div>
