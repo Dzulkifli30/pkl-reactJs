@@ -1,16 +1,24 @@
 import React from 'react'
+import KK from '../KK'
+
 
 const FormKK = (props) => {
     const { gotoNext,...rest } = props;
     return (
         <div className="">
-            <h1>Form KK</h1>
+            <h3>Form KK</h3>
+
             <button
                 onClick={gotoNext}
-                className="btn btn-md btn-success"
+                className="btn btn-sm btn-success"
             >
                 Next
             </button>
+            <div className="">
+                <KK/>
+                
+            </div>
+            
         </div>
     )
 }
