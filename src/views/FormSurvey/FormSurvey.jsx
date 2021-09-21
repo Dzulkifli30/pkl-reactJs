@@ -1,9 +1,7 @@
 import React, {useRef} from 'react'
 import FormKK from '../FormKK'
 import FormAnggota from '../FormAnggota'
-import FormPekerjaan from '../FormPekerjaan'
-import FormPendidikan from '../FormPendidikan'
-import FormPendapatan from '../FormPendapatan'
+import FormAlatKontrasepsi from '../FormAlatKontrasepsi'
 import Slider from "react-slick"; 
 import "./slick/slick.css"; 
 import "./slick/slick-theme.css";
@@ -58,17 +56,7 @@ const FormSurvey = () => {
               />
               </div>
               <div>
-              <FormPendidikan
-              gotoNext={gotoNext}
-              />
-              </div>
-              <div>
-              <FormPekerjaan
-              gotoNext={gotoNext}
-              />
-              </div>
-              <div>
-              <FormPendapatan
+              <FormAlatKontrasepsi
               gotoNext={gotoNext}
               />
               </div>

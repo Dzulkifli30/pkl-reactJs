@@ -1,13 +1,13 @@
 import React from 'react'
 
-const FormPekerjaan = (props) => {
+const FormAlatKontrasepsi = (props) => {
     const { gotoNext,...rest } = props;
     return(
         <div className="">
-            <h1>Form Pekerjaan</h1>
+            <h1>Form Pengguanan Alat Kontrasepsi</h1>
             <button
                 onClick={gotoNext}
-                className="btn btn-md btn-warning"
+                className="btn btn-md btn-primary"
             >
                 Next
             </button>
@@ -15,4 +15,4 @@ const FormPekerjaan = (props) => {
     )
 }
 
-export default FormPekerjaan;
+export default FormAlatKontrasepsi;
