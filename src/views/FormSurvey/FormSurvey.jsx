@@ -40,6 +40,9 @@ const FormSurvey = () => {
       const gotoNext = () => {
         sliderRef.current.slickNext();
       }
+      const goPrev = () => {
+        sliderRef.current.slickPrev();
+      }
       const sliderRef = useRef();
     return(
       <Animated animationIn="zoomIn" isVisible={true}>
@@ -53,6 +56,7 @@ const FormSurvey = () => {
               <div>
               <FormAnggota
               gotoNext={gotoNext}
+              goPrev={goPrev}
               />
               </div>
               <div>

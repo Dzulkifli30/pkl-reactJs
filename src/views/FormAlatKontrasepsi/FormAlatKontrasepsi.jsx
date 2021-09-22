@@ -4,10 +4,10 @@ const FormAlatKontrasepsi = (props) => {
     const { gotoNext,...rest } = props;
     return(
         <div className="">
-            <h1>Form Pengguanan Alat Kontrasepsi</h1>
+            <h3>Form Pengguanan Alat Kontrasepsi</h3>
             <button
                 onClick={gotoNext}
-                className="btn btn-md btn-primary"
+                className="btn btn-sm btn-primary"
             >
                 Next
             </button>

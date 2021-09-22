@@ -211,6 +211,13 @@ const UserSignIn=props => {
             localStorage.setItem('url', data.data4[2].value_setting);
             localStorage.setItem('nama wilayah', JSON.stringify(data.data5));
             localStorage.setItem('form rt', JSON.stringify(data.rt));
+            localStorage.setItem('agama', JSON.stringify(data.agama));
+            localStorage.setItem('jenis_kelamin', JSON.stringify(data.jenis_kelamin));
+            localStorage.setItem('kewarganegaraan', JSON.stringify(data.kewarganegaraan));
+            localStorage.setItem('status_nikah', JSON.stringify(data.status_nikah));
+            localStorage.setItem('pendidikan', JSON.stringify(data.pendidikan));
+            localStorage.setItem('status_dalam_keluarga', JSON.stringify(data.status_dalam_keluarga));
+            localStorage.setItem('pekerjaan', JSON.stringify(data.pekerjaan));
             localStorage.setItem('rt', data.data5[0].nama_rt);
             window.location='/beranda-user';
 
