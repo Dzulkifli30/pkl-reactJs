@@ -105,6 +105,9 @@ export const urlDeleteUserAccessSurvey = urlport + '/user-access-survey/delete'
 
 //Form KK
 export const urlGetFormKK = urlport + '/form-kk/getFormKK'
+export const urlAddFormKK = urlport + '/form-kk/storeFormKK'
+export const urlEditFormKK = urlport + '/form-kk/updateFormKK'
+export const urlDeleteFormKK = urlport + '/form-kk/deleteFormKK'
 
 
 //Anggota KK
@@ -112,3 +115,4 @@ export const urlGetAnggotaKK = urlport + '/anggota-kk/getAnggotaKK'
 export const urlShowAnggotaKK=urlport+'/anggota-kk/showAnggotaKK'
 export const urlAddAnggotaKK=urlport+'/anggota-kk/storeAnggotaKK'
 export const urlEditAnggotaKK=urlport+'/anggota-kk/updateAnggotaKK'
+

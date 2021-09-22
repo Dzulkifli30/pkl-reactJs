@@ -60,14 +60,14 @@ const useStyles=makeStyles(theme => ({
 const KKTable=props => {
   const {
     handleOpenViewMap,
-    className,handleDelete,
-    textfind,KKfind,
+    className,handleClose,
+    title,KKfind,
     order, orderBy, SettingKK,
     KKExport, filteredItems, handleOpen, selectedKK,
-    setSelectedKK,
-    Export,
+    setSelectedKK,datas,
+    Export,setData,
     convertArrayOfObjectsToCSV,
-    downloadCSV
+    roles,handleChange
 
     , ...rest }=props;
 
@@ -78,7 +78,12 @@ const KKTable=props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
-
+  const textfind=() =>{
+      title();
+  }
+  const downloadCSV=() =>{
+    roles();
+}
 
 
   const customStyles={
@@ -280,7 +285,7 @@ const KKTable=props => {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleDelete(e,row)} ><DeleteIcon /></Button>
+          onClick={(e) => handleChange(e,row)} ><DeleteIcon /></Button>
       ,
     },
   ];
@@ -296,9 +301,6 @@ const KKTable=props => {
       <div class="col-md-6">
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
-        </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Form KK")}>
-          <AddIcon/>
         </Button>
 
       </div>
@@ -386,7 +388,7 @@ const KKTable=props => {
               title=""
               customStyles={customStyles}
               columns={columns}
-              data={filteredItems}
+              data={datas}
               keyField="UserName"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
@@ -396,7 +398,10 @@ const KKTable=props => {
               persistTableHead
               dense
             />
-
+            <button className="btn btn-md btn-warning mr-10 mt-2 justify-center"
+            onClick={handleClose}>
+                Tutup
+            </button>
 
           </div>
 

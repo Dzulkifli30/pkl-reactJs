@@ -79,7 +79,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const KKAddModi=props => {
-  const { className, setData, getDataBackend,getMockData, setRowSelect, rowSelect, title, ...rest }=props;
+  const { className, setData, getDataBackend,getMockData, setRowSelect, rowSelect, title, handleOpen,gotoNext, ...rest }=props;
 
   const classes=useStyles();
 
@@ -480,7 +480,6 @@ const KKAddModi=props => {
     });
   }
 
-
   const handleClose=() => {
     getDataBackend();
   }
@@ -503,6 +502,7 @@ const KKAddModi=props => {
       "id_rw": rowSelect.id_rw,
       "id_rt":rowSelect.id_rt,
     }
+    gotoNext();
     if (rowSelect.KK_id===undefined) {
       url=urlAddFormKK;
       varJson.create_by = userName
@@ -530,7 +530,7 @@ const KKAddModi=props => {
 
     ///let urlGetData=urlPostLogin
     // alert(url);
-    console.log(url)
+    // console.log(url)
     const response=fetch(url, requestOptions)
       .then(tester => {
         if (tester.status === 200) {  
@@ -544,7 +544,7 @@ const KKAddModi=props => {
         console.log(tester)
         // alert(tester)
       getDataBackend();
-      if (url == urlAddKelompokData) {
+      if (url == urlAddFormKK) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -552,7 +552,7 @@ const KKAddModi=props => {
           showConfirmButton: false,
           timer: 1000
         })
-      }if(url == urlEditKelompokData){
+      }if(url == urlEditFormKK){
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -615,7 +615,7 @@ const KKAddModi=props => {
       >
         <CardHeader
           subheader=""
-        title={title}
+        title="Form KK"
         />
         <Divider />
         <CardContent>
@@ -922,13 +922,17 @@ const KKAddModi=props => {
             disabled={!formState.isValid}
 
           >
-            Simpan
+            Simpan dan Next
           </Button>
-
-          <Button color="primary"
-            className={classes.buttonCancel}
+          <Button
+            color="secondary"
+            className={classes.buttonPrimary}
             variant="contained"
-            onClick={handleClose} >Batal</Button>
+            onClick={handleOpen}
+
+          >
+            Lihat Form KK
+          </Button>
 
         </CardActions>
       </form>

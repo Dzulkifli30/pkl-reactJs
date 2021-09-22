@@ -22,31 +22,7 @@ import { urlAddProv, urlEditProv, urlU, urlUbahPassword } from '../../../../kump
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 import Swal from 'sweetalert2';
-const schema = {
-    KodeDepdagri: {
-        presence: { allowEmpty: false, message: 'harus diisi' },
-        //email: true,
-        length: {
-            maximum: 200
-        }
-    },
-    nama_provinsi: {
-        presence: { allowEmpty: false, message: 'harus diisi' },
-        //email: true,
-        length: {
-            maximum: 200
-        }
-    },
-    IsActive: {
-        presence: { allowEmpty: false, message: 'harus diisi' },
-        //email: true,
-        /* length: {
-           maximum: 1
-         }*/
-    },
-    /**/
 
-};
 let form_rt = JSON.parse(localStorage.getItem("form rt"));
 const useStyles = makeStyles(theme => ({
     root: {},
