@@ -417,7 +417,7 @@ const AnggotaKKTable=props => {
               customStyles={customStyles}
               columns={columns}
               data={datas}
-              keyField="UserName"
+              keyField=""
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader

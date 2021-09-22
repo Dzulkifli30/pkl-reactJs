@@ -5,11 +5,11 @@ import { Button } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
 import moment from 'moment';
-import { VuserToolbar, AnggotaKKTable, AnggotaKKAddModi, ViewMap } from './components';
+import { AnggotaKKToolbar, AnggotaKKTable, AnggotaKKAddModi, ViewMap } from './components';
 import { ModalComponent } from 'components';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { urlKab,urlGetVuser,urlGetAnggotaKK, urlDeleteTargetkk } from '../../kumpulanUrl'
+import { urlKab,urlGetAnggotaKK, } from '../../kumpulanUrl'
 
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
@@ -46,7 +46,8 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const VuserList=props => {
+const AnggotaKKList=props => {
+  const { rowKK,setRowKK,...rest } = props;
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
@@ -57,77 +58,79 @@ const VuserList=props => {
 
   }
 
-  async function getTargetKk() {
+  async function getAnggotaKK(anggotaKK_params) {
     const userId=localStorage.getItem('user_id');
-    setFilteredItems(Vuser);
+    setFilteredItems(anggotaKK_params);
     setOpen(false);
-
+    AnggotaKK.push(anggotaKK_params)
+    // setAnggotaKK(anggotaKK_params)
+    console.log('ini Nggota kaka',AnggotaKK)
     /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
+    // const requestOptions={
+    //   method: 'get',
+    //   //mode: "cors",
+    //   headers: { 'Content-Type': 'application/json' },
+    // };
 
     let url=urlGetAnggotaKK
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
+    // const response=await fetch(url, requestOptions)
+    //   .then(res => {
+    //     return res.json();
+    //   })
 
-      .then(resJson => {
-        const data=resJson;
-        setVuser(data.data);
-        setFilteredItems(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setVuser([]);
-        setFilteredItems([]);
-        setOpen(false);
-        //this.setState({ ...this.state, isFetching: false });
-      });
+    //   .then(resJson => {
+    //     const data=resJson;
+    //     setAnggotaKK(data.data);
+    //     setFilteredItems(data.data);
+    //     //return false;
+    //   })
+    //   .catch(e => {
+    //     //console.log(e);
+    //     alert("Nextwork Error");
+    //     setAnggotaKK([]);
+    //     setFilteredItems([]);
+    //     setOpen(false);
+    //     //this.setState({ ...this.state, isFetching: false });
+    //   });
 
     setOpen(false);
   }
 
 
 
-  const deleteTargetKk = async (id_rt) => {  /* */
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body:JSON.stringify({
-        id_rt: id_rt
-      })
-    };
+  // const deleteAnggotaKK = async (id_rt) => {  /* */
+  //   const requestOptions={
+  //     method: 'POST',
+  //     mode: "cors",
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body:JSON.stringify({
+  //       id_rt: id_rt
+  //     })
+  //   };
 
-    let url=urlDeleteTargetkk
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
+  //   let url=urlDeleteAnggotaKK
+  //   // eslint-disable-next-line no-useless-concat
+  //   const response=await fetch(url, requestOptions)
+  //     .then(res => {
+  //       return res.json();
+  //     })
 
-      .then(resJson => {
-        const data=resJson;
-        setVuser(data.data);
-        setFilteredItems(data.data);
-        getTargetKk()
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        alert("Nextwork Error");
-        setVuser([]);
-        setFilteredItems([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
+  //     .then(resJson => {
+  //       const data=resJson;
+  //       setAnggotaKK(data.data);
+  //       setFilteredItems(data.data);
+  //       getAnggotaKK()
+  //       //return false;
+  //     })
+  //     .catch(e => {
+  //       //console.log(e);
+  //       alert("Nextwork Error");
+  //       setAnggotaKK([]);
+  //       setFilteredItems([]);
+  //       //this.setState({ ...this.state, isFetching: false });
+  //     });
+  // }
 
   const csvData=() => {
     const tempCsv=[];
@@ -135,7 +138,7 @@ const VuserList=props => {
 
     //];
 
-    SettingVuser[0].HeaderData.map(headCell => {
+    SettingAnggotaKK[0].HeaderData.map(headCell => {
       tempCsvItem.push(
         headCell.label
       )
@@ -148,41 +151,22 @@ const VuserList=props => {
   }
 
 
-  
 
-  const deleteVuser=async (e, id) => {
-    const selectedVuser_string=selectedVuser.join("<batas></batas>");
-    let Vuser3=Vuser.filter(function (entry) {
-      return entry&&entry.id&&selectedVuser_string.toUpperCase().indexOf(entry.id.toUpperCase())===-1;
-    });
-
-    let url=urlDeleteProv
-    if (url === 200) {
-      // thisClickedFunda.closest("tr").remove();
-      console.log(url.data.message)
-    }
-
-    setFilteredItems(Vuser3)
-    setVuser(Vuser3)
-    setVuserfind('')
-    //console.log("groups3",groups3);
-    //findData(groupfind)
-  }
   
   const classes=useStyles();
   const printPdf=(e) => {
     //alert("dsdsd")
-    setVuserExport(flteredItems);
+    setAnggotaKKExport(flteredItems);
     const doc=new jsPDF()
 
     const timer=setTimeout(() => {
-      doc.setProperties({ title: SettingVuser[0].TitleModule });
+      doc.setProperties({ title: SettingAnggotaKK[0].TitleModule });
       doc.viewerPreferences({ 'DisplayDocTitle': true });
-      doc.autoTable({ html: '#VuserExport' })
-      var posis_x=(doc.previousAutoTable.width-(SettingVuser[0].TitleModule).length)/2
-      doc.text(SettingVuser[0].TitleModule, posis_x, 6);
+      doc.autoTable({ html: '#AnggotaKKExport' })
+      var posis_x=(doc.previousAutoTable.width-(SettingAnggotaKK[0].TitleModule).length)/2
+      doc.text(SettingAnggotaKK[0].TitleModule, posis_x, 6);
 
-      doc.save('Vuser.pdf')
+      doc.save('AnggotaKK.pdf')
     }, 2000);
     return () => clearTimeout(timer);
 
@@ -199,17 +183,17 @@ const VuserList=props => {
   const onChangefind=(e) => {
     // return;
     if (e.target.value.length>=3) {
-      setVuserfind(e.target.value)
-      let Vuser4=Vuser.filter(function (entry) {
+      setAnggotaKKfind(e.target.value)
+      let AnggotaKK4=AnggotaKK.filter(function (entry) {
         return entry&&entry.UserName&&
           ((entry.UserName!==null? entry.UserName:'').toUpperCase().indexOf(e.target.value.toUpperCase())!==-1);
       });
-      setFilteredItems(Array.isArray(Vuser4)? Vuser4:[Vuser4]);
+      setFilteredItems(Array.isArray(AnggotaKK4)? AnggotaKK4:[AnggotaKK4]);
 
     } if (e.target.value.length==0) {
-      setFilteredItems(Vuser);
+      setFilteredItems(AnggotaKK);
     }
-    setVuserfind(e.target.value)
+    setAnggotaKKfind(e.target.value)
 
     //console.log("user1", users1);
   }
@@ -260,23 +244,23 @@ const VuserList=props => {
   }
 
 
-  const [Vuser, setVuser]=useState([]);
+  const [AnggotaKK, setAnggotaKK]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  const [rowVuserSelect, setRowVuserSelect]=useState({});
+  // const [rowKK, setRowKK]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
-  const [selectedVuser, setSelectedVuser]=useState([]);
-  const [VuserExport, setVuserExport]=useState([]);
-  const [Vuserfind, setVuserfind]=useState([]);
+  const [selectedAnggotaKK, setSelectedAnggotaKK]=useState([]);
+  const [AnggotaKKExport, setAnggotaKKExport]=useState([]);
+  const [AnggotaKKfind, setAnggotaKKfind]=useState([]);
   const [add,setAdd]=React.useState([])
-  // const SettingVuser=useState(mockDataSettingVuser);
+  // const SettingAnggotaKK=useState(mockDataSettingAnggotaKK);
   const [order, setOrder]=React.useState('asc');
   const [orderBy, setOrderBy]=React.useState('keyId');
 
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getTargetKk();
+    getAnggotaKK();
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -286,22 +270,22 @@ const VuserList=props => {
     //setData(event.target.name, event.target.value);
 
 
-    setSelectedVuser({
-      ...setSelectedVuser,
+    setSelectedAnggotaKK({
+      ...setSelectedAnggotaKK,
       [event.target.name]: event.target.value[0]
     });
 
   };
 
 
-  const setData=(field1, value1, field2, value2, nmVuser, kdVuser, status, keyId) => {
-    setRowVuserSelect({
-      ...selectedVuser,
+  const setData=(field1, value1, field2, value2, nmAnggotaKK, kdAnggotaKK, status, keyId) => {
+    setRowKK({
+      ...selectedAnggotaKK,
       [field1]: value1,
 
       [field2]: value2,
-      ['kdVuser']: kdVuser,
-      ['nmVuser']: nmVuser,
+      ['kdAnggotaKK']: kdAnggotaKK,
+      ['nmAnggotaKK']: nmAnggotaKK,
       ['status']: status,
       ['keyId']: keyId,
     });
@@ -313,19 +297,19 @@ const VuserList=props => {
   };
 
 
-  const handleOpen=(e, rowVuser, MessageButton) => {
+  const handleOpen=(e, rowAnggotaKK, MessageButton) => {
     setOpen(true);
     setTitle(MessageButton);
     // alert(MessageButton)
-    setRowVuserSelect(rowVuser);
+    setRowKK(rowAnggotaKK);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
 
   };
 
-  const handleDelete=(e,RowVuserSelect) => {
-    deleteTargetKk(RowVuserSelect.id_rt).then( Swal.fire({
+  const handleDelete=(e,RowKK) => {
+    deleteAnggotaKK(RowKK.id_rt).then( Swal.fire({
       position: 'center',
       icon: 'success',
       title: 'Data Berhasil Dihapus',
@@ -339,7 +323,7 @@ const VuserList=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowVuserSelect(rowVuser);
+    //setRowKK(rowAnggotaKK);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -357,10 +341,10 @@ const VuserList=props => {
 
   function popupComponen(componenPopup) {
     return (
-      <ModalComponent getDataBackend={getTargetKk}
+      <ModalComponent getDataBackend={getAnggotaKK}
         handleChange={handleChange} setData={setData}
         handleOpenViewMap={handleOpenViewMap}
-        open={open} setRowSelect={setRowVuserSelect} rowSelect={rowVuserSelect}
+        open={open} setRowSelect={setRowKK} rowSelect={rowKK}
         title={title} datas={filteredItems} handleClose={handleClose} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
@@ -372,22 +356,21 @@ const VuserList=props => {
   return (
     <div className={classes.root}>
       {/*}
-      <VuserToolbar
+      <AnggotaKKToolbar
         handleOpenViewMap={handleOpenViewMap}
-        textfind={Vuserfind} deleteVuser={deleteVuser}
+        textfind={AnggotaKKfind} deleteAnggotaKK={deleteAnggotaKK}
         csvData={csvData} printPdf={printPdf} onChange={onChangefind}
         handleOpen={handleOpen}
-        Vuser={Vuser}
+        AnggotaKK={AnggotaKK}
       />
   {*/}
       <div className={classes.content,"font-poppins p-10"}>
         <AnggotaKKAddModi 
-        getDataBackend={getTargetKk}
+        getDataBackend={getAnggotaKK}
         datas={filteredItems}
         handleChange={handleChange} setData={setData}
         handleOpenViewMap={handleOpenViewMap}
-        open={open} setRowSelect={setRowVuserSelect} rowSelect={rowVuserSelect}
-        gotoNext={gotoNext}
+        open={open} setRowSelect={setRowKK} rowSelect={rowKK}
         title={title}
         />
       {popupComponen(AnggotaKKTable)}
@@ -400,4 +383,4 @@ const VuserList=props => {
   );
 };
 
-export default VuserList;
+export default AnggotaKKList;

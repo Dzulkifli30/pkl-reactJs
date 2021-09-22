@@ -201,75 +201,74 @@ const AnggotaKKAddModi=props => {
       "nama_ayah": rowSelect.nama_ayah,
       "nama_ibu": rowSelect.nama_ibu,
     }
-    gotoNext();
-    let url=urlAddAnggotaKK;
+    // let url=urlAddAnggotaKK;
     if (rowSelect.anggota_kk_id === undefined) {
-      url=urlAddAnggotaKK;
+      // url=urlAddAnggotaKK;
       varJson.create_by = userName
       varJson.update_by = userName
     } else {
-      url=urlEditAnggotaKK;
+      // url=urlEditAnggotaKK;
       varJson.update_by = userName
     }
-
+    getDataBackend(varJson)
     console.log("var json =",varJson);
 
 
 
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        varJson
-      )
-    };
+    // const requestOptions={
+    //   method: 'POST',
+    //   mode: "cors",
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(
+    //     varJson
+    //   )
+    // };
 
 
     ///let urlGetData=urlPostLogin
     // alert(url);
-    console.log(url)
-    const response=fetch(url, requestOptions)
-      .then(tester => {
-        if (tester.status === 200) {  
-       handleClose();
-          return tester.json();
-        }
+    // console.log(url)
+    // const response=fetch(url, requestOptions)
+    //   .then(tester => {
+    //     if (tester.status === 200) {  
+    //    handleClose();
+    //       return tester.json();
+    //     }
        
-      })/**/
+    //   })/**/
 
-      .then(tester => {
-        console.log(tester)
-        // alert(tester)
-      getDataBackend();
-      if (url == urlAddAnggotaKK) {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Menambah Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }if(url == urlEditAnggotaKK){
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Memperbarui Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }
+    //   .then(tester => {
+    //     console.log(tester)
+    //     // alert(tester)
+    //   getDataBackend();
+    //   if (url == urlAddAnggotaKK) {
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: 'Sukses Menambah Data',
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     })
+    //   }if(url == urlEditAnggotaKK){
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: 'Sukses Memperbarui Data',
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     })
+    //   }
 
-        // alert("Sukses")
-        const data=tester;
-      })
-      .catch((e) => {
-        alert("RUSAk")
-        // swal("Gagal Login!", "Gagal Login", "error",  )
-        return false;
+    //     // alert("Sukses")
+    //     const data=tester;
+    //   })
+    //   .catch((e) => {
+    //     alert("RUSAk")
+    //     // swal("Gagal Login!", "Gagal Login", "error",  )
+    //     return false;
 
 
-      });
+    //   });
 
 
   }

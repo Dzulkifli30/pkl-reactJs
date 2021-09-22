@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import KK from '../KK'
 import { ModalComponent } from 'components';
 import { KKTable, KKaddModi } from "./components";
 import {
@@ -19,7 +18,7 @@ import Swal from 'sweetalert2';
 
 
 const FormKK = (props) => {
-    const { gotoNext,...rest } = props;
+    const { gotoNext,rowKK,setRowKK,...rest } = props;
 
     async function getFormKK() {
       const userId=localStorage.getItem('user_id');
@@ -154,7 +153,7 @@ const FormKK = (props) => {
 
     const [KK, setKK]=useState([]);
     const [filteredItems, setFilteredItems]=useState([]);
-    const [rowKKSelect, setRowKKSelect]=useState({});
+    // const [rowKK, setRowKK]=useState({});
     const [open, setOpen]=React.useState(false);
     const [title, setTitle]=React.useState(false);
     const [selectedKK, setSelectedKK]=useState([]);
@@ -166,7 +165,7 @@ const FormKK = (props) => {
     const [orderBy, setOrderBy]=React.useState('keyId');
 
     const setData=(field1, value1, field2, value2, nmKK, kdKK, status, keyId) => {
-      setRowKKSelect({
+      setRowKK({
         ...selectedKK,
         [field1]: value1,
   
@@ -202,8 +201,8 @@ const FormKK = (props) => {
         setOpen(false);
     };
 
-    const handleDelete=(e,RowKKSelect) => {
-      deleteFormKK(RowKKSelect.KK_id).then( Swal.fire({
+    const handleDelete=(e,RowKK) => {
+      deleteFormKK(RowKK.KK_id).then( Swal.fire({
         position: 'center',
         icon: 'success',
         title: 'Data Berhasil Dihapus',
@@ -217,7 +216,7 @@ const FormKK = (props) => {
       return (
         <ModalComponent getDataBackend={deleteFormKK}
           handleChange={handleDelete} setData={setData} roles={downloadCSV}
-          open={open} setRowSelect={setRowKKSelect} rowSelect={rowKKSelect}
+          open={open} setRowSelect={setRowKK} rowSelect={rowKK}
           title={KKfind} datas={filteredItems} handleClose={handleClose} datas={KK}
           ComponenAddModi={componenPopup}>
            </ModalComponent>
@@ -230,7 +229,7 @@ const FormKK = (props) => {
           <KKaddModi
         getDataBackend={getFormKK}
         handleChange={handleChange} setData={setData} handleOpen={handleOpen}
-        open={open} setRowSelect={setRowKKSelect} rowSelect={rowKKSelect}
+        open={open} setRowSelect={setRowKK} rowSelect={rowKK}
         title={title} datas={filteredItems} handleClose={handleClose} gotoNext={gotoNext}
         />
           {popupComponen(KKTable)}
