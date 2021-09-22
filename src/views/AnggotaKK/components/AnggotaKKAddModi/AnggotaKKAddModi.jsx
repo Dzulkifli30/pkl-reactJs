@@ -93,7 +93,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const AnggotaKKAddModi=props => {
-  const { className, setData,datas, getDataBackend,getMockData, setRowSelect, rowSelect,handleOpenViewMap, title, ...rest }=props;
+  const { className, setData,datas, getDataBackend,getMockData, setRowSelect,gotoNext, rowSelect,handleOpenViewMap, title, ...rest }=props;
 
   const classes=useStyles();
 
@@ -201,6 +201,7 @@ const AnggotaKKAddModi=props => {
       "nama_ayah": rowSelect.nama_ayah,
       "nama_ibu": rowSelect.nama_ibu,
     }
+    gotoNext();
     let url=urlAddAnggotaKK;
     if (rowSelect.anggota_kk_id === undefined) {
       url=urlAddAnggotaKK;
@@ -777,7 +778,7 @@ const AnggotaKKAddModi=props => {
             disabled={!formState.isValid}
 
           >
-            Simpan
+            Simpan dan Next
           </Button>
           <Button 
           color="primary"

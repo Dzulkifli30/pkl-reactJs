@@ -50,6 +50,7 @@ const VuserList=props => {
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
+  const { gotoNext,...rest } = props;
   const { history }=props;
   if (!localStorage.getItem("NamaLengkap")) {
     history.push('/beranda');
@@ -379,13 +380,14 @@ const VuserList=props => {
         Vuser={Vuser}
       />
   {*/}
-      <div className={classes.content,"font-poppins p-28"}>
+      <div className={classes.content,"font-poppins p-10"}>
         <AnggotaKKAddModi 
         getDataBackend={getTargetKk}
         datas={filteredItems}
         handleChange={handleChange} setData={setData}
         handleOpenViewMap={handleOpenViewMap}
         open={open} setRowSelect={setRowVuserSelect} rowSelect={rowVuserSelect}
+        gotoNext={gotoNext}
         title={title}
         />
       {popupComponen(AnggotaKKTable)}

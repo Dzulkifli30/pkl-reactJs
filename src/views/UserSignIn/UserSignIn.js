@@ -210,7 +210,6 @@ const UserSignIn=props => {
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
             localStorage.setItem('nama wilayah', JSON.stringify(data.data5));
-            localStorage.setItem('form rt', JSON.stringify(data.rt));
             localStorage.setItem('agama', JSON.stringify(data.agama));
             localStorage.setItem('jenis_kelamin', JSON.stringify(data.jenis_kelamin));
             localStorage.setItem('kewarganegaraan', JSON.stringify(data.kewarganegaraan));
