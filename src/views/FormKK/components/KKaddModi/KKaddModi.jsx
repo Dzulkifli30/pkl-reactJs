@@ -93,6 +93,7 @@ const KKAddModi=props => {
   const [kecamatan, setKecamatan] = useState([]);
   const [provinsi, setProvinsi] = useState([]);
   const [kel, setKel]=useState([]);
+  const formRt = JSON.parse(localStorage.getItem("form rt"));
 
   const status=[
     {
@@ -487,34 +488,44 @@ const KKAddModi=props => {
 
   const handleSave=(event) => {
     const userName=localStorage.getItem('username');
+    const periode_sensus=localStorage.getItem('Periode Sensus');
+    let wilayah = JSON.parse(localStorage.getItem("Data Wilayah"))
+    rowSelect.id_provinsi=wilayah[0].id_provinsi;
+    
+    console.log(rowSelect);
     let url=urlAddFormKK;
     let varJson = {
       "KK_id": rowSelect.KK_id,
-      "periode_sensus": rowSelect.periode_sensus,
+      "periode_sensus": periode_sensus,
       "NoKK": rowSelect.NoKK,
       "NIK_KK": rowSelect.NIK_KK,
       "nama_kk": rowSelect.nama_kk,
       "alamat_kk": rowSelect.alamat_kk,
       "id_provinsi": rowSelect.id_provinsi,
-      "id_kab": rowSelect.id_kab,
-      "id_kec": rowSelect.id_kec,
-      "id_kel": rowSelect.id_kel,
+      "id_kab": rowSelect.id_kabupaten,
+      "id_kec": rowSelect.id_kecamatan,
+      "id_kel": rowSelect.id_kelurahan,
       "id_rw": rowSelect.id_rw,
       "id_rt":rowSelect.id_rt,
     }
-    gotoNext();
     if (rowSelect.KK_id===undefined) {
-      url=urlAddFormKK;
+      // url=urlAddFormKK;
       varJson.create_by = userName
       varJson.update_by = userName
     } else {
-      url=urlEditFormKK;
+      // url=urlEditFormKK;
       // console.log("ide =",rowSelect.id_rt)
-
       varJson.update_by = userName
     }
-
-    console.log("var json =",varJson);
+    rowSelect.id_provinsi=wilayah[0].id_provinsi
+    rowSelect.id_kabupaten=wilayah[0].id_kabupaten;
+    rowSelect.id_kecamatan=wilayah[0].id_kecamatan;
+    rowSelect.id_kelurahan=wilayah[0].id_kelurahan;
+    rowSelect.id_rw=wilayah[0].id_rw;
+    rowSelect.create_by= userName
+    rowSelect.update_by= userName
+    gotoNext();
+    // console.log("var json =",varJson);
 
 
 
@@ -527,51 +538,50 @@ const KKAddModi=props => {
       )
     };
 
-
     ///let urlGetData=urlPostLogin
     // alert(url);
     // console.log(url)
-    const response=fetch(url, requestOptions)
-      .then(tester => {
-        if (tester.status === 200) {  
-       handleClose();
-          return tester.json();
-        }
+    // const response=fetch(url, requestOptions)
+    //   .then(tester => {
+    //     if (tester.status === 200) {  
+    //    handleClose();
+    //       return tester.json();
+    //     }
        
-      })/**/
+    //   })/**/
 
-      .then(tester => {
-        console.log(tester)
-        // alert(tester)
-      getDataBackend();
-      if (url == urlAddFormKK) {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Menambah Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }if(url == urlEditFormKK){
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Memperbarui Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }
+    //   .then(tester => {
+    //     console.log(tester)
+    //     // alert(tester)
+    //   getDataBackend();
+    //   if (url == urlAddFormKK) {
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: 'Sukses Menambah Data',
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     })
+    //   }if(url == urlEditFormKK){
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: 'Sukses Memperbarui Data',
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     })
+    //   }
 
-        // alert("Sukses")
-        const data=tester;
-      })
-      .catch((e) => {
-        alert(e)
-        // swal("Gagal Login!", "Gagal Login", "error",  )
-        return false;
+    //     // alert("Sukses")
+    //     const data=tester;
+    //   })
+    //   .catch((e) => {
+    //     alert(e)
+    //     // swal("Gagal Login!", "Gagal Login", "error",  )
+    //     return false;
 
 
-      });
+    //   });
 
 
   }
@@ -623,24 +633,6 @@ const KKAddModi=props => {
             container
             spacing={3}
           >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Periode Sensus"
-                margin="dense"
-                name="periode_sensus"
-                onChange={handleChange}
-                select
-                variant="outlined"
-                value={rowSelect.periode_sensus}
-              >
-                {handling()}
-              </TextField>
-            </Grid>
 
             <Grid
               item
@@ -734,159 +726,6 @@ const KKAddModi=props => {
 
               <TextField
                 fullWidth
-                label="Pilih Provinsi"
-                margin="dense"
-                name="id_provinsi"
-                onChange={handleChangeProvinsi}
-                //required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                //SelectProps={{ native: true }}
-
-                //defaultValue={rowSelect.IsActive}
-                value={rowSelect.id_provinsi}
-                variant="outlined"
-              >
-                {provinsi.map(option => (
-                  <option
-                    key={option.id_provinsi}
-                    value={option.id_provinsi}
-                  >
-                    {option.nama_provinsi}
-                  </option>
-                ))}
-
-              </TextField>
-
-            </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Pilih Kabupaten"
-                margin="dense"
-                name="id_kab"
-                onChange={handleChangeKabupaten}
-                //required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                //SelectProps={{ native: true }}
-
-                //defaultValue={rowSelect.IsActive}
-                value={rowSelect.id_kab}
-                variant="outlined"
-              >
-                {kabupaten.map(option => (
-                  <option
-                    key={option.id_kabupaten}
-                    value={option.id_kabupaten}
-                  >
-                    {option.nama_kabupaten}
-                  </option>
-                ))}
-
-              </TextField>
-
-            </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Pilih kecamatan"
-                margin="dense"
-                select
-                name="id_kec"
-                onChange={handleChangeKecamatan}
-                value={rowSelect.id_kec}
-                variant="outlined"
-              >
-                {kecamatan.map(option => (
-                  <option
-                    key={option.id_kecamatan}
-                    value={option.id_kecamatan}
-                  >
-                    {option.nama_kecamatan}
-                  </option>
-                ))}
-              </TextField>
-
-            </Grid>
-            
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-
-              <TextField
-                fullWidth
-                label="Pilih Kelurahan"
-                margin="dense"
-                name="id_kel"
-                onChange={handleChangeKelurahan}
-                select
-
-                value={rowSelect.id_kel}
-                variant="outlined"
-              >
-                {kel.map((option)=> (
-                  <option
-                    key={option.id_kelurahan}
-                    value={option.id_kelurahan}
-                  >
-                    {option.nama_kelurahan}
-                  </option>
-                ))}
-
-              </TextField>
-
-            </Grid>
-
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-
-              <TextField
-                fullWidth
-                label="Pilih Rw"
-                margin="dense"
-                name="id_rw"
-                onChange={handleChangeRw}
-                select
-
-                value={rowSelect.id_rw}
-                variant="outlined"
-              >
-                {rw.map((option)=> (
-                  <option
-                    key={option.id_rw}
-                    value={option.id_rw}
-                  >
-                    {option.nama_rw}
-                  </option>
-                ))}
-
-              </TextField>
-
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-
-              <TextField
-                fullWidth
                 label="Pilih Rt"
                 margin="dense"
                 name="id_rt"
@@ -896,7 +735,7 @@ const KKAddModi=props => {
                 value={rowSelect.id_rt}
                 variant="outlined"
               >
-                {rt.map((option)=> (
+                {formRt.map((option)=> (
                   <option
                     key={option.id_rt}
                     value={option.id_rt}

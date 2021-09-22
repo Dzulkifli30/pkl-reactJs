@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import FormKK from '../FormKK'
 import FormAnggota from '../FormAnggota'
 import FormAlatKontrasepsi from '../FormAlatKontrasepsi'
@@ -44,6 +44,8 @@ const FormSurvey = () => {
         sliderRef.current.slickPrev();
       }
       const sliderRef = useRef();
+      const [rowKK, setRowKK]=useState({});
+      const [dataKK, setDataKK]=useState({});
     return(
       <Animated animationIn="zoomIn" isVisible={true}>
         <div className="mb-6">
@@ -51,12 +53,19 @@ const FormSurvey = () => {
               <div>
               <FormKK
               gotoNext={gotoNext}
+              // dataKK={dataKK}
+              rowKK={rowKK}
+              setRowKK={setRowKK}
               />
               </div>
               <div>
               <FormAnggota
               gotoNext={gotoNext}
               goPrev={goPrev}
+              // dataKK={dataKK}
+              rowKK={rowKK}
+              setRowKK={setRowKK}
+              // anggotaKK={anggotaKK}
               />
               </div>
               <div>
