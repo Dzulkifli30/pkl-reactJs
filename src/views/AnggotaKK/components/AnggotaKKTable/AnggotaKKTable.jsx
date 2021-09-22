@@ -34,6 +34,7 @@ import {
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
 import { async } from 'validate.js';
+import Add from '@material-ui/icons/Add';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -327,8 +328,8 @@ const AnggotaKKTable=props => {
           <img src="/img/xls.jpeg" />
         </Button>
 
-        <button className=" btn btn-md text-white bg-red-600" onClick={handleClose}>
-          x
+        <button className=" btn btn-md " onClick={(e) => handleOpen(e,[],"Tambah Anggota KK")}>
+          <AddIcon/>
         </button>
 
       </div>
@@ -416,7 +417,7 @@ const AnggotaKKTable=props => {
               title=""
               customStyles={customStyles}
               columns={columns}
-              data={datas}
+              data={filteredItems}
               keyField=""
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1

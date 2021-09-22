@@ -779,13 +779,6 @@ const AnggotaKKAddModi=props => {
           >
             Simpan dan Next
           </Button>
-          <Button 
-          color="primary"
-          variant="contained"
-          onClick={(e) => handleOpenViewMap(e, "Tampilkan Table Data KB")}>
-          Tampilkan Table
-          </Button>
-
         </CardActions>
       </form>
     </Card>

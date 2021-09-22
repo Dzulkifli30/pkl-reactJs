@@ -51,7 +51,7 @@ const AnggotaKKList=props => {
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
-  const { gotoNext,...rest } = props;
+  // const { ,...rest } = props;
   const { history }=props;
   if (!localStorage.getItem("NamaLengkap")) {
     history.push('/beranda');
@@ -365,16 +365,16 @@ const AnggotaKKList=props => {
       />
   {*/}
       <div className={classes.content,"font-poppins p-10"}>
-        <AnggotaKKAddModi 
+        <AnggotaKKTable 
         getDataBackend={getAnggotaKK}
         datas={filteredItems}
+        handleOpen={handleOpen}
         handleChange={handleChange} setData={setData}
         handleOpenViewMap={handleOpenViewMap}
         open={open} setRowSelect={setRowKK} rowSelect={rowKK}
         title={title}
         />
-      {popupComponen(AnggotaKKTable)}
-      {/* {popupComponen(AnggotaKKAddModi)} */}
+      {popupComponen(AnggotaKKAddModi)}
 
       </div>
 
