@@ -206,7 +206,7 @@ const UserSignIn=props => {
             localStorage.setItem('Title Email', data.data4[0].value_setting);
             localStorage.setItem('Data Wilayah', JSON.stringify(data.wilayah));
             localStorage.setItem('Form Rt', JSON.stringify(data.rt));
-            localStorage.setItem('Form rt', JSON.stringify(data.rt));
+            localStorage.setItem('form rt', JSON.stringify(data.rt));
             localStorage.setItem('Period', JSON.stringify(data.data5));
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
