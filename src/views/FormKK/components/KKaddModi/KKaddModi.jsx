@@ -94,7 +94,6 @@ const KKAddModi=props => {
   const [provinsi, setProvinsi] = useState([]);
   const [kel, setKel]=useState([]);
   const formRt = JSON.parse(localStorage.getItem("form rt"));
-
   const status=[
     {
       value: '1',
@@ -723,7 +722,6 @@ const KKAddModi=props => {
               md={6}
               xs={12}
             >
-
               <TextField
                 fullWidth
                 label="Pilih Rt"
