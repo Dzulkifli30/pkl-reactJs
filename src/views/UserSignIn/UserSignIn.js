@@ -296,7 +296,7 @@ const UserSignIn=props => {
     formState.touched[field]&&formState.errors[field]? true:false;
 
   return (
-    <div className={classes.root,"font-poppins"}>
+    <div className={classes.root,"font-poppins sm:mt-20 lg:mt-5"}>
       <Grid
         className={classes.grid}
         container
@@ -308,7 +308,7 @@ const UserSignIn=props => {
           lg={12}
           xs={12}
         >
-          <div className={classes.content}>
+          <div className={classes.content,"font-poppins sm:mt-20 lg:mt-5"}>
             {/* <div>{bg_login}</div> */}
             <div className="d-md flex" style={{ width: '100%' }}>
               <form

@@ -8,7 +8,7 @@ import "animate.css"
 const LoginSlider = () => {
 
     return(
-        <Carousel className="h-full ">
+        <Carousel className="h-full sm:mr-4">
                 <div className="w-full font-poppins mt-9 p-9 mb-12 bg-gray-200 animate__fadeInBottomRight rounded-xl">
                     {/* <img src='images/auth.jpg' /> */}
                     <h4 className="mb-12 font-poppins ">Login Petugas Sensus</h4>
