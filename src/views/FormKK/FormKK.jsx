@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 
 
 const FormKK = (props) => {
-    const { gotoNext,rowKK,setRowKK,...rest } = props;
+    const { gotoNext,rowKK,setRowKK,KK,setKK,...rest } = props;
 
     async function getFormKK() {
       const userId=localStorage.getItem('user_id');
@@ -151,7 +151,7 @@ const FormKK = (props) => {
       link.click();
     }
 
-    const [KK, setKK]=useState([]);
+    // const [KK, setKK]=useState([]);
     const [filteredItems, setFilteredItems]=useState([]);
     // const [rowKK, setRowKK]=useState({});
     const [open, setOpen]=React.useState(false);

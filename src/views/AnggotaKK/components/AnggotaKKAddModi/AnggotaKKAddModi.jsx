@@ -18,7 +18,7 @@ import L from 'leaflet';
 import axios from 'axios';
 import { urlAddAnggotaKK, 
   urlEditAnggotaKK, 
-urlRw, urlKel, urlKec, urlKab, urlProv, urlShowKab, urlShowKec, urlShowKel, urlShowRw,urlShowRt,
+urlRw, urlKel, urlKec, urlKab, urlGetAnggotaKK, urlShowAnggotaKK, urlShowKec, urlShowKel, urlShowR,urlShowRt, urlGetFormKK, urlGetIdKK,
 } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
@@ -93,8 +93,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const AnggotaKKAddModi=props => {
-  const { className, setData,datas, getDataBackend,getMockData, setRowSelect,gotoNext, rowSelect,handleOpenViewMap, title, ...rest }=props;
-
+  const { className, setData,datas, getDataBackend,getMockData, setRowSelect,rowSelect,handleOpenViewMap, title,handleClose, ...rest }=props;
   const classes=useStyles();
 
   const agama = JSON.parse(localStorage.getItem("agama"));
@@ -104,7 +103,9 @@ const AnggotaKKAddModi=props => {
   const status_nikah = JSON.parse(localStorage.getItem("status_nikah"));
   const status_dalam_keluarga = JSON.parse(localStorage.getItem("status_dalam_keluarga"));
   const kewarganegaraan = JSON.parse(localStorage.getItem("kewarganegaraan"));
-  const [values, setValues]=useState({});
+  const [KK,setKK] = useState([])
+
+
   // const status_nikah=[
   //   {
   //     value: '1',
@@ -123,11 +124,43 @@ const AnggotaKKAddModi=props => {
     errors: {}
   });
 
+  const handleChangeAnggotaKK = event => {
+    handleChange(event)
+    showAnggotaKK(event.target.value)
+  }
+
+  async function getKK() {
+    /* */
+    const requestOptions={
+      method: 'get',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    let url=urlGetIdKK
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        setKK(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        setKK([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
   
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    // getProv();
+    getKK();
+    // showAnggotaKK(rowSelect.KK_id)
     // showKab(rowSelect.id_provinsi);
     // showKecamatan(rowSelect.id_kabupaten);
     // showKel(rowSelect.id_kecamatan);
@@ -174,10 +207,6 @@ const AnggotaKKAddModi=props => {
   }
 
 
-  const handleClose=() => {
-    getDataBackend();
-  }
-
 
   const handleSave=(event) => {
     const userName=localStorage.getItem('username');
@@ -214,63 +243,6 @@ const AnggotaKKAddModi=props => {
     console.log("var json =",varJson);
 
 
-
-    // const requestOptions={
-    //   method: 'POST',
-    //   mode: "cors",
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(
-    //     varJson
-    //   )
-    // };
-
-
-    ///let urlGetData=urlPostLogin
-    // alert(url);
-    // console.log(url)
-    // const response=fetch(url, requestOptions)
-    //   .then(tester => {
-    //     if (tester.status === 200) {  
-    //    handleClose();
-    //       return tester.json();
-    //     }
-       
-    //   })/**/
-
-    //   .then(tester => {
-    //     console.log(tester)
-    //     // alert(tester)
-    //   getDataBackend();
-    //   if (url == urlAddAnggotaKK) {
-    //     Swal.fire({
-    //       position: 'center',
-    //       icon: 'success',
-    //       title: 'Sukses Menambah Data',
-    //       showConfirmButton: false,
-    //       timer: 1000
-    //     })
-    //   }if(url == urlEditAnggotaKK){
-    //     Swal.fire({
-    //       position: 'center',
-    //       icon: 'success',
-    //       title: 'Sukses Memperbarui Data',
-    //       showConfirmButton: false,
-    //       timer: 1000
-    //     })
-    //   }
-
-    //     // alert("Sukses")
-    //     const data=tester;
-    //   })
-    //   .catch((e) => {
-    //     alert("RUSAk")
-    //     // swal("Gagal Login!", "Gagal Login", "error",  )
-    //     return false;
-
-
-    //   });
-
-
   }
   const handling =()=>{
     {
@@ -278,7 +250,7 @@ const AnggotaKKAddModi=props => {
       // alert(tmp) 
       // alert( localStorage.getItem("Periode Sensus") - 5 )
       var periode_sensus = parseInt(localStorage.getItem("Periode Sensus"));
-      for (var option = periode_sensus; option <= periode_sensus + 5; option++)
+      for (var option = periode_sensus; option <= periode_sensus + 0; option++)
        {tmp.push({"option" : option});}
       console.log('temp =',tmp)
       return tmp.map(option => (
@@ -288,24 +260,6 @@ const AnggotaKKAddModi=props => {
                    
            ))}
   }
-  const handlings =()=>{
-    {
-      var pm = [];
-      // alert(pm) 
-      // alert( localStorage.getItem("Periode Sensus") - 5 )
-      var agama = parseInt(localStorage.getItem("agama"));
-       {pm.push({"agama" : agama});}
-      console.log('agama =',pm)
-      return pm.map(agama => (
-          <option value={agama.agama}>
-            {agama.agama}
-          </option>
-                   
-           ))}
-  }
-
-
-
 
   //  const position=[currentLocation.lat, currentLocation.lng]
   const hasError=field => {
@@ -384,13 +338,19 @@ const AnggotaKKAddModi=props => {
                 margin="dense"
                 name="KK_id"
                 onChange={handleChange}
-                helperText={
-                  hasError('KK_id')? formState.errors.KK_id[0]:null
-                }
-                error={hasError('KK_id')}
-                defaultValue={rowSelect&&rowSelect.KK_id? rowSelect.KK_id:''}
                 variant="outlined"
-              />
+                value={rowSelect.KK_id}
+                select
+              >
+                {KK.map(option => (
+                  <option
+                   value={option.KK_id}
+                    key={option.KK_id}
+                  >
+                    {option.KK_id}
+                  </option>
+                ))}
+              </TextField>
             </Grid>
             <Grid
               item
@@ -777,8 +737,14 @@ const AnggotaKKAddModi=props => {
             disabled={!formState.isValid}
 
           >
-            Simpan dan Next
+            Simpan 
           </Button>
+          
+          <Button color="primary"
+            className={classes.buttonCancel}
+            variant="contained"
+            onClick={handleClose} >Batal</Button>
+
         </CardActions>
       </form>
     </Card>

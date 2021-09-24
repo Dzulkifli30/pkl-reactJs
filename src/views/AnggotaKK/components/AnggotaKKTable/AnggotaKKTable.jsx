@@ -59,6 +59,8 @@ const useStyles=makeStyles(theme => ({
   },
 }));
 const AnggotaKKTable=props => {
+
+  
   const {
     handleOpenViewMap,
     datas,
@@ -67,7 +69,9 @@ const AnggotaKKTable=props => {
     order, orderBy, SettingVuser,
     VuserExport, filteredItems, handleOpen, selectedVuser,
     setSelectedVuser,
+    anggotaKK_params,
     handleClose,
+    AnggotaKK,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -407,7 +411,9 @@ const AnggotaKKTable=props => {
   return (
     <Card
       {...rest}
-      className={clsx(classes.root, className)}
+      className={clsx(classes.root, className)
+      
+      }
     >
       <CardContent className={classes.content}>
         <PerfectScrollbar>

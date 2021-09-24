@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react'
 import FormKK from '../FormKK'
 import FormAnggota from '../FormAnggota'
+// import AnggotaKK from 'views/AnggotaKK'
 import FormAlatKontrasepsi from '../FormAlatKontrasepsi'
 import Slider from "react-slick"; 
 import "./slick/slick.css"; 
@@ -29,6 +30,10 @@ import {Animated} from "react-animated-css";
 // }
 
 const FormSurvey = () => {
+  const [KK,setKK]=useState([])
+  const [AnggotaKK,setAnggotaKK]=useState([])
+  const [rowKK, setRowKK]=useState({});
+
       const settings = {
         infinite: true,
         speed: 800,
@@ -38,13 +43,15 @@ const FormSurvey = () => {
       // prevArrow: <SamplePrevArrow />
       };
       const gotoNext = () => {
+        rowKK.AnggotaKK = AnggotaKK
+        console.log(rowKK)
+
         sliderRef.current.slickNext();
       }
       const goPrev = () => {
         sliderRef.current.slickPrev();
       }
       const sliderRef = useRef();
-      const [rowKK, setRowKK]=useState({});
       const [dataKK, setDataKK]=useState({});
     return(
       <Animated animationIn="zoomIn" isVisible={true}>
@@ -56,6 +63,8 @@ const FormSurvey = () => {
               // dataKK={dataKK}
               rowKK={rowKK}
               setRowKK={setRowKK}
+              KK={KK}
+              setKK={setKK}
               />
               </div>
               <div>
@@ -65,12 +74,18 @@ const FormSurvey = () => {
               // dataKK={dataKK}
               rowKK={rowKK}
               setRowKK={setRowKK}
+              KK={KK}
+              setKK={setKK}
+              AnggotaKK={AnggotaKK}
+              setAnggotaKK={setAnggotaKK}
               // anggotaKK={anggotaKK}
               />
               </div>
               <div>
               <FormAlatKontrasepsi
               gotoNext={gotoNext}
+              KK={KK}
+              setKK={setKK}
               />
               </div>
           </Slider>

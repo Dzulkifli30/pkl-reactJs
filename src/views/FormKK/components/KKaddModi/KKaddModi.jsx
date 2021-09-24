@@ -440,12 +440,12 @@ const KKAddModi=props => {
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    getProv();
-    showKab(rowSelect.id_provinsi);
-    showKecamatan(rowSelect.id_kab);
-    showKel(rowSelect.id_kec);
-    showRw(rowSelect.id_kel);
-    showRt(rowSelect.id_rw);
+    // getProv();
+    // showKab(rowSelect.id_provinsi);
+    // showKecamatan(rowSelect.id_kab);
+    // showKel(rowSelect.id_kec);
+    // showRw(rowSelect.id_kel);
+    // showRt(rowSelect.id_rw);
 
     const errors=validate(rowSelect, schema);
     console.log(errors)

@@ -47,7 +47,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const AnggotaKKList=props => {
-  const { rowKK,setRowKK,...rest } = props;
+  const { rowKK,setRowKK,KK,setKK,AnggotaKK,setAnggotaKK,...rest } = props;
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
@@ -58,21 +58,28 @@ const AnggotaKKList=props => {
 
   }
 
-  async function getAnggotaKK(anggotaKK_params) {
-    const userId=localStorage.getItem('user_id');
-    setFilteredItems(anggotaKK_params);
-    setOpen(false);
+
+   function getAnggotaKK(anggotaKK_params) {
+
     AnggotaKK.push(anggotaKK_params)
+    setFilteredItems(AnggotaKK);
+    setOpen(false);
+
+    const userId=localStorage.getItem('user_id');
+    // setFilteredItems(anggotaKK_params);
+    // setOpen(false);
     // setAnggotaKK(anggotaKK_params)
-    console.log('ini Nggota kaka',AnggotaKK)
-    /* */
+    console.log('ini Anggota KK',AnggotaKK)
+    console.log('FIltered Items',filteredItems)
+    console.log("Parampaa = ",anggotaKK_params)
+    // /* */
     // const requestOptions={
     //   method: 'get',
     //   //mode: "cors",
     //   headers: { 'Content-Type': 'application/json' },
     // };
 
-    let url=urlGetAnggotaKK
+    // let url=urlGetAnggotaKK
     // eslint-disable-next-line no-useless-concat
     // const response=await fetch(url, requestOptions)
     //   .then(res => {
@@ -244,13 +251,15 @@ const AnggotaKKList=props => {
   }
 
 
-  const [AnggotaKK, setAnggotaKK]=useState([]);
+  // const [AnggotaKK, setAnggotaKK]=useState([]);
+  const [rowAnggotaKK, setRowAnggotaKK]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
-  // const [rowKK, setRowKK]=useState({});
+  // const [rowKK, setRowAnggotaKK]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
   const [selectedAnggotaKK, setSelectedAnggotaKK]=useState([]);
   const [AnggotaKKExport, setAnggotaKKExport]=useState([]);
+  const [anggotaKK_params, setAnggotaKK_params]=useState([]);
   const [AnggotaKKfind, setAnggotaKKfind]=useState([]);
   const [add,setAdd]=React.useState([])
   // const SettingAnggotaKK=useState(mockDataSettingAnggotaKK);
@@ -260,7 +269,7 @@ const AnggotaKKList=props => {
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getAnggotaKK();
+   console.log(anggotaKK_params);
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -279,7 +288,7 @@ const AnggotaKKList=props => {
 
 
   const setData=(field1, value1, field2, value2, nmAnggotaKK, kdAnggotaKK, status, keyId) => {
-    setRowKK({
+    setRowAnggotaKK({
       ...selectedAnggotaKK,
       [field1]: value1,
 
@@ -301,7 +310,7 @@ const AnggotaKKList=props => {
     setOpen(true);
     setTitle(MessageButton);
     // alert(MessageButton)
-    setRowKK(rowAnggotaKK);
+    setRowAnggotaKK(rowAnggotaKK);
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
 
@@ -323,7 +332,7 @@ const AnggotaKKList=props => {
     setOpen(true);
     setTitle(MessageButton);
     //    alert(title)
-    //setRowKK(rowAnggotaKK);
+    //setRowAnggotaKK(rowAnggotaKK);
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
@@ -344,7 +353,7 @@ const AnggotaKKList=props => {
       <ModalComponent getDataBackend={getAnggotaKK}
         handleChange={handleChange} setData={setData}
         handleOpenViewMap={handleOpenViewMap}
-        open={open} setRowSelect={setRowKK} rowSelect={rowKK}
+        open={open} setRowSelect={setRowAnggotaKK} rowSelect={rowAnggotaKK}
         title={title} datas={filteredItems} handleClose={handleClose} 
         ComponenAddModi={componenPopup}>
          </ModalComponent>
@@ -365,13 +374,16 @@ const AnggotaKKList=props => {
       />
   {*/}
       <div className={classes.content,"font-poppins p-10"}>
-        <AnggotaKKTable 
+      <AnggotaKKTable 
         getDataBackend={getAnggotaKK}
-        datas={filteredItems}
+        AnggotaKK={AnggotaKK}
+        filteredItems={filteredItems}
+        anggotaKK_params={anggotaKK_params}
         handleOpen={handleOpen}
+        handleClose={handleClose}
         handleChange={handleChange} setData={setData}
         handleOpenViewMap={handleOpenViewMap}
-        open={open} setRowSelect={setRowKK} rowSelect={rowKK}
+        open={open} setRowSelect={setRowAnggotaKK} rowSelect={rowAnggotaKK}
         title={title}
         />
       {popupComponen(AnggotaKKAddModi)}
