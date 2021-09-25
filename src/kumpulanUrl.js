@@ -1,111 +1,125 @@
-let ulrport="http://localhost:8000/";
-let ulrportRefresh="http://localhost:8000/";
+let urlport="http://localhost:8000/";
+let urlportrefresh="http://localhost:8000/";
 //"http://10.242.11.101:8082/"
 
 //"http://10.242.11.101:8081/";
- //let ulrport="http://36.89.25.220:15002/"
+ //let urlport="http://36.89.25.220:15002/"
 
 
 
  // Vuser
-export const urlPostLogin=ulrport+'vuser/showUser'
-export const urlAddVuser=ulrport+'vuser/storeUser'
-export const urlEditVuser=ulrport+'vuser/updateUser'
-export const urlUbahPassword=ulrport+'vuser/ubahPassword'
-export const urlGetVuser=ulrport+'vuser/getUser'
-export const urlDeleteUser=ulrport+'vuser/deleteUser'
+export const urlPostLogin=urlport+'vuser/showUser'
+export const urlAddVuser=urlport+'vuser/storeUser'
+export const urlEditVuser=urlport+'vuser/updateUser'
+export const urlUbahPassword=urlport+'vuser/ubahPassword'
+export const urlGetVuser=urlport+'vuser/getUser'
+export const urlDeleteUser=urlport+'vuser/deleteUser'
 
 // setting
-export const urlShowSetting=ulrport+'setting/showSetting'
-export const urlAddSetting=ulrport+'setting/storeSetting'
-export const urlEditSetting=ulrport+'setting/updateSetting'
-export const urlGetSetting=ulrport+'setting/getSetting'
-export const urlDeleteSetting=ulrport+'setting/deleteSetting'
+export const urlShowSetting=urlport+'setting/showSetting'
+export const urlAddSetting=urlport+'setting/storeSetting'
+export const urlEditSetting=urlport+'setting/updateSetting'
+export const urlGetSetting=urlport+'setting/getSetting'
+export const urlDeleteSetting=urlport+'setting/deleteSetting'
 
 // kel data
-export const urlShowKelompokData=ulrport+'kelompok-data/showKelompokData'
-export const urlAddKelompokData=ulrport+'kelompok-data/storeKelompokData'
-export const urlEditKelompokData=ulrport+'kelompok-data/updateKelompokData'
-export const urlGetKelompokData=ulrport+'kelompok-data/getKelompokData'
-export const urlDeleteKelompokData=ulrport+'kelompok-data/deleteKelompokData'
+export const urlShowKelompokData=urlport+'kelompok-data/showKelompokData'
+export const urlAddKelompokData=urlport+'kelompok-data/storeKelompokData'
+export const urlEditKelompokData=urlport+'kelompok-data/updateKelompokData'
+export const urlGetKelompokData=urlport+'kelompok-data/getKelompokData'
+export const urlDeleteKelompokData=urlport+'kelompok-data/deleteKelompokData'
 
 // targetKK
-export const urlShowTargetKk=ulrport+'target-kk/showTargetKk'
-export const urlShowTargetKkPerProv=ulrport+'target-kk/showTargetKkPerProv'
-export const urlAddTargetKk=ulrport+'target-kk/storeTargetKk'
-export const urlEditTargetKk=ulrport+'target-kk/updateTargetKk'
-export const urlGetTargetKk=ulrport+'target-kk/getTargetKk'
-export const urlDeleteTargetkk=ulrport+'target-kk/deleteTargetKk'
+export const urlShowTargetKk=urlport+'target-kk/showTargetKk'
+export const urlShowTargetKkPerProv=urlport+'target-kk/showTargetKkPerProv'
+export const urlAddTargetKk=urlport+'target-kk/storeTargetKk'
+export const urlEditTargetKk=urlport+'target-kk/updateTargetKk'
+export const urlGetTargetKk=urlport+'target-kk/getTargetKk'
+export const urlDeleteTargetkk=urlport+'target-kk/deleteTargetKk'
 
  //provinsi
-export const urlProv=ulrport+'provinsi/getProvinsi'
-export const urlAddProv=ulrport+'provinsi/storeProv'
-export const urlEditProv=ulrport+'provinsi/updateProv'
-export const urlDeleteProv= ulrport+ 'provinsi/deleteProv'
-export const urlLaporanProv=ulrport+'provinsi/laporanProv'
-export const urlLaporanPerProv=ulrport+'provinsi/laporanPerProv'
+export const urlProv=urlport+'provinsi/getProvinsi'
+export const urlAddProv=urlport+'provinsi/storeProv'
+export const urlEditProv=urlport+'provinsi/updateProv'
+export const urlDeleteProv= urlport+ 'provinsi/deleteProv'
+export const urlLaporanProv=urlport+'provinsi/laporanProv'
+export const urlLaporanPerProv=urlport+'provinsi/laporanPerProv'
 
  //Kecamatan
- export const urlKec=ulrport+'kecamatan/getKecamatan'
- export const urlAddKec=ulrport+'kecamatan/storeKec'
- export const urlEditKec=ulrport+'kecamatan/updateKec'
- export const urlShowKec=ulrport+'kecamatan/showKecamatan'
- export const urlShowKecs=ulrport+'kecamatan/showKecamatans'
- export const urlDeleteKec=ulrport+'kecamatan/deleteKec'
- export const urlLaporanKec=ulrport+'kecamatan/laporanKec'
- export const urlShowPerKec=ulrport+'kecamatan/show-per-kec'
+ export const urlKec=urlport+'kecamatan/getKecamatan'
+ export const urlAddKec=urlport+'kecamatan/storeKec'
+ export const urlEditKec=urlport+'kecamatan/updateKec'
+ export const urlShowKec=urlport+'kecamatan/showKecamatan'
+ export const urlShowKecs=urlport+'kecamatan/showKecamatans'
+ export const urlDeleteKec=urlport+'kecamatan/deleteKec'
+ export const urlLaporanKec=urlport+'kecamatan/laporanKec'
+ export const urlShowPerKec=urlport+'kecamatan/show-per-kec'
 
 
 // Kelurahan
-export const urlKel = ulrport+'kelurahan/getKelurahan'
-export const urlAddKel = ulrport+'kelurahan/storeKel'
-export const urlEditKel = ulrport+'kelurahan/updateKel'
-export const urlShowKel = ulrport + '/kelurahan/showKel'
-export const urlDeleteKel = ulrport+'kelurahan/deleteKel'
-export const urlLaporanKel=ulrport+'kelurahan/laporanKel'
-export const urlLaporanPerKel=ulrport+'kelurahan/laporanPerKel'
+export const urlKel = urlport+'kelurahan/getKelurahan'
+export const urlAddKel = urlport+'kelurahan/storeKel'
+export const urlEditKel = urlport+'kelurahan/updateKel'
+export const urlShowKel = urlport + '/kelurahan/showKel'
+export const urlDeleteKel = urlport+'kelurahan/deleteKel'
+export const urlLaporanKel=urlport+'kelurahan/laporanKel'
+export const urlLaporanPerKel=urlport+'kelurahan/laporanPerKel'
 
 //Kabupaten
-export const urlShowKab=ulrport+'kabupaten/showKabupaten'
-export const urlShowsKab=ulrport+'kabupaten/showsKabupaten'
- export const urlKab=ulrport+'kabupaten/getKabupaten'
- export const urlDeleteKab=ulrport+'kabupaten/deleteKab'
- export const urlAddKab=ulrport+'kabupaten/storeKab'
- export const urlEditKab=ulrport+'kabupaten/updateKab'
- export const urlLaporanKab=ulrport+'kabupaten/laporanKab'
- export const urlLaporanPerKab=ulrport+'kabupaten/show-per-kab'
+export const urlShowKab=urlport+'kabupaten/showKabupaten'
+export const urlShowsKab=urlport+'kabupaten/showsKabupaten'
+ export const urlKab=urlport+'kabupaten/getKabupaten'
+ export const urlDeleteKab=urlport+'kabupaten/deleteKab'
+ export const urlAddKab=urlport+'kabupaten/storeKab'
+ export const urlEditKab=urlport+'kabupaten/updateKab'
+ export const urlLaporanKab=urlport+'kabupaten/laporanKab'
+ export const urlLaporanPerKab=urlport+'kabupaten/show-per-kab'
 
  //RW
-export const urlShowRw=ulrport+'rw/showRw'
-export const urlRw=ulrport+'rw/getRw'
-export const urlAddRw=ulrport+'rw/storeRw'
-export const urlEditRw=ulrport+'rw/updateRw'
-export const urlDeleteRw=ulrport +'rw/deleteRw'
+export const urlShowRw=urlport+'rw/showRw'
+export const urlRw=urlport+'rw/getRw'
+export const urlAddRw=urlport+'rw/storeRw'
+export const urlEditRw=urlport+'rw/updateRw'
+export const urlDeleteRw=urlport +'rw/deleteRw'
 
 //RT
-export const urlShowRt=ulrport+'rt/showRt'
-export const urlRt=ulrport+'rt/getRt'
-export const urlAddRt=ulrport+'rt/storeRt'
-export const urlEditRt=ulrport+'rt/updateRt'
-export const urlDeleteRt=ulrport +'rt/deleteRt'
+export const urlShowRt=urlport+'rt/showRt'
+export const urlRt=urlport+'rt/getRt'
+export const urlAddRt=urlport+'rt/storeRt'
+export const urlEditRt=urlport+'rt/updateRt'
+export const urlDeleteRt=urlport +'rt/deleteRt'
 
 //LaporanSensus
-export const urlShowLaporanSensusID=ulrport +'laporan-sensus/indonesia'
-export const urlShowLaporanSensusPerProv=ulrport +'laporan-sensus/perprov'
-export const urlShowLaporanSensusPerKab=ulrport +'laporan-sensus/perkab'
-export const urlShowLaporanSensusPerKec=ulrport +'laporan-sensus/perkec'
-export const urlShowLaporanSensusPerKel=ulrport +'laporan-sensus/perkel'
+export const urlShowLaporanSensusID=urlport +'laporan-sensus/indonesia'
+export const urlShowLaporanSensusPerProv=urlport +'laporan-sensus/perprov'
+export const urlShowLaporanSensusPerKab=urlport +'laporan-sensus/perkab'
+export const urlShowLaporanSensusPerKec=urlport +'laporan-sensus/perkec'
+export const urlShowLaporanSensusPerKel=urlport +'laporan-sensus/perkel'
 
 //User Access Survey
-export const urlGetUserAccessSurvey = ulrport + '/user-access-survey/get'
-export const urlPostLoginUser = ulrport + '/user-access-survey/showUAS'
-export const urlAddUserAccessSurvey = ulrport + '/user-access-survey/store'
-export const urlEditUserAccessSurvey = ulrport + '/user-access-survey/update'
-export const urlDeleteUserAccessSurvey = ulrport + '/user-access-survey/delete'
+export const urlGetUserAccessSurvey = urlport + '/user-access-survey/get'
+export const urlPostLoginUser = urlport + '/user-access-survey/showUAS'
+export const urlAddUserAccessSurvey = urlport + '/user-access-survey/store'
+export const urlEditUserAccessSurvey = urlport + '/user-access-survey/update'
+export const urlDeleteUserAccessSurvey = urlport + '/user-access-survey/delete'
+
+//Form KK
+export const urlGetFormKK = urlport + '/form-kk/getFormKK'
+export const urlAddFormKK = urlport + '/form-kk/storeFormKK'
+export const urlEditFormKK = urlport + '/form-kk/updateFormKK'
+export const urlDeleteFormKK = urlport + '/form-kk/deleteFormKK'
+export const urlGetIdKK = urlport + '/form-kk/getIdKK'
+
+
+//Anggota KK
+export const urlGetAnggotaKK = urlport + '/anggota-kk/getAnggotaKK'
+export const urlShowAnggotaKK=urlport+'/anggota-kk/showAnggotaKK'
+export const urlAddAnggotaKK=urlport+'/anggota-kk/storeAnggotaKK'
+export const urlEditAnggotaKK=urlport+'/anggota-kk/updateAnggotaKK'
 
 //KB
-export const urlGetKB = ulrport + 'data-kb/getKB'
-export const urlUpdateKB = ulrport + 'data-kb/updateKB'
-export const urlEditKB = ulrport + 'data-kb/editKB'
-export const urlAddKB = ulrport + 'data-kb/addKB'
-export const urlDeleteKB = ulrport + 'data-kb/deleteKB'
+export const urlGetKB = urlport + 'data-kb/getKB'
+export const urlUpdateKB = urlport + 'data-kb/updateKB'
+export const urlEditKB = urlport + 'data-kb/editKB'
+export const urlAddKB = urlport + 'data-kb/addKB'
+export const urlDeleteKB = urlport + 'data-kb/deleteKB'

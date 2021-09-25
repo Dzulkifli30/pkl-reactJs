@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 //import styled from 'styled-components';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-import { urlDeleteKel } from 'kumpulanUrl';
+import axios from 'axios';
+import { urlDeleteProv } from 'kumpulanUrl';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
@@ -34,7 +34,7 @@ import {
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
 import { async } from 'validate.js';
-// import { array } from 'yargs';
+import Add from '@material-ui/icons/Add';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -58,15 +58,20 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const KelurahansTable =props => {
+const AnggotaKKTable=props => {
+
+  
   const {
     handleOpenViewMap,
-    className,
-    handleDelete,
-    textfind,
-    order, orderBy, SettingKelurahan,
-    provinsisExport, filteredItems, handleOpen, selectedKelurahans,
-    setSelectedKelurahans,
+    datas,
+    className,handleDelete,
+    textfind,Vuserfind,
+    order, orderBy, SettingVuser,
+    VuserExport, filteredItems, handleOpen, selectedVuser,
+    setSelectedVuser,
+    anggotaKK_params,
+    handleClose,
+    AnggotaKK,
     Export,
     convertArrayOfObjectsToCSV,
     downloadCSV
@@ -80,19 +85,8 @@ const KelurahansTable =props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
-const deleteKel = async (e,selectedKelurahans) => {
-  let url = urlDeleteKel;
-  let response = axios.delete(url + `/${selectedKelurahans.id_kelurahan}`)
-  console.log(selectedKelurahans.id_kelurahan)
-
-  if (response === 200) {
-    thisClickedFunda.closest(columns).remove();
-    console.log(response.data.data)
-  }
-  
 
 
-}
 
   const customStyles={
     header: {
@@ -204,77 +198,127 @@ const deleteKel = async (e,selectedKelurahans) => {
     },
   };
 
-
-
   const columns=[
     {
-      name: 'Kode Depdagri',
-      selector: 'KodeDepdagri',
+      name: 'Id KK',
+      selector: 'KK_id',
       sortable: true,
     },
     {
-      name:'Nama Provinsi',
-      selector:'nama_provinsi',
-      sortable:true,
+      name: 'Periode Sensus',
+      selector: 'periode_sensus',
+      sortable: true,
+    },
+    {
+      name: 'NIK ',
+      selector: 'NIK',
+      sortable: true,
+    },
+    {
+      name: 'Jenis Kelamin',
+      selector: 'jenis_kelamin',
+      sortable: true,
+    },
+    {
+      name: 'Tempat Lahir',
+      selector: 'tempat_lahir',
+      sortable: true,
+    },
+    {
+      name: 'Tanggal Lahir',
+      selector: 'tanggal_lahir',
+      sortable: true,
+    },
+    {
+      name: 'Agama',
+      selector: 'agama',
+      sortable: true,
+    },
+    {
+      name: 'Pendidikan',
+      selector: 'pendidikan',
+      sortable: true,
     },    {
-      name:'Nama Kabupaten',
-      selector:'nama_kabupaten',
-      sortable:true,
-    },
-    {
-      name:'Nama Kecamatan',
-      selector:'nama_kecamatan',
-      sortable:true,
-    },
-    {
-      name: 'Nama Kelurahan',
-      selector: 'nama_kelurahan',
-      sortable: true, 
-    },
-    {
-      name: 'Keterangan',
-      selector: 'IsActive',
+      name: 'Jenis Pekerjaan',
+      selector: 'jenis_pekerjaan',
       sortable: true,
-      cell: row => row.IsActive==1? "Aktiv":"Non Aktiv"
     },
+    {
+      name: 'Status Nikah',
+      selector: 'status_nikah',
+      sortable: true,
+    },
+    {
+      name: 'Tanggal Pernikahan',
+      selector: 'tanggal_pernikahan',
+      sortable: true,
+    },
+    {
+      name: 'Status Dalam Keluarga',
+      selector: 'status_dalam_keluarga',
+      sortable: true,
+    },
+    {
+      name: 'Kewarganegaraan',
+      selector: 'kewarganegaraan',
+      sortable: true,
+    },
+    {
+      name: 'Nomor Paspor',
+      selector: 'no_paspor',
+      sortable: true,
+    },    {
+      name: 'Nomor Katas',
+      selector: 'no_katas',
+      sortable: true,
+    },    {
+      name: 'Nama Ayah',
+      selector: 'nama_ayah',
+      sortable: true,
+    },    {
+      name: 'Nama Ibu',
+      selector: 'nama_ibu',
+      sortable: true,
+    },
+
     {
       name: 'CreatedBy',
-      selector: 'CreatedBy',
+      selector: 'create_by',
       sortable: true,
     },
+    
     {
       name: 'Created',
-      selector: 'Created',
+      selector: 'create_date',
       sortable: true,
     },
     {
       name: 'LastModified',
-      selector: 'LastModified',
+      selector: 'update_date',
       sortable: true,
     },
     {
       name: 'LastModifiedBy',
-      selector: 'LastModifiedBy',
+      selector: 'update_by',
       sortable: true,
     },
     {
-      name: 'Edit Kelurahan',
       button: true,
       cell: row =>
-        <Button color="primary" id="edit"
-          onClick={(e) => handleOpen(e, row, "Ubah Kelurahan")}  ><EditIcon /></Button>
+        <Button color="primary"
+        disabled={row.Periode_Sensus <= localStorage.getItem('Periode Sensus')}//={row.Periode_Sensus <= localStorage.getItem('Periode Sensus') ? "true" : "false"}
+          onClick={(e) => handleOpen(e, row, "Ubah Target Kk ") }  > {row.Periode_Sensus < parseInt(localStorage.getItem('Periode Sensus'))}<EditIcon /></Button>
       ,
     },
     {
-      name: 'Hapus Kelurahan',
       button: true,
       cell: row =>
-        <Button color="primary" id="delete"
-          onClick={(e) => handleDelete(e, row, "Hapus Kelurahan")}  ><DeleteIcon /></Button>
+        <Button color="primary"
+          onClick={(e) => handleDelete(e,row)} ><DeleteIcon /></Button>
       ,
     },
   ];
-  // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
+  // const filteredItems=Vuser.filter(item => item.nama_Vuser&&item.nama_Vuser.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
     const handleClear=() => {
       if (filterText) {
@@ -284,19 +328,20 @@ const deleteKel = async (e,selectedKelurahans) => {
     };
     return <div class="form-group">
       <div class="col-md-6">
-        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+          <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Kelurahan")}>
-        <AddIcon />
-        </Button>
+
+        <button className=" btn btn-md " onClick={(e) => handleOpen(e,[],"Tambah Anggota KK")}>
+          <AddIcon/>
+        </button>
 
       </div>
 
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Kelurahan"
+          placeholder="Search Vuser"
           textfind={textfind}
         />
       </div>
@@ -320,36 +365,36 @@ const deleteKel = async (e,selectedKelurahans) => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedKelurahans_var;
+    let selectedVuser_var;
 
     if (event.target.checked) {
-      selectedKelurahans_var=provinsis.map(provinsi => id);
+      selectedVuser_var=Vuser.map(Vuser => Vuser.id);
     } else {
-      selectedKelurahans_var=[];
+      selectedVuser_var=[];
     }
 
-    setSelectedKelurahans(selectedKelurahans_var);
+    setSelectedVuser(selectedVuser_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedKelurahans.indexOf(id);
-    let newSelectedKelurahans=[];
+    const selectedIndex=selectedVuser.indexOf(id);
+    let newSelectedVuser=[];
 
     if (selectedIndex===-1) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans, id);
+      newSelectedVuser=newSelectedVuser.concat(selectedVuser, id);
     } else if (selectedIndex===0) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans.slice(1));
-    } else if (selectedIndex===selectedKelurahans.length-1) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(selectedKelurahans.slice(0, -1));
+      newSelectedVuser=newSelectedVuser.concat(selectedVuser.slice(1));
+    } else if (selectedIndex===selectedVuser.length-1) {
+      newSelectedVuser=newSelectedVuser.concat(selectedVuser.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedKelurahans=newSelectedKelurahans.concat(
-        selectedKelurahans.slice(0, selectedIndex),
-        selectedKelurahans.slice(selectedIndex+1)
+      newSelectedVuser=newSelectedVuser.concat(
+        selectedVuser.slice(0, selectedIndex),
+        selectedVuser.slice(selectedIndex+1)
       );
     }
 
-    setSelectedKelurahans(newSelectedKelurahans);
+    setSelectedVuser(newSelectedVuser);
     //console.log(selectedUsers);
   };
 
@@ -360,24 +405,26 @@ const deleteKel = async (e,selectedKelurahans) => {
   const handleRowsPerPageChange=event => {
     setRowsPerPage(event.target.value);
   };
-  //  const filteredItems=provinsis;
+  //  const filteredItems=Vuser;
   //const actionsMemo=React.useMemo(() => <Export onExport={() => downloadCSV()} />, []);
 
   return (
     <Card
       {...rest}
-      className={clsx(classes.root, className)}
+      className={clsx(classes.root, className)
+      
+      }
     >
       <CardContent className={classes.content}>
         <PerfectScrollbar>
 
           <div className={classes.inner}>
             <DataTable
-              title="Kelurahan List"
+              title=""
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField="nama_kelurahan"
+              keyField=""
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -397,9 +444,9 @@ const deleteKel = async (e,selectedKelurahans) => {
   );
 };
 
-KelurahansTable.propTypes={
+AnggotaKKTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KelurahansTable;
+export default AnggotaKKTable;

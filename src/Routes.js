@@ -2,8 +2,8 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
-import { 
-  Main as MainLayout, 
+import {
+  Main as MainLayout,
   Minimal as MinimalLayout,
   MinimalUser as MinimalUserLayout,
   MainUser as MainUserLayout,
@@ -61,7 +61,7 @@ import {
 
 } from './views';
 
-const Routes=() => {
+const Routes = () => {
 
   return (
     <Switch>
@@ -71,37 +71,41 @@ const Routes=() => {
         to="/beranda"
       /> */}
 
-    <Redirect
+      {localStorage.getItem("Username") ? <Redirect
         exact
         from="/"
         to="/beranda-user"
-      />
-      
+      /> : <Redirect
+        exact
+        from="/"
+        to="/login"
+      />}
 
-<RouteWithLayout
+
+      <RouteWithLayout
         component={SettingListView}
         exact
         layout={MainLayout}
         path="/setting"
       />
       <RouteWithLayout
-      component={ProfileView}
-      exact
-      layout={MainLayout}
-      path="/profile"
-    />
-          <RouteWithLayout
-      component={ProfileUserView}
-      exact
-      layout={MainUserLayout}
-      path="/profile-user"
-    />
-    <RouteWithLayout
-      component={LoginSliderView}
-      exact
-      layout={MinimalLayout}
-      path="/login"
-    />
+        component={ProfileView}
+        exact
+        layout={MainLayout}
+        path="/profile"
+      />
+      <RouteWithLayout
+        component={ProfileUserView}
+        exact
+        layout={MainUserLayout}
+        path="/profile-user"
+      />
+      <RouteWithLayout
+        component={LoginSliderView}
+        exact
+        layout={MinimalLayout}
+        path="/login"
+      />
       <RouteWithLayout
         component={KelompokDataListView}
         exact
@@ -122,7 +126,7 @@ const Routes=() => {
         layout={MainLayout}
         path="/beranda"
       />
-            <RouteWithLayout
+      <RouteWithLayout
         component={DashboardView}
         exact
         layout={MainUserLayout}
@@ -146,7 +150,7 @@ const Routes=() => {
         layout={MainLayout}
         path="/target-kk"
       />
-       <RouteWithLayout
+      <RouteWithLayout
         component={TargetKkListView}
         exact
         layout={MainLayout}
@@ -154,13 +158,13 @@ const Routes=() => {
       />
 
 
-    {/* Beginning Of Input Data */}
+      {/* Beginning Of Input Data */}
       <RouteWithLayout
         component={VuserListView}
         exact
         layout={MainLayout}
         path="/vusertable"
-      /> 
+      />
 
       <RouteWithLayout
         component={ProvinsiListView}
@@ -183,14 +187,14 @@ const Routes=() => {
         path="/kecamatan"
       />
 
-      
+
       <RouteWithLayout
         component={KelurahanListView}
         exact
         layout={MainLayout}
         path="/kelurahan"
       />
-        <RouteWithLayout
+      <RouteWithLayout
         component={RtListView}
         exact
         layout={MainLayout}
@@ -208,8 +212,8 @@ const Routes=() => {
         layout={MainLayout}
         path="/user-access-survey"
       />
-   
-       {/*End Of Input Data  */}
+
+      {/*End Of Input Data  */}
 
 
       {/* Beginning of Laporan */}
@@ -239,7 +243,7 @@ const Routes=() => {
         layout={MainLayout}
         path="/laporan-per-kabupaten"
       />
-        <RouteWithLayout
+      <RouteWithLayout
         component={LaporanPerKecamatanView}
         exact
         layout={MainLayout}
@@ -304,7 +308,7 @@ const Routes=() => {
         exact
         layout={MinimalLayout}
         path="/sign-up"
-      />  
+      />
       {/* <RouteWithLayout
         component={SignInView}
         exact
