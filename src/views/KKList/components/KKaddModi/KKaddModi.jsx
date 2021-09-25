@@ -538,8 +538,6 @@ const KKAddModi=props => {
     };
 
     let urlGetData=urlAddFormKK
-    alert(url);
-    console.log(url)
     const response=fetch(url, requestOptions)
       .then(tester => {
         if (tester.status === 200) {  
