@@ -493,6 +493,13 @@ const KKAddModi=props => {
     
     console.log(rowSelect);
     let url=urlAddFormKK;
+    rowSelect.id_provinsi=wilayah[0].id_provinsi
+    rowSelect.id_kabupaten=wilayah[0].id_kabupaten;
+    rowSelect.id_kecamatan=wilayah[0].id_kecamatan;
+    rowSelect.id_kelurahan=wilayah[0].id_kelurahan;
+    rowSelect.id_rw=wilayah[0].id_rw;
+    rowSelect.create_by= userName
+    rowSelect.update_by= userName
     let varJson = {
       "KK_id": rowSelect.KK_id,
       "periode_sensus": periode_sensus,
@@ -516,13 +523,6 @@ const KKAddModi=props => {
       // console.log("ide =",rowSelect.id_rt)
       varJson.update_by = userName
     }
-    rowSelect.id_provinsi=wilayah[0].id_provinsi
-    rowSelect.id_kabupaten=wilayah[0].id_kabupaten;
-    rowSelect.id_kecamatan=wilayah[0].id_kecamatan;
-    rowSelect.id_kelurahan=wilayah[0].id_kelurahan;
-    rowSelect.id_rw=wilayah[0].id_rw;
-    rowSelect.create_by= userName
-    rowSelect.update_by= userName
     gotoNext();
     // console.log("var json =",varJson);
 
