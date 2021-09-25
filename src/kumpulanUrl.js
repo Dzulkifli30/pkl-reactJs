@@ -102,3 +102,10 @@ export const urlPostLoginUser = ulrport + '/user-access-survey/showUAS'
 export const urlAddUserAccessSurvey = ulrport + '/user-access-survey/store'
 export const urlEditUserAccessSurvey = ulrport + '/user-access-survey/update'
 export const urlDeleteUserAccessSurvey = ulrport + '/user-access-survey/delete'
+
+//KB
+export const urlGetKB = ulrport + 'data-kb/getKB'
+export const urlUpdateKB = ulrport + 'data-kb/updateKB'
+export const urlEditKB = ulrport + 'data-kb/editKB'
+export const urlAddKB = ulrport + 'data-kb/addKB'
+export const urlDeleteKB = ulrport + 'data-kb/deleteKB'

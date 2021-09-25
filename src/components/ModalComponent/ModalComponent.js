@@ -28,7 +28,7 @@ const useStyles=makeStyles(theme => ({
 
 
 const ModalComponent=props => {
-  const { datas2,
+  const { datas,
     handleChange, getProv, getDataBackend, setData2, setData,
     setRowSelect, users, groups, roles, className, style, open, setOpen, title, rowSelect,
     ComponenAddModi, ViewMap, handleClose,
@@ -57,7 +57,7 @@ const ModalComponent=props => {
             setData2={setData2}
             handleChange={handleChange} setData={setData}
             setOpen={setOpen}
-            setRowSelect={setRowSelect} datas2={datas2} users={users} groups={groups}
+            setRowSelect={setRowSelect} datas={datas} users={users} groups={groups}
             roles={roles} rowSelect={rowSelect} title={title} handleClose={handleClose}
             auditTrailsfind={auditTrailsfind}
           ></ComponenAddModi>

@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import FormKK from '../FormKK'
 import FormAnggota from '../FormAnggota'
 import FormAlatKontrasepsi from '../FormAlatKontrasepsi'
+import FormKB from '../FormKB'
 import Slider from "react-slick"; 
 import "./slick/slick.css"; 
 import "./slick/slick-theme.css";
@@ -34,6 +35,7 @@ const FormSurvey = () => {
         speed: 800,
         slidesToShow: 1,
         slidesToScroll: 1,
+        fadeIn: true
       //   nextArrow: <SampleNextArrow />,
       // prevArrow: <SamplePrevArrow />
       };
@@ -46,17 +48,7 @@ const FormSurvey = () => {
         <div className="mb-6">
           <Slider className="sliderMain" ref={sliderRef} {...settings}>
               <div>
-              <FormKK
-              gotoNext={gotoNext}
-              />
-              </div>
-              <div>
-              <FormAnggota
-              gotoNext={gotoNext}
-              />
-              </div>
-              <div>
-              <FormAlatKontrasepsi
+              <FormKB
               gotoNext={gotoNext}
               />
               </div>

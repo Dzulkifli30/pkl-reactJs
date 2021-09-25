@@ -213,7 +213,6 @@ const UserSignIn=props => {
             localStorage.setItem('form rt', JSON.stringify(data.rt));
             localStorage.setItem('rt', data.data5[0].nama_rt);
             window.location='/beranda-user';
-
             //history.push('/beranda');
 
           } else{  
