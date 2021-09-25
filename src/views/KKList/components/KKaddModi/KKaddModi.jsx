@@ -508,11 +508,11 @@ const KKAddModi=props => {
       "id_rt":rowSelect.id_rt,
     }
     if (rowSelect.KK_id===undefined) {
-      // url=urlAddFormKK;
+      url=urlAddFormKK;
       varJson.create_by = userName
       varJson.update_by = userName
     } else {
-      // url=urlEditFormKK;
+      url=urlEditFormKK;
       // console.log("ide =",rowSelect.id_rt)
       varJson.update_by = userName
     }
@@ -537,50 +537,50 @@ const KKAddModi=props => {
       )
     };
 
-    ///let urlGetData=urlPostLogin
-    // alert(url);
-    // console.log(url)
-    // const response=fetch(url, requestOptions)
-    //   .then(tester => {
-    //     if (tester.status === 200) {  
-    //    handleClose();
-    //       return tester.json();
-    //     }
+    let urlGetData=urlAddFormKK
+    alert(url);
+    console.log(url)
+    const response=fetch(url, requestOptions)
+      .then(tester => {
+        if (tester.status === 200) {  
+       handleClose();
+          return tester.json();
+        }
        
-    //   })/**/
+      })/**/
 
-    //   .then(tester => {
-    //     console.log(tester)
-    //     // alert(tester)
-    //   getDataBackend();
-    //   if (url == urlAddFormKK) {
-    //     Swal.fire({
-    //       position: 'center',
-    //       icon: 'success',
-    //       title: 'Sukses Menambah Data',
-    //       showConfirmButton: false,
-    //       timer: 1000
-    //     })
-    //   }if(url == urlEditFormKK){
-    //     Swal.fire({
-    //       position: 'center',
-    //       icon: 'success',
-    //       title: 'Sukses Memperbarui Data',
-    //       showConfirmButton: false,
-    //       timer: 1000
-    //     })
-    //   }
+      .then(tester => {
+        console.log(tester)
+        // alert(tester)
+      getDataBackend();
+      if (url == urlAddFormKK) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditFormKK){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
 
-    //     // alert("Sukses")
-    //     const data=tester;
-    //   })
-    //   .catch((e) => {
-    //     alert(e)
-    //     // swal("Gagal Login!", "Gagal Login", "error",  )
-    //     return false;
+        // alert("Sukses")
+        const data=tester;
+      })
+      .catch((e) => {
+        alert(e)
+        // swal("Gagal Login!", "Gagal Login", "error",  )
+        return false;
 
 
-    //   });
+      });
 
 
   }
