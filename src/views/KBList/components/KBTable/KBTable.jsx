@@ -290,10 +290,8 @@ const KBTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button color="primary"
-            className={classes.buttonCancel}
-            variant="contained"
-            onClick={handleClose} >Tutup Table
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Kecamatan")}>
+          <AddIcon/>
         </Button>
       </div>
 

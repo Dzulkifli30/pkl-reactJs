@@ -308,12 +308,10 @@ const KBAddModi=props => {
           >
             Simpan
           </Button>
-          <Button 
-          color="primary"
-          variant="contained"
-          onClick={(e) => handleOpenViewMap(e, "Tampilkan Table Data KB")}>
-          Tampilkan Table
-          </Button>
+          <Button color="primary"
+            className={classes.buttonCancel}
+            variant="contained"
+            onClick={handleClose} >Batal</Button>
         </CardActions>
       </form>
     </Card>

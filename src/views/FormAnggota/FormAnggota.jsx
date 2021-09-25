@@ -5,9 +5,8 @@ import AnggotaKKAddModi from '../AnggotaKK/components/AnggotaKKAddModi'
 const FormAnggota = (props) => {
     const { gotoNext,goPrev,rowKK,setRowKK,KK,setKK,setAnggotaKK,AnggotaKK,...rest } = props;
     return(
-        <div className="">
-            <h3>Form Anggota Keluarga</h3>
-            <div className="space-x-4">
+        <div className="p-4">
+            <h1>Form Anggota Keluarga</h1>
             <button
                 onClick={goPrev}
                 className="btn btn-sm bg-red-500 text-white"
@@ -20,8 +19,6 @@ const FormAnggota = (props) => {
             >
                 Next
             </button>
-            </div>
-            <div className="mb-4 p-10">
                 <AnggotaKKList
                 KK={KK}
                 setKK={setKK}
@@ -30,7 +27,6 @@ const FormAnggota = (props) => {
                 AnggotaKK = {AnggotaKK}
                 setRowKK={setRowKK}
                 />
-            </div>
         </div>
     )
 }

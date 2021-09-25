@@ -318,49 +318,6 @@ const KBList=props => {
   function popupComponen(componenPopup) {
     return (
       <ModalComponent 
-      handleOpenViewMap={handleOpenViewMap}
-      handleDelete={handleDelete}
-      onChange={onChangefind}
-      kbExport={kbExport}
-      // deleteProv={deleteProv}
-      // deleteProvinsi={deleteProvinsi}
-      kbfind={kbfind}
-      selectedkb={selectedkb} 
-      kbfind={kbfind}
-      getKB={getKB}
-      getDataBackend={getKB}
-      handleChange={handleChange} 
-      setSelectedkb={setSelectedkb}
-      Export={Export}
-      setRowSelect={setRowkbSelect} 
-      rowSelect={rowkbSelect}
-      title={title} 
-      setData={setData} 
-      filteredItems={filteredItems}
-      open={open} 
-      datas={filteredItems} 
-      convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
-      handleClose={handleClose} 
-      downloadCSV={downloadCSV} ComponenAddModi={componenPopup}>
-      </ModalComponent>
-
-    )
-  }
-
-  return (
-    <div className={classes.root}>
-      <h5 style={{ color: 'black' }} className="font-poppins">KB</h5>
-      {/*}
-      <kbToolbar
-        handleOpenViewMap={handleOpenViewMap}
-        textfind={kbfind} deleteProvinsi={deleteProvinsi}
-        csvData={csvData} printPdf={printPdf} onChange={onChangefind}
-        handleOpen={handleOpen}
-        kb={kb}
-      />
-  {*/}
-      <div className={classes.content}>
-        <KBAddModi
           getDataBackend={getKB}
           handleChange={handleChange} 
           setData={setData} 
@@ -371,10 +328,54 @@ const KBList=props => {
           title={title} 
           datas={filteredItems} 
           handleOpen={handleOpen}
+       ComponenAddModi={componenPopup}>
+      </ModalComponent>
+
+    )
+  }
+
+  return (
+    <div className={classes.root}>
+      {/* <h5 style={{ color: 'black' }} className="font-poppins">KB</h5> */}
+      {/*}
+      <kbToolbar
+        handleOpenViewMap={handleOpenViewMap}
+        textfind={kbfind} deleteProvinsi={deleteProvinsi}
+        csvData={csvData} printPdf={printPdf} onChange={onChangefind}
+        handleOpen={handleOpen}
+        kb={kb}
+      />
+  {*/}
+  
+      <div className={classes.content}>
+        <KBTable
+          handleOpen={handleOpen}
+          handleDelete={handleDelete}
+          onChange={onChangefind}
+          kbExport={kbExport}
+          // deleteProv={deleteProv}
+          // deleteProvinsi={deleteProvinsi}
+          kbfind={kbfind}
+          selectedkb={selectedkb} 
+          kbfind={kbfind}
+          getKB={getKB}
+          getDataBackend={getKB}
+          handleChange={handleChange} 
+          setSelectedkb={setSelectedkb}
+          Export={Export}
+          setRowSelect={setRowkbSelect} 
+          rowSelect={rowkbSelect}
+          title={title} 
+          setData={setData} 
+          filteredItems={filteredItems}
+          open={open} 
+          convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
+          handleClose={handleClose} 
+          downloadCSV={downloadCSV}
         />
 
 
-      {popupComponen(KBTable)}
+      {popupComponen(KBAddModi)}
 
       </div>
 

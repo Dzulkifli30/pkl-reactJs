@@ -622,10 +622,6 @@ const KKAddModi=props => {
         autoComplete="off"
         noValidate
       >
-        <CardHeader
-          subheader=""
-        title="Form KK"
-        />
         <Divider />
         <CardContent>
           <Grid

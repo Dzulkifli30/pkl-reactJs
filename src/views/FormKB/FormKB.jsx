@@ -8,9 +8,9 @@ const FormKK = (props) => {
             <h1>Form KB</h1>
             <button
                 onClick={gotoNext}
-                className="btn btn-md btn-success"
+                className="btn btn-sm bg-purple-800"
             >
-                Next
+                Isi data KK lagi?
             </button>
             <KBList/>
         </div>
