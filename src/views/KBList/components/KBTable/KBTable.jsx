@@ -4,8 +4,7 @@ import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-import axios from 'axios';
-import { urlDeleteProv } from 'kumpulanUrl';
+
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
@@ -19,11 +18,13 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardHeader,
   Avatar,
   Checkbox,
   Table,
   TableBody,
   TableCell,
+  Divider,
   TableHead,
   TableRow,
   Typography,
@@ -33,7 +34,6 @@ import {
 
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
-import { async } from 'validate.js';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -56,18 +56,38 @@ const useStyles=makeStyles(theme => ({
   }, importButton: {
     marginRight: theme.spacing(1)
   },
+  buttonSuccess: {
+    color: theme.palette.white,
+    backgroundColor: theme.palette.green,
+    '&:hover': {
+      backgroundColor: '#4caf50',
+      borderColor: '#66bb6a',
+      boxShadow: 'none',
+    },
+  },
+  buttonCancel: {
+    color: theme.palette.white,
+    backgroundColor: theme.palette.red,
+    '&:hover': {
+      backgroundColor: '#f44336',
+      borderColor: '#ef5350',
+      boxShadow: 'none',
+    },
+  },
 }));
-const KKTable=props => {
+const KBTable=props => {
   const {
-    handleOpenViewMap,
-    className,handleClose,
-    title,KKfind,
-    order, orderBy, SettingKK,
-    KKExport, filteredItems, handleOpen, selectedKK,
-    setSelectedKK,datas,
-    Export,setData,
+    handleOpenViewMap,KB_params,
+    className,handleDelete,
+    textfind,kbfind,kb,
+    order, orderBy,
+    datas,
+    getDataBackend,
+    provinsisExport, filteredItems, handleOpen, selectedkb,
+    setselectedkb,
+    Export,
     convertArrayOfObjectsToCSV,
-    roles,handleChange
+    downloadCSV
 
     , ...rest }=props;
 
@@ -78,13 +98,9 @@ const KKTable=props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
-  const textfind=() =>{
-      title();
+  const handleClose=() => {
+    getDataBackend();
   }
-  const downloadCSV=() =>{
-    roles();
-}
-
 
   const customStyles={
     header: {
@@ -196,100 +212,72 @@ const KKTable=props => {
     },
   };
 
+
+
   const columns=[
     {
-      name: 'Periode Sensus',
-      selector: 'periode_sensus',
+      name: 'ID KK',
+      selector: 'KK_id',
       sortable: true,
     },
     {
-      name: 'Nomor KK',
-      selector: 'NoKK',
+      name: 'NIK',
+      selector: 'NIK',
       sortable: true,
     },
     {
-      name: 'NIK KK',
-      selector: 'NIK_KK',
+      name: 'Alat Kontrasepsi',
+      selector: 'alat_kontrasepsi',
       sortable: true,
     },
     {
-      name: 'Nama KK',
-      selector: 'nama_kk',
+      name: 'Tahun Pemakaian',
+      selector: 'tahun_pemakaian',
       sortable: true,
     },
     {
-      name: 'Alamat KK',
-      selector: 'alamat_kk',
+      name: 'Alasan',
+      selector: 'alasan',
       sortable: true,
     },
-    {
-      name: 'Nama Provinsi',
-      selector: 'nama_provinsi',
-      sortable: true,
-    },
-    {
-      name: 'Nama Kabupaten',
-      selector: 'nama_kabupaten',
-      sortable: true,
-    },
-    {
-      name: 'Nama Kecamatan',
-      selector: 'nama_kecamatan',
-      sortable: true,
-    },    {
-      name: 'Nama Kelurahan',
-      selector: 'nama_kelurahan',
-      sortable: true,
-    },
-    {
-      name: 'Nama Rw',
-      selector: 'nama_rw',
-      sortable: true,
-    },
-    {
-      name: 'Nama Rt',
-      selector: 'nama_rt',
-      sortable: true,
-    },
-
     {
       name: 'CreatedBy',
-      selector: 'create_by',
+      selector: 'CreatedBy',
       sortable: true,
     },
-    
     {
       name: 'Created',
-      selector: 'create_date',
+      selector: 'Created',
       sortable: true,
     },
     {
       name: 'LastModified',
-      selector: 'update_date',
+      selector: 'LastModified',
       sortable: true,
     },
     {
       name: 'LastModifiedBy',
-      selector: 'update_by',
+      selector: 'LastModifiedBy',
       sortable: true,
     },
     {
+      name: 'Edit KB',
       button: true,
       cell: row =>
         <Button color="primary"
-        disabled={row.Periode_Sensus <= localStorage.getItem('Periode Sensus')}//={row.Periode_Sensus <= localStorage.getItem('Periode Sensus') ? "true" : "false"}
-          onClick={(e) => handleOpen(e, row, "Ubah Form Kk ") }  > {row.Periode_Sensus < parseInt(localStorage.getItem('Periode Sensus'))}<EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah KB")}  ><EditIcon /></Button>
       ,
     },
     {
+      name: 'Hapus KB',
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleChange(e,row)} ><DeleteIcon /></Button>
+          onClick={(e) => handleDelete(e, row, "Hapus KB")} ><DeleteIcon /></Button>
       ,
-    },
+    }
   ];
-  // const filteredItems=KK.filter(item => item.nama_KK&&item.nama_KK.toLowerCase().includes(filterText.toLowerCase()));
+  // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
     const handleClear=() => {
       if (filterText) {
@@ -302,17 +290,20 @@ const KKTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Kecamatan")}>
+          <AddIcon/>
+        </Button>
       </div>
 
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search KK"
+          placeholder="Search KB"
           textfind={textfind}
         />
       </div>
     </div>
+     
 
 
 
@@ -332,36 +323,36 @@ const KKTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedKK_var;
+    let selectedkb_var;
 
     if (event.target.checked) {
-      selectedKK_var=KK.map(KK => KK.id);
+      selectedkb_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedKK_var=[];
+      selectedkb_var=[];
     }
 
-    setSelectedKK(selectedKK_var);
+    setselectedkb(selectedkb_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedKK.indexOf(id);
-    let newSelectedKK=[];
+    const selectedIndex=selectedkb.indexOf(id);
+    let newselectedkb=[];
 
     if (selectedIndex===-1) {
-      newSelectedKK=newSelectedKK.concat(selectedKK, id);
+      newselectedkb=newselectedkb.concat(selectedkb, id);
     } else if (selectedIndex===0) {
-      newSelectedKK=newSelectedKK.concat(selectedKK.slice(1));
-    } else if (selectedIndex===selectedKK.length-1) {
-      newSelectedKK=newSelectedKK.concat(selectedKK.slice(0, -1));
+      newselectedkb=newselectedkb.concat(selectedkb.slice(1));
+    } else if (selectedIndex===selectedkb.length-1) {
+      newselectedkb=newselectedkb.concat(selectedkb.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedKK=newSelectedKK.concat(
-        selectedKK.slice(0, selectedIndex),
-        selectedKK.slice(selectedIndex+1)
+      newselectedkb=newselectedkb.concat(
+        selectedkb.slice(0, selectedIndex),
+        selectedkb.slice(selectedIndex+1)
       );
     }
 
-    setSelectedKK(newSelectedKK);
+    setselectedkb(newselectedkb);
     //console.log(selectedUsers);
   };
 
@@ -372,7 +363,7 @@ const KKTable=props => {
   const handleRowsPerPageChange=event => {
     setRowsPerPage(event.target.value);
   };
-  //  const filteredItems=KK;
+  //  const filteredItems=provinsis;
   //const actionsMemo=React.useMemo(() => <Export onExport={() => downloadCSV()} />, []);
 
   return (
@@ -385,11 +376,11 @@ const KKTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title=""
+              title="KB List"
               customStyles={customStyles}
               columns={columns}
-              data={datas}
-              keyField="UserName"
+              data={filteredItems}
+              keyField=""
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -398,10 +389,7 @@ const KKTable=props => {
               persistTableHead
               dense
             />
-            <button className="btn btn-md btn-warning mr-10 mt-2 justify-center"
-            onClick={handleClose}>
-                Tutup
-            </button>
+
 
           </div>
 
@@ -412,9 +400,9 @@ const KKTable=props => {
   );
 };
 
-KKTable.propTypes={
+KBTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KKTable;
+export default KBTable;

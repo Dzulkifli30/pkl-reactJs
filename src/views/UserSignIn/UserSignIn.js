@@ -219,8 +219,8 @@ const UserSignIn=props => {
             localStorage.setItem('status_dalam_keluarga', JSON.stringify(data.status_dalam_keluarga));
             localStorage.setItem('pekerjaan', JSON.stringify(data.pekerjaan));
             localStorage.setItem('rt', data.data5[0].nama_rt);
+            localStorage.setItem('Alat Kontrasepsi', JSON.stringify(data.alatKB));
             window.location='/beranda-user';
-
             //history.push('/beranda');
 
           } else{  

@@ -348,7 +348,6 @@ const KKAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -376,7 +375,7 @@ const KKAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -404,7 +403,6 @@ const KKAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
         setProvinsi([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -432,7 +430,7 @@ const KKAddModi=props => {
       })
       .catch(e => {
         //console.log(e);
-        alert("Nextwork Error");
+  
         setRw([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -491,11 +489,19 @@ const KKAddModi=props => {
     let wilayah = JSON.parse(localStorage.getItem("Data Wilayah"))
     rowSelect.id_provinsi=wilayah[0].id_provinsi;
     
-    console.log(rowSelect);
+    
     let url=urlAddFormKK;
+    rowSelect.id_provinsi=wilayah[0].id_provinsi
+    rowSelect.id_kabupaten=wilayah[0].id_kabupaten;
+    rowSelect.id_kecamatan=wilayah[0].id_kecamatan;
+    rowSelect.id_kelurahan=wilayah[0].id_kelurahan;
+    rowSelect.id_rw=wilayah[0].id_rw;
+    rowSelect.create_by= userName
+    rowSelect.periode_sensus = periode_sensus
+    rowSelect.update_by= userName
     let varJson = {
       "KK_id": rowSelect.KK_id,
-      "periode_sensus": periode_sensus,
+      "periode_sensus": rowSelect.periode_sensus,
       "NoKK": rowSelect.NoKK,
       "NIK_KK": rowSelect.NIK_KK,
       "nama_kk": rowSelect.nama_kk,
@@ -508,21 +514,15 @@ const KKAddModi=props => {
       "id_rt":rowSelect.id_rt,
     }
     if (rowSelect.KK_id===undefined) {
-      // url=urlAddFormKK;
+      url=urlAddFormKK;
       varJson.create_by = userName
       varJson.update_by = userName
     } else {
-      // url=urlEditFormKK;
+      url=urlEditFormKK;
       // console.log("ide =",rowSelect.id_rt)
       varJson.update_by = userName
     }
-    rowSelect.id_provinsi=wilayah[0].id_provinsi
-    rowSelect.id_kabupaten=wilayah[0].id_kabupaten;
-    rowSelect.id_kecamatan=wilayah[0].id_kecamatan;
-    rowSelect.id_kelurahan=wilayah[0].id_kelurahan;
-    rowSelect.id_rw=wilayah[0].id_rw;
-    rowSelect.create_by= userName
-    rowSelect.update_by= userName
+    console.log(rowSelect);
     gotoNext();
     // console.log("var json =",varJson);
 
@@ -537,50 +537,48 @@ const KKAddModi=props => {
       )
     };
 
-    ///let urlGetData=urlPostLogin
-    // alert(url);
-    // console.log(url)
-    // const response=fetch(url, requestOptions)
-    //   .then(tester => {
-    //     if (tester.status === 200) {  
-    //    handleClose();
-    //       return tester.json();
-    //     }
+    let urlGetData=urlAddFormKK
+    const response=fetch(url, requestOptions)
+      .then(tester => {
+        if (tester.status === 200) {  
+       handleClose();
+          return tester.json();
+        }
        
-    //   })/**/
+      })/**/
 
-    //   .then(tester => {
-    //     console.log(tester)
-    //     // alert(tester)
-    //   getDataBackend();
-    //   if (url == urlAddFormKK) {
-    //     Swal.fire({
-    //       position: 'center',
-    //       icon: 'success',
-    //       title: 'Sukses Menambah Data',
-    //       showConfirmButton: false,
-    //       timer: 1000
-    //     })
-    //   }if(url == urlEditFormKK){
-    //     Swal.fire({
-    //       position: 'center',
-    //       icon: 'success',
-    //       title: 'Sukses Memperbarui Data',
-    //       showConfirmButton: false,
-    //       timer: 1000
-    //     })
-    //   }
+      .then(tester => {
+        console.log(tester)
+        // alert(tester)
+      getDataBackend();
+      if (url == urlAddFormKK) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditFormKK){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
 
-    //     // alert("Sukses")
-    //     const data=tester;
-    //   })
-    //   .catch((e) => {
-    //     alert(e)
-    //     // swal("Gagal Login!", "Gagal Login", "error",  )
-    //     return false;
+        // alert("Sukses")
+        const data=tester;
+      })
+      .catch((e) => {
+        alert(e)
+        // swal("Gagal Login!", "Gagal Login", "error",  )
+        return false;
 
 
-    //   });
+      });
 
 
   }
@@ -597,8 +595,8 @@ const KKAddModi=props => {
           <option value={option.option}>
             {option.option}
           </option>
-                   
-           ))}
+                   
+           ))}
   }
 
 
@@ -622,10 +620,6 @@ const KKAddModi=props => {
         autoComplete="off"
         noValidate
       >
-        <CardHeader
-          subheader=""
-        title="Form KK"
-        />
         <Divider />
         <CardContent>
           <Grid

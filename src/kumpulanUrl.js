@@ -116,4 +116,12 @@ export const urlGetAnggotaKK = urlport + '/anggota-kk/getAnggotaKK'
 export const urlShowAnggotaKK=urlport+'/anggota-kk/showAnggotaKK'
 export const urlAddAnggotaKK=urlport+'/anggota-kk/storeAnggotaKK'
 export const urlEditAnggotaKK=urlport+'/anggota-kk/updateAnggotaKK'
+export const urlGetNIKAnggota=urlport+'/anggota-kk/getNIKAnggota'
+
+//KB
+export const urlGetKB = urlport + 'data-kb/getKB'
+export const urlUpdateKB = urlport + 'data-kb/updateKB'
+export const urlEditKB = urlport + 'data-kb/editKB'
+export const urlAddKB = urlport + 'data-kb/addKB'
+export const urlDeleteKB = urlport + 'data-kb/deleteKB'
 

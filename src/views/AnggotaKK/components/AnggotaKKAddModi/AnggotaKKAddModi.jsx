@@ -15,6 +15,7 @@ import {
   Input
 } from '@material-ui/core';
 import L from 'leaflet';
+
 import axios from 'axios';
 import { urlAddAnggotaKK, 
   urlEditAnggotaKK, 
@@ -210,6 +211,7 @@ const AnggotaKKAddModi=props => {
 
   const handleSave=(event) => {
     const userName=localStorage.getItem('username');
+    let url=urlAddAnggotaKK;
     let varJson = {
       "KK_id": rowSelect.KK_id,
       "anggota_kk_id": rowSelect.anggota_kk_id,
@@ -232,17 +234,16 @@ const AnggotaKKAddModi=props => {
     }
     let url=urlAddAnggotaKK;
     if (rowSelect.anggota_kk_id === undefined) {
-      url=urlAddAnggotaKK;
+      let url=urlAddAnggotaKK;
       varJson.create_by = userName
       varJson.update_by = userName
     } else {
-      // url=urlEditAnggotaKK;
+      let url=urlEditAnggotaKK;
       varJson.update_by = userName
     }
     getDataBackend(varJson)
     console.log("var json =",varJson);
 
-    
     const requestOptions={
       method: 'POST',
       mode: "cors",
@@ -250,31 +251,44 @@ const AnggotaKKAddModi=props => {
       body: JSON.stringify(
         varJson
       )
-    }
-  
-    ///let urlGetData=urlPostLogin
-    // alert(url);
+    };
     const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
+      .then(tester => {
+        if (tester.status === 200) {  
+       handleClose();
+          return tester.json();
+        }
+       
       })/**/
 
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        // alert(res.message)
+      .then(tester => {
+        console.log(tester)
+        // alert(tester)
+      getDataBackend();
+      if (url == urlAddAnggotaKK) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditAnggotaKK){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
 
-        swal("Berhasil Tambah data", "berhasil", "success").then(
-          handleClose()
-          )
-        getDataBackend();
-        //alert("Sukses")
-        const data=res;
+        // alert("Sukses")
+        const data=tester;
       })
       .catch((e) => {
-
-        // swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
-
+        alert(e)
+        // swal("Gagal Login!", "Gagal Login", "error",  )
         return false;
 
 

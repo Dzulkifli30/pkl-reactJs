@@ -3,50 +3,65 @@ import FormKK from '../FormKK'
 import FormAnggota from '../FormAnggota'
 // import AnggotaKK from 'views/AnggotaKK'
 import FormAlatKontrasepsi from '../FormAlatKontrasepsi'
+import FormKB from '../FormKB'
 import Slider from "react-slick"; 
 import "./slick/slick.css"; 
 import "./slick/slick-theme.css";
 import {Animated} from "react-animated-css";
-// function SampleNextArrow(props) {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{ ...style}}
-//       onClick={onClick}
-//       ></div>
-//   );
-// }
-
-// function SamplePrevArrow(props) {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{ ...style}}
-//       onClick={onClick}
-//     />
-//   );
-// }
+import { useHistory } from "react-router-dom";
 
 const FormSurvey = () => {
   const [KK,setKK]=useState([])
   const [AnggotaKK,setAnggotaKK]=useState([])
   const [rowKK, setRowKK]=useState({});
+  const [kb, setKB]=useState([]);
 
       const settings = {
         infinite: true,
         speed: 800,
         slidesToShow: 1,
         slidesToScroll: 1,
+        swipeToSlide: false,
       //   nextArrow: <SampleNextArrow />,
       // prevArrow: <SamplePrevArrow />
       };
+      const history = useHistory();
+      function refreshPage(){
+        KK.push(rowKK)
+        // sliderRef.current.slickNext();
+        // rowKK = useState({})
+        delete rowKK.kb
+        delete rowKK.AnggotaKK
+        delete rowKK.NIK_KK
+        delete rowKK.KK_id
+        delete rowKK.periode_sensus
+        delete rowKK.id_provinsi
+        delete rowKK.id_kabupaten
+        delete rowKK.id_kecamatan
+        delete rowKK.id_kelurahan
+        delete rowKK.id_rt
+        delete rowKK.id_rw
+        delete rowKK.alamat_kk
+        delete rowKK.NoKK
+        delete rowKK.nama_kk
+        delete rowKK.update_by
+        delete rowKK.create_by
+        console.log(rowKK)
+        // setRowKK({})
+        // rowKK = {}
+        console.log('ini KK gan',KK)
+          // history.push("/form-survey")
+        sliderRef.current.slickNext();
+      }
       const gotoNext = () => {
         rowKK.AnggotaKK = AnggotaKK
         console.log(rowKK)
 
         sliderRef.current.slickNext();
+      }
+      const kirimData = () => {
+        rowKK.kb = kb
+        console.log(rowKK)
       }
       const goPrev = () => {
         sliderRef.current.slickPrev();
@@ -55,7 +70,7 @@ const FormSurvey = () => {
       const [dataKK, setDataKK]=useState({});
     return(
       <Animated animationIn="zoomIn" isVisible={true}>
-        <div className="mb-6">
+        <div className="">
           <Slider className="sliderMain" ref={sliderRef} {...settings}>
               <div>
               <FormKK
@@ -82,10 +97,14 @@ const FormSurvey = () => {
               />
               </div>
               <div>
-              <FormAlatKontrasepsi
+              <FormKB
+              kirimData={kirimData}
               gotoNext={gotoNext}
               KK={KK}
+              refreshPage={refreshPage}
               setKK={setKK}
+              kb={kb}
+              setKB={setKB}
               />
               </div>
           </Slider>

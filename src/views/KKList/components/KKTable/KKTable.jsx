@@ -34,7 +34,6 @@ import {
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
 import { async } from 'validate.js';
-import Add from '@material-ui/icons/Add';
 
 const useStyles=makeStyles(theme => ({
   root: {},
@@ -58,23 +57,17 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const AnggotaKKTable=props => {
-
-  
+const KKTable=props => {
   const {
     handleOpenViewMap,
-    datas,
-    className,handleDelete,
-    textfind,Vuserfind,
-    order, orderBy, SettingVuser,
-    VuserExport, filteredItems, handleOpen, selectedVuser,
-    setSelectedVuser,
-    anggotaKK_params,
-    handleClose,
-    AnggotaKK,
-    Export,
+    className,handleClose,
+    title,KKfind,
+    order, orderBy, SettingKK,
+    KKExport, filteredItems, handleOpen, selectedKK,
+    setSelectedKK,datas,
+    Export,setData,
     convertArrayOfObjectsToCSV,
-    downloadCSV
+    roles,handleChange
 
     , ...rest }=props;
 
@@ -85,7 +78,12 @@ const AnggotaKKTable=props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
-
+  const textfind=() =>{
+      title();
+  }
+  const downloadCSV=() =>{
+    roles();
+}
 
 
   const customStyles={
@@ -200,101 +198,63 @@ const AnggotaKKTable=props => {
 
   const columns=[
     {
-      name: 'ID KK',
-      selector: 'KK_id',
-      sortable: true,
-    },
-    {
       name: 'Periode Sensus',
       selector: 'periode_sensus',
       sortable: true,
     },
     {
-      name: 'NIK ',
-      selector: 'NIK',
+      name: 'Nomor KK',
+      selector: 'NoKK',
       sortable: true,
     },
     {
-      name: 'Jenis Kelamin',
-      selector: 'jenis_kelamin',
+      name: 'NIK KK',
+      selector: 'NIK_KK',
       sortable: true,
     },
     {
-      name: 'Tempat Lahir',
-      selector: 'tempat_lahir',
+      name: 'Nama KK',
+      selector: 'nama_kk',
       sortable: true,
     },
     {
-      name: 'Tanggal Lahir',
-      selector: 'tanggal_lahir',
+      name: 'Alamat KK',
+      selector: 'alamat_kk',
       sortable: true,
     },
     {
-      name: 'Agama',
-      selector: 'agama',
+      name: 'Id Provinsi',
+      selector: 'id_provinsi',
       sortable: true,
     },
     {
-      name: 'Pendidikan',
-      selector: 'pendidikan',
+      name: 'Id Kabupaten',
+      selector: 'id_kabupaten',
+      sortable: true,
+    },
+    {
+      name: 'Id Kecamatan',
+      selector: 'id_kecamatan',
       sortable: true,
     },    {
-      name: 'Jenis Pekerjaan',
-      selector: 'jenis_pekerjaan',
+      name: 'Id Kelurahan',
+      selector: 'id_kelurahan',
       sortable: true,
     },
     {
-      name: 'Status Nikah',
-      selector: 'status_nikah',
+      name: 'Id Rw',
+      selector: 'id_rw',
       sortable: true,
     },
     {
-      name: 'Tanggal Pernikahan',
-      selector: 'tanggal_pernikahan',
-      sortable: true,
-    },
-    {
-      name: 'Status Dalam Keluarga',
-      selector: 'status_dalam_keluarga',
-      sortable: true,
-    },
-    {
-      name: 'Kewarganegaraan',
-      selector: 'kewarganegaraan',
-      sortable: true,
-    },
-    {
-      name: 'Nomor Paspor',
-      selector: 'no_paspor',
-      sortable: true,
-    },    {
-      name: 'Nomor Katas',
-      selector: 'no_katas',
-      sortable: true,
-    },    {
-      name: 'Nama Ayah',
-      selector: 'nama_ayah',
-      sortable: true,
-    },    {
-      name: 'Nama Ibu',
-      selector: 'nama_ibu',
+      name: 'Id Rt',
+      selector: 'id_rt',
       sortable: true,
     },
 
     {
       name: 'CreatedBy',
       selector: 'create_by',
-      sortable: true,
-    },
-    
-    {
-      name: 'Created',
-      selector: 'create_date',
-      sortable: true,
-    },
-    {
-      name: 'LastModified',
-      selector: 'update_date',
       sortable: true,
     },
     {
@@ -307,18 +267,18 @@ const AnggotaKKTable=props => {
       cell: row =>
         <Button color="primary"
         disabled={row.Periode_Sensus <= localStorage.getItem('Periode Sensus')}//={row.Periode_Sensus <= localStorage.getItem('Periode Sensus') ? "true" : "false"}
-          onClick={(e) => handleOpen(e, row, "Ubah Target Kk ") }  > {row.Periode_Sensus < parseInt(localStorage.getItem('Periode Sensus'))}<EditIcon /></Button>
+          onClick={(e) => handleOpen(e, row, "Ubah Form Kk ") }  > {row.Periode_Sensus < parseInt(localStorage.getItem('Periode Sensus'))}<EditIcon /></Button>
       ,
     },
     {
       button: true,
       cell: row =>
         <Button color="primary"
-          onClick={(e) => handleDelete(e,row)} ><DeleteIcon /></Button>
+          onClick={(e) => handleChange(e,row)} ><DeleteIcon /></Button>
       ,
     },
   ];
-  // const filteredItems=Vuser.filter(item => item.nama_Vuser&&item.nama_Vuser.toLowerCase().includes(filterText.toLowerCase()));
+  // const filteredItems=KK.filter(item => item.nama_KK&&item.nama_KK.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
     const handleClear=() => {
       if (filterText) {
@@ -328,20 +288,16 @@ const AnggotaKKTable=props => {
     };
     return <div class="form-group">
       <div class="col-md-6">
-          <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-
-        <button className=" btn btn-md " onClick={(e) => handleOpen(e,[],"Tambah Anggota KK")}>
-          <AddIcon/>
-        </button>
 
       </div>
 
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Vuser"
+          placeholder="Search KK"
           textfind={textfind}
         />
       </div>
@@ -365,36 +321,36 @@ const AnggotaKKTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedVuser_var;
+    let selectedKK_var;
 
     if (event.target.checked) {
-      selectedVuser_var=Vuser.map(Vuser => Vuser.id);
+      selectedKK_var=KK.map(KK => KK.id);
     } else {
-      selectedVuser_var=[];
+      selectedKK_var=[];
     }
 
-    setSelectedVuser(selectedVuser_var);
+    setSelectedKK(selectedKK_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedVuser.indexOf(id);
-    let newSelectedVuser=[];
+    const selectedIndex=selectedKK.indexOf(id);
+    let newSelectedKK=[];
 
     if (selectedIndex===-1) {
-      newSelectedVuser=newSelectedVuser.concat(selectedVuser, id);
+      newSelectedKK=newSelectedKK.concat(selectedKK, id);
     } else if (selectedIndex===0) {
-      newSelectedVuser=newSelectedVuser.concat(selectedVuser.slice(1));
-    } else if (selectedIndex===selectedVuser.length-1) {
-      newSelectedVuser=newSelectedVuser.concat(selectedVuser.slice(0, -1));
+      newSelectedKK=newSelectedKK.concat(selectedKK.slice(1));
+    } else if (selectedIndex===selectedKK.length-1) {
+      newSelectedKK=newSelectedKK.concat(selectedKK.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedVuser=newSelectedVuser.concat(
-        selectedVuser.slice(0, selectedIndex),
-        selectedVuser.slice(selectedIndex+1)
+      newSelectedKK=newSelectedKK.concat(
+        selectedKK.slice(0, selectedIndex),
+        selectedKK.slice(selectedIndex+1)
       );
     }
 
-    setSelectedVuser(newSelectedVuser);
+    setSelectedKK(newSelectedKK);
     //console.log(selectedUsers);
   };
 
@@ -405,15 +361,13 @@ const AnggotaKKTable=props => {
   const handleRowsPerPageChange=event => {
     setRowsPerPage(event.target.value);
   };
-  //  const filteredItems=Vuser;
+  //  const filteredItems=KK;
   //const actionsMemo=React.useMemo(() => <Export onExport={() => downloadCSV()} />, []);
 
   return (
     <Card
       {...rest}
-      className={clsx(classes.root, className)
-      
-      }
+      className={clsx(classes.root, className)}
     >
       <CardContent className={classes.content}>
         <PerfectScrollbar>
@@ -423,8 +377,8 @@ const AnggotaKKTable=props => {
               title=""
               customStyles={customStyles}
               columns={columns}
-              data={filteredItems}
-              keyField=""
+              data={datas}
+              keyField="UserName"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -433,7 +387,10 @@ const AnggotaKKTable=props => {
               persistTableHead
               dense
             />
-
+            <button className="btn btn-md btn-warning mr-10 mt-2 justify-center"
+            onClick={handleClose}>
+                Tutup
+            </button>
 
           </div>
 
@@ -444,9 +401,9 @@ const AnggotaKKTable=props => {
   );
 };
 
-AnggotaKKTable.propTypes={
+KKTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default AnggotaKKTable;
+export default KKTable;
