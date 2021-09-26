@@ -230,9 +230,9 @@ const AnggotaKKAddModi=props => {
       "nama_ayah": rowSelect.nama_ayah,
       "nama_ibu": rowSelect.nama_ibu,
     }
-    // let url=urlAddAnggotaKK;
+    let url=urlAddAnggotaKK;
     if (rowSelect.anggota_kk_id === undefined) {
-      // url=urlAddAnggotaKK;
+      url=urlAddAnggotaKK;
       varJson.create_by = userName
       varJson.update_by = userName
     } else {
@@ -242,6 +242,43 @@ const AnggotaKKAddModi=props => {
     getDataBackend(varJson)
     console.log("var json =",varJson);
 
+    
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        varJson
+      )
+    }
+  
+    ///let urlGetData=urlPostLogin
+    // alert(url);
+    const response=fetch(url, requestOptions)
+      .then(res => {
+        return res.json();
+      })/**/
+
+      .then(res => {
+        //console.log(res)
+        //console.log(res.data)
+        // alert(res.message)
+
+        swal("Berhasil Tambah data", "berhasil", "success").then(
+          handleClose()
+          )
+        getDataBackend();
+        //alert("Sukses")
+        const data=res;
+      })
+      .catch((e) => {
+
+        // swal("Gagal Login!", "Gagal Login", "error", null, '200x200')
+
+        return false;
+
+
+      });
 
   }
   const handling =()=>{
