@@ -77,7 +77,7 @@ const useStyles=makeStyles(theme => ({
 }));
 const KBTable=props => {
   const {
-    handleOpenViewMap,
+    handleOpenViewMap,KB_params,
     className,handleDelete,
     textfind,kbfind,kb,
     order, orderBy,
@@ -379,8 +379,8 @@ const KBTable=props => {
               title="KB List"
               customStyles={customStyles}
               columns={columns}
-              data={datas}
-              keyField="nama_kb"
+              data={filteredItems}
+              keyField=""
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader

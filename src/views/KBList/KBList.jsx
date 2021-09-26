@@ -33,75 +33,57 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const KBList=props => {
+  const { kb,setKB,...rest } = props;
 
-  async function getKB() {
-    const userId=localStorage.getItem('user_id');
+  if (!localStorage.getItem("NamaLengkap")) {
+    history.push('/beranda');
+
+  }
+
+
+   function getKB(KB_params) {
+
+    kb.push(KB_params)
     setFilteredItems(kb);
     setOpen(false);
 
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
+    const userId=localStorage.getItem('user_id');
+    // setFilteredItems(KB_params);
+    // setOpen(false);
+    // setkb(KB_params)
+    console.log('ini data KB ',kb)
+    console.log('FIltered ItemsKB',filteredItems)
+    console.log("ParampaaKB = ",KB_params)
+    // /* */
+    // const requestOptions={
+    //   method: 'get',
+    //   //mode: "cors",
+    //   headers: { 'Content-Type': 'application/json' },
+    // };
 
-    let url=urlGetKB
+    // let url=urlGetkb
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
+    // const response=await fetch(url, requestOptions)
+    //   .then(res => {
+    //     return res.json();
+    //   })
 
-      .then(resJson => {
-        const data=resJson;
-        setKB(data.data);
-        setFilteredItems(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        // alert("Nextwork Error");
-        setKB([]);
-        setFilteredItems([]);
-        setOpen(false);
-        //this.setState({ ...this.state, isFetching: false });
-      });
+    //   .then(resJson => {
+    //     const data=resJson;
+    //     setkb(data.data);
+    //     setFilteredItems(data.data);
+    //     //return false;
+    //   })
+    //   .catch(e => {
+    //     //console.log(e);
+    //     alert("Nextwork Error");
+    //     setkb([]);
+    //     setFilteredItems([]);
+    //     setOpen(false);
+    //     //this.setState({ ...this.state, isFetching: false });
+    //   });
 
     setOpen(false);
-  }
-
-  const deleteKB = async (data_kb_id) => {  /* */
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body:JSON.stringify({
-        data_kb_id: data_kb_id
-      })
-    };
-
-    let url=urlDeleteKB
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setKB(data.data);
-        setFilteredItems(data.data);
-        getKB()
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        // alert("Nextwork Error");
-        setKB([]);
-        setFilteredItems([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
   }
 
   const csvData=() => {
@@ -226,10 +208,11 @@ const KBList=props => {
   }
 
 
-  const [kb, setKB]=useState([]);
+  
   // const [provinsiId, setProvinsiId]=useState(getKB());
   const [filteredItems, setFilteredItems]=useState([]);
   const [rowkbSelect, setRowkbSelect]=useState({});
+  const [KB_params, setKB_params]=useState({});
   const [open, setOpen]=React.useState(false);
   const [title, setTitle]=React.useState(false);
   const [selectedkb, setSelectedkb]=useState([]);
@@ -241,7 +224,7 @@ const KBList=props => {
   const [compPopup, setCompPopup]=useState(null);
 
   useEffect(() => {
-    getKB();
+    console.log(KB_params);
     // console.log('prov',provinsiId)
     //   alert(setOpen)
   }, [order, orderBy]);
@@ -326,6 +309,7 @@ const KBList=props => {
           setRowSelect={setRowkbSelect} 
           rowSelect={rowkbSelect}
           title={title} 
+          handleClose={handleClose}
           datas={filteredItems} 
           handleOpen={handleOpen}
        ComponenAddModi={componenPopup}>
@@ -363,9 +347,12 @@ const KBList=props => {
           handleChange={handleChange} 
           setSelectedkb={setSelectedkb}
           Export={Export}
+          KB_params={KB_params}
+          kb={kb}
           setRowSelect={setRowkbSelect} 
           rowSelect={rowkbSelect}
           title={title} 
+          handleClose={handleClose}
           setData={setData} 
           filteredItems={filteredItems}
           open={open} 

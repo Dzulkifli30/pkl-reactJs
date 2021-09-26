@@ -200,7 +200,7 @@ const AnggotaKKTable=props => {
 
   const columns=[
     {
-      name: 'Id KK',
+      name: 'ID KK',
       selector: 'KK_id',
       sortable: true,
     },

@@ -223,49 +223,38 @@ const KKTable=props => {
       sortable: true,
     },
     {
-      name: 'Nama Provinsi',
-      selector: 'nama_provinsi',
+      name: 'Id Provinsi',
+      selector: 'id_provinsi',
       sortable: true,
     },
     {
-      name: 'Nama Kabupaten',
-      selector: 'nama_kabupaten',
+      name: 'Id Kabupaten',
+      selector: 'id_kabupaten',
       sortable: true,
     },
     {
-      name: 'Nama Kecamatan',
-      selector: 'nama_kecamatan',
+      name: 'Id Kecamatan',
+      selector: 'id_kecamatan',
       sortable: true,
     },    {
-      name: 'Nama Kelurahan',
-      selector: 'nama_kelurahan',
+      name: 'Id Kelurahan',
+      selector: 'id_kelurahan',
       sortable: true,
     },
     {
-      name: 'Nama Rw',
-      selector: 'nama_rw',
+      name: 'Id Rw',
+      selector: 'id_rw',
       sortable: true,
     },
     {
-      name: 'Nama Rt',
-      selector: 'nama_rt',
+      name: 'Id Rt',
+      selector: 'id_rt',
       sortable: true,
     },
 
     {
       name: 'CreatedBy',
       selector: 'create_by',
-      sortable: true,
-    },
-    
-    {
-      name: 'Created',
-      selector: 'create_date',
-      sortable: true,
-    },
-    {
-      name: 'LastModified',
-      selector: 'update_date',
       sortable: true,
     },
     {

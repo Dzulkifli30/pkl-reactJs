@@ -15,6 +15,7 @@ import {
   Input
 } from '@material-ui/core';
 import L from 'leaflet';
+
 import axios from 'axios';
 import { urlAddAnggotaKK, 
   urlEditAnggotaKK, 
@@ -210,6 +211,7 @@ const AnggotaKKAddModi=props => {
 
   const handleSave=(event) => {
     const userName=localStorage.getItem('username');
+    let url=urlAddAnggotaKK;
     let varJson = {
       "KK_id": rowSelect.KK_id,
       "anggota_kk_id": rowSelect.anggota_kk_id,
@@ -232,16 +234,65 @@ const AnggotaKKAddModi=props => {
     }
     // let url=urlAddAnggotaKK;
     if (rowSelect.anggota_kk_id === undefined) {
-      // url=urlAddAnggotaKK;
+      let url=urlAddAnggotaKK;
       varJson.create_by = userName
       varJson.update_by = userName
     } else {
-      // url=urlEditAnggotaKK;
+      let url=urlEditAnggotaKK;
       varJson.update_by = userName
     }
     getDataBackend(varJson)
     console.log("var json =",varJson);
 
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        varJson
+      )
+    };
+    const response=fetch(url, requestOptions)
+      .then(tester => {
+        if (tester.status === 200) {  
+       handleClose();
+          return tester.json();
+        }
+       
+      })/**/
+
+      .then(tester => {
+        console.log(tester)
+        // alert(tester)
+      getDataBackend();
+      if (url == urlAddAnggotaKK) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditAnggotaKK){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+        // alert("Sukses")
+        const data=tester;
+      })
+      .catch((e) => {
+        alert(e)
+        // swal("Gagal Login!", "Gagal Login", "error",  )
+        return false;
+
+
+      });
 
   }
   const handling =()=>{

@@ -22,37 +22,38 @@ const KKList = (props) => {
 
     async function getFormKK() {
       const userId=localStorage.getItem('user_id');
-      setFilteredItems(KK);
+      setKK([rowKK]);
+      console.log(rowKK)
       // setOpen(true);
   
       /* */
-      const requestOptions={
-        method: 'get',
-        //mode: "cors",
-        headers: { 'Content-Type': 'application/json' },
-      };
+      // const requestOptions={
+      //   method: 'get',
+      //   //mode: "cors",
+      //   headers: { 'Content-Type': 'application/json' },
+      // };
   
-      let url=urlGetFormKK
-      // eslint-disable-next-line no-useless-concat
-      const response=await fetch(url, requestOptions)
-        .then(res => {
-          return res.json();
-        })
+      // let url=urlGetFormKK
+      // // eslint-disable-next-line no-useless-concat
+      // const response=await fetch(url, requestOptions)
+      //   .then(res => {
+      //     return res.json();
+      //   })
   
-        .then(resJson => {
-          const data=resJson;
-          setKK(data.data);
-          setFilteredItems(data.data);
-          //return false;
-        })
-        .catch(e => {
-          //console.log(e);
-          alert("Nextwork Error");
-          setKK([]);
-          setFilteredItems([]);
-          // setOpen(false);
-          //this.setState({ ...this.state, isFetching: false });
-        });
+      //   .then(resJson => {
+      //     const data=resJson;
+      //     setKK(data.data);
+      //     setFilteredItems(data.data);
+      //     //return false;
+      //   })
+      //   .catch(e => {
+      //     //console.log(e);
+      //     alert("Nextwork Error");
+      //     setKK([]);
+      //     setFilteredItems([]);
+      //     // setOpen(false);
+      //     //this.setState({ ...this.state, isFetching: false });
+      //   });
   
       // setOpen(true);
     }
@@ -217,7 +218,7 @@ const KKList = (props) => {
         <ModalComponent getDataBackend={deleteFormKK}
           handleChange={handleDelete} setData={setData} roles={downloadCSV}
           open={open} setRowSelect={setRowKK} rowSelect={rowKK}
-          title={KKfind} datas={filteredItems} handleClose={handleClose} datas={KK}
+          title={KKfind} handleClose={handleClose} datas={KK}
           ComponenAddModi={componenPopup}>
            </ModalComponent>
   
