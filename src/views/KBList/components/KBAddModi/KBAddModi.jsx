@@ -19,7 +19,7 @@ import { urlAddKB, urlEditKB, urlGetIdKK, urlGetNIKAnggota } from '../../../../k
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
-const schema={
+const schema={  
   KK_id: {
     presence: { allowEmpty: false, message: 'harus diisi' },
   },

@@ -20,7 +20,8 @@ import Swal from 'sweetalert2';
 const KKList = (props) => {
     const { gotoNext,rowKK,setRowKK,KK,setKK,...rest } = props;
 
-    async function getFormKK() {
+       function getFormKK() {
+      alert("Get Form KK")
       const userId=localStorage.getItem('user_id');
       setKK([rowKK]);
       console.log(rowKK)
