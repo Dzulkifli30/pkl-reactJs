@@ -46,6 +46,9 @@ const FormSurvey = () => {
         delete rowKK.nama_kk
         delete rowKK.update_by
         delete rowKK.create_by
+
+        setRowKK(rowKK)
+        // window.location.reload();
         console.log(rowKK)
         // setRowKK({})
         // rowKK = {}

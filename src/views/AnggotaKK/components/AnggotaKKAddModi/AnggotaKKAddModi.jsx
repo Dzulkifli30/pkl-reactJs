@@ -232,9 +232,9 @@ const AnggotaKKAddModi=props => {
       "nama_ayah": rowSelect.nama_ayah,
       "nama_ibu": rowSelect.nama_ibu,
     }
-    let url=urlAddAnggotaKK;
+    // let url =urlAddAnggotaKK;
     if (rowSelect.anggota_kk_id === undefined) {
-      let url=urlAddAnggotaKK;
+      // let url=urlAddAnggotaKK;
       varJson.create_by = userName
       varJson.update_by = userName
     } else {

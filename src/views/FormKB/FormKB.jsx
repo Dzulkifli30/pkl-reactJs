@@ -1,8 +1,8 @@
 import React from 'react'
 import KBList from '../KBList'
 
-const FormKK = (props) => {
-    const { kirimData, refreshPage, gotoNext, kb, setKB,...rest } = props;
+const FormKB = (props) => {
+    const { kirimData, refreshPage, gotoNext, kb, setKB, ...rest } = props;
 
     return (
         <div>
@@ -27,4 +27,4 @@ const FormKK = (props) => {
     )
 }
 
-export default FormKK;
+export default FormKB;
