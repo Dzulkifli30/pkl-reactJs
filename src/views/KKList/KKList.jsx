@@ -20,43 +20,27 @@ import Swal from 'sweetalert2';
 const KKList = (props) => {
     const { gotoNext,rowKK,setRowKK,KK,setKK,...rest } = props;
 
-       function getFormKK() {
-      alert("Get Form KK")
+      function getFormKK() {
+      // alert("Get Form KK")
       const userId=localStorage.getItem('user_id');
-      setKK([rowKK]);
+      // KK = JSON.parse(localStorage.getItem("Data KK"))
+      console.log("jxon",JSON.parse(localStorage.getItem("Data KK")))
+      setKK(JSON.parse(localStorage.getItem("Data KK")));
+     
+      // KK.push(rowKK)
       console.log(rowKK)
-      // setOpen(true);
-  
-      /* */
-      // const requestOptions={
-      //   method: 'get',
-      //   //mode: "cors",
-      //   headers: { 'Content-Type': 'application/json' },
-      // };
-  
-      // let url=urlGetFormKK
-      // // eslint-disable-next-line no-useless-concat
-      // const response=await fetch(url, requestOptions)
-      //   .then(res => {
-      //     return res.json();
-      //   })
-  
-      //   .then(resJson => {
-      //     const data=resJson;
-      //     setKK(data.data);
-      //     setFilteredItems(data.data);
-      //     //return false;
-      //   })
-      //   .catch(e => {
-      //     //console.log(e);
-      //     alert("Nextwork Error");
-      //     setKK([]);
-      //     setFilteredItems([]);
-      //     // setOpen(false);
-      //     //this.setState({ ...this.state, isFetching: false });
-      //   });
-  
-      // setOpen(true);
+    }
+
+    function saveRowKK() {
+      // alert("Get Form KK")
+      const userId=localStorage.getItem('user_id');
+      // KK = JSON.parse(localStorage.getItem("Data KK"))
+      console.log("jxon",JSON.parse(localStorage.getItem("Data KK")))
+      // setKK(JSON.parse(localStorage.getItem("Data KK")));
+     
+      KK.push(rowKK)
+      console.log(rowKK)
+
     }
     const deleteFormKK = async (KK_id) => {  /* */
       const requestOptions={
@@ -229,7 +213,7 @@ const KKList = (props) => {
     return (
         <div className="p-10">
           <KKaddModi
-        getDataBackend={getFormKK}
+        getDataBackend={saveRowKK}
         handleChange={handleChange} setData={setData} handleOpen={handleOpen}
         open={open} setRowSelect={setRowKK} rowSelect={rowKK}
         title={title} datas={filteredItems} handleClose={handleClose} gotoNext={gotoNext}

@@ -30,31 +30,30 @@ const FormSurvey = () => {
         KK.push(rowKK)
         // sliderRef.current.slickNext();
         // rowKK = useState({})
-        delete rowKK.kb
-        delete rowKK.AnggotaKK
-        delete rowKK.NIK_KK
-        delete rowKK.KK_id
-        delete rowKK.periode_sensus
-        delete rowKK.id_provinsi
-        delete rowKK.id_kabupaten
-        delete rowKK.id_kecamatan
-        delete rowKK.id_kelurahan
-        delete rowKK.id_rt
-        delete rowKK.id_rw
-        delete rowKK.alamat_kk
-        delete rowKK.NoKK
-        delete rowKK.nama_kk
-        delete rowKK.update_by
-        delete rowKK.create_by
-
-        setRowKK(rowKK)
-        // window.location.reload();
-        console.log(rowKK)
+        // delete rowKK.kb
+        // delete rowKK.AnggotaKK
+        // delete rowKK.NIK_KK
+        // delete rowKK.KK_id
+        // delete rowKK.periode_sensus
+        // delete rowKK.id_provinsi
+        // delete rowKK.id_kabupaten
+        // delete rowKK.id_kecamatan
+        // delete rowKK.id_kelurahan
+        // delete rowKK.id_rt
+        // delete rowKK.id_rw
+        // delete rowKK.alamat_kk
+        // delete rowKK.NoKK
+        // delete rowKK.nama_kk
+        // delete rowKK.update_by
+        // delete rowKK.create_by
+        localStorage.setItem("Data KK",JSON.stringify(KK))
+        window.location.reload();
+        // console.log(rowKK)
         // setRowKK({})
         // rowKK = {}
-        console.log('ini KK gan',KK)
+        // console.log('ini KK gan',KK)
           // history.push("/form-survey")
-        sliderRef.current.slickNext();
+        // sliderRef.current.slickNext();
       }
       const gotoNext = () => {
         rowKK.AnggotaKK = AnggotaKK
