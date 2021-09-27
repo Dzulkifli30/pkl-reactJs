@@ -9,6 +9,7 @@ import "./slick/slick.css";
 import "./slick/slick-theme.css";
 import {Animated} from "react-animated-css";
 import { useHistory } from "react-router-dom";
+import { urlAddFormKK, urlGetFormKK } from 'kumpulanUrl'
 
 const FormSurvey = () => {
   const [KK,setKK]=useState([])
@@ -61,9 +62,39 @@ const FormSurvey = () => {
 
         sliderRef.current.slickNext();
       }
-      const kirimData = () => {
+      async function kirimData  () {
         rowKK.kb = kb
-        console.log(rowKK)
+        KK.push(rowKK)
+        console.log(KK)
+
+        const requestOptions={
+          method: 'POST',
+          //mode: "cors",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            "dataKK": KK,
+          })
+        };
+    
+        let urlAdd=urlAddFormKK
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlAdd, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        alert("data disimpan")
+        setRowKK(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        alert("data gagal")
+        setRowKK([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
       }
       const goPrev = () => {
         sliderRef.current.slickPrev();
