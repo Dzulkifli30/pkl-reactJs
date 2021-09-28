@@ -25,12 +25,10 @@ const KKList = (props) => {
       const userId=localStorage.getItem('user_id');
       // KK = JSON.parse(localStorage.getItem("Data KK"))
       console.log("jxon",JSON.parse(localStorage.getItem("Data KK")))
-      setKK(JSON.parse(localStorage.getItem("Data KK")));
-     
+      setKK([rowKK]);
       // KK.push(rowKK)
       console.log(rowKK)
     }
-
     function saveRowKK() {
       // alert("Get Form KK")
       const userId=localStorage.getItem('user_id');
