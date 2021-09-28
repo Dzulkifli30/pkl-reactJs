@@ -199,14 +199,15 @@ const AnggotaKKTable=props => {
   };
 
   const columns=[
-    {
-      name: 'ID KK',
-      selector: 'KK_id',
-      sortable: true,
-    },
+
     {
       name: 'Periode Sensus',
       selector: 'periode_sensus',
+      sortable: true,
+    },
+    {
+      name: 'Nama ',
+      selector: 'nama_anggota',
       sortable: true,
     },
     {

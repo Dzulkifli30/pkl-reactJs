@@ -1,10 +1,5 @@
 let urlport="http://localhost:8000/";
 let urlportrefresh="http://localhost:8000/";
-//"http://10.242.11.101:8082/"
-
-//"http://10.242.11.101:8081/";
- //let urlport="http://36.89.25.220:15002/"
-
 
 
  // Vuser
@@ -54,7 +49,6 @@ export const urlLaporanPerProv=urlport+'provinsi/laporanPerProv'
  export const urlDeleteKec=urlport+'kecamatan/deleteKec'
  export const urlLaporanKec=urlport+'kecamatan/laporanKec'
  export const urlShowPerKec=urlport+'kecamatan/show-per-kec'
-
 
 // Kelurahan
 export const urlKel = urlport+'kelurahan/getKelurahan'
@@ -108,9 +102,8 @@ export const urlGetFormKK = urlport + '/form-kk/getFormKK'
 export const urlAddFormKK = urlport + '/form-kk/storeFormKK'
 export const urlEditFormKK = urlport + '/form-kk/updateFormKK'
 export const urlDeleteFormKK = urlport + '/form-kk/deleteFormKK'
-export const urlAccForm = urlport + +'/form-kk/acceptFormKK'
+export const urlAccForm = urlport +'/form-kk/acceptFormKK'
 export const urlGetIdKK = urlport + '/form-kk/getIdKK'
-
 
 //Anggota KK
 export const urlGetAnggotaKK = urlport + '/anggota-kk/getAnggotaKK'
@@ -123,6 +116,6 @@ export const urlGetNIKAnggota=urlport+'/anggota-kk/getNIKAnggota'
 export const urlGetKB = urlport + 'data-kb/getKB'
 export const urlUpdateKB = urlport + 'data-kb/updateKB'
 export const urlEditKB = urlport + 'data-kb/editKB'
+export const urlShowNama = urlport + 'data-kb/showNama'
 export const urlAddKB = urlport + 'data-kb/addKB'
 export const urlDeleteKB = urlport + 'data-kb/deleteKB'
-

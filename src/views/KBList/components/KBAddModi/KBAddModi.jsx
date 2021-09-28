@@ -15,14 +15,12 @@ import {
 import L from 'leaflet';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { urlAddKB, urlEditKB, urlGetIdKK, urlGetNIKAnggota } from '../../../../kumpulanUrl';
+import { urlAddKB, urlEditKB, urlGetIdKK, urlGetNIKAnggota, urlShowNama } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 const schema={  
-  KK_id: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-  },
+
   NIK: {
     presence: { allowEmpty: false, message: 'harus diisi' },
   },
@@ -68,7 +66,9 @@ const KBAddModi=props => {
   const [getStatus, setStatus]=useState([]);
   const [getKeyId, setKeyId]=useState([]);
   const [KK, setKK] = useState([])
+  const [anggotaId, setAnggotaId] = useState([])
   const [AnggotaKK, setAnggotaKK] = useState([])
+  const [nama, setNama] = useState([])
   const alatKB = JSON.parse(localStorage.getItem("Alat Kontrasepsi"));
 
   const [formState, setFormState]=useState({
@@ -78,7 +78,7 @@ const KBAddModi=props => {
     errors: {}
   });
 
-  async function getKK() {
+  async function getIdAnggota() {
     /* */
     const requestOptions={
       method: 'get',
@@ -95,12 +95,12 @@ const KBAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        setKK(data.data);
+        setAnggotaId(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        setKK([]);
+        setAnggotaId([]);
         //this.setState({ ...this.state, isFetching: false });
       });
   }
@@ -134,8 +134,9 @@ const KBAddModi=props => {
 
 
   useEffect(() => {
-    getKK()
+    getIdAnggota()
     getNIKanggota()
+    showNama(rowSelect.anggota_kk_id)
 
     const errors=validate(rowSelect, schema);
 
@@ -171,6 +172,40 @@ const KBAddModi=props => {
   // const handleClose=() => {
   //   getDataBackend();
   // }
+  const handleChangeNama=event=> {
+    handleChange(event)
+    showNama(event.target.value)
+  }
+  async function showNama(anggota_kk_id) {
+    /* */
+    const requestOptions={
+      method: 'POST',
+      //mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "anggota_kk_id": anggota_kk_id,
+      })
+    };
+
+    let urlShow=urlShowNama
+    // eslint-disable-next-line no-useless-concat
+    const response=await fetch(urlShow, requestOptions)
+      .then(res => {
+        return res.json();
+      })
+
+      .then(resJson => {
+        const data=resJson;
+        // console.log('kabupaten =',data.data)
+        setNama(data.data);
+        //return false;
+      })
+      .catch(e => {
+        //console.log(e);
+        setNama([]);
+        //this.setState({ ...this.state, isFetching: false });
+      });
+  }
 
   const handleSave=() => {
     const userName=localStorage.getItem('username');
@@ -183,9 +218,9 @@ const KBAddModi=props => {
     // rowSelect.create_by= userName
     // rowSelect.update_by= userName
     let varJson = {
-      "KK_id": rowSelect.KK_id,
-      // "data_kb_id": rowSelect.data_kb_id,
+      "anggota_kk_id": rowSelect.anggota_kk_id,
       "NIK": rowSelect.NIK,
+      "nama_anggota": rowSelect.nama_anggota,
       "tahun_pemakaian": rowSelect.tahun_pemakaian,
       "alat_kontrasepsi": rowSelect.alatKB,
       "alasan": rowSelect.alasan,
@@ -279,6 +314,31 @@ const KBAddModi=props => {
             container
             spacing={3}
           >
+          {/* <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Id Anggota"
+                margin="dense"
+                name="anggota_kk_id"
+                onChange={handleChange}
+                variant="outlined"
+                value={rowSelect.anggota_kk_id}
+                select
+              >
+                {anggotaId.map(option => (
+                  <option
+                   value={option.anggota_kk_id}
+                    key={option.anggota_kk_id}
+                  >
+                    {option.anggota_kk_id}
+                  </option>
+                ))}
+              </TextField>
+            </Grid> */}
             <Grid
               item
               md={6}
@@ -286,24 +346,25 @@ const KBAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="KK_id"
+                label="Nama"
                 margin="dense"
-                name="KK_id"
+                name="nama_anggota"
                 onChange={handleChange}
                 variant="outlined"
-                value={rowSelect.KK_id}
+                value={rowSelect.anggota_kk_id}
                 select
               >
-                {KK.map(option => (
+                {anggotaId.map(option => (
                   <option
-                   value={option.KK_id}
-                    key={option.KK_id}
+                   value={option.anggota_kk_id}
+                    key={option.anggota_kk_id}
                   >
-                    {option.KK_id}
+                    {option.nama_anggota}
                   </option>
                 ))}
               </TextField>
             </Grid>
+
 
             <Grid
               item

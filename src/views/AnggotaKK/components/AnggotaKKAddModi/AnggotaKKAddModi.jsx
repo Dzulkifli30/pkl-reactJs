@@ -41,14 +41,14 @@ const schema={
     // }
   },
   no_paspor: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
+    presence: { allowEmpty: true, message: 'Kosongkan Jika Tidak ada' },
     //email: true,
     // length: {
     //   maximum: 200
     // }
   },
   no_katas: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
+    presence: { allowEmpty: true, message: 'Kosongkan Jika Tidak ada' },
     //email: true,
     // length: {
     //   maximum: 200
@@ -62,6 +62,13 @@ const schema={
     // }
   },
   nama_ibu: {
+    presence: { allowEmpty: false, message: 'harus diisi' },
+    //email: true,
+    // length: {
+    //   maximum: 200
+    // }
+  },
+  nama_anggota: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     // length: {
@@ -218,10 +225,10 @@ const AnggotaKKAddModi=props => {
     rowSelect.periode_sensus = periode_sensus
     // rowSelect.KK_id = getKKID
     let varJson = {
-      "KK_id": rowSelect.KK_id,
       // "anggota_kk_id": rowSelect.anggota_kk_id,
       "periode_sensus": rowSelect.periode_sensus,
       "NIK":rowSelect.NIK,
+      "nama_anggota":rowSelect.nama_anggota,
       "jenis_kelamin":rowSelect.jenis_kelamin,
       "tempat_lahir":rowSelect.tempat_lahir,
       "tanggal_lahir": rowSelect.tanggal_lahir,
@@ -335,6 +342,28 @@ const AnggotaKKAddModi=props => {
             >
               <TextField
                 fullWidth
+                label="Nama"
+                margin="dense"
+                name="nama_anggota"
+                onChange={handleChange}
+                helperText={
+                  hasError('nama_anggota')? formState.errors.nama_anggota[0]:null
+                }
+                error={hasError('nama_anggota')}
+                defaultValue={rowSelect&&rowSelect.nama_anggota? rowSelect.nama_anggota:''}
+                variant="outlined"
+              />
+            </Grid>
+
+
+
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
                 label="NIK"
                 margin="dense"
                 name="NIK"
@@ -346,32 +375,6 @@ const AnggotaKKAddModi=props => {
                 defaultValue={rowSelect&&rowSelect.NIK? rowSelect.NIK:''}
                 variant="outlined"
               />
-            </Grid>
-            
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="KK_id"
-                margin="dense"
-                name="KK_id"
-                onChange={handleChange}
-                variant="outlined"
-                value={rowSelect.KK_id}
-                select
-              >
-                {KK.map(option => (
-                  <option
-                   value={option.KK_id}
-                    key={option.KK_id}
-                  >
-                    {option.KK_id}
-                  </option>
-                ))}
-              </TextField>
             </Grid>
             <Grid
               item

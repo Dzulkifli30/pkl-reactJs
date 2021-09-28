@@ -68,13 +68,18 @@ const FormSurvey = () => {
       }
 
       async function kirimData  () {
+        rowKK.kb = kb
+        // rowKK.KK = KK
+        console.log("young lex = ",KK)
+
         KK.push(rowKK)
+
         const requestOptions={
           method: 'POST',
           //mode: "cors",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            "dataKK": KK,
+            "KK": rowKK,
           })
         };
     
@@ -88,13 +93,13 @@ const FormSurvey = () => {
       .then(resJson => {
         const data=resJson;
         alert("data disimpan")
-        setRowKK(data.data);
-        //return false;
+        // setRowKK(data.data);
       })
       .catch(e => {
         //console.log(e);
         alert("data gagal")
-        setRowKK([]);
+        return false;
+        // setRowKK([]);
         //this.setState({ ...this.state, isFetching: false });
       });
       }
