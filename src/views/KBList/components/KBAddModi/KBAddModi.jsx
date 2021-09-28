@@ -184,7 +184,7 @@ const KBAddModi=props => {
     // rowSelect.update_by= userName
     let varJson = {
       "KK_id": rowSelect.KK_id,
-      "data_kb_id": rowSelect.data_kb_id,
+      // "data_kb_id": rowSelect.data_kb_id,
       "NIK": rowSelect.NIK,
       "tahun_pemakaian": rowSelect.tahun_pemakaian,
       "alat_kontrasepsi": rowSelect.alatKB,

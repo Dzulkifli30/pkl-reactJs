@@ -94,7 +94,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const AnggotaKKAddModi=props => {
-  const { className, setData,datas, getDataBackend,getMockData, setRowSelect,rowSelect,handleOpenViewMap, title,handleClose, ...rest }=props;
+  const { className, getKKID,setData,datas, getDataBackend,getMockData, setRowSelect,rowSelect,handleOpenViewMap, title,handleClose,KK2,rowKK, ...rest }=props;
   const classes=useStyles();
 
   const agama = JSON.parse(localStorage.getItem("agama"));
@@ -156,11 +156,13 @@ const AnggotaKKAddModi=props => {
         //this.setState({ ...this.state, isFetching: false });
       });
   }
+
   
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    getKK();
+    console.log('wowowowooww',rowKK)
+    getKK()
     // showAnggotaKK(rowSelect.KK_id)
     // showKab(rowSelect.id_provinsi);
     // showKecamatan(rowSelect.id_kabupaten);
@@ -211,10 +213,13 @@ const AnggotaKKAddModi=props => {
 
   const handleSave=(event) => {
     const userName=localStorage.getItem('username');
+    const periode_sensus=localStorage.getItem('Periode Sensus');
     let url=urlAddAnggotaKK;
+    rowSelect.periode_sensus = periode_sensus
+    // rowSelect.KK_id = getKKID
     let varJson = {
       "KK_id": rowSelect.KK_id,
-      "anggota_kk_id": rowSelect.anggota_kk_id,
+      // "anggota_kk_id": rowSelect.anggota_kk_id,
       "periode_sensus": rowSelect.periode_sensus,
       "NIK":rowSelect.NIK,
       "jenis_kelamin":rowSelect.jenis_kelamin,
@@ -295,22 +300,6 @@ const AnggotaKKAddModi=props => {
       });
 
   }
-  const handling =()=>{
-    {
-      var tmp = [];
-      // alert(tmp) 
-      // alert( localStorage.getItem("Periode Sensus") - 5 )
-      var periode_sensus = parseInt(localStorage.getItem("Periode Sensus"));
-      for (var option = periode_sensus; option <= periode_sensus + 0; option++)
-       {tmp.push({"option" : option});}
-      console.log('temp =',tmp)
-      return tmp.map(option => (
-          <option value={option.option}>
-            {option.option}
-          </option>
-                   
-           ))}
-  }
 
   //  const position=[currentLocation.lat, currentLocation.lng]
   const hasError=field => {
@@ -339,25 +328,6 @@ const AnggotaKKAddModi=props => {
             container
             spacing={3}
           >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Periode Sensus"
-                margin="dense"
-                name="periode_sensus"
-                onChange={handleChange}
-                select
-                variant="outlined"
-                value={rowSelect.periode_sensus}
-              >
-                {handling()}
-              </TextField>
-            </Grid>
-
             <Grid
               item
               md={6}
