@@ -3,7 +3,9 @@ import AnggotaKKList from '../AnggotaKK'
 import AnggotaKKAddModi from '../AnggotaKK/components/AnggotaKKAddModi'
 
 const FormAnggota = (props) => {
-    const { gotoNext,goPrev,rowKK,setRowKK,KK,setKK,setAnggotaKK,AnggotaKK,...rest } = props;
+    const { gotoNext,goPrev,rowKK,setRowKK,KK
+        ,setKK,setAnggotaKK,AnggotaKK,getKKID,
+        ...rest } = props;
     return(
         <div className="p-4">
             <h1>Form Anggota Keluarga</h1>
@@ -23,6 +25,7 @@ const FormAnggota = (props) => {
                 KK={KK}
                 setKK={setKK}
                 rowKK={rowKK}
+                getKKID={getKKID}
                 setAnggotaKK = {setAnggotaKK}
                 AnggotaKK = {AnggotaKK}
                 setRowKK={setRowKK}

@@ -62,6 +62,11 @@ const FormSurvey = () => {
 
         sliderRef.current.slickNext();
       }
+
+      const getKKID = () => {
+        KK.push(rowKK)
+      }
+
       async function kirimData  () {
         rowKK.kb = kb
         KK.push(rowKK)
@@ -123,6 +128,7 @@ const FormSurvey = () => {
               rowKK={rowKK}
               setRowKK={setRowKK}
               KK={KK}
+              getKKID={getKKID}
               setKK={setKK}
               AnggotaKK={AnggotaKK}
               setAnggotaKK={setAnggotaKK}

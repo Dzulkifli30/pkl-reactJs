@@ -47,7 +47,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const AnggotaKKList=props => {
-  const { rowKK,setRowKK,KK,setKK,AnggotaKK,setAnggotaKK,...rest } = props;
+  const { rowKK,setRowKK,KK,setKK,AnggotaKK,setAnggotaKK, getKKID,...rest } = props;
   //  componentWillMount() {
   //    alert("fdfdf")
   //  }
@@ -268,8 +268,14 @@ const AnggotaKKList=props => {
 
   const [compPopup, setCompPopup]=useState(null);
 
+  // const kkidbwang = () => {
+  //   KK.push(rowKK)
+  //   console.log('wwwwwwwwwwwwwwwww',KK)
+  // }
+
   useEffect(() => {
    console.log(anggotaKK_params);
+  //  kkidbwang()
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -353,6 +359,8 @@ const AnggotaKKList=props => {
       <ModalComponent getDataBackend={getAnggotaKK}
         handleChange={handleChange} setData={setData}
         handleOpenViewMap={handleOpenViewMap}
+        rowKK={rowKK} KK2={KK}
+        getKKID={getKKID}
         open={open} setRowSelect={setRowAnggotaKK} rowSelect={rowAnggotaKK}
         title={title} datas={filteredItems} handleClose={handleClose} 
         ComponenAddModi={componenPopup}>
