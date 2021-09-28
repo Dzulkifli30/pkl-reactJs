@@ -528,57 +528,6 @@ const KKAddModi=props => {
 
 
 
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        varJson
-      )
-    };
-
-    let urlGetData=urlAddFormKK
-    const response=fetch(url, requestOptions)
-      .then(tester => {
-        if (tester.status === 200) {  
-       handleClose();
-          return tester.json();
-        }
-       
-      })/**/
-
-      .then(tester => {
-        console.log(tester)
-        // alert(tester)
-      getDataBackend();
-      if (url == urlAddFormKK) {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Menambah Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }if(url == urlEditFormKK){
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Memperbarui Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }
-
-        // alert("Sukses")
-        const data=tester;
-      })
-      .catch((e) => {
-        alert(e)
-        // swal("Gagal Login!", "Gagal Login", "error",  )
-        return false;
-
-
-      });
 
 
   }

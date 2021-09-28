@@ -9,7 +9,7 @@ import "./slick/slick.css";
 import "./slick/slick-theme.css";
 import {Animated} from "react-animated-css";
 import { useHistory } from "react-router-dom";
-import { urlAddFormKK, urlGetFormKK } from 'kumpulanUrl'
+import { urlAccKK, urlAddFormKK, urlGetFormKK } from 'kumpulanUrl'
 
 const FormSurvey = () => {
   const [KK,setKK]=useState([])
@@ -59,6 +59,7 @@ const FormSurvey = () => {
       const gotoNext = () => {
         rowKK.AnggotaKK = AnggotaKK
         console.log(rowKK)
+        console.log(AnggotaKK)
 
         sliderRef.current.slickNext();
       }
@@ -70,18 +71,18 @@ const FormSurvey = () => {
       async function kirimData  () {
         rowKK.kb = kb
         KK.push(rowKK)
-        console.log(KK)
+        console.log("KK kirimdata ",KK)
 
         const requestOptions={
           method: 'POST',
           //mode: "cors",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            "dataKK": KK,
+            "KK": KK,
           })
         };
     
-        let urlAdd=urlAddFormKK
+        let urlAdd=urlAccKK
     // eslint-disable-next-line no-useless-concat
     const response=await fetch(urlAdd, requestOptions)
       .then(res => {
@@ -91,13 +92,13 @@ const FormSurvey = () => {
       .then(resJson => {
         const data=resJson;
         alert("data disimpan")
-        setRowKK(data.data);
+        // setRowKK(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
         alert("data gagal")
-        setRowKK([]);
+        // setRowKK([]);
         //this.setState({ ...this.state, isFetching: false });
       });
       }
@@ -139,9 +140,11 @@ const FormSurvey = () => {
               <FormKB
               kirimData={kirimData}
               gotoNext={gotoNext}
-              KK={KK}
+              AnggotaKK={AnggotaKK}
+              rowKK={rowKK}
               refreshPage={refreshPage}
-              setKK={setKK}
+              setAnggotaKK={setAnggotaKK}
+              setRowKK={setRowKK}
               kb={kb}
               setKB={setKB}
               />

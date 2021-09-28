@@ -109,6 +109,7 @@ export const urlAddFormKK = urlport + '/form-kk/storeFormKK'
 export const urlEditFormKK = urlport + '/form-kk/updateFormKK'
 export const urlDeleteFormKK = urlport + '/form-kk/deleteFormKK'
 export const urlGetIdKK = urlport + '/form-kk/getIdKK'
+export const urlAccKK = urlport + '/form-kk/acceptFormKK'
 
 
 //Anggota KK

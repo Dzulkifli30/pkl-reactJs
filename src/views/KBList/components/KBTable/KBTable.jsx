@@ -216,11 +216,6 @@ const KBTable=props => {
 
   const columns=[
     {
-      name: 'ID KK',
-      selector: 'KK_id',
-      sortable: true,
-    },
-    {
       name: 'NIK',
       selector: 'NIK',
       sortable: true,

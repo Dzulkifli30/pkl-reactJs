@@ -2,7 +2,7 @@ import React from 'react'
 import KBList from '../KBList'
 
 const FormKB = (props) => {
-    const { kirimData, refreshPage, gotoNext, kb, setKB, ...rest } = props;
+    const { kirimData, refreshPage, gotoNext, kb, setKB,AnggotaKK,setAnggotaKK, ...rest } = props;
 
     return (
         <div>
@@ -22,6 +22,8 @@ const FormKB = (props) => {
             <KBList
             kb={kb}
             setKB={setKB}
+            AnggotaKK={AnggotaKK}
+            setAnggotaKK={setAnggotaKK}
             />
         </div>
     )

@@ -20,9 +20,6 @@ import { urlAddKB, urlEditKB, urlGetIdKK, urlGetNIKAnggota } from '../../../../k
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 const schema={  
-  KK_id: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-  },
   NIK: {
     presence: { allowEmpty: false, message: 'harus diisi' },
   },
@@ -60,7 +57,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const KBAddModi=props => {
-  const { className, setData, datas, handleClose, getDataBackend, setRowSelect,handleOpen ,handleOpenViewMap , rowSelect, title, ...rest }=props;
+  const { className, setData, datas, handleClose, getDataBackend, setRowSelect,handleOpen ,handleOpenViewMap , rowSelect, title,setAnggotaKK,AnggotaKK, ...rest }=props;
 
   const classes=useStyles();
 
@@ -68,7 +65,7 @@ const KBAddModi=props => {
   const [getStatus, setStatus]=useState([]);
   const [getKeyId, setKeyId]=useState([]);
   const [KK, setKK] = useState([])
-  const [AnggotaKK, setAnggotaKK] = useState([])
+  // const [AnggotaKK, setAnggotaKK] = useState([])
   const alatKB = JSON.parse(localStorage.getItem("Alat Kontrasepsi"));
 
   const [formState, setFormState]=useState({
@@ -78,64 +75,42 @@ const KBAddModi=props => {
     errors: {}
   });
 
-  async function getKK() {
-    /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
+  // async function getKK() {
+  //   /* */
+  //   const requestOptions={
+  //     method: 'get',
+  //     //mode: "cors",
+  //     headers: { 'Content-Type': 'application/json' },
+  //   };
 
-    let url=urlGetIdKK
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
+  //   let url=urlGetIdKK
+  //   // eslint-disable-next-line no-useless-concat
+  //   const response=await fetch(url, requestOptions)
+  //     .then(res => {
+  //       return res.json();
+  //     })
 
-      .then(resJson => {
-        const data=resJson;
-        setKK(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        setKK([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
+  //     .then(resJson => {
+  //       const data=resJson;
+  //       setKK(data.data);
+  //       //return false;
+  //     })
+  //     .catch(e => {
+  //       //console.log(e);
+  //       setKK([]);
+  //       //this.setState({ ...this.state, isFetching: false });
+  //     });
+  // }
 
   async function getNIKanggota() {
     /* */
-    const requestOptions={
-      method: 'get',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    let url=urlGetNIKAnggota
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        setAnggotaKK(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        setAnggotaKK([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
+    console.log("anggota KK ",AnggotaKK)
   }
 
 
   useEffect(() => {
-    getKK()
-    getNIKanggota()
+    // getKK()
+    // getNIKanggota()
 
     const errors=validate(rowSelect, schema);
 
@@ -183,7 +158,7 @@ const KBAddModi=props => {
     // rowSelect.create_by= userName
     // rowSelect.update_by= userName
     let varJson = {
-      "KK_id": rowSelect.KK_id,
+      // "KK_id": rowSelect.KK_id,
       // "data_kb_id": rowSelect.data_kb_id,
       "NIK": rowSelect.NIK,
       "tahun_pemakaian": rowSelect.tahun_pemakaian,
@@ -191,66 +166,66 @@ const KBAddModi=props => {
       "alasan": rowSelect.alasan,
     }
     if (rowSelect.data_kb_id===undefined) {
-      url=urlAddKB;
+      // url=urlAddKB;
       varJson.CreatedBy = userName
       varJson.LastModifiedBy = userName
     } else {
-      url=urlEditKB;
+      // url=urlEditKB;
       // console.log("ide =",rowSelect.id_rt)
       varJson.LastModifiedBy = userName
     }
     getDataBackend(varJson)
     console.log("var json KB =",varJson);
 
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        varJson
-      )
-    };
-    const response=fetch(url, requestOptions)
-      .then(tester => {
-        if (tester.status === 200) {  
-       handleClose();
-          return tester.json();
-        }
+    // const requestOptions={
+    //   method: 'POST',
+    //   mode: "cors",
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(
+    //     varJson
+    //   )
+    // };
+    // const response=fetch(url, requestOptions)
+    //   .then(tester => {
+    //     if (tester.status === 200) {  
+    //    handleClose();
+    //       return tester.json();
+    //     }
        
-      })/**/
+    //   })/**/
 
-      .then(tester => {
-        console.log(tester)
-        // alert(tester)
-      getDataBackend();
-      if (url == urlAddKB) {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Menambah Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }if(url == urlEditKB){
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Memperbarui Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }
+    //   .then(tester => {
+    //     console.log(tester)
+    //     // alert(tester)
+    //   getDataBackend();
+    //   if (url == urlAddKB) {
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: 'Sukses Menambah Data',
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     })
+    //   }if(url == urlEditKB){
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: 'Sukses Memperbarui Data',
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     })
+    //   }
 
-        // alert("Sukses")
-        const data=tester;
-      })
-      .catch((e) => {
-        alert(e)
-        // swal("Gagal Login!", "Gagal Login", "error",  )
-        return false;
+    //     // alert("Sukses")
+    //     const data=tester;
+    //   })
+    //   .catch((e) => {
+    //     alert(e)
+    //     // swal("Gagal Login!", "Gagal Login", "error",  )
+    //     return false;
 
 
-      });
+    //   });
 
     }
 
@@ -279,31 +254,6 @@ const KBAddModi=props => {
             container
             spacing={3}
           >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="KK_id"
-                margin="dense"
-                name="KK_id"
-                onChange={handleChange}
-                variant="outlined"
-                value={rowSelect.KK_id}
-                select
-              >
-                {KK.map(option => (
-                  <option
-                   value={option.KK_id}
-                    key={option.KK_id}
-                  >
-                    {option.KK_id}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
 
             <Grid
               item
@@ -312,7 +262,7 @@ const KBAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="NIK"
+                label="Nama anggota"
                 margin="dense"
                 name="NIK"
                 onChange={handleChange}
@@ -325,7 +275,7 @@ const KBAddModi=props => {
                    value={option.NIK}
                     key={option.NIK}
                   >
-                    {option.NIK}
+                    {option.nama_anggota}
                   </option>
                 ))}
               </TextField>
