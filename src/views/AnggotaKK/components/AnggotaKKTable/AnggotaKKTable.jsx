@@ -206,11 +206,6 @@ const AnggotaKKTable=props => {
       sortable: true,
     },
     {
-      name: 'Nama ',
-      selector: 'nama_anggota',
-      sortable: true,
-    },
-    {
       name: 'NIK ',
       selector: 'NIK',
       sortable: true,

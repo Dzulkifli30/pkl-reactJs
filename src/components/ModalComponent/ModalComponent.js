@@ -31,7 +31,7 @@ const ModalComponent=props => {
   const { datas,
     handleChange, getProv, getDataBackend, setData2, setData,
     setRowSelect, users, groups, roles, className, style, open, setOpen, title, rowSelect,
-    ComponenAddModi, ViewMap, handleClose,
+    ComponenAddModi, ViewMap, handleClose, AnggotaKK, setAnggotaKK,
     auditTrailsfind, ...rest }=props;
   const classes=useStyles();
   //alert("open="+open);
@@ -56,7 +56,8 @@ const ModalComponent=props => {
           <ComponenAddModi getProv={getProv} getDataBackend={getDataBackend}
             setData2={setData2}
             handleChange={handleChange} setData={setData}
-            setOpen={setOpen}
+            setOpen={setOpen} setAnggotaKK={setAnggotaKK} 
+            AnggotaKK={AnggotaKK}
             setRowSelect={setRowSelect} datas={datas} users={users} groups={groups}
             roles={roles} rowSelect={rowSelect} title={title} handleClose={handleClose}
             auditTrailsfind={auditTrailsfind}

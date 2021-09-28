@@ -104,6 +104,7 @@ export const urlEditFormKK = urlport + '/form-kk/updateFormKK'
 export const urlDeleteFormKK = urlport + '/form-kk/deleteFormKK'
 export const urlAccForm = urlport +'/form-kk/acceptFormKK'
 export const urlGetIdKK = urlport + '/form-kk/getIdKK'
+export const urlAccKK = urlport + '/form-kk/acceptFormKK'
 
 //Anggota KK
 export const urlGetAnggotaKK = urlport + '/anggota-kk/getAnggotaKK'

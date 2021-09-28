@@ -33,6 +33,13 @@ const schema={
     //   maximum: 200
     // }
   },
+  nama_anggota: {
+    presence: { allowEmpty: false, message: 'harus diisi' },
+    //email: true,
+    // length: {
+    //   maximum: 200
+    // }
+  },
   tempat_lahir: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
@@ -225,6 +232,7 @@ const AnggotaKKAddModi=props => {
     rowSelect.periode_sensus = periode_sensus
     // rowSelect.KK_id = getKKID
     let varJson = {
+      // "KK_id": rowSelect.KK_id,
       // "anggota_kk_id": rowSelect.anggota_kk_id,
       "periode_sensus": rowSelect.periode_sensus,
       "NIK":rowSelect.NIK,
@@ -264,47 +272,6 @@ const AnggotaKKAddModi=props => {
         varJson
       )
     };
-    const response=fetch(url, requestOptions)
-      .then(tester => {
-        if (tester.status === 200) {  
-       handleClose();
-          return tester.json();
-        }
-       
-      })/**/
-
-      .then(tester => {
-        console.log(tester)
-        // alert(tester)
-      getDataBackend();
-      if (url == urlAddAnggotaKK) {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Menambah Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }if(url == urlEditAnggotaKK){
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Sukses Memperbarui Data',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }
-
-        // alert("Sukses")
-        const data=tester;
-      })
-      .catch((e) => {
-        alert(e)
-        // swal("Gagal Login!", "Gagal Login", "error",  )
-        return false;
-
-
-      });
 
   }
 
@@ -364,18 +331,19 @@ const AnggotaKKAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="NIK"
+                label="nama_anggota"
                 margin="dense"
-                name="NIK"
+                name="nama_anggota"
                 onChange={handleChange}
                 helperText={
-                  hasError('NIK')? formState.errors.NIK[0]:null
+                  hasError('nama_anggota')? formState.errors.nama_anggota[0]:null
                 }
-                error={hasError('NIK')}
-                defaultValue={rowSelect&&rowSelect.NIK? rowSelect.NIK:''}
+                error={hasError('nama_anggota')}
+                defaultValue={rowSelect&&rowSelect.nama_anggota? rowSelect.nama_anggota:''}
                 variant="outlined"
               />
             </Grid>
+            
             <Grid
               item
               md={6}

@@ -33,7 +33,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const KBList=props => {
-  const { kb,setKB,...rest } = props;
+  const { kb,setKB,AnggotaKK,setAnggotaKK,...rest } = props;
 
   if (!localStorage.getItem("NamaLengkap")) {
     history.push('/beranda');
@@ -266,6 +266,7 @@ const KBList=props => {
     setOpen(true);
     setTitle(MessageButton);
     setRowkbSelect(rowkb);
+    console.log("ANggota kk di formkb ",AnggotaKK)
     
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)
@@ -312,6 +313,8 @@ const KBList=props => {
           handleClose={handleClose}
           datas={filteredItems} 
           handleOpen={handleOpen}
+          AnggotaKK={AnggotaKK}
+          setAnggotaKK={setAnggotaKK}
        ComponenAddModi={componenPopup}>
       </ModalComponent>
 
