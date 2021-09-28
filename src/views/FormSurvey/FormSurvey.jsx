@@ -9,7 +9,7 @@ import "./slick/slick.css";
 import "./slick/slick-theme.css";
 import {Animated} from "react-animated-css";
 import { useHistory } from "react-router-dom";
-import { urlAddFormKK, urlGetFormKK } from 'kumpulanUrl'
+import { urlAddFormKK, urlGetFormKK,urlAccForm } from 'kumpulanUrl'
 
 const FormSurvey = () => {
   const [KK,setKK]=useState([])
@@ -68,10 +68,7 @@ const FormSurvey = () => {
       }
 
       async function kirimData  () {
-        rowKK.kb = kb
         KK.push(rowKK)
-        console.log(KK)
-
         const requestOptions={
           method: 'POST',
           //mode: "cors",
@@ -81,7 +78,7 @@ const FormSurvey = () => {
           })
         };
     
-        let urlAdd=urlAddFormKK
+        let urlAdd=urlAccForm
     // eslint-disable-next-line no-useless-concat
     const response=await fetch(urlAdd, requestOptions)
       .then(res => {
