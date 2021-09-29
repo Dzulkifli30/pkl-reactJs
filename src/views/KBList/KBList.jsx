@@ -426,6 +426,8 @@ const KBList = props => {
           handleClose={handleClose}
           downloadCSV={downloadCSV}
           getServer={getServer}
+          AnggotaKK={AnggotaKK}
+          setAnggotaKK={setAnggotaKK}
         />
 
 
