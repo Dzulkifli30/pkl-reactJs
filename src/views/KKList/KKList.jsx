@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { ModalComponent } from 'components';
-import { KKTable, KKaddModi } from "./components";
+import { KKTable, KKaddModi} from "./components";
 import {
     Card,
     CardHeader,
@@ -29,6 +29,8 @@ const KKList = (props) => {
       // KK.push(rowKK)
       console.log(rowKK)
     }
+
+
     function saveRowKK() {
       // alert("Get Form KK")
       const userId=localStorage.getItem('user_id');
@@ -181,6 +183,7 @@ const KKList = (props) => {
         getFormKK();
         setOpen(true);
     };
+
     const handleClose=(e) => {
         setOpen(false);
     };
@@ -193,7 +196,7 @@ const KKList = (props) => {
         showConfirmButton: false,
         timer: 1000
       }))
-      getFormKK();
+      // getFormKK();
     };
 
     function popupComponen(componenPopup) {
@@ -218,6 +221,7 @@ const KKList = (props) => {
         />
           {popupComponen(KKTable)}
         </div>
+        
         
     )
 }

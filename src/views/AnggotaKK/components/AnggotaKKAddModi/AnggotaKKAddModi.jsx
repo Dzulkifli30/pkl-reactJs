@@ -48,14 +48,14 @@ const schema={
     // }
   },
   no_paspor: {
-    presence: { allowEmpty: true, message: 'Kosongkan Jika Tidak ada' },
+    presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     // length: {
     //   maximum: 200
     // }
   },
   no_katas: {
-    presence: { allowEmpty: true, message: 'Kosongkan Jika Tidak ada' },
+    presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     // length: {
     //   maximum: 200
@@ -69,13 +69,6 @@ const schema={
     // }
   },
   nama_ibu: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    // length: {
-    //   maximum: 200
-    // }
-  },
-  nama_anggota: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
     // length: {
@@ -309,21 +302,19 @@ const AnggotaKKAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="Nama"
+                label="NIK"
                 margin="dense"
-                name="nama_anggota"
+                name="NIK"
                 onChange={handleChange}
                 helperText={
-                  hasError('nama_anggota')? formState.errors.nama_anggota[0]:null
+                  hasError('NIK')? formState.errors.NIK[0]:null
                 }
-                error={hasError('nama_anggota')}
-                defaultValue={rowSelect&&rowSelect.nama_anggota? rowSelect.nama_anggota:''}
+                error={hasError('NIK')}
+                defaultValue={rowSelect&&rowSelect.NIK? rowSelect.NIK:''}
                 variant="outlined"
               />
             </Grid>
-
-
-
+            
             <Grid
               item
               md={6}

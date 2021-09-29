@@ -15,7 +15,7 @@ import {
 import L from 'leaflet';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { urlAddKB, urlEditKB, urlGetIdKK, urlGetNIKAnggota, urlShowNama } from '../../../../kumpulanUrl';
+import { urlAddKB, urlEditKB, urlGetIdKK, urlGetNIKAnggota } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
@@ -146,40 +146,6 @@ const KBAddModi=props => {
   // const handleClose=() => {
   //   getDataBackend();
   // }
-  const handleChangeNama=event=> {
-    handleChange(event)
-    showNama(event.target.value)
-  }
-  async function showNama(anggota_kk_id) {
-    /* */
-    const requestOptions={
-      method: 'POST',
-      //mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "anggota_kk_id": anggota_kk_id,
-      })
-    };
-
-    let urlShow=urlShowNama
-    // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlShow, requestOptions)
-      .then(res => {
-        return res.json();
-      })
-
-      .then(resJson => {
-        const data=resJson;
-        // console.log('kabupaten =',data.data)
-        setNama(data.data);
-        //return false;
-      })
-      .catch(e => {
-        //console.log(e);
-        setNama([]);
-        //this.setState({ ...this.state, isFetching: false });
-      });
-  }
 
   const handleSave=() => {
     const userName=localStorage.getItem('username');
@@ -195,7 +161,6 @@ const KBAddModi=props => {
       // "KK_id": rowSelect.KK_id,
       // "data_kb_id": rowSelect.data_kb_id,
       "NIK": rowSelect.NIK,
-      "nama_anggota": rowSelect.nama_anggota,
       "tahun_pemakaian": rowSelect.tahun_pemakaian,
       "alat_kontrasepsi": rowSelect.alatKB,
       "alasan": rowSelect.alasan,
@@ -289,7 +254,6 @@ const KBAddModi=props => {
             container
             spacing={3}
           >
-
 
             <Grid
               item

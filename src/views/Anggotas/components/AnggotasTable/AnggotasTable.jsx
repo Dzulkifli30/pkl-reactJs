@@ -18,13 +18,11 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   Avatar,
   Checkbox,
   Table,
   TableBody,
   TableCell,
-  Divider,
   TableHead,
   TableRow,
   Typography,
@@ -56,39 +54,18 @@ const useStyles=makeStyles(theme => ({
   }, importButton: {
     marginRight: theme.spacing(1)
   },
-  buttonSuccess: {
-    color: theme.palette.white,
-    backgroundColor: theme.palette.green,
-    '&:hover': {
-      backgroundColor: '#4caf50',
-      borderColor: '#66bb6a',
-      boxShadow: 'none',
-    },
-  },
-  buttonCancel: {
-    color: theme.palette.white,
-    backgroundColor: theme.palette.red,
-    '&:hover': {
-      backgroundColor: '#f44336',
-      borderColor: '#ef5350',
-      boxShadow: 'none',
-    },
-  },
 }));
-const KBTable=props => {
+const AnggotasTable=props => {
   const {
-    handleOpenViewMap,KB_params,
+    handleOpenViewMap,
     className,handleDelete,
-    textfind,kbfind,kb,
+    textfind,kabupatenfind,
     order, orderBy,
-    datas,
-    getDataBackend,
-    provinsisExport, filteredItems, handleOpen, selectedkb,
-    setselectedkb,
+    provinsisExport, filteredItems, handleOpen, selectedkabupaten,
+    setselectedkabupaten,
     Export,
     convertArrayOfObjectsToCSV,
-    downloadCSV,
-    handleView
+    downloadCSV
 
     , ...rest }=props;
 
@@ -99,9 +76,8 @@ const KBTable=props => {
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
 
-  const handleClose=() => {
-    getDataBackend();
-  }
+
+
 
   const customStyles={
     header: {
@@ -216,29 +192,87 @@ const KBTable=props => {
 
 
   const columns=[
+
     {
-      name: 'NIK',
+      name: 'Periode Sensus',
+      selector: 'periode_sensus',
+      sortable: true,
+    },
+    {
+      name: 'NIK ',
       selector: 'NIK',
       sortable: true,
     },
     {
-      name: 'Alat Kontrasepsi',
-      selector: 'alat_kontrasepsi',
+      name: 'Jenis Kelamin',
+      selector: 'jenis_kelamin',
       sortable: true,
     },
     {
-      name: 'Tahun Pemakaian',
-      selector: 'tahun_pemakaian',
+      name: 'Tempat Lahir',
+      selector: 'tempat_lahir',
       sortable: true,
     },
     {
-      name: 'Alasan',
-      selector: 'alasan',
+      name: 'Tanggal Lahir',
+      selector: 'tanggal_lahir',
       sortable: true,
     },
+    {
+      name: 'Agama',
+      selector: 'agama',
+      sortable: true,
+    },
+    {
+      name: 'Pendidikan',
+      selector: 'pendidikan',
+      sortable: true,
+    },    {
+      name: 'Jenis Pekerjaan',
+      selector: 'jenis_pekerjaan',
+      sortable: true,
+    },
+    {
+      name: 'Status Nikah',
+      selector: 'status_nikah',
+      sortable: true,
+    },
+    {
+      name: 'Tanggal Pernikahan',
+      selector: 'tanggal_pernikahan',
+      sortable: true,
+    },
+    {
+      name: 'Status Dalam Keluarga',
+      selector: 'status_dalam_keluarga',
+      sortable: true,
+    },
+    {
+      name: 'Kewarganegaraan',
+      selector: 'kewarganegaraan',
+      sortable: true,
+    },
+    {
+      name: 'Nomor Paspor',
+      selector: 'no_paspor',
+      sortable: true,
+    },    {
+      name: 'Nomor Katas',
+      selector: 'no_katas',
+      sortable: true,
+    },    {
+      name: 'Nama Ayah',
+      selector: 'nama_ayah',
+      sortable: true,
+    },    {
+      name: 'Nama Ibu',
+      selector: 'nama_ibu',
+      sortable: true,
+    },
+
     {
       name: 'CreatedBy',
-      selector: 'CreatedBy',
+      selector: 'create_by',
       sortable: true,
     },
   ];
@@ -255,20 +289,20 @@ const KBTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Kecamatan")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Kabupaten")}>
           <AddIcon/>
         </Button>
+
       </div>
 
       <div class="col-md-6">
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search KB"
+          placeholder="Search Kabupaten"
           textfind={textfind}
         />
       </div>
     </div>
-     
 
 
 
@@ -288,36 +322,36 @@ const KBTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedkb_var;
+    let selectedkabupaten_var;
 
     if (event.target.checked) {
-      selectedkb_var=provinsis.map(provinsi => provinsi.id);
+      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedkb_var=[];
+      selectedkabupaten_var=[];
     }
 
-    setselectedkb(selectedkb_var);
+    setselectedkabupaten(selectedkabupaten_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedkb.indexOf(id);
-    let newselectedkb=[];
+    const selectedIndex=selectedkabupaten.indexOf(id);
+    let newselectedkabupaten=[];
 
     if (selectedIndex===-1) {
-      newselectedkb=newselectedkb.concat(selectedkb, id);
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
     } else if (selectedIndex===0) {
-      newselectedkb=newselectedkb.concat(selectedkb.slice(1));
-    } else if (selectedIndex===selectedkb.length-1) {
-      newselectedkb=newselectedkb.concat(selectedkb.slice(0, -1));
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
+    } else if (selectedIndex===selectedkabupaten.length-1) {
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
     } else if (selectedIndex>0) {
-      newselectedkb=newselectedkb.concat(
-        selectedkb.slice(0, selectedIndex),
-        selectedkb.slice(selectedIndex+1)
+      newselectedkabupaten=newselectedkabupaten.concat(
+        selectedkabupaten.slice(0, selectedIndex),
+        selectedkabupaten.slice(selectedIndex+1)
       );
     }
 
-    setselectedkb(newselectedkb);
+    setselectedkabupaten(newselectedkabupaten);
     //console.log(selectedUsers);
   };
 
@@ -341,11 +375,11 @@ const KBTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="KB List"
+              title=""
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}
-              keyField=""
+              keyField="nama_kabupaten"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -360,17 +394,14 @@ const KBTable=props => {
 
 
         </PerfectScrollbar>
-
-        
       </CardContent>
-      
     </Card>
   );
 };
 
-KBTable.propTypes={
+AnggotasTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default KBTable;
+export default AnggotasTable;

@@ -59,11 +59,11 @@ const useStyles=makeStyles(theme => ({
 }));
 const KKTable=props => {
   const {
-    handleOpenViewMap,
     className,handleClose,
     title,KKfind,
     order, orderBy, SettingKK,
     KKExport, filteredItems, handleOpen, selectedKK,
+    handleView,
     setSelectedKK,datas,
     Export,setData,
     convertArrayOfObjectsToCSV,
@@ -258,19 +258,6 @@ const KKTable=props => {
       sortable: true,
     },
     {
-      name: 'LastModifiedBy',
-      selector: 'update_by',
-      sortable: true,
-    },
-    {
-      button: true,
-      cell: row =>
-        <Button color="primary"
-        disabled={row.Periode_Sensus <= localStorage.getItem('Periode Sensus')}//={row.Periode_Sensus <= localStorage.getItem('Periode Sensus') ? "true" : "false"}
-          onClick={(e) => handleOpen(e, row, "Ubah Form Kk ") }  > {row.Periode_Sensus < parseInt(localStorage.getItem('Periode Sensus'))}<EditIcon /></Button>
-      ,
-    },
-    {
       button: true,
       cell: row =>
         <Button color="primary"
@@ -387,7 +374,7 @@ const KKTable=props => {
               persistTableHead
               dense
             />
-            <button className="btn btn-md btn-warning mr-10 mt-2 justify-center"
+            <button className="btn btn-md btn-danger mr-10 mt-2 justify-center"
             onClick={handleClose}>
                 Tutup
             </button>

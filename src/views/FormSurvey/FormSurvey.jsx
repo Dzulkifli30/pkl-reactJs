@@ -70,9 +70,6 @@ const FormSurvey = () => {
 
       async function kirimData  () {
         rowKK.kb = kb
-        // rowKK.KK = KK
-        console.log("young lex = ",KK)
-
         KK.push(rowKK)
         console.log("KK kirimdata ",KK)
 
@@ -145,6 +142,10 @@ const FormSurvey = () => {
               gotoNext={gotoNext}
               AnggotaKK={AnggotaKK}
               rowKK={rowKK}
+              KK={KK}
+              rowKK={rowKK}
+              setRowKK={setRowKK}
+              setKK={setKK}
               refreshPage={refreshPage}
               setAnggotaKK={setAnggotaKK}
               setRowKK={setRowKK}

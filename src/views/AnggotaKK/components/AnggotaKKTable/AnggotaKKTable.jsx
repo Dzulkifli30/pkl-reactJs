@@ -282,37 +282,6 @@ const AnggotaKKTable=props => {
       selector: 'create_by',
       sortable: true,
     },
-    
-    {
-      name: 'Created',
-      selector: 'create_date',
-      sortable: true,
-    },
-    {
-      name: 'LastModified',
-      selector: 'update_date',
-      sortable: true,
-    },
-    {
-      name: 'LastModifiedBy',
-      selector: 'update_by',
-      sortable: true,
-    },
-    {
-      button: true,
-      cell: row =>
-        <Button color="primary"
-        disabled={row.Periode_Sensus <= localStorage.getItem('Periode Sensus')}//={row.Periode_Sensus <= localStorage.getItem('Periode Sensus') ? "true" : "false"}
-          onClick={(e) => handleOpen(e, row, "Ubah Target Kk ") }  > {row.Periode_Sensus < parseInt(localStorage.getItem('Periode Sensus'))}<EditIcon /></Button>
-      ,
-    },
-    {
-      button: true,
-      cell: row =>
-        <Button color="primary"
-          onClick={(e) => handleDelete(e,row)} ><DeleteIcon /></Button>
-      ,
-    },
   ];
   // const filteredItems=Vuser.filter(item => item.nama_Vuser&&item.nama_Vuser.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo=React.useMemo(() => {
