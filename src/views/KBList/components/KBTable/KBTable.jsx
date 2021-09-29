@@ -85,7 +85,7 @@ const KBTable=props => {
     getDataBackend,
     provinsisExport, filteredItems, handleOpen, selectedkb,
     setselectedkb,
-    Export,
+    Export,AnggotaKK,setAnggotaKK,
     convertArrayOfObjectsToCSV,
     downloadCSV
 
@@ -212,6 +212,17 @@ const KBTable=props => {
     },
   };
 
+  const carinama = (paramNIK) => {
+    let value = paramNIK
+    let result = [];
+    // alert(value)
+    result = AnggotaKK.filter((entry) => {
+      return entry&&entry.NIK &&(entry.NIK === value) 
+    });
+    // console.log("result =",result[0].nama_provinsi)
+    // alert("result = " + result[0].nama_provinsi)
+    return result[0].nama_anggota
+  }
 
 
   const columns=[
@@ -219,6 +230,12 @@ const KBTable=props => {
       name: 'NIK',
       selector: 'NIK',
       sortable: true,
+    },
+    {
+      name: 'Nama Anggota',
+      selector: 'NIK',
+      sortable: true,
+      cell: row => carinama(row.NIK)
     },
     {
       name: 'Alat Kontrasepsi',

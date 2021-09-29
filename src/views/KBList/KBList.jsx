@@ -362,6 +362,8 @@ const KBList=props => {
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           handleClose={handleClose} 
           downloadCSV={downloadCSV}
+          AnggotaKK={AnggotaKK}
+          setAnggotaKK={setAnggotaKK}
         />
 
 
