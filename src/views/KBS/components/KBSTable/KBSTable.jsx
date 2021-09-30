@@ -65,7 +65,9 @@ const KBSList=props => {
     setselectedkabupaten,
     Export,
     convertArrayOfObjectsToCSV,
-    downloadCSV
+    downloadCSV,
+    AnggotaKK,
+    setAnggotaKK
 
     , ...rest }=props;
 
@@ -189,10 +191,20 @@ const KBSList=props => {
     },
   };
 
-
+  const carinama = (paramNIK) => {
+    let value = paramNIK
+    let result = [];
+    // alert(value)
+    result = AnggotaKK.filter((entry) => {
+      return entry&&entry.NIK &&(entry.NIK === value) 
+    });
+    console.log("result Nya =",result)
+    // alert("result = " + result[0])
+    // return result[0].nama_anggota
+  }
+  const alatKB = JSON.parse(localStorage.getItem("Alat Kontrasepsi"));
 
   const columns=[
-
     {
       name: 'NIK',
       selector: 'NIK',
@@ -202,6 +214,9 @@ const KBSList=props => {
       name: 'Alat Kontrasepsi',
       selector: 'alat_kontrasepsi',
       sortable: true,
+      cell: row =>   {
+        return alatKB[row.alat_kontrasepsi].nama  
+      }
     },
     {
       name: 'Tahun Pemakaian',

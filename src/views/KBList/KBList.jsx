@@ -19,6 +19,7 @@ import { urlGetFormKK } from '../../kumpulanUrl';
 import FormKK from 'views/FormKK/FormKK';
 import KKSList from 'views/KKS'
 import AnggotasList from 'views/Anggotas'
+import AnggotaKKList from 'views/AnggotaKK'
 import KBSList from 'views/KBS'
 
 //import Modal from "@material-ui/core/Modal";
@@ -489,7 +490,11 @@ const KBList = props => {
          closeOnDocumentClick
 
           >
-            <KBSList/>
+            <KBSList
+            AnggotaKK={AnggotaKK}
+            setAnggotaKK={setAnggotaKK}
+            
+            />
 
           </Popup>
             </div>

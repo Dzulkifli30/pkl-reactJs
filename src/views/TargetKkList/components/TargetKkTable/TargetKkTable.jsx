@@ -199,31 +199,31 @@ const TargetKkTable=props => {
     },
     {
       name: 'Id Provinsi',
-      selector: 'id_provinsi',
+      selector: 'nama_provinsi',
       sortable: true,
     },
     {
       name: 'Id Kabupaten',
-      selector: 'id_kabupaten',
+      selector: 'nama_kabupaten',
       sortable: true,
     },
     {
       name: 'Id Kecamatan',
-      selector: 'id_kecamatan',
+      selector: 'nama_kecamatan',
       sortable: true,
     },    {
       name: 'Id Kelurahan',
-      selector: 'id_kelurahan',
+      selector: 'nama_kelurahan',
       sortable: true,
     },
     {
       name: 'Id Rw',
-      selector: 'id_rw',
+      selector: 'nama_rw',
       sortable: true,
     },
     {
       name: 'Id Rt',
-      selector: 'id_rt',
+      selector: 'nama_rt',
       sortable: true,
     },
     {

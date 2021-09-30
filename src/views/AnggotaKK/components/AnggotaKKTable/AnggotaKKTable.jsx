@@ -198,12 +198,21 @@ const AnggotaKKTable=props => {
     },
   };
 
+  const stats = JSON.parse(localStorage.getItem("status_dalam_keluarga"))
+  const religi = JSON.parse(localStorage.getItem("agama"))
+  const gawe = JSON.parse(localStorage.getItem("pekerjaan"))
+  const smart = JSON.parse(localStorage.getItem("pendidikan"))
   const columns=[
 
     {
       name: 'Periode Sensus',
       selector: 'periode_sensus',
       sortable: true,
+    },
+    {
+      name: 'Nama Anggota KK',
+      selector: 'nama_anggota',
+      sortable : true,
     },
     {
       name: 'NIK ',
@@ -214,6 +223,7 @@ const AnggotaKKTable=props => {
       name: 'Jenis Kelamin',
       selector: 'jenis_kelamin',
       sortable: true,
+      cell: row => row.jenis_kelamin== 0 ? "Perempuan":"Laki-laki"
     },
     {
       name: 'Tempat Lahir',
@@ -229,20 +239,30 @@ const AnggotaKKTable=props => {
       name: 'Agama',
       selector: 'agama',
       sortable: true,
+      cell: row => {
+        return  religi[row.agama].nama
+      }
     },
     {
       name: 'Pendidikan',
       selector: 'pendidikan',
       sortable: true,
+      cell: row => {
+        return  smart[row.pendidikan].nama
+      }
     },    {
       name: 'Jenis Pekerjaan',
       selector: 'jenis_pekerjaan',
       sortable: true,
+      cell: row => {
+        return  gawe[row.jenis_pekerjaan].nama
+      }
     },
     {
       name: 'Status Nikah',
       selector: 'status_nikah',
       sortable: true,
+      cell: row => row.status_nikah==1? "Menikah":"Belum Menikah"
     },
     {
       name: 'Tanggal Pernikahan',
@@ -251,13 +271,18 @@ const AnggotaKKTable=props => {
     },
     {
       name: 'Status Dalam Keluarga',
-      selector: 'status_dalam_keluarga',
+      selector: 'agama',
       sortable: true,
+      cell: row => {
+        return  stats[row.status_dalam_keluarga].nama
+      }
+      
     },
     {
       name: 'Kewarganegaraan',
       selector: 'kewarganegaraan',
       sortable: true,
+      cell: row => row.kewarganegaraan == 0 ? "WNA" : 'WNI'
     },
     {
       name: 'Nomor Paspor',

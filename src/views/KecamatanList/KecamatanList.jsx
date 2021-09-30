@@ -237,7 +237,7 @@ const KecamatanList=props => {
 
   useEffect(() => {
     getKec();
-    //   alert(setOpen)
+    //   alert(setOpen) 
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 

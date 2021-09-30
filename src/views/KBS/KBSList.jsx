@@ -33,7 +33,7 @@ const useStyles=makeStyles(theme => ({
 }));
 
 const KabupatenList=props => {
-
+  const {  AnggotaKK,setAnggotaKK, ...rest } = props;
   async function getKab() {
     const userId=localStorage.getItem('user_id');
     setFilteredItems(kabupaten);
@@ -356,6 +356,8 @@ const KabupatenList=props => {
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
+          AnggotaKK={AnggotaKK}
+          setAnggotaKK={setAnggotaKK}
 
         />
 
