@@ -229,7 +229,6 @@ const KBTable=props => {
   
 
 
-
   const alatKB = JSON.parse(localStorage.getItem("Alat Kontrasepsi"));
 
   const columns=[
@@ -237,6 +236,12 @@ const KBTable=props => {
       name: 'NIK',
       selector: 'NIK',
       sortable: true,
+    },
+    {
+      name: 'Nama Anggota',
+      selector: 'NIK',
+      sortable: true,
+      cell: row => carinama(row.NIK)
     },
     {
       name: 'Alat Kontrasepsi',
