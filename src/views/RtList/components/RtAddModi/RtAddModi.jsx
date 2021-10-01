@@ -18,6 +18,8 @@ import { urlAddRt, urlEditRt, urlRt, urlRw, urlKel, urlKec, urlKab, urlProv, url
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
+import Swal from 'sweetalert2'
+
 const schema={
   KodeRT: {
     presence: { allowEmpty: false, message: 'harus diisi' },
@@ -374,35 +376,38 @@ const RtAddModi=props => {
 
 
 
-    const requestOptions={
-      method: 'POST',
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        varJson
-      )
-    };
-
-
-    ///let urlGetData=urlPostLogin
-    // alert(url);
     const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
-      })/**/
+    .then(tester => {
+      return tester.json();
+    })/**/
 
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        // alert(res.message)
-
-        swal("Berhasil Tambah data", "berhasil", "success").then(
-          handleClose()
-          )
-        getDataBackend();
-        //alert("Sukses")
-        const data=res;
-      })
+    .then(tester => {
+      console.log(tester)
+      // alert(tester.message)
+      getDataBackend();
+      if (url == urlAddRt) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditRt){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+      then(
+        handleClose()
+        )
+      // alert("Sukses")
+      const data=tester;
+    })
       .catch((e) => {
 
         swal("Gagal Login!", "Gagal Login", "error", null, '200x200')

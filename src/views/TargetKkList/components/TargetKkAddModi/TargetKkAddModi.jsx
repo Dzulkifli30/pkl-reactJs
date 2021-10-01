@@ -485,7 +485,7 @@ const TargetKkAddModi=props => {
       "id_kelurahan": rowSelect.id_kelurahan,
       "id_rw": rowSelect.id_rw,
     }
-    let url=urlAddTargetKk;
+    let url 
     if (title=='Tambah Target Kk') {
       url=urlAddTargetKk;
       varJson.CreatedBy = userName
@@ -493,7 +493,6 @@ const TargetKkAddModi=props => {
     } else {
       url=urlEditTargetKk;
       // console.log("ide =",rowSelect.id_rt)
-
       varJson.LastModifiedBy = userName
     }
 
@@ -506,7 +505,7 @@ const TargetKkAddModi=props => {
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(
-        varJson
+        varJson,
       )
     };
 
@@ -527,7 +526,7 @@ const TargetKkAddModi=props => {
         console.log(tester)
         // alert(tester)
       getDataBackend();
-      if (url == urlAddKelompokData) {
+      if (url == urlAddTargetKk) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -535,7 +534,7 @@ const TargetKkAddModi=props => {
           showConfirmButton: false,
           timer: 1000
         })
-      }if(url == urlEditKelompokData){
+      }if(url == urlEditTargetKk){
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -549,7 +548,8 @@ const TargetKkAddModi=props => {
         const data=tester;
       })
       .catch((e) => {
-        alert(e)
+        // alert(e)
+        console.log(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
         return false;
 

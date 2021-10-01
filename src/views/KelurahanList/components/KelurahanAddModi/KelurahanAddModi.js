@@ -17,6 +17,7 @@ import axios from 'axios';
 import { urlAddKel, urlEditKel, urlKab, urlKec, urlProv, urlShowKab,urlShowKec } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate, { async } from 'validate.js';
+import Swal from 'sweetalert2'
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 const schema = {
   KodeDepdagri: {
@@ -348,28 +349,38 @@ async function showKab(id_provinsi) {
 
     ///let urlGetData=urlPostLogin
 
-    alert(url)
-    const response = fetch(url, requestOptions)
-      .then(res => {
-        if (res === 200) {
-          alert('bisa')
-          return res.json()
-        }
-        return res.json();
-      })/**/
+    const response=fetch(url, requestOptions)
+    .then(tester => {
+      return tester.json();
+    })/**/
 
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        // alert(res.message)
-
-        swal("Berhasil Tambah data", "berhasil", "success").then(
+    .then(tester => {
+      console.log(tester)
+      // alert(tester.message)
+      getDataBackend();
+      if (url == urlAddKel) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Menambah Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }if(url == urlEditKel){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Memperbarui Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+      then(
         handleClose()
         )
-        getDataBackend();
-        // alert("Sukses")
-        const data = res;
-      })
+      // alert("Sukses")
+      const data=tester;
+    })
       .catch((e) => {
           alert(e.message)
         return false;

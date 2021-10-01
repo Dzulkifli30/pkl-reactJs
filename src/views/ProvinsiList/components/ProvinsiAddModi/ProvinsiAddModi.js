@@ -143,7 +143,7 @@ const ProvinsiAddModi=props => {
     getDataBackend();
   }
 
-  const handleSave=(event) => {
+  const handleSave=() => {
     const userName=localStorage.getItem('username');
     let varJson = {
       "KodeDepdagri": rowSelect.KodeDepdagri,

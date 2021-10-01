@@ -16,6 +16,7 @@ import L from 'leaflet';
 import axios from 'axios';
 import { urlAddKab, urlEditKab, urlKab, urlProv } from '../../../../kumpulanUrl';
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
+import Swal from 'sweetalert2';
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 const schema={
@@ -174,7 +175,6 @@ const KabupatenAddModi=props => {
 
   const handleSave=() => {
     const userName=localStorage.getItem('username');
-    let url=urlAddKab;
     let varJson = {
       "KodeDepdagri": rowSelect.KodeDepdagri,
       "id_provinsi": rowSelect.id_provinsi,
@@ -182,6 +182,7 @@ const KabupatenAddModi=props => {
       "nama_kabupaten": rowSelect.nama_kabupaten,
       "IsActive": rowSelect.IsActive,
     }
+    let url=urlAddKab;
     if (rowSelect.id_kabupaten===undefined) {
       url=urlAddKab;
       varJson.CreatedBy = userName
@@ -198,28 +199,43 @@ const KabupatenAddModi=props => {
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(
-        varJson
+        varJson,
       )
     }
   
     ///let urlGetData=urlPostLogin
     // alert(url);
     const response=fetch(url, requestOptions)
-      .then(res => {
-        return res.json();
+      .then(tester => {
+        return tester.json();
       })/**/
 
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        // alert(res.message)
-
-        swal("Berhasil Tambah data", "berhasil", "success").then(
+      .then(tester => {
+        console.log(tester)
+        // alert(tester.message)
+        getDataBackend();
+        if (url == urlAddKab) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Menambah Data',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }if(url == urlEditKab){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Memperbarui Data',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }
+        then(
           handleClose()
           )
-        getDataBackend();
-        //alert("Sukses")
-        const data=res;
+        // alert("Sukses")
+        const data=tester;
       })
       .catch((e) => {
 

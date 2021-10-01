@@ -18,6 +18,7 @@ import { urlAddKec, urlEditKec, urlKab, urlProv, urlShowKab } from '../../../../
 //import { Map, TileLayer, Marker, Popup, Tooltip } from 'components/LeafletComponent'
 import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
+import Swal from 'sweetalert2'
 const schema={
   KodeDepdagri: {
     presence: { allowEmpty: false, message: 'harus diisi' },
@@ -269,26 +270,37 @@ const KecamatanAddModi=props => {
 
     ///let urlGetData=urlPostLogin
     // alert(url);
-    const response = fetch(url, requestOptions)
-      .then(res => {
-        if (res === 200) {
-          // alert('bisa')
-          return res.json()
-        }
-        return res.json();
+    const response=fetch(url, requestOptions)
+      .then(tester => {
+        return tester.json();
       })/**/
 
-      .then(res => {
-        //console.log(res)
-        //console.log(res.data)
-        // alert(res.message)
-
-        swal("Berhasil Tambah data", "berhasil", "success").then(
-        handleClose()
-        )
+      .then(tester => {
+        console.log(tester)
+        // alert(tester.message)
         getDataBackend();
+        if (url == urlAddKec) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Menambah Data',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }if(url == urlEditKec){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Memperbarui Data',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }
+        then(
+          handleClose()
+          )
         // alert("Sukses")
-        const data = res;
+        const data=tester;
       })
       .catch((e) => {
           // alert(e.message)

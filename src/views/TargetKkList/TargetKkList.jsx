@@ -369,7 +369,6 @@ const VuserList=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Vuser</h5>
       {/*}
       <VuserToolbar
         handleOpenViewMap={handleOpenViewMap}
