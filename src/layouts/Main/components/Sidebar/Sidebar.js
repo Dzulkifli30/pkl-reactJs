@@ -189,6 +189,14 @@ const Sidebar=props => {
           title:'Laporan Target dan Realisasi ID',
           href:'/target-realisasi-id'
         },
+        {
+          title:'Laporan Target dan Realisasi Perprov',
+          href:'/target-realisasi-perprov'
+        },
+        {
+          title:'Laporan Target dan Realisasi Perkab',
+          href:'/target-realisasi-perkab'
+        },
       ]
 
     },

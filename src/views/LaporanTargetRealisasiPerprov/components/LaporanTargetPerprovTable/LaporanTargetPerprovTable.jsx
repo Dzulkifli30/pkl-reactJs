@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 //import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-import axios from 'axios'
 
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
+import { urlProv,urlShowKab } from '../../../../kumpulanUrl';
 import DataTable from 'react-data-table-component';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
-import { urlDeleteProv } from '../../../../kumpulanUrl'
 
 import {
+  rowSelect,
   Card,
   CardActions,
   CardContent,
   Avatar,
+  TextField,
   Checkbox,
   Table,
   TableBody,
@@ -51,35 +52,41 @@ const useStyles=makeStyles(theme => ({
   avatar: {
     marginRight: theme.spacing(2)
   },
+  fontFamily:{
+    fontFamily: 'font-poppins'
+  },
   actions: {
     justifyContent: 'flex-end'
   }, importButton: {
     marginRight: theme.spacing(1)
   },
 }));
-const LaporanTargetTable=props => {
+const LaporanTargetPerProvTable=props => {
   const {
-    handleOpenViewMap,
+    sensus,
     className,handleDelete,
-    textfind,provinsifind,
-    order, orderBy, SettingProvinsi,
-    provinsisExport, filteredItems, handleOpen, selectedProvinsis,
-    setSelectedProvinsis,
+    textfind,kabupatenfind,
+    order, orderBy,
+    provinsisExport, filteredItems, handleOpen, selectedkabupaten,
+    setselectedkabupaten,
     Export,
     convertArrayOfObjectsToCSV,
-    downloadCSV,Periode,
-    deleteProv,
-    ...rest }=props;
+    downloadCSV,
+    rowSelect,Periode,
+    setRowSelect,
+    getDataBackend,
+    // setFormState,
+    onChangeFind
 
+    , ...rest }=props;
+
+  
   const [filterText, setFilterText]=React.useState('');
   const [resetPaginationToggle, setResetPaginationToggle]=React.useState(false);
   const classes=useStyles();
 
   const [rowsPerPage, setRowsPerPage]=useState(10);
   const [page, setPage]=useState(0);
-
-
-
 
   const customStyles={
     header: {
@@ -183,7 +190,7 @@ const LaporanTargetTable=props => {
 
         }
 
-
+        
 
 
       },
@@ -191,12 +198,10 @@ const LaporanTargetTable=props => {
     },
   };
 
-  
-
   const columns=[
     {
-      name: 'Nama Provinsi',
-      selector: 'Nama_Provinsi',
+      name: 'Nama Kabupaten Kota',
+      selector: 'Nama_Kabupaten',
       sortable: true,
     },
     {
@@ -218,9 +223,9 @@ const LaporanTargetTable=props => {
         setFilterText('');
       }
     };
-    return <div class="form-group">
-
-    </div>
+  return <div class="form-group">
+  
+  </div>
 
 
 
@@ -240,36 +245,36 @@ const LaporanTargetTable=props => {
 
     //const { groups }=props;
     //setSelectedUsers
-    let selectedProvinsis_var;
+    let selectedkabupaten_var;
 
     if (event.target.checked) {
-      selectedProvinsis_var=provinsis.map(provinsi => provinsi.id);
+      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedProvinsis_var=[];
+      selectedkabupaten_var=[];
     }
 
-    setSelectedProvinsis(selectedProvinsis_var);
+    setselectedkabupaten(selectedkabupaten_var);
   };
 
   const handleSelectOne=(event, id) => {
 
-    const selectedIndex=selectedProvinsis.indexOf(id);
-    let newSelectedProvinsis=[];
+    const selectedIndex=selectedkabupaten.indexOf(id);
+    let newselectedkabupaten=[];
 
     if (selectedIndex===-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis, id);
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
     } else if (selectedIndex===0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(1));
-    } else if (selectedIndex===selectedProvinsis.length-1) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(selectedProvinsis.slice(0, -1));
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
+    } else if (selectedIndex===selectedkabupaten.length-1) {
+      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
     } else if (selectedIndex>0) {
-      newSelectedProvinsis=newSelectedProvinsis.concat(
-        selectedProvinsis.slice(0, selectedIndex),
-        selectedProvinsis.slice(selectedIndex+1)
+      newselectedkabupaten=newselectedkabupaten.concat(
+        selectedkabupaten.slice(0, selectedIndex),
+        selectedkabupaten.slice(selectedIndex+1)
       );
     }
 
-    setSelectedProvinsis(newSelectedProvinsis);
+    setselectedkabupaten(newselectedkabupaten);
     //console.log(selectedUsers);
   };
 
@@ -293,11 +298,12 @@ const LaporanTargetTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title={"Laporan Target Dan Realisasi Sensus Di Indonesia tahun " + Periode}
+            font="Poppins"
+              title={rowSelect.nama_provinsi == undefined ? "laporan Target Sensus di Provinsi "+ Periode : "laporan Target Sensus di Provinsi " +rowSelect.nama_provinsi +" "+ Periode}
               customStyles={customStyles}
               columns={columns}
-              data={filteredItems}
-              keyField="nama_provinsi"
+              data={sensus}
+              keyField="Periode_sensus"
               pagination
               paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -317,9 +323,9 @@ const LaporanTargetTable=props => {
   );
 };
 
-LaporanTargetTable.propTypes={
+LaporanTargetPerProvTable.propTypes={
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };
 
-export default LaporanTargetTable;
+export default LaporanTargetPerProvTable;

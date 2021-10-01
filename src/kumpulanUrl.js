@@ -123,3 +123,5 @@ export const urlDeleteKB = urlport + 'data-kb/deleteKB'
 
 // Realisasi
 export const urlshowRealisasiID = urlport + 'realisasi/id'
+export const urlRealisasiPerprov = urlport + '/realisasi/perprov'
+export const urlRealisasiPerkab = urlport + '/realisasi/perkab'
