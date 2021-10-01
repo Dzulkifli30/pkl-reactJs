@@ -55,7 +55,8 @@ import {
   UserAccessSurveyList as UserAccessSurveyListView,
   FormSurvey as FormSurveyView,
   ProfileUser as ProfileUserView,
-  LoginSlider as LoginSliderView
+  LoginSlider as LoginSliderView,
+  LaporanTargetRealisasiID as LaporanTargetRealisasiIDView
 
 
 
@@ -300,6 +301,15 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/laporan-sensus-perkecamatan"
+      />
+      {/* Ending */}
+
+      {/* Beginning Target Realisasi */}
+      <RouteWithLayout
+        component={LaporanTargetRealisasiIDView}
+        exact
+        layout={MainLayout}
+        path="/target-realisasi-id"
       />
       {/* Ending */}
 

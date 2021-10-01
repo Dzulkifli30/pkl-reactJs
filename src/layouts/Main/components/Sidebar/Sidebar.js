@@ -182,6 +182,17 @@ const Sidebar=props => {
       ]
     },
     {
+      title: 'Laporan Target dan Realisasi',
+      href: '/#',
+      items: [
+        {
+          title:'Laporan Target dan Realisasi ID',
+          href:'/target-realisasi-id'
+        },
+      ]
+
+    },
+    {
       title: 'Setting Aplikasi',
       href: '/setting'
 
