@@ -58,7 +58,10 @@ import {
   LoginSlider as LoginSliderView,
   LaporanTargetRealisasiID as LaporanTargetRealisasiIDView,
   LaporanTargetRealisasiPerprov as LaporanTargetRealisasiPerprovView,
-  LaporanTargetRealisasiPerkab as LaporanTargetRealisasiPerkabView
+  LaporanTargetRealisasiPerkab as LaporanTargetRealisasiPerkabView,
+  LaporanKbId as LaporanKbIdView,
+  LaporanKbPerProv as LaporanKbProvView,
+  LaporanKbPerkab as LaporanKbKabView,
 
 
 
@@ -325,6 +328,26 @@ const Routes = () => {
         layout={MainLayout}
         path="/target-realisasi-perkab"
       />
+
+      <RouteWithLayout
+        component={LaporanKbIdView}
+        exact
+        layout={MainLayout}
+        path="/laporan-alatKb-id"
+      />
+      <RouteWithLayout
+        component={LaporanKbProvView}
+        exact
+        layout={MainLayout}
+        path="/laporan-alatKb-prov"
+      />
+        <RouteWithLayout
+        component={LaporanKbKabView}
+        exact
+        layout={MainLayout}
+        path="/laporan-alatKb-kab"
+      />
+
       {/* Ending */}
 
       <RouteWithLayout

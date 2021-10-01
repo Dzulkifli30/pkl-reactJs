@@ -186,16 +186,28 @@ const Sidebar=props => {
       href: '/#',
       items: [
         {
-          title:'Laporan Target dan Realisasi ID',
+          title:'Laporan Target dan Realisasi di Indonesia',
           href:'/target-realisasi-id'
         },
         {
-          title:'Laporan Target dan Realisasi Perprov',
+          title:'Laporan Target dan Realisasi Per Provinsi',
           href:'/target-realisasi-perprov'
         },
         {
-          title:'Laporan Target dan Realisasi Perkab',
+          title:'Laporan Target dan Realisasi Per Kabupaten',
           href:'/target-realisasi-perkab'
+        },
+        {
+          title:'Laporan Alat Kontrasepsi di Indonesia',
+          href:'/laporan-alatKb-id'
+        },
+        {
+          title:'Laporan Alat Kontrasepsi per Provinsi',
+          href:'/laporan-alatKb-prov'
+        },
+        {
+          title:'Laporan Alat Kontrasepsi per Kabupaten',
+          href:'/laporan-alatKb-kab'
         },
       ]
 
