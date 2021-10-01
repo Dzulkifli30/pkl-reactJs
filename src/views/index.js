@@ -34,6 +34,7 @@ export {default as TargetKkList} from './TargetKkList'
 export {default as LaporanSensusPerKab} from './LaporanSensusPerKab'
 export {default as LaporanSensusPerProv} from './LaporanSensusPerProv'
 export {default as UserAccessSurveyList} from './UserAccessSurveyList'
+export {default as LaporanTargetRealisasiID} from './LaporanTargetRealisasiID'
 // export {default as RtList} from './RtList'
 // export {default as RwList} from './RwList'
 

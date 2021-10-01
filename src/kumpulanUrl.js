@@ -120,3 +120,6 @@ export const urlEditKB = urlport + 'data-kb/editKB'
 export const urlShowNama = urlport + 'data-kb/showNama'
 export const urlAddKB = urlport + 'data-kb/addKB'
 export const urlDeleteKB = urlport + 'data-kb/deleteKB'
+
+// Realisasi
+export const urlshowRealisasiID = urlport + 'realisasi/id'
