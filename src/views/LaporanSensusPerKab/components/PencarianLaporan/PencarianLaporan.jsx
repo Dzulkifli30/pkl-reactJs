@@ -23,43 +23,43 @@ import validate from 'validate.js';
 import { isArrayLiteralExpression, createTypeAliasDeclaration } from 'typescript';
 import { LapPeriode } from 'components';
 
-const useStyles=makeStyles(theme => ({
-    root: {},
-    buttonSuccess: {
-      color: theme.palette.white,
-      backgroundColor: theme.palette.green,
-      '&:hover': {
-        backgroundColor: '#4caf50',
-        borderColor: '#66bb6a',
-        boxShadow: 'none',
-      },
-      marginTop: '10px',
-      marginBottom: '10px',
+const useStyles = makeStyles(theme => ({
+  root: {},
+  buttonSuccess: {
+    color: theme.palette.white,
+    backgroundColor: theme.palette.green,
+    '&:hover': {
+      backgroundColor: '#4caf50',
+      borderColor: '#66bb6a',
+      boxShadow: 'none',
     },
-    buttonCancel: {
-      color: theme.palette.white,
-      backgroundColor: theme.palette.red,
-      '&:hover': {
-        backgroundColor: '#f44336',
-        borderColor: '#ef5350',
-        boxShadow: 'none',
-      },
+    marginTop: '10px',
+    marginBottom: '10px',
+  },
+  buttonCancel: {
+    color: theme.palette.white,
+    backgroundColor: theme.palette.red,
+    '&:hover': {
+      backgroundColor: '#f44336',
+      borderColor: '#ef5350',
+      boxShadow: 'none',
     },
-  }));
+  },
+}));
 
 
-const PencarianLaporan=props => {
-  const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest }=props;
-  const classes=useStyles();
+const PencarianLaporan = props => {
+  const { className, textfind, onChange, style, rowSelect, setRowSelect, getDataBackend, ...rest } = props;
+  const classes = useStyles();
   const schema = {
     id_kabupaten: {
       presence: { allowEmpty: false, message: 'harus diisi' },
     },
   };
 
-  const [kab, setKab]=useState([])
-  const [prov, setProv]=useState([])
-  const [formState, setFormState]=useState({
+  const [kab, setKab] = useState([])
+  const [prov, setProv] = useState([])
+  const [formState, setFormState] = useState({
     isValid: false,
     values: {},
     touched: {},
@@ -99,7 +99,7 @@ const PencarianLaporan=props => {
 
   async function showKab(id_provinsi) {
     /* */
-    const requestOptions={
+    const requestOptions = {
       method: 'POST',
       //mode: "cors",
       headers: { 'Content-Type': 'application/json' },
@@ -108,16 +108,16 @@ const PencarianLaporan=props => {
       })
     };
 
-    let urlShow=urlShowKab
+    let urlShow = urlShowKab
     // eslint-disable-next-line no-useless-concat
-    const response=await fetch(urlShow, requestOptions)
+    const response = await fetch(urlShow, requestOptions)
       .then(res => {
         return res.json();
       })
 
       .then(resJson => {
-        const data=resJson;
-        console.log('kabupaten =',data.data)
+        const data = resJson;
+        console.log('kabupaten =', data.data)
         setKab(data.data);
         //return false;
       })
@@ -130,38 +130,38 @@ const PencarianLaporan=props => {
 
 
   useEffect(() => {
-    const errors=validate(rowSelect,schema);
+    const errors = validate(rowSelect, schema);
 
     setFormState(formState => ({
       ...rowSelect,
-      isValid: errors? false:true,
-      errors: errors||{}
+      isValid: errors ? false : true,
+      errors: errors || {}
     }));
     console.log("formState", formState)
 
 
     //   alert(setOpen)
-  }, [rowSelect]); 
+  }, [rowSelect]);
 
-  const handleSave=() => {
+  const handleSave = () => {
     getDataBackend(rowSelect)
     console.log(rowSelect.Periode_Sensus)
   }
 
-const hasError=field => {
-    return formState&&formState.errors&&formState.errors[field]? true:false;
+  const hasError = field => {
+    return formState && formState.errors && formState.errors[field] ? true : false;
   }
-  
-  const handleChange=event => {
-    
+
+  const handleChange = event => {
+
     //    event.persist();
 
-    const errors=validate(rowSelect, schema);
+    const errors = validate(rowSelect, schema);
 
     setFormState(formState => ({
       ...rowSelect,
-      isValid: errors? false:true,
-      errors: errors||{}
+      isValid: errors ? false : true,
+      errors: errors || {}
     }));
 
 
@@ -171,13 +171,13 @@ const hasError=field => {
     });
 
     let nama = event.target.name.replace("id", "nama")
-        if (event.target.name == "id_kabupaten") {
-            setRowSelect({
-                ...rowSelect,
-                [nama]: pencarian(kab, event.target.value),
-                [event.target.name]: event.target.value,
-            });
-            // console.log("Ket kecamatan =", kecamatan)
+    if (event.target.name == "id_kabupaten") {
+      setRowSelect({
+        ...rowSelect,
+        [nama]: pencarian(kab, event.target.value),
+        [event.target.name]: event.target.value,
+      });
+      // console.log("Ket kecamatan =", kecamatan)
     }
   }
 
@@ -191,75 +191,75 @@ const hasError=field => {
     showKab(event.target.value)
   }
 
-    const pencarian = (paramKec, id_kab) => {
-          let value = id_kab
-          let result = [];
-          // alert(value)
-          result = paramKec.filter((entry) => {
-              return entry && entry.id && (entry.id === value)
-          });
-          // console.log("result =", result[0].nama_kecamatan)
-          // alert("result = " + result[0].nama_kecamatan)
-          return result[0].nama_kabupaten
-    }
+  const pencarian = (paramKab, id_kab) => {
+    let value = id_kab
+    let result = [];
+    // alert(value)
+    result = paramKab.filter((entry) => {
+      return entry && entry.id && (entry.id === value)
+    });
+    // console.log("result =", result[0].nama_kecamatan)
+    // alert("result = " + result[0].nama_kecamatan)
+    return result[0].nama_kabupaten
+  }
 
-  const handling =()=>{
+  const handling = () => {
     {
       var tmp = [];
       // alert(tmp) 
       // alert( localStorage.getItem("Periode Sensus") - 5 )
       var periode_sensus = localStorage.getItem("Periode Sensus");
-      for (var option = periode_sensus; option >= periode_sensus - 5; option--)
-       {tmp.push({"option" : option});}
-      console.log('temp =',tmp)
+      for (var option = periode_sensus; option >= periode_sensus - 5; option--) { tmp.push({ "option": option }); }
+      console.log('temp =', tmp)
       return tmp.map(option => (
-          <option value={option.option}>
-            {option.option}
-          </option>
-                   
-           ))}
+        <option value={option.option}>
+          {option.option}
+        </option>
+
+      ))
+    }
   }
 
   return (
     <Card
-            {...rest}
-            className={clsx(classes.root, className)}
-        >
+      {...rest}
+      className={clsx(classes.root, className)}
+    >
 
-            <form
-                autoComplete="off"
-                noValidate
+      <form
+        autoComplete="off"
+        noValidate
+      >
+        <CardHeader
+
+          subheader=""
+          title="Search Laporan Sensus"
+        />
+        <Divider />
+        <CardContent>
+          <Grid
+            container
+            spacing={3}
+          >
+
+            <Grid
+              item
+              md={6}
+              xs={12}
             >
-                <CardHeader
+              <LapPeriode
+                onChange={handleChange2}
+                rowSelect={rowSelect} />
 
-                    subheader=""
-                    title="Search Laporan Sensus"
-                />
-                <Divider />
-                <CardContent>
-                    <Grid
-                        container
-                        spacing={3}
-                    >
 
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
-                           <LapPeriode 
-              onChange={handleChange2}
-              rowSelect={rowSelect}/>
+            </Grid>
 
-           
-                        </Grid>
-
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
-                           <TextField
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
                 fullWidth
                 label="Pilih Provinsi"
                 margin="dense"
@@ -280,29 +280,57 @@ const hasError=field => {
 
               </TextField>
 
-                        </Grid>
-                    </Grid>
-                </CardContent>
-                <Divider />
-                <CardActions>
-                    {!formState.isValid}
-                    <Button
-                        color="primary"
-                        className={classes.buttonSuccess}
-                        variant="contained"
-                        onClick={handleSave}
-                        disabled={!formState.isValid}
-                    >
-                        Search
-                    </Button>
+            </Grid>
 
-                </CardActions>
-            </form>
-        </Card>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Pilih Kabupaten"
+                margin="dense"
+                name="id_kabupaten"
+                onChange={handleChange}
+                select
+                value={rowSelect.id_kabupaten}
+                variant="outlined"
+              >
+                {kab.map(option => (
+                  <option
+                    key={option.id_kabupaten}
+                    value={option.id_kabupaten}
+                  >
+                    {option.nama_kabupaten}
+                  </option>
+                ))}
+
+              </TextField>
+
+            </Grid>
+          </Grid>
+        </CardContent>
+        <Divider />
+        <CardActions>
+          {!formState.isValid}
+          <Button
+            color="primary"
+            className={classes.buttonSuccess}
+            variant="contained"
+            onClick={handleSave}
+            disabled={!formState.isValid}
+          >
+            Search
+          </Button>
+
+        </CardActions>
+      </form>
+    </Card>
   );
 };
 
-PencarianLaporan.propTypes={
+PencarianLaporan.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func,
   style: PropTypes.object

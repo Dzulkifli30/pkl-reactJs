@@ -314,7 +314,7 @@ const LaporanSensusPerKab=props => {
           <div className={classes.inner}>
             <DataTable
             font="Poppins"
-              title={rowSelect.nama_kabupaten == undefined ? "laporan Target Sensus di Kabupaten" : "laporan Target Sensus di Kabupaten " +rowSelect.nama_kabupaten}
+              title={rowSelect.nama_kabupaten == undefined ? "Laporan Target Sensus di Kabupaten" : "Laporan Target Sensus di Kabupaten " + rowSelect.nama_kabupaten}
               customStyles={customStyles}
               columns={columns}
               data={sensus}
