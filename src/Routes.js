@@ -56,7 +56,9 @@ import {
   FormSurvey as FormSurveyView,
   ProfileUser as ProfileUserView,
   LoginSlider as LoginSliderView,
-  LaporanTargetRealisasiID as LaporanTargetRealisasiIDView
+  LaporanTargetRealisasiID as LaporanTargetRealisasiIDView,
+  LaporanTargetRealisasiPerprov as LaporanTargetRealisasiPerprovView,
+  LaporanTargetRealisasiPerkab as LaporanTargetRealisasiPerkabView
 
 
 
@@ -310,6 +312,18 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/target-realisasi-id"
+      />
+      <RouteWithLayout
+        component={LaporanTargetRealisasiPerprovView}
+        exact
+        layout={MainLayout}
+        path="/target-realisasi-perprov"
+      />
+      <RouteWithLayout
+        component={LaporanTargetRealisasiPerkabView}
+        exact
+        layout={MainLayout}
+        path="/target-realisasi-perkab"
       />
       {/* Ending */}
 
