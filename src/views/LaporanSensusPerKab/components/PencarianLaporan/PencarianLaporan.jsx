@@ -196,9 +196,9 @@ const PencarianLaporan = props => {
     let result = [];
     // alert(value)
     result = paramKab.filter((entry) => {
-      return entry && entry.id && (entry.id === value)
+      return entry && entry.id_kabupaten && (entry.id_kabupaten === value)
     });
-    // console.log("result =", result[0].nama_kecamatan)
+    // console.log("result =", result[0].nama_kabupaten)
     // alert("result = " + result[0].nama_kecamatan)
     return result[0].nama_kabupaten
   }
