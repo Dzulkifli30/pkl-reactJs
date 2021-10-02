@@ -6,7 +6,7 @@ import validate from 'validate.js';
 import md5 from 'md5'
 import swal from '@sweetalert/with-react';
 import '../../assets/css_swal/cssSwal.css';
-import {bg_login} from '../../assets/img_master_backup/index'
+import { bg_login } from '../../assets/img_master_backup/index'
 import Swal from 'sweetalert2';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -24,7 +24,7 @@ import { urlPostLoginUser } from '../../kumpulanUrl';
 
 import UsersByDevice from 'views/Dashboard/components/UsersByDevice';
 
-const schema={
+const schema = {
   UserName: {
     presence: { allowEmpty: false, message: 'is required' },
     //email: true,
@@ -40,7 +40,7 @@ const schema={
   }
 };
 
-const useStyles=makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     //backgroundColor: theme.palette.background.default,
     height: '100%',
@@ -105,12 +105,12 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const UserSignIn=props => {
-  const { history }=props;
-  const [users, setUsers]=useState([]/*mockDataUser*/);
-  const classes=useStyles();
+const UserSignIn = props => {
+  const { history } = props;
+  const [users, setUsers] = useState([]/*mockDataUser*/);
+  const classes = useStyles();
 
-  const [formState, setFormState]=useState({
+  const [formState, setFormState] = useState({
     isValid: false,
     values: {},
     touched: {},
@@ -118,19 +118,19 @@ const UserSignIn=props => {
   });
 
   useEffect(() => {
-    const errors=validate(formState.values, schema);
+    const errors = validate(formState.values, schema);
     setFormState(formState => ({
       ...formState,
-      isValid: errors? false:true,
-      errors: errors||{}
+      isValid: errors ? false : true,
+      errors: errors || {}
     }));
   }, [formState.values]);
 
-  const handleBack=() => {
+  const handleBack = () => {
     history.goBack();
   };
 
-  const handleChange=event => {
+  const handleChange = event => {
     event.persist();
 
     setFormState(formState => ({
@@ -138,9 +138,9 @@ const UserSignIn=props => {
       values: {
         ...formState.values,
         [event.target.name]:
-          event.target.type==='checkbox'
+          event.target.type === 'checkbox'
             ? event.target.checked
-            :event.target.value
+            : event.target.value
       },
       touched: {
         ...formState.touched,
@@ -149,13 +149,13 @@ const UserSignIn=props => {
     }));
   };
 
-  const handleSignIn=event => {
+  const handleSignIn = event => {
     //event.preventDefault();
     //
     event.preventDefault();
     /* */
     async function getData() {
-      const requestOptions={
+      const requestOptions = {
         method: 'POST',
         mode: "cors",
         headers: { 'Content-Type': 'application/json' },
@@ -166,18 +166,18 @@ const UserSignIn=props => {
       };
 
 
-      let urlGetData=urlPostLoginUser
-      
-      const response=await fetch(urlGetData, requestOptions)
+      let urlGetData = urlPostLoginUser
+
+      const response = await fetch(urlGetData, requestOptions)
         .then(res => {
           return res.json();
         })/**/
 
         .then(res => {
-          const data=res;
+          const data = res;
 
           //console.log(data.data);
-          if (data.code=="00") {
+          if (data.code == "00") {
             //{ userId: "A6B433CD8F15397BE05314B5A8C00F89" }
             // localStorage.setItem('nama_provinsi', data.data[0].nama_provinsi);
             // localStorage.setItem('nama_kabupaten', data.data[0].nama_kabupaten);
@@ -220,10 +220,10 @@ const UserSignIn=props => {
             localStorage.setItem('pekerjaan', JSON.stringify(data.pekerjaan));
             localStorage.setItem('rt', data.data5[0].nama_rt);
             localStorage.setItem('Alat Kontrasepsi', JSON.stringify(data.alatKB));
-            window.location='/beranda-user';
+            window.location = '/beranda-user';
             //history.push('/beranda');
 
-          } else{  
+          } else {
             console.log(data);
             setFormState(formState => ({
               ...formState,
@@ -246,7 +246,7 @@ const UserSignIn=props => {
               showConfirmButton: false,
               timer: 1000
             })
-            
+
             return false;
           }
         })
@@ -279,8 +279,8 @@ const UserSignIn=props => {
     /*requestOptions*/
 
     //    console.log("users", users)
-    let users4=users.find(user => user.UserName===formState.values.user_name
-      &&user.userPassword===md5(formState.values.password));
+    let users4 = users.find(user => user.UserName === formState.values.user_name
+      && user.userPassword === md5(formState.values.password));
 
     //alert(formState.values.user_name)
     ///console.log("users4", users4);
@@ -293,143 +293,151 @@ const UserSignIn=props => {
     //history.push('/');
   };
 
-  const hasError=field =>
-    formState.touched[field]&&formState.errors[field]? true:false;
+  const hasError = field =>
+    formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
-    <div className={classes.root,"font-poppins sm:mt-20 lg:mt-5"}>
-      <Grid
-        className={classes.grid}
-        container
-        style={{ width: "92%" }}
-      >
-        <Grid
-          className={classes.content}
-          item
-          lg={12}
-          xs={12}
-        >
-          <div className={classes.content,"font-poppins sm:mt-20 lg:mt-5"}>
-            {/* <div>{bg_login}</div> */}
-            <div className="d-md flex" style={{ width: '100%' }}>
-              <form
-                className={classes.form}
-                onSubmit={handleSignIn}
-              >
-
-
-                <Grid
-                  className={classes.grid}
-                  container
-                >
-                  <Grid
-                    // className={classes.content}
-                    item
-                    lg={6}
-                    xs={6}
-
+    <div className="h-full sm:mr-4">
+      <div className="w-full font-poppins mt-9 p-9 mb-12 bg-gray-200 rounded-xl">
+        <h4 className="mb-12 font-poppins ">Login Petugas Sensus</h4>
+        <div className={classes.root, "font-poppins sm:mt-20 lg:mt-5"}>
+          <Grid
+            className={classes.grid}
+            container
+            style={{ width: "92%" }}
+          >
+            <Grid
+              className={classes.content}
+              item
+              lg={12}
+              xs={12}
+            >
+              <div className={classes.content, "font-poppins sm:mt-20 lg:mt-5"}>
+                {/* <div>{bg_login}</div> */}
+                <div className="d-md flex" style={{ width: '100%' }}>
+                  <form
+                    className={classes.form}
+                    onSubmit={handleSignIn}
                   >
-                    <br />
-                    <Typography
-                      style={{ verticalAlign: 'bottom' }}
-                      className={classes.title}
-                      variant="h6"
-                      margin="normal"
+
+
+                    <Grid
+                      className={classes.grid}
+                      container
                     >
-                      Username
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    className={classes.content}
-                    item
-                    lg={6}
-                    xs={6}
-                  >
+                      <Grid
+                        // className={classes.content}
+                        item
+                        lg={6}
+                        xs={6}
 
-                    <TextField
-                      className="form-control"
-                      fullWidth
-                      margin="dense"
+                      >
+                        <br />
+                        <Typography
+                          style={{ verticalAlign: 'bottom' }}
+                          className={classes.title}
+                          variant="h6"
+                          margin="normal"
+                        >
+                          Username
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        className={classes.content}
+                        item
+                        lg={6}
+                        xs={6}
+                      >
 
-                      error={hasError('UserName')}
-                      fullWidth
-                      helperText={
-                        hasError('UserName')? formState.errors.UserName[0]:null
-                      }
-                      name="UserName"
-                      onChange={handleChange}
-                      type="text"
-                      value={formState.values.UserName||''}
-                      variant="outlined"
+                        <TextField
+                          className="form-control"
+                          fullWidth
+                          margin="dense"
 
-                    />
-                  </Grid>
-                  <Grid
-                    //className={classes.content}
-                    item
-                    lg={6}
-                    xs={6}
-                  >
-                    <br />
-                    <Typography
-                      className={classes.title}
-                      variant="h6"
+                          error={hasError('UserName')}
+                          fullWidth
+                          helperText={
+                            hasError('UserName') ? formState.errors.UserName[0] : null
+                          }
+                          name="UserName"
+                          onChange={handleChange}
+                          type="text"
+                          value={formState.values.UserName || ''}
+                          variant="outlined"
+
+                        />
+                      </Grid>
+                      <Grid
+                        //className={classes.content}
+                        item
+                        lg={6}
+                        xs={6}
+                      >
+                        <br />
+                        <Typography
+                          className={classes.title}
+                          variant="h6"
+                        >
+                          Kata Kunci
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        //className={classes.content}
+                        item
+                        lg={6}
+                        xs={6}
+                      >
+
+                        <TextField
+                          className="form-control"
+                          error={hasError('password')}
+                          fullWidth
+                          helperText={
+                            hasError('password') ? formState.errors.password[0] : null
+                          }
+                          //label="Password"
+                          name="password"
+                          margin="dense"
+                          onChange={handleChange}
+                          type="password"
+                          value={formState.values.password || ''}
+                          variant="outlined"
+                          style={{ marginBottom: 12 }}
+                        />
+
+                      </Grid>
+
+                    </Grid>
+
+
+                    <Button
+                      className={classes.signInButton}
+                      color="primary"
+                      disabled={!formState.isValid}
+                      //fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                    //style={{ marginTop: '2%', marginBottom: '-2%' }}
                     >
-                      Kata Kunci
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    //className={classes.content}
-                    item
-                    lg={6}
-                    xs={6}
-                  >
-
-                    <TextField
-                      className="form-control"
-                      error={hasError('password')}
-                      fullWidth
-                      helperText={
-                        hasError('password')? formState.errors.password[0]:null
-                      }
-                      //label="Password"
-                      name="password"
-                      margin="dense"
-                      onChange={handleChange}
-                      type="password"
-                      value={formState.values.password||''}
-                      variant="outlined"
-                      style={{ marginBottom: 12 }}
-                    />
-
-                  </Grid>
-
-                </Grid>
-
-
-                <Button
-                  className={classes.signInButton}
-                  color="primary"
-                  disabled={!formState.isValid}
-                  //fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                //style={{ marginTop: '2%', marginBottom: '-2%' }}
-                >
-                  Masuk
-                </Button>
-              </form>
-            </div>
-          </div>
-        </Grid>
-      </Grid>
+                      Masuk
+                    </Button>
+                  </form>
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+        {/* <p className="legend">Legend 1</p> */}
+      </div>
     </div>
-    
+
+
+
   );
 };
 
-UserSignIn.propTypes={
+UserSignIn.propTypes = {
   history: PropTypes.object
 };
 
