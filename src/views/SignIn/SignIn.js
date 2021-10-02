@@ -10,7 +10,7 @@ import '../../assets/css_swal/cssSwal.css';
 // import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import Slider from 'react-slick/lib/slider';
-import {bg_login} from '../../assets/img_master_backup/index'
+import { bg_login } from '../../assets/img_master_backup/index'
 import Swal from 'sweetalert2';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -28,7 +28,7 @@ import { urlPostLogin } from '../../kumpulanUrl'
 import UsersByDevice from 'views/Dashboard/components/UsersByDevice';
 
 
-const schema={
+const schema = {
   user_name: {
     presence: { allowEmpty: false, message: 'is required' },
     //email: true,
@@ -44,7 +44,7 @@ const schema={
   }
 };
 
-const useStyles=makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     //backgroundColor: theme.palette.background.default,
     height: '100%',
@@ -109,12 +109,12 @@ const useStyles=makeStyles(theme => ({
   }
 }));
 
-const SignIn=props => {
-  const { history }=props;
-  const [users, setUsers]=useState([]/*mockDataUser*/);
-  const classes=useStyles();
+const SignIn = props => {
+  const { history } = props;
+  const [users, setUsers] = useState([]/*mockDataUser*/);
+  const classes = useStyles();
 
-  const [formState, setFormState]=useState({
+  const [formState, setFormState] = useState({
     isValid: false,
     values: {},
     touched: {},
@@ -122,19 +122,19 @@ const SignIn=props => {
   });
 
   useEffect(() => {
-    const errors=validate(formState.values, schema);
+    const errors = validate(formState.values, schema);
     setFormState(formState => ({
       ...formState,
-      isValid: errors? false:true,
-      errors: errors||{}
+      isValid: errors ? false : true,
+      errors: errors || {}
     }));
   }, [formState.values]);
 
-  const handleBack=() => {
+  const handleBack = () => {
     history.goBack();
   };
 
-  const handleChange=event => {
+  const handleChange = event => {
     event.persist();
 
     setFormState(formState => ({
@@ -142,9 +142,9 @@ const SignIn=props => {
       values: {
         ...formState.values,
         [event.target.name]:
-          event.target.type==='checkbox'
+          event.target.type === 'checkbox'
             ? event.target.checked
-            :event.target.value
+            : event.target.value
       },
       touched: {
         ...formState.touched,
@@ -152,21 +152,21 @@ const SignIn=props => {
       }
     }));
   };
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    }
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  }
 
-  const handleSignIn=event => {
+  const handleSignIn = event => {
     //event.preventDefault();
     //
     event.preventDefault();
     /* */
     async function getData() {
-      const requestOptions={
+      const requestOptions = {
         method: 'POST',
         mode: "cors",
         headers: { 'Content-Type': 'application/json' },
@@ -177,17 +177,17 @@ const SignIn=props => {
       };
 
 
-      let urlGetData=urlPostLogin
-      const response=await fetch(urlGetData, requestOptions)
+      let urlGetData = urlPostLogin
+      const response = await fetch(urlGetData, requestOptions)
         .then(res => {
           return res.json();
         })/**/
 
         .then(res => {
 
-          const data=res;
+          const data = res;
           //console.log(data.data);
-          if (data.code=="00") {
+          if (data.code == "00") {
             //{ userId: "A6B433CD8F15397BE05314B5A8C00F89" }
             localStorage.setItem('username', data.data[0].UserName);
             localStorage.setItem('NamaLengkap', data.data[0].NamaLengkap);
@@ -203,10 +203,11 @@ const SignIn=props => {
             localStorage.setItem('Title Email', data.data4[0].value_setting);
             localStorage.setItem('body', data.data4[1].value_setting);
             localStorage.setItem('url', data.data4[2].value_setting);
-            window.location='/beranda';
+            localStorage.setItem('Alat Kontrasepsi', JSON.stringify(data.alatKB));
+            window.location = '/beranda';
             //history.push('/beranda');
 
-          } else {  
+          } else {
             console.log(data);
             setFormState(formState => ({
               ...formState,
@@ -224,7 +225,7 @@ const SignIn=props => {
               showConfirmButton: false,
               timer: 1000
             })
-            
+
             return false;
           }
         })
@@ -258,8 +259,8 @@ const SignIn=props => {
     /*requestOptions*/
 
     //    console.log("users", users)
-    let users4=users.find(user => user.userName===formState.values.user_name
-      &&user.userPassword===md5(formState.values.password));
+    let users4 = users.find(user => user.userName === formState.values.user_name
+      && user.userPassword === md5(formState.values.password));
 
     //alert(formState.values.user_name)
     ///console.log("users4", users4);
@@ -272,149 +273,155 @@ const SignIn=props => {
     //history.push('/');
   };
 
-  const hasError=field =>
-    formState.touched[field]&&formState.errors[field]? true:false;
+  const hasError = field =>
+    formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
 
-    <div>
+    <div className="h-full sm:mr-4">
 
-    
-    <div className={classes.root,"font-poppins sm:mt-20 lg:mt-5"  }>
-      <Grid
-        className={classes.grid}
-        container
-        style={{ width: "92%" }}
-      >
-        <Grid
-          className={classes.content}
-          item
-          lg={12}
-          xs={12}
-        >
-          <div className={classes.content,"font-poppins"}>
-            {/* <div>{bg_login}</div> */}
-            <div className="d-md flex" style={{ width: '100%' }}>
-              <form
-                className={classes.form}
-                onSubmit={handleSignIn}
-              >
-
-
-                <Grid
-                  className={classes.grid}
-                  container
-                >
-                  <Grid
-                    // className={classes.content}
-                    item
-                    lg={6}
-                    xs={6}
-
+      <div className="w-full font-poppins mt-9 p-9 mb-12 bg-gray-200 rounded-xl">
+        {/* <img src='images/auth.jpg' /> */}
+        <h4 className="mb-12 font-poppins ">Login Admin BKKBN</h4>
+        <div className={classes.root, "font-poppins sm:mt-20 lg:mt-5"}>
+          <Grid
+            className={classes.grid}
+            container
+            style={{ width: "92%" }}
+          >
+            <Grid
+              className={classes.content}
+              item
+              lg={12}
+              xs={12}
+            >
+              <div className={classes.content, "font-poppins"}>
+                {/* <div>{bg_login}</div> */}
+                <div className="d-md flex" style={{ width: '100%' }}>
+                  <form
+                    className={classes.form}
+                    onSubmit={handleSignIn}
                   >
-                    <br />
-                    <Typography
-                      style={{ verticalAlign: 'bottom' }}
-                      className={classes.title}
-                      variant="h6"
-                      margin="normal"
+
+
+                    <Grid
+                      className={classes.grid}
+                      container
                     >
-                      Username
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    className={classes.content}
-                    item
-                    lg={6}
-                    xs={6}
-                  >
+                      <Grid
+                        // className={classes.content}
+                        item
+                        lg={6}
+                        xs={6}
 
-                    <TextField
-                      className="form-control"
-                      error={hasError('email')}
-                      fullWidth
-                      margin="dense"
+                      >
+                        <br />
+                        <Typography
+                          style={{ verticalAlign: 'bottom' }}
+                          className={classes.title}
+                          variant="h6"
+                          margin="normal"
+                        >
+                          Username
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        className={classes.content}
+                        item
+                        lg={6}
+                        xs={6}
+                      >
 
-                      /*
-                      helperText={
-                        hasError('email')? formState.errors.email[0]:null
-                      }*/
-                      //label="User Name"
-                      name="user_name"
-                      onChange={handleChange}
-                      type="text"
-                      value={formState.values.user_name||''}
-                      variant="outlined"
+                        <TextField
+                          className="form-control"
+                          error={hasError('email')}
+                          fullWidth
+                          margin="dense"
 
-                    />
-                  </Grid>
-                  <Grid
-                    //className={classes.content}
-                    item
-                    lg={6}
-                    xs={6}
-                  >
-                    <br />
-                    <Typography
-                      className={classes.title}
-                      variant="h6"
+                          /*
+                          helperText={
+                            hasError('email')? formState.errors.email[0]:null
+                          }*/
+                          //label="User Name"
+                          name="user_name"
+                          onChange={handleChange}
+                          type="text"
+                          value={formState.values.user_name || ''}
+                          variant="outlined"
+
+                        />
+                      </Grid>
+                      <Grid
+                        //className={classes.content}
+                        item
+                        lg={6}
+                        xs={6}
+                      >
+                        <br />
+                        <Typography
+                          className={classes.title}
+                          variant="h6"
+                        >
+                          Kata Kunci
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        //className={classes.content}
+                        item
+                        lg={6}
+                        xs={6}
+                      >
+
+                        <TextField
+                          className="form-control"
+                          error={hasError('password')}
+                          fullWidth
+                          helperText={
+                            hasError('password') ? formState.errors.password[0] : null
+                          }
+                          //label="Password"
+                          name="password"
+                          margin="dense"
+                          onChange={handleChange}
+                          type="password"
+                          value={formState.values.password || ''}
+                          variant="outlined"
+                          style={{ marginBottom: 12 }}
+                        />
+
+                      </Grid>
+
+                    </Grid>
+
+
+                    <Button
+                      className={classes.signInButton}
+                      color="primary"
+                      disabled={!formState.isValid}
+                      //fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                    //style={{ marginTop: '2%', marginBottom: '-2%' }}
                     >
-                      Kata Kunci
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    //className={classes.content}
-                    item
-                    lg={6}
-                    xs={6}
-                  >
-
-                    <TextField
-                      className="form-control"
-                      error={hasError('password')}
-                      fullWidth
-                      helperText={
-                        hasError('password')? formState.errors.password[0]:null
-                      }
-                      //label="Password"
-                      name="password"
-                      margin="dense"
-                      onChange={handleChange}
-                      type="password"
-                      value={formState.values.password||''}
-                      variant="outlined"
-                      style={{ marginBottom: 12 }}
-                    />
-
-                  </Grid>
-
-                </Grid>
+                      Masuk
+                    </Button>
+                  </form>
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+        {/* <p className="legend">Legend 1</p> */}
+      </div>
 
 
-                <Button
-                  className={classes.signInButton}
-                  color="primary"
-                  disabled={!formState.isValid}
-                  //fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                //style={{ marginTop: '2%', marginBottom: '-2%' }}
-                >
-                  Masuk
-                </Button>
-              </form>
-            </div>
-          </div>
-        </Grid>
-      </Grid>
-    </div>
     </div>
 
   );
 };
 
-SignIn.propTypes={
+SignIn.propTypes = {
   history: PropTypes.object
 };
 

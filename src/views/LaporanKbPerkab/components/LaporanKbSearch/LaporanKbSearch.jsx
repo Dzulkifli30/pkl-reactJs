@@ -1,7 +1,7 @@
 import React, { createRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { urlGetSetting, urlShowKab, urlShowTargetKk, urlShowTargetKkPerProv } from '../../../../kumpulanUrl'
+import { urlGetSetting, urlShowKab, urlshowKKPerprov, urlShowTargetKk, urlShowTargetKkPerProv } from '../../../../kumpulanUrl'
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import {
@@ -77,7 +77,7 @@ const LaporanTargetSearch = props => {
       })
     };
 
-    let urlShow = urlShowTargetKkPerProv
+    let urlShow = urlshowKKPerprov
     // eslint-disable-next-line no-useless-concat
     const response = await fetch(urlShow, requestOptions)
       .then(res => {

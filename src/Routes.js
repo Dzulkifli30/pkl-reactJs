@@ -6,12 +6,10 @@ import {
   Main as MainLayout,
   Minimal as MinimalLayout,
   MinimalUser as MinimalUserLayout,
-  MainUser as MainUserLayout,
 } from './layouts';
 
 import {
   Team as TeamView,
-  UserSignIn as UserSignInView,
   ContactUs as ContactUsView,
   Portfolio as PortfolioView,
   Services as ServicesView,
@@ -53,9 +51,6 @@ import {
   LaporanSensusPerProv as LaporanSensusPerProvView,
   Profile as ProfileView,
   UserAccessSurveyList as UserAccessSurveyListView,
-  FormSurvey as FormSurveyView,
-  ProfileUser as ProfileUserView,
-  LoginSlider as LoginSliderView,
   LaporanTargetRealisasiID as LaporanTargetRealisasiIDView,
   LaporanTargetRealisasiPerprov as LaporanTargetRealisasiPerprovView,
   LaporanTargetRealisasiPerkab as LaporanTargetRealisasiPerkabView,
@@ -101,13 +96,7 @@ const Routes = () => {
         path="/profile"
       />
       <RouteWithLayout
-        component={ProfileUserView}
-        exact
-        layout={MainUserLayout}
-        path="/profile-user"
-      />
-      <RouteWithLayout
-        component={LoginSliderView}
+        component={SignInView}
         exact
         layout={MinimalLayout}
         path="/login"
@@ -118,25 +107,12 @@ const Routes = () => {
         layout={MainLayout}
         path="/kelompok-data"
       />
-      <RouteWithLayout
-        component={FormSurveyView}
-        exact
-        layout={MainUserLayout}
-        path="/form-survey"
-      />
-
 
       <RouteWithLayout
         component={DashboardView}
         exact
         layout={MainLayout}
         path="/beranda"
-      />
-      <RouteWithLayout
-        component={DashboardView}
-        exact
-        layout={MainUserLayout}
-        path="/beranda-user"
       />
       <RouteWithLayout
         component={SettingListView}
@@ -149,12 +125,6 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/kelompok-data"
-      />
-      <RouteWithLayout
-        component={TargetKkListView}
-        exact
-        layout={MainLayout}
-        path="/target-kk"
       />
       <RouteWithLayout
         component={TargetKkListView}
@@ -350,12 +320,6 @@ const Routes = () => {
 
       {/* Ending */}
 
-      <RouteWithLayout
-        component={SignUpView}
-        exact
-        layout={MinimalLayout}
-        path="/sign-up"
-      />
       {/* <RouteWithLayout
         component={SignInView}
         exact

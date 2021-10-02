@@ -13,7 +13,7 @@ import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
 import DataTable from 'react-data-table-component';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddIcon from '@material-ui/icons/Add ';
+import AddIcon from '@material-ui/icons/Add';
 
 import {
   Card,
