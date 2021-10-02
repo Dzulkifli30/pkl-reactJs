@@ -309,7 +309,7 @@ const KBList = props => {
     setOpen(true);
     setTitle(MessageButton);
     setRowkbSelect(rowkb);
-    console.log("ANggota kk di formkb ", AnggotaKK)
+    // console.log("ANggota kk di formkb ", AnggotaKK)
 
     //setCompPopup("NonMap")
     //console.log("rowgroup", rowgroup)

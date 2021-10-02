@@ -38,7 +38,7 @@ const ProfileUser = () => {
       }
 
     return (
-        <div className=" justify-center text-center mb-96  bg-indigo-700  ">
+        <div className=" justify-center text-center mb-10 bg-indigo-700  ">
             <Card>
                 <CardHeader
                     subheader=""
@@ -175,7 +175,12 @@ const ProfileUser = () => {
                 >
                     Tugas anda 
                 </button>
-                <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah ProfileUser</button>}>
+                <Popup trigger={<button className="btn btn-md bg-green-700 mt-2 ">Ubah ProfileUser</button>}
+                modal
+                position='top center'
+
+                
+                >
                     <ProfileAddModi
                         rowSelect={rowSelect}
                         setRowSelect={setRowSelect}

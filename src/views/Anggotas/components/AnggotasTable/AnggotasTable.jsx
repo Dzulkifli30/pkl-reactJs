@@ -290,6 +290,7 @@ const AnggotasTable=props => {
       name: 'Tanggal Pernikahan',
       selector: 'tanggal_pernikahan',
       sortable: true,
+      cell: row => row.tanggal_pernikahan== null ? '-' : row.tanggal_pernikahan
     },
     {
       name: 'Status Dalam Keluarga',
@@ -310,10 +311,12 @@ const AnggotasTable=props => {
       name: 'Nomor Paspor',
       selector: 'no_paspor',
       sortable: true,
+      cell : row => row.no_paspor == null ? "-" : row.no_paspor
     },    {
-      name: 'Nomor Katas',
+      name: 'Nomor Kitas',
       selector: 'no_katas',
       sortable: true,
+      cell : row => row.no_katas == null ? "-" : row.no_katas
     },    {
       name: 'Nama Ayah',
       selector: 'nama_ayah',

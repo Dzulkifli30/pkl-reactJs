@@ -47,20 +47,6 @@ const schema={
     //   maximum: 200
     // }
   },
-  no_paspor: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    // length: {
-    //   maximum: 200
-    // }
-  },
-  no_katas: {
-    presence: { allowEmpty: false, message: 'harus diisi' },
-    //email: true,
-    // length: {
-    //   maximum: 200
-    // }
-  },
   nama_ayah: {
     presence: { allowEmpty: false, message: 'harus diisi' },
     //email: true,
@@ -322,7 +308,7 @@ const AnggotaKKAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="nama_anggota"
+                label="Nama Anggota"
                 margin="dense"
                 name="nama_anggota"
                 onChange={handleChange}
@@ -556,8 +542,10 @@ const AnggotaKKAddModi=props => {
                 helperText={
                   hasError('tanggal_pernikahan')? formState.errors.tanggal_pernikahan[0]:null
                 }
+                disabled ={ rowSelect.status_nikah == 0}
                 error={hasError('tanggal_pernikahan')}
-                defaultValue={rowSelect&&rowSelect.tanggal_pernikahan? rowSelect.tanggal_pernikahan:''}
+                defaultValue= {rowSelect.status_nikah == 0 ? rowSelect.tanggal_pernikahan = null : rowSelect&&rowSelect.tanggal_pernikahan? rowSelect.tanggal_pernikahan:'' }
+                // defaultValue ={rowSelect.status_nikah == 0 }
                 variant="outlined"
               />
             </Grid>
@@ -643,7 +631,7 @@ const AnggotaKKAddModi=props => {
                   hasError('no_paspor')? formState.errors.no_paspor[0]:null
                 }
                 error={hasError('no_paspor')}
-                defaultValue={rowSelect&&rowSelect.no_paspor? rowSelect.no_paspor:''}
+                defaultValue={rowSelect.no_paspor == undefined  ? rowSelect.no_paspor = null  : rowSelect&&rowSelect.no_paspor ? rowSelect.no_paspor:''}
                 variant="outlined"
               />
             </Grid>
@@ -655,7 +643,7 @@ const AnggotaKKAddModi=props => {
             >
               <TextField
                 fullWidth
-                label="Nomor Katas"
+                label="Nomor Kitas"
                 margin="dense"
                 name="no_katas"
                 onChange={handleChange}
@@ -663,7 +651,7 @@ const AnggotaKKAddModi=props => {
                   hasError('no_katas')? formState.errors.no_katas[0]:null
                 }
                 error={hasError('no_katas')}
-                defaultValue={rowSelect&&rowSelect.no_katas? rowSelect.no_katas:''}
+                defaultValue={rowSelect.no_katas == undefined  ? rowSelect.no_katas = null  : rowSelect&&rowSelect.no_katas ? rowSelect.no_katas:''}
                 variant="outlined"
               />
             </Grid>

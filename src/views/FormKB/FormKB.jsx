@@ -15,7 +15,7 @@ const FormKB = (props) => {
             </button>
             <button
                 onClick={kirimData}
-                className="btn btn-sm bg-green-800"
+                className="btn btn-sm bg-green-800 ml-10"
             >
                 Kirim Data
             </button>

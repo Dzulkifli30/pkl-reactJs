@@ -10,6 +10,7 @@ import "./slick/slick-theme.css";
 import {Animated} from "react-animated-css";
 import { useHistory } from "react-router-dom";
 import { urlAccKK, urlAddFormKK, urlGetFormKK } from 'kumpulanUrl'
+import Swal from 'sweetalert2'
 
 const FormSurvey = () => {
   const [KK,setKK]=useState([])
@@ -91,13 +92,25 @@ const FormSurvey = () => {
 
       .then(resJson => {
         const data=resJson;
-        alert("data disimpan")
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Sukses Mengirim Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
         // setRowKK(data.data);
         //return false;
       })
       .catch(e => {
         //console.log(e);
-        alert("data gagal")
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Gagal Mengirim Data',
+          showConfirmButton: false,
+          timer: 1000
+        })
         // setRowKK([]);
         //this.setState({ ...this.state, isFetching: false });
       });

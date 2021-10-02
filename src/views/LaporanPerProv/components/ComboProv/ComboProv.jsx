@@ -256,7 +256,7 @@ const ComboProv = props => {
                         disabled={!formState.isValid}
 
                     >
-                        Cari
+                        Search
                     </Button>
                 </CardActions>
             </form>

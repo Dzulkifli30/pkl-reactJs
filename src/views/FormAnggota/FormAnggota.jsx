@@ -17,7 +17,7 @@ const FormAnggota = (props) => {
             </button>
             <button
                 onClick={gotoNext}
-                className="btn btn-sm bg-purple-800"
+                className="btn btn-sm bg-purple-800 ml-10"
             >
                 Next
             </button>

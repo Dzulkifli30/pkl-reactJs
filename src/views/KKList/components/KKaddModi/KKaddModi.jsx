@@ -626,7 +626,7 @@ const KKAddModi=props => {
 
               <TextField
                 fullWidth
-                label="nama KK"
+                label="Nama KK"
                 margin="dense"
                 name="nama_kk"
                 onChange={handleChange}
@@ -647,7 +647,7 @@ const KKAddModi=props => {
 
               <TextField
                 fullWidth
-                label="alamat KK"
+                label="Alamat KK"
                 margin="dense"
                 name="alamat_kk"
                 onChange={handleChange}

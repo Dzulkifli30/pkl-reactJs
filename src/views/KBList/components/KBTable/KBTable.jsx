@@ -280,7 +280,7 @@ const KBTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-        <Button onClick={(e) => handleOpen(e, [], "Tambah Kecamatan")}>
+        <Button onClick={(e) => handleOpen(e, [], "Tambah Pengguna Alat KB")}>
           <AddIcon/>
         </Button>
       </div>
@@ -366,7 +366,7 @@ const KBTable=props => {
 
           <div className={classes.inner}>
             <DataTable
-              title="KB List"
+              title=""
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}

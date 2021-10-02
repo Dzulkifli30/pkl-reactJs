@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/styles';
-import { useMediaQuery } from '@material-ui/core';
+import { Avatar, useMediaQuery } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { urlProv,urlKab,urlKec,urlKel,urlRw,urlRt,urlGetVuser } from 'kumpulanUrl';
 import { Sidebar, Topbar, Footer, ImportScript } from './components';
@@ -12,6 +12,7 @@ import '../../../src/assets/vendor/dist/css/AdminLTE.min.css';
 import '../../../src/assets/vendor/dist/css/skins/_all-skins.min.css';
 import '../../../src/assets/vendor/dist/css/custom.css';
 import { select } from 'underscore';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 /**/
 const useStyles=makeStyles(theme => ({
@@ -75,25 +76,25 @@ const Main=props => {
               </div>{/*<!-- /.navbar-collapse -->*/}
               {/*<!--Navbar Right Menu -->*/}
 
-              <div className="navbar-custom-menu">
+              <div className="navbar-custom-menu ">
 
-                <ul className="nav navbar-nav">
+                <ul className="nav navbar-nav ">
 
                   {/*<!-- User Account Menu -->*/}
                   <li className="dropdown user user-menu">
                     {/*<!-- Menu Toggle Button -->*/}
-                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" className="dropdown-toggle " data-toggle="dropdown">
                       {/*<!-- The user image in the navbar-->*/}
                       {/*<!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->*/}
                       {/*<!-- hidden-xs hides the username on small devices so only the image appears. --> */}
-                      <span className="hidden-xs"><b>{localStorage.getItem("username")}</b></span>
+                      <span className=""><AccountCircleIcon fontSize="large"/></span>
                     </a>
-                    <ul className="dropdown-menu">
+                    <ul className="dropdown-menu ">
                       {/*<!-- The user image in the menu -->*/}
-                      <li className="user-header">
+                      <li className="user-header ">
 
-                        <img src={'/assets/dist/img/'+localStorage.getItem("Foto")} className="img-circle" alt="User Image" />
-                        <p>
+                        {/* <img src={'/assets/dist/img/'+localStorage.getItem("Foto")} className="img-circle" alt="User Image" /> */}
+                        <p className="">
                           {localStorage.getItem("NamaLengkap")}
                           <small>{localStorage.getItem("Jabatan")}</small>
                         </p>

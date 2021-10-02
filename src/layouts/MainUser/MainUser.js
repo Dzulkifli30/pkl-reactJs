@@ -11,6 +11,7 @@ import '../../../src/assets/vendor/dist/font-awesome-4.1.0/css/font-awesome.css'
 import '../../../src/assets/vendor/dist/css/AdminLTE.min.css';
 import '../../../src/assets/vendor/dist/css/skins/_all-skins.min.css';
 import '../../../src/assets/vendor/dist/css/custom.css';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { select } from 'underscore';
 
 /**/
@@ -86,13 +87,12 @@ const MainUser=props => {
                       {/*<!-- The user image in the navbar-->*/}
                       {/*<!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->*/}
                       {/*<!-- hidden-xs hides the username on small devices so only the image appears. --> */}
-                      <span className="hidden-xs"><b>{localStorage.getItem("username")}</b></span>
+                      <span className=""><AccountCircleIcon fontSize="large"/></span>
                     </a>
                     <ul className="dropdown-menu">
                       {/*<!-- The user image in the menu -->*/}
                       <li className="user-header">
 
-                        <img src={'/assets/dist/img/'+localStorage.getItem("Foto")} className="img-circle" alt="User Image" />
                         <p>
                           {localStorage.getItem("NamaLengkap")}
                           <small>{localStorage.getItem("Jabatan")}</small>
