@@ -59,8 +59,8 @@ const FormSurvey = () => {
       }
       const gotoNext = () => {
         rowKK.AnggotaKK = AnggotaKK
-        console.log(rowKK)
-        console.log(AnggotaKK)
+        // console.log(rowKK)
+        // console.log(AnggotaKK)
 
         sliderRef.current.slickNext();
       }
@@ -72,7 +72,7 @@ const FormSurvey = () => {
       async function kirimData  () {
         rowKK.kb = kb
         KK.push(rowKK)
-        console.log("KK kirimdata ",KK)
+        // console.log("KK kirimdata ",KK)
 
         const requestOptions={
           method: 'POST',

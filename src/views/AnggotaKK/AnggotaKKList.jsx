@@ -28,7 +28,7 @@ const getMockData=() =>{
 
     )
   })
-  console.log(mockData)
+  // console.log(mockData)
 
   
 }
@@ -69,9 +69,9 @@ const AnggotaKKList=props => {
     // setFilteredItems(anggotaKK_params);
     // setOpen(false);
     // setAnggotaKK(anggotaKK_params)
-    console.log('ini Anggota KK',AnggotaKK)
-    console.log('FIltered Items',filteredItems)
-    console.log("Parampaa = ",anggotaKK_params)
+    // console.log('ini Anggota KK',AnggotaKK)
+    // console.log('FIltered Items',filteredItems)
+    // console.log("Parampaa = ",anggotaKK_params)
     // /* */
     // const requestOptions={
     //   method: 'get',
@@ -274,7 +274,7 @@ const AnggotaKKList=props => {
   // }
 
   useEffect(() => {
-   console.log(anggotaKK_params);
+  //  console.log(anggotaKK_params);
   //  kkidbwang()
     //   alert(setOpen)
   }, [order, orderBy]);

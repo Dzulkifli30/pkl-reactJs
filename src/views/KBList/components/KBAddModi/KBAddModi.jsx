@@ -104,7 +104,7 @@ const KBAddModi=props => {
 
   async function getNIKanggota() {
     /* */
-    console.log("anggota KK ",AnggotaKK)
+    // console.log("anggota KK ",AnggotaKK)
   }
 
 
@@ -175,7 +175,7 @@ const KBAddModi=props => {
       varJson.LastModifiedBy = userName
     }
     getDataBackend(varJson)
-    console.log("var json KB =",varJson);
+    // console.log("var json KB =",varJson);
 
     // const requestOptions={
     //   method: 'POST',

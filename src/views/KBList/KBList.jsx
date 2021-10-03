@@ -57,9 +57,9 @@ const KBList = props => {
     // setFilteredItems(KB_params);
     // setOpen(false);
     // setkb(KB_params)
-    console.log('ini data KB ', kb)
-    console.log('FIltered ItemsKB', filteredItems)
-    console.log("ParampaaKB = ", KB_params)
+    // console.log('ini data KB ', kb)
+    // console.log('FIltered ItemsKB', filteredItems)
+    // console.log("ParampaaKB = ", KB_params)
     // /* */
     // const requestOptions={
     //   method: 'get',
@@ -97,7 +97,7 @@ const KBList = props => {
     const userId = localStorage.getItem('user_id');
     setFilteredItems(KK);
     setOpen(true);
-    console.log("Ini KK", KK)
+    // console.log("Ini KK", KK)
     /* */
     const requestOptions = {
       method: 'get',
@@ -267,7 +267,7 @@ const KBList = props => {
   const [compPopup, setCompPopup] = useState(null);
 
   useEffect(() => {
-    console.log(KB_params);
+    // console.log(KB_params);
     // console.log('prov',provinsiId)
     //   alert(setOpen)
   }, [order, orderBy]);

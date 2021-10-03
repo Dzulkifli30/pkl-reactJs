@@ -154,7 +154,7 @@ const AnggotaKKAddModi=props => {
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    console.log('wowowowooww',rowKK)
+    // console.log('wowowowooww',rowKK)
     getKK()
     // showAnggotaKK(rowSelect.KK_id)
     // showKab(rowSelect.id_provinsi);
@@ -164,16 +164,16 @@ const AnggotaKKAddModi=props => {
     // showRt(rowSelect.id_rw);
 
     const errors=validate(rowSelect, schema);
-    console.log(errors)
-    console.log("rowSelect", rowSelect)
-    console.log("schema", schema)
+    // console.log(errors)
+    // console.log("rowSelect", rowSelect)
+    // console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
     // if (title!='Tambah Anggota KK' && rowSelect.id_rt_old===undefined) {
     //   rowSelect.id_rt_old=rowSelect.id_rt;
     //   rowSelect.Periode_Sensus_old=rowSelect.Periode_Sensus;
@@ -241,7 +241,7 @@ const AnggotaKKAddModi=props => {
       varJson.update_by = userName
     }
     getDataBackend(varJson)
-    console.log("var json =",varJson);
+    // console.log("var json =",varJson);
 
     const requestOptions={
       method: 'POST',
