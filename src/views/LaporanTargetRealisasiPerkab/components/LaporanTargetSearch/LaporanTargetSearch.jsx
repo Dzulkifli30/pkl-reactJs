@@ -117,7 +117,7 @@ const LaporanTargetSearch = props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kabupaten =', data.data)
+        // console.log('kabupaten =', data.data)
         setKab(data.data);
         //return false;
       })
@@ -137,7 +137,7 @@ const LaporanTargetSearch = props => {
       isValid: errors ? false : true,
       errors: errors || {}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -145,7 +145,7 @@ const LaporanTargetSearch = props => {
 
   const handleSave = () => {
     getDataBackend(rowSelect)
-    console.log(rowSelect.Periode_Sensus)
+    // console.log(rowSelect.Periode_Sensus)
   }
 
   const hasError = field => {
@@ -210,7 +210,7 @@ const LaporanTargetSearch = props => {
       // alert( localStorage.getItem("Periode Sensus") - 5 )
       var periode_sensus = localStorage.getItem("Periode Sensus");
       for (var option = periode_sensus; option >= periode_sensus - 5; option--) { tmp.push({ "option": option }); }
-      console.log('temp =', tmp)
+      // console.log('temp =', tmp)
       return tmp.map(option => (
         <option value={option.option}>
           {option.option}

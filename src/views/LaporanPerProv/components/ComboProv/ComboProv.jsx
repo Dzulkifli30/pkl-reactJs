@@ -122,15 +122,15 @@ const ComboProv = props => {
     useEffect(() => {
         getProv()
         const errors = validate(rowSelect);
-        console.log(errors)
-        console.log("rowSelect", rowSelect)
+        // console.log(errors)
+        // console.log("rowSelect", rowSelect)
 
         setFormState(formState => ({
             ...rowSelect,
             isValid: errors ? false : true,
             errors: errors || {}
         }));
-        console.log("formState", formState)
+        // console.log("formState", formState)
 
 
         //   alert(setOpen)
@@ -162,7 +162,7 @@ const ComboProv = props => {
              [nama]:pencarian(prov,event.target.value),
              [event.target.name]: event.target.value,
           });
-          console.log("Ket Provinsi =", prov)
+        //   console.log("Ket Provinsi =", prov)
         }
     }
 
@@ -173,7 +173,7 @@ const ComboProv = props => {
 
     const handleCari = () => {   
         getDataBackend(rowSelect)
-        console.log('rs',rowSelect)
+        // console.log('rs',rowSelect)
     }
 
     //  const position=[currentLocation.lat, currentLocation.lng]
@@ -187,7 +187,7 @@ const ComboProv = props => {
         result = paramKab.filter((entry) => {
           return entry&&entry.id_provinsi &&(entry.id_provinsi === value) 
         });
-        console.log("result =",result[0].nama_provinsi)
+        // console.log("result =",result[0].nama_provinsi)
         return result[0].nama_provinsi
     }
 

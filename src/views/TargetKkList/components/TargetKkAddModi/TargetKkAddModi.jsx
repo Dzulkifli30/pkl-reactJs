@@ -135,7 +135,7 @@ const TargetKkAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        // console.log('kabupaten =',data.data)
         setKabupaten(data.data);
         //return false;
       })
@@ -168,7 +168,7 @@ const TargetKkAddModi=props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kecamatan =', data.data)
+        // console.log('kecamatan =', data.data)
         setKecamatan(data.data);
         //return false;
       })
@@ -201,7 +201,7 @@ const TargetKkAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kelurahan =',data.data)
+        // console.log('kelurahan =',data.data)
         setKel(data.data);
         //return false;
       })
@@ -233,7 +233,7 @@ const TargetKkAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('Rw =',data.data)
+        // console.log('Rw =',data.data)
         setRw(data.data);
         //return false;
       })
@@ -265,7 +265,7 @@ const TargetKkAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('Rt =',data.data)
+        // console.log('Rt =',data.data)
         setRt(data.data);
         //return false;
       })
@@ -427,20 +427,20 @@ const TargetKkAddModi=props => {
     showRt(rowSelect.id_rw);
 
     const errors=validate(rowSelect, schema);
-    console.log(errors)
-    console.log("rowSelect", rowSelect)
-    console.log("schema", schema)
+    // console.log(errors)
+    // console.log("rowSelect", rowSelect)
+    // console.log("schema", schema)
 
     setFormState(formState => ({
       ...rowSelect,
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
     if (title!='Tambah Target Kk' && rowSelect.id_rt_old===undefined) {
       rowSelect.id_rt_old=rowSelect.id_rt;
       rowSelect.Periode_Sensus_old=rowSelect.Periode_Sensus;
-      console.log('rs = ',rowSelect)
+      // console.log('rs = ',rowSelect)
     }
     //   alert(setOpen)
   }, [rowSelect]);  // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -496,7 +496,7 @@ const TargetKkAddModi=props => {
       varJson.LastModifiedBy = userName
     }
 
-    console.log("var json =",varJson);
+    // console.log("var json =",varJson);
 
 
 
@@ -512,7 +512,7 @@ const TargetKkAddModi=props => {
 
     ///let urlGetData=urlPostLogin
     // alert(url);
-    console.log(url)
+    // console.log(url)
     const response=fetch(url, requestOptions)
       .then(tester => {
         if (tester.status === 200) {  
@@ -523,7 +523,7 @@ const TargetKkAddModi=props => {
       })/**/
 
       .then(tester => {
-        console.log(tester)
+        // console.log(tester)
         // alert(tester)
       getDataBackend();
       if (url == urlAddTargetKk) {
@@ -549,7 +549,7 @@ const TargetKkAddModi=props => {
       })
       .catch((e) => {
         // alert(e)
-        console.log(e)
+        // console.log(e)
         // swal("Gagal Login!", "Gagal Login", "error",  )
         return false;
 
@@ -566,7 +566,7 @@ const TargetKkAddModi=props => {
       var periode_sensus = parseInt(localStorage.getItem("Periode Sensus"));
       for (var option = periode_sensus; option <= periode_sensus + 5; option++)
        {tmp.push({"option" : option});}
-      console.log('temp =',tmp)
+      // console.log('temp =',tmp)
       return tmp.map(option => (
           <option value={option.option}>
             {option.option}

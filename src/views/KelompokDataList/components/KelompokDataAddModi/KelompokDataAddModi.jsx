@@ -100,7 +100,7 @@ const KelompokDataAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -148,7 +148,7 @@ const KelompokDataAddModi=props => {
       varJson.LastModifiedBy = userName
     }
 
-    console.log("var json =",varJson);
+    // console.log("var json =",varJson);
 
 
 
@@ -164,7 +164,7 @@ const KelompokDataAddModi=props => {
 
     ///let urlGetData=urlPostLogin
     // alert(url);
-    console.log(url)
+    // console.log(url)
     const response=fetch(url, requestOptions)
       .then(tester => {
         if (tester.status === 200) {  
@@ -175,7 +175,7 @@ const KelompokDataAddModi=props => {
       })/**/
 
       .then(tester => {
-        console.log(tester)
+        // console.log(tester)
         // alert(tester)
       getDataBackend();if (url == urlAddKelompokData) {
         Swal.fire({

@@ -382,7 +382,7 @@ const RtAddModi=props => {
     })/**/
 
     .then(tester => {
-      console.log(tester)
+      // console.log(tester)
       // alert(tester.message)
       getDataBackend();
       if (url == urlAddRt) {

@@ -452,7 +452,7 @@ const UserAccessSurveyModi=props => {
       // alert( localStorage.getItem("Periode Sensus") - 5 )
       var periode_sensus = localStorage.getItem("Periode Sensus");
       for (var option = periode_sensus; option >= periode_sensus - 5; option--) { tmp.push({ "option": option }); }
-      console.log('temp =', tmp)
+      // console.log('temp =', tmp)
       return tmp.map(option => (
         <option value={option.option}>
           {option.option}

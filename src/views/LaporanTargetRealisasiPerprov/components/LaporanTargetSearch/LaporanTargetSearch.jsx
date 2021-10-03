@@ -105,7 +105,7 @@ const LaporanTargetSearch=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -113,7 +113,7 @@ const LaporanTargetSearch=props => {
 
   const handleSave=() => {
     getDataBackend(rowSelect)
-    console.log(rowSelect.Periode_Sensus)
+    // console.log(rowSelect.Periode_Sensus)
   }
 
 const hasError=field => {

@@ -53,7 +53,7 @@ const LaporanKabupaten=props => {
     };
 
     let urlgetKab=urlShowsKab
-    console.log(urlgetKab)
+    // console.log(urlgetKab)
     // eslint-disable-next-line no-useless-concat
     // alert()
     const response=await fetch(urlgetKab, requestOptions)

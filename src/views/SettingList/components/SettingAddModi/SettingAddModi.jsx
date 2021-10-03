@@ -208,7 +208,7 @@ const SettingAddModi=props => {
     })/**/
 
     .then(tester => {
-      console.log(tester)
+      // console.log(tester)
       // alert(tester)
       getDataBackend();
       if (url == urlAddSetting) {

@@ -216,7 +216,7 @@ const AnggotasTable=props => {
     result = statKel.filter((entry) => {
       return entry&&entry.value &&(entry.value == value) 
     });
-    console.log("result =",val)
+    // console.log("result =",val)
     // alert("result = " + result[0].nama_provinsi)
     // return result[0]
   }

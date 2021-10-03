@@ -120,7 +120,7 @@ const VuserAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    console.log("formState", formState)
+    // console.log("formState", formState)
 
 
     //   alert(setOpen)
@@ -195,7 +195,7 @@ const VuserAddModi=props => {
       })/**/
 
       .then(res => {
-        console.log(res)
+        // console.log(res)
         getDataBackend();
         if (url == urlAddVuser) {
           Swal.fire({
