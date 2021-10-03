@@ -75,7 +75,7 @@ const Routes = () => {
       {localStorage.getItem("Username") ? <Redirect
         exact
         from="/"
-        to="/beranda-user"
+        to="/beranda"
       /> : <Redirect
         exact
         from="/"
