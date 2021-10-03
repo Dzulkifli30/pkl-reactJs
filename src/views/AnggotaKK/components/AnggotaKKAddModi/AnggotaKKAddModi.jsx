@@ -144,7 +144,7 @@ const AnggotaKKAddModi=props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         setKK([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -154,7 +154,7 @@ const AnggotaKKAddModi=props => {
   ///  const mapRef=createRef();
 
   useEffect(() => {
-    // console.log('wowowowooww',rowKK)
+    // 
     getKK()
     // showAnggotaKK(rowSelect.KK_id)
     // showKab(rowSelect.id_provinsi);
@@ -164,20 +164,20 @@ const AnggotaKKAddModi=props => {
     // showRt(rowSelect.id_rw);
 
     const errors=validate(rowSelect, schema);
-    // console.log(errors)
-    // console.log("rowSelect", rowSelect)
-    // console.log("schema", schema)
+    // 
+    // 
+    // 
 
     setFormState(formState => ({
       ...rowSelect,
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    // console.log("formState", formState)
+    // 
     // if (title!='Tambah Anggota KK' && rowSelect.id_rt_old===undefined) {
     //   rowSelect.id_rt_old=rowSelect.id_rt;
     //   rowSelect.Periode_Sensus_old=rowSelect.Periode_Sensus;
-    //   console.log('rs = ',rowSelect)
+    //   
     // }
     //   alert(setOpen)
   }, [rowSelect]);  // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -241,7 +241,7 @@ const AnggotaKKAddModi=props => {
       varJson.update_by = userName
     }
     getDataBackend(varJson)
-    // console.log("var json =",varJson);
+    // 
 
     const requestOptions={
       method: 'POST',

@@ -198,7 +198,7 @@ const KBSList=props => {
     result = AnggotaKK.filter((entry) => {
       return entry&&entry.NIK &&(entry.NIK === value) 
     });
-    // console.log("result Nya =",result)
+    // 
     // alert("result = " + result[0])
     // return result[0].nama_anggota
   }
@@ -310,7 +310,7 @@ const KBSList=props => {
     }
 
     setselectedkabupaten(newselectedkabupaten);
-    //console.log(selectedUsers);
+    //
   };
 
   const handlePageChange=(event, page) => {

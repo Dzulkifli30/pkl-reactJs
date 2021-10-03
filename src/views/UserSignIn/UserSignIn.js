@@ -176,7 +176,7 @@ const UserSignIn = props => {
         .then(res => {
           const data = res;
 
-          //console.log(data.data);
+          //
           if (data.code == "00") {
             //{ userId: "A6B433CD8F15397BE05314B5A8C00F89" }
             // localStorage.setItem('nama_provinsi', data.data[0].nama_provinsi);
@@ -224,7 +224,7 @@ const UserSignIn = props => {
             //history.push('/beranda');
 
           } else {
-            console.log(data);
+            
             setFormState(formState => ({
               ...formState,
               isValid: false,
@@ -251,7 +251,7 @@ const UserSignIn = props => {
           }
         })
         .catch((e) => {
-          console.log(e)
+          
           alert("Anda Tidak mempunyai akses");
           setFormState(formState => ({
             ...formState,
@@ -278,12 +278,12 @@ const UserSignIn = props => {
 
     /*requestOptions*/
 
-    //    console.log("users", users)
+    //    
     let users4 = users.find(user => user.UserName === formState.values.user_name
       && user.userPassword === md5(formState.values.password));
 
     //alert(formState.values.user_name)
-    ///console.log("users4", users4);
+    ///
     ///alert(formState.values.user_name)
     //alert(formState.values.password)
 

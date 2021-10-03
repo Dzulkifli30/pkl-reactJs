@@ -386,7 +386,7 @@ const AnggotaKKTable=props => {
     }
 
     setSelectedVuser(newSelectedVuser);
-    //console.log(selectedUsers);
+    //
   };
 
   const handlePageChange=(event, page) => {

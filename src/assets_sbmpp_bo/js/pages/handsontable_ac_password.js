@@ -146,7 +146,7 @@ $(function() {
                             query: query
                         },
                         success: function (response) {
-                            console.log("response", response);
+                            
                             process(response.data);
                         }
                     });
@@ -176,7 +176,7 @@ $(function() {
                             query: query
                         },
                         success: function (response) {
-                            console.log("response", response);
+                            
                             process(response.data);
                         }
                     });

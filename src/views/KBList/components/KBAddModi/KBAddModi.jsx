@@ -96,7 +96,7 @@ const KBAddModi=props => {
   //       //return false;
   //     })
   //     .catch(e => {
-  //       //console.log(e);
+  //       //
   //       setKK([]);
   //       //this.setState({ ...this.state, isFetching: false });
   //     });
@@ -104,7 +104,7 @@ const KBAddModi=props => {
 
   async function getNIKanggota() {
     /* */
-    // console.log("anggota KK ",AnggotaKK)
+    // 
   }
 
 
@@ -119,7 +119,7 @@ const KBAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    // console.log("formState", formState)
+    // 
     //   alert(setOpen)
   }, [rowSelect]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
@@ -171,11 +171,11 @@ const KBAddModi=props => {
       varJson.LastModifiedBy = userName
     } else {
       // url=urlEditKB;
-      // console.log("ide =",rowSelect.id_rt)
+      // 
       varJson.LastModifiedBy = userName
     }
     getDataBackend(varJson)
-    // console.log("var json KB =",varJson);
+    // 
 
     // const requestOptions={
     //   method: 'POST',
@@ -195,7 +195,7 @@ const KBAddModi=props => {
     //   })/**/
 
     //   .then(tester => {
-    //     console.log(tester)
+    //     
     //     // alert(tester)
     //   getDataBackend();
     //   if (url == urlAddKB) {

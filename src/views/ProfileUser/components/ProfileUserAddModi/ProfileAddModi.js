@@ -113,7 +113,7 @@ const PrifleUserAddModi=props => {
       isValid: errors? false:true,
       errors: errors||{}
     }));
-    // console.log("formState", formState)
+    // 
 
 
     //   alert(setOpen)
@@ -156,7 +156,7 @@ const PrifleUserAddModi=props => {
     // alert(url)
     varJson.LastModifiedBy = userName;
 
-    //console.log(body);
+    //
 
 
 

@@ -34,7 +34,7 @@ const Profile=props => {
       );
     )
   if (user) alert("userInLocalStorage"); else alert("Error")
-  console.log(
+  
     localStorage.getItem('userInLocalStorage')
   
   );

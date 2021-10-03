@@ -303,22 +303,22 @@ $(function() {
     // Events
     $('.pickadate-events').pickadate({
         onStart: function() {
-            console.log('Hello there :)')
+            
         },
         onRender: function() {
-            console.log('Whoa.. rendered anew')
+            
         },
         onOpen: function() {
-            console.log('Opened up')
+            
         },
         onClose: function() {
-            console.log('Closed now')
+            
         },
         onStop: function() {
-            console.log('See ya.')
+            
         },
         onSet: function(context) {
-            console.log('Just set stuff:', context)
+            
         }
     });
 
@@ -434,22 +434,22 @@ $(function() {
     // Events
     $('.pickatime-events').pickatime({
         onStart: function() {
-            console.log('Hello there :)')
+            
         },
         onRender: function() {
-            console.log('Whoa.. rendered anew')
+            
         },
         onOpen: function() {
-            console.log('Opened up')
+            
         },
         onClose: function() {
-            console.log('Closed now')
+            
         },
         onStop: function() {
-            console.log('See ya.')
+            
         },
         onSet: function(context) {
-            console.log('Just set stuff:', context)
+            
         }
     });
 

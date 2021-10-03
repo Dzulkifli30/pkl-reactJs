@@ -156,12 +156,12 @@ const KKAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kabupaten =',data.data)
+        
         setKabupaten(data.data);
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -189,12 +189,12 @@ const KKAddModi=props => {
 
       .then(resJson => {
         const data = resJson;
-        console.log('kecamatan =', data.data)
+        
         setKecamatan(data.data);
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -222,12 +222,12 @@ const KKAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('kelurahan =',data.data)
+        
         setKel(data.data);
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setKel([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -254,12 +254,12 @@ const KKAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('Rw =',data.data)
+        
         setRw(data.data);
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setRw([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -286,12 +286,12 @@ const KKAddModi=props => {
 
       .then(resJson => {
         const data=resJson;
-        console.log('Rt =',data.data)
+        
         setRt(data.data);
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setRt([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -319,7 +319,7 @@ const KKAddModi=props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setKel([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -347,7 +347,7 @@ const KKAddModi=props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         setKecamatan([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -374,7 +374,7 @@ const KKAddModi=props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
 
         setKabupaten([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -402,7 +402,7 @@ const KKAddModi=props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         setProvinsi([]);
         //this.setState({ ...this.state, isFetching: false });
       });
@@ -429,7 +429,7 @@ const KKAddModi=props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
   
         setRw([]);
         //this.setState({ ...this.state, isFetching: false });
@@ -446,9 +446,9 @@ const KKAddModi=props => {
     // showRt(rowSelect.id_rw);
 
     const errors=validate(rowSelect, schema);
-    console.log(errors)
-    console.log("rowSelect", rowSelect)
-    console.log("schema", schema)
+    
+    
+    
 
     setFormState(formState => ({
       ...rowSelect,
@@ -519,12 +519,12 @@ const KKAddModi=props => {
       varJson.update_by = userName
     } else {
       url=urlEditFormKK;
-      // console.log("ide =",rowSelect.id_rt)
+      // 
       varJson.update_by = userName
     }
-    console.log(rowSelect);
+    
     gotoNext();
-    // console.log("var json =",varJson);
+    // 
 
 
 
@@ -539,7 +539,7 @@ const KKAddModi=props => {
       var periode_sensus = parseInt(localStorage.getItem("Periode Sensus"));
       for (var option = periode_sensus; option <= periode_sensus + 5; option++)
        {tmp.push({"option" : option});}
-      console.log('temp =',tmp)
+      
       return tmp.map(option => (
           <option value={option.option}>
             {option.option}

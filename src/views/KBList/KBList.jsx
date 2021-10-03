@@ -57,9 +57,9 @@ const KBList = props => {
     // setFilteredItems(KB_params);
     // setOpen(false);
     // setkb(KB_params)
-    // console.log('ini data KB ', kb)
-    // console.log('FIltered ItemsKB', filteredItems)
-    // console.log("ParampaaKB = ", KB_params)
+    // 
+    // 
+    // 
     // /* */
     // const requestOptions={
     //   method: 'get',
@@ -81,7 +81,7 @@ const KBList = props => {
     //     //return false;
     //   })
     //   .catch(e => {
-    //     //console.log(e);
+    //     //
     //     alert("Nextwork Error");
     //     setkb([]);
     //     setFilteredItems([]);
@@ -97,7 +97,7 @@ const KBList = props => {
     const userId = localStorage.getItem('user_id');
     setFilteredItems(KK);
     setOpen(true);
-    // console.log("Ini KK", KK)
+    // 
     /* */
     const requestOptions = {
       method: 'get',
@@ -119,7 +119,7 @@ const KBList = props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setKK([]);
         setFilteredItems([]);
@@ -156,7 +156,7 @@ const KBList = props => {
     setFilteredItems(kb3)
     setKB(kb3)
     setKBfind('')
-    //console.log("groups3",groups3);
+    //
     //findData(groupfind)
   }
 
@@ -202,7 +202,7 @@ const KBList = props => {
     }
     setKBfind(e.target.value)
 
-    //console.log("user1", users1);
+    //
   }
   const Export = ({ onExport }) => (
     <Button onClick={e => onExport(e.target)}>Export</Button>
@@ -267,8 +267,8 @@ const KBList = props => {
   const [compPopup, setCompPopup] = useState(null);
 
   useEffect(() => {
-    // console.log(KB_params);
-    // console.log('prov',provinsiId)
+    // 
+    // 
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -309,10 +309,10 @@ const KBList = props => {
     setOpen(true);
     setTitle(MessageButton);
     setRowkbSelect(rowkb);
-    // console.log("ANggota kk di formkb ", AnggotaKK)
+    // 
 
     //setCompPopup("NonMap")
-    //console.log("rowgroup", rowgroup)
+    //
 
 
   };
@@ -335,7 +335,7 @@ const KBList = props => {
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
-    //console.log("rowgroup", rowgroup)
+    //
 
 
   };

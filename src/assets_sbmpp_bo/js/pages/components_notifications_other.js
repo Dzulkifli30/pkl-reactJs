@@ -230,13 +230,13 @@ $(function() {
             life: 5000,
             header: 'Callbacks',
             beforeOpen: function(e,m,o) {
-                console.log("I am going to be opened!", this);
+                
             },
             afterOpen: function(e,m,o) {
-                console.log("I am opened!", this);
+                
             },
             close: function(e,m,o) {
-                console.log("I am closed!", this);
+                
             }
         });
     });

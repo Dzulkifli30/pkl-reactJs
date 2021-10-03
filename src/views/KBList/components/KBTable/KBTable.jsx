@@ -220,7 +220,7 @@ const KBTable=props => {
     result = AnggotaKK.filter((entry) => {
       return entry&&entry.NIK &&(entry.NIK === value) 
     });
-    // console.log("result =",result[0].nama_provinsi)
+    // 
     // alert("result = " + result[0].nama_provinsi)
     return result[0].nama_anggota
   }
@@ -343,7 +343,7 @@ const KBTable=props => {
     }
 
     setselectedkb(newselectedkb);
-    //console.log(selectedUsers);
+    //
   };
 
   const handlePageChange=(event, page) => {
