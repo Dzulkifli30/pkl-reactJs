@@ -1,0 +1,7 @@
+{
+    "name": "adminbkkbn",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }

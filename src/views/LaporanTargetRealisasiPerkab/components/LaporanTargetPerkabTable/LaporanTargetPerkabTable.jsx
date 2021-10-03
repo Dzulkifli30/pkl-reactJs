@@ -239,11 +239,10 @@ const LaporanSensusPerKab=props => {
     };
   return <div class="form-group">
       <div class="col-md-6">
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search Kecamatan"
-          textfind={textfind}
-        />
+        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+          <img src="/img/xls.jpeg" />
+        </Button>
+
       </div>
   </div>
 
@@ -319,7 +318,7 @@ const LaporanSensusPerKab=props => {
           <div className={classes.inner}>
             <DataTable
             font="Poppins"
-              title={rowSelect.nama_kabupaten == undefined ? "laporan Target Sensus di Kabupaten" : "laporan Target Sensus di Kabupaten " +rowSelect.nama_kabupaten}
+              title={rowSelect.nama_kabupaten == undefined ? "Laporan Target Sensus di Kabupaten" : "laporan Target Sensus di Kabupaten " +rowSelect.nama_kabupaten}
               customStyles={customStyles}
               columns={columns}
               data={sensus}

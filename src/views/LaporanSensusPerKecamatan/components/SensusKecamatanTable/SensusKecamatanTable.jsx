@@ -289,7 +289,7 @@ const SensusKecamatanTable=props => {
         <PerfectScrollbar>
           <div className={classes.inner}>
             <DataTable
-              title={rowSelect.nama_kecamatan == undefined ? "laporan Target Sensus di Kecamatan" : "laporan Target Sensus di Kecamatan " +rowSelect.nama_kecamatan}
+              title={rowSelect.nama_kecamatan == undefined ? "Laporan Target Sensus di Kecamatan" : "laporan Target Sensus di Kecamatan " +rowSelect.nama_kecamatan}
               customStyles={customStyles}
               columns={columns}
               data={filteredItems}

@@ -238,8 +238,13 @@ const LaporanSensusPerKab=props => {
         setFilterText('');
       }
     };
-  return <div class="form-group">
+    return <div class="form-group">
+    <div class="col-md-6">
+      <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+        <img src="/img/xls.jpeg" />
+      </Button>
 
+    </div>
   </div>
 
 

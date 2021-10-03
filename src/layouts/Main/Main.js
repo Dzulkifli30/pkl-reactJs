@@ -143,7 +143,7 @@ const Main=props => {
                     {children}
                   </main>
 
-                {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}!! to Periode Sensus Tahun {localStorage.getItem("Periode Sensus")}
+                {localStorage.getItem("username") == null ? "Harap Login Terlebih Dahulu !!" : localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}!! to Periode Sensus Tahun {localStorage.getItem("Periode Sensus")}
                 </div>{/*<!-- /.box-body -->*/}
               </div>{/*<!-- /.box -->*/}
             </section>

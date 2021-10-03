@@ -283,7 +283,7 @@ const LaporanTargetRealisasiID=props => {
 
   return (
     <div className={classes.root}>
-      <h5 style={{ color: 'black' }}>Provinsi</h5>
+      <h5 style={{ color: 'black' }}>Indonesia</h5>
       {/*}
       <ProvinsisToolbar
         handleOpenViewMap={handleOpenViewMap}

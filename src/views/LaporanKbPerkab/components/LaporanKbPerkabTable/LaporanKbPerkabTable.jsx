@@ -242,12 +242,11 @@ const LaporanSensusPerKab=props => {
       }
     };
   return <div class="form-group">
-      <div class="col-md-6">
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search Kecamatan"
-          textfind={textfind}
-        />
+                  <div class="col-md-6">
+        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+          <img src="/img/xls.jpeg" />
+        </Button>
+
       </div>
   </div>
 

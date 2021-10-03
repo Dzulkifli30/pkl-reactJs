@@ -105,7 +105,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(40)
   },
   signInButton: {
-    //margin: theme.spacing(2, 0)
+    // margin: theme.spacing(2, 0)
+    left:50
   }
 }));
 
@@ -282,7 +283,7 @@ const SignIn = props => {
 
       <div className="w-full font-poppins mt-9 p-9 mb-12 bg-gray-200 rounded-xl">
         {/* <img src='images/auth.jpg' /> */}
-        <h4 className="mb-12 font-poppins ">Login Admin BKKBN</h4>
+        <span className="align text-center"><h4 className="mb-12 font-poppins ">Login Admin BKKBN</h4></span>
         <div className={classes.root, "font-poppins sm:mt-20 lg:mt-5"}>
           <Grid
             className={classes.grid}
@@ -302,8 +303,6 @@ const SignIn = props => {
                     className={classes.form}
                     onSubmit={handleSignIn}
                   >
-
-
                     <Grid
                       className={classes.grid}
                       container
@@ -313,7 +312,6 @@ const SignIn = props => {
                         item
                         lg={6}
                         xs={6}
-
                       >
                         <br />
                         <Typography
@@ -392,7 +390,6 @@ const SignIn = props => {
                       </Grid>
 
                     </Grid>
-
 
                     <Button
                       className={classes.signInButton}

@@ -172,11 +172,11 @@ const Sidebar=props => {
           href:'/laporan-sensus-perkab'
         },
         {
-          title:'Laporan target Sensus PerKecamatan',
+          title:'Laporan target Sensus Per Kecamatan',
           href:'/laporan-sensus-perkecamatan'
         },
         {
-          title:'Laporan target Sensus PerKelurahan',
+          title:'Laporan target Sensus Per Kelurahan',
           href:'/laporan-sensus-perkelurahan'
         },
       ]

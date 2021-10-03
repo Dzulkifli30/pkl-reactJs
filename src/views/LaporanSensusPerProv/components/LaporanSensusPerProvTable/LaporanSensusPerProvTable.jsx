@@ -229,10 +229,14 @@ const LaporanSensusPerProvTable=props => {
         setFilterText('');
       }
     };
-  return <div class="form-group">
-  
-  </div>
+    return <div class="form-group">
+      <div class="col-md-6">
+        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+          <img src="/img/xls.jpeg" />
+        </Button>
 
+      </div>
+    </div>
 
 
       ;
@@ -305,7 +309,7 @@ const LaporanSensusPerProvTable=props => {
           <div className={classes.inner}>
             <DataTable
             font="Poppins"
-              title={rowSelect.nama_provinsi == undefined ? "laporan Target Sensus di Provinsi" : "laporan Target Sensus di Provinsi " +rowSelect.nama_provinsi}
+              title={rowSelect.nama_provinsi == undefined ? "Laporan Target Sensus di Provinsi" : "laporan Target Sensus di Provinsi " +rowSelect.nama_provinsi}
               customStyles={customStyles}
               columns={columns}
               data={sensus}
@@ -315,7 +319,7 @@ const LaporanSensusPerProvTable=props => {
               subHeader
               subHeaderComponent={subHeaderComponentMemo}
               selectableRows
-              persistTableHead
+              persistTableHead  
               dense
             />
 

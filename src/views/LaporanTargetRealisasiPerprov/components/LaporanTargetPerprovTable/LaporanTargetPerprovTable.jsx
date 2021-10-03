@@ -224,7 +224,11 @@ const LaporanTargetPerProvTable=props => {
       }
     };
   return <div class="form-group">
-  
+          <div class="col-md-6">
+        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+          <img src="/img/xls.jpeg" />
+        </Button>
+      </div>
   </div>
 
 
@@ -299,7 +303,7 @@ const LaporanTargetPerProvTable=props => {
           <div className={classes.inner}>
             <DataTable
             font="Poppins"
-              title={rowSelect.nama_provinsi == undefined ? "laporan Target Sensus di Provinsi "+ Periode : "laporan Target Sensus di Provinsi " +rowSelect.nama_provinsi +" "+ Periode}
+              title={rowSelect.nama_provinsi == undefined ? "Laporan Target Sensus di Provinsi "+ Periode : "laporan Target Sensus di Provinsi " +rowSelect.nama_provinsi +" "+ Periode}
               customStyles={customStyles}
               columns={columns}
               data={sensus}
