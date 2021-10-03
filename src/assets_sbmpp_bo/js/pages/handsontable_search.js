@@ -82,7 +82,7 @@ $(function() {
     Handsontable.Dom.addEvent(hot_search_basic_input, 'keyup', function (event) {
         var queryResult = hot_search_basic_init.search.query(this.value);
 
-        console.log(queryResult);
+        
         hot_search_basic_init.render();
     });
 
@@ -137,7 +137,7 @@ $(function() {
     Handsontable.Dom.addEvent(hot_search_class_input,'keyup', function (event) {
         var queryResult = hot_search_class_init.search.query(this.value);
 
-        console.log(queryResult);
+        
         hot_search_class_init.render();
     });
 
@@ -197,7 +197,7 @@ $(function() {
     Handsontable.Dom.addEvent(hot_search_query_input,'keyup', function(event) {
         var queryResult = hot_search_query_init.search.query(this.value);
 
-        console.log(queryResult);
+        
         hot_search_query_init.render();
     });
 
@@ -267,7 +267,7 @@ $(function() {
 
         searchResultCount = 0;
         queryResult = hot_search_callback_init.search.query(this.value);
-        console.log(queryResult);
+        
         resultCount.innerText = searchResultCount.toString();
         hot_search_callback_init.render();
     });

@@ -330,7 +330,7 @@ const KKSTable=props => {
     }
 
     setselectedkabupaten(newselectedkabupaten);
-    //console.log(selectedUsers);
+    //
   };
 
   const handlePageChange=(event, page) => {

@@ -39,7 +39,7 @@ const AppMenuItem: React.FC<AppMenuItemProps>=props => {
     const classes=useStyles()
     const isExpandable=items&&items.length>0
     const [open, setOpen]=React.useState(false)
-    console.log(items)
+    
     const marginLeftVar=level*22;
     const MenuItemChildren=isExpandable? (
         <ul className="dropdown-menu" role="menu">

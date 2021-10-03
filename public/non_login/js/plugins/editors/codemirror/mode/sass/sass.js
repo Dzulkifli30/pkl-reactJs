@@ -64,10 +64,10 @@ CodeMirror.defineMode("sass", function(config) {
       var endingString = ((nextChar !== "\\" && peekChar === quote) || (nextChar === quote && previousChar !== "\\"));
 
       /*
-      console.log("previousChar: " + previousChar);
-      console.log("nextChar: " + nextChar);
-      console.log("peekChar: " + peekChar);
-      console.log("ending: " + endingString);
+      
+      
+      
+      
       */
 
       if (endingString){

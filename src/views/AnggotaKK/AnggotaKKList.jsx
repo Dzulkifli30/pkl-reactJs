@@ -28,7 +28,7 @@ const getMockData=() =>{
 
     )
   })
-  // console.log(mockData)
+  // 
 
   
 }
@@ -69,9 +69,9 @@ const AnggotaKKList=props => {
     // setFilteredItems(anggotaKK_params);
     // setOpen(false);
     // setAnggotaKK(anggotaKK_params)
-    // console.log('ini Anggota KK',AnggotaKK)
-    // console.log('FIltered Items',filteredItems)
-    // console.log("Parampaa = ",anggotaKK_params)
+    // 
+    // 
+    // 
     // /* */
     // const requestOptions={
     //   method: 'get',
@@ -93,7 +93,7 @@ const AnggotaKKList=props => {
     //     //return false;
     //   })
     //   .catch(e => {
-    //     //console.log(e);
+    //     //
     //     alert("Nextwork Error");
     //     setAnggotaKK([]);
     //     setFilteredItems([]);
@@ -131,7 +131,7 @@ const AnggotaKKList=props => {
   //       //return false;
   //     })
   //     .catch(e => {
-  //       //console.log(e);
+  //       //
   //       alert("Nextwork Error");
   //       setAnggotaKK([]);
   //       setFilteredItems([]);
@@ -202,7 +202,7 @@ const AnggotaKKList=props => {
     }
     setAnggotaKKfind(e.target.value)
 
-    //console.log("user1", users1);
+    //
   }
   const Export=({ onExport }) => (
     <Button onClick={e => onExport(e.target)}>Export</Button>
@@ -270,11 +270,11 @@ const AnggotaKKList=props => {
 
   // const kkidbwang = () => {
   //   KK.push(rowKK)
-  //   console.log('wwwwwwwwwwwwwwwww',KK)
+  //   
   // }
 
   useEffect(() => {
-  //  console.log(anggotaKK_params);
+  //  
   //  kkidbwang()
     //   alert(setOpen)
   }, [order, orderBy]);
@@ -318,7 +318,7 @@ const AnggotaKKList=props => {
     // alert(MessageButton)
     setRowAnggotaKK(rowAnggotaKK);
     //setCompPopup("NonMap")
-    //console.log("rowgroup", rowgroup)
+    //
 
 
   };
@@ -342,7 +342,7 @@ const AnggotaKKList=props => {
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
-    //console.log("rowgroup", rowgroup)
+    //
 
 
   };

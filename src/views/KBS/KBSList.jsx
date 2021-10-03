@@ -60,7 +60,7 @@ const KabupatenList=props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setkabupaten([]);
         setFilteredItems([]);
@@ -96,7 +96,7 @@ const KabupatenList=props => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         // alert("Nextwork Error");
         setkabupaten([]);
         setFilteredItems([]);
@@ -131,7 +131,7 @@ const KabupatenList=props => {
     setFilteredItems(kabupaten3)
     setkabupaten(kabupaten3)
     setkabupatenfind('')
-    //console.log("groups3",groups3);
+    //
     //findData(groupfind)
   }
   
@@ -177,7 +177,7 @@ const KabupatenList=props => {
     }
     setkabupatenfind(e.target.value)
 
-    //console.log("user1", users1);
+    //
   }
   const Export=({ onExport }) => (
     <Button onClick={e => onExport(e.target)}>Export</Button>
@@ -242,7 +242,7 @@ const KabupatenList=props => {
 
   useEffect(() => {
     getKab();
-    // console.log('prov',provinsiId)
+    // 
     //   alert(setOpen)
   }, [order, orderBy]);
   // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
@@ -284,7 +284,7 @@ const KabupatenList=props => {
     setTitle(MessageButton);
     setRowkabupatenSelect(rowKabupaten);
     //setCompPopup("NonMap")
-    //console.log("rowgroup", rowgroup)
+    //
 
 
   };
@@ -303,7 +303,7 @@ const KabupatenList=props => {
 
     //setCompPopup("Map")
     //setCompPopup("NonMap")
-    //console.log("rowgroup", rowgroup)
+    //
 
 
   };

@@ -611,7 +611,7 @@ $(function() {
         url: '/editable-put-submit',
         responseTime: 200,
         response: function(settings) {
-            console.log(settings);
+            
         }
     }); 
 

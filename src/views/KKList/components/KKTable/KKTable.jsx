@@ -338,7 +338,7 @@ const KKTable=props => {
     }
 
     setSelectedKK(newSelectedKK);
-    //console.log(selectedUsers);
+    //
   };
 
   const handlePageChange=(event, page) => {

@@ -50,17 +50,17 @@ const FormSurvey = () => {
         // delete rowKK.create_by
         localStorage.setItem("Data KK",JSON.stringify(KK))
         window.location.reload();
-        // console.log(rowKK)
+        // 
         // setRowKK({})
         // rowKK = {}
-        // console.log('ini KK gan',KK)
+        // 
           // history.push("/form-survey")
         // sliderRef.current.slickNext();
       }
       const gotoNext = () => {
         rowKK.AnggotaKK = AnggotaKK
-        // console.log(rowKK)
-        // console.log(AnggotaKK)
+        // 
+        // 
 
         sliderRef.current.slickNext();
       }
@@ -72,7 +72,7 @@ const FormSurvey = () => {
       async function kirimData  () {
         rowKK.kb = kb
         KK.push(rowKK)
-        // console.log("KK kirimdata ",KK)
+        // 
 
         const requestOptions={
           method: 'POST',
@@ -103,7 +103,7 @@ const FormSurvey = () => {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         Swal.fire({
           position: 'center',
           icon: 'error',

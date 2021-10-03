@@ -24,10 +24,10 @@ const KKList = (props) => {
       // alert("Get Form KK")
       const userId=localStorage.getItem('user_id');
       // KK = JSON.parse(localStorage.getItem("Data KK"))
-      // console.log("jxon",JSON.parse(localStorage.getItem("Data KK")))
+      // 
       setKK([rowKK]);
       // KK.push(rowKK)
-      // console.log(rowKK)
+      // 
     }
 
 
@@ -35,11 +35,11 @@ const KKList = (props) => {
       // alert("Get Form KK")
       const userId=localStorage.getItem('user_id');
       // KK = JSON.parse(localStorage.getItem("Data KK"))
-      // console.log("jxon",JSON.parse(localStorage.getItem("Data KK")))
+      // 
       // setKK(JSON.parse(localStorage.getItem("Data KK")));
      
       KK.push(rowKK)
-      // console.log(rowKK)
+      // 
 
     }
     const deleteFormKK = async (KK_id) => {  /* */
@@ -67,7 +67,7 @@ const KKList = (props) => {
           //return false;
         })
         .catch(e => {
-          //console.log(e);
+          //
           // alert("Nextwork Error");
           setKK([]);
           setFilteredItems([]);
@@ -90,7 +90,7 @@ const KKList = (props) => {
       }
       setKKfind(e.target.value)
   
-      //console.log("user1", users1);
+      //
     }
     const Export=({ onExport }) => (
       <Button onClick={e => onExport(e.target)}>Export</Button>

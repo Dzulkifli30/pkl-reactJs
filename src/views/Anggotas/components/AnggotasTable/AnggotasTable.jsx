@@ -216,7 +216,7 @@ const AnggotasTable=props => {
     result = statKel.filter((entry) => {
       return entry&&entry.value &&(entry.value == value) 
     });
-    // console.log("result =",val)
+    // 
     // alert("result = " + result[0].nama_provinsi)
     // return result[0]
   }
@@ -409,7 +409,7 @@ const AnggotasTable=props => {
     }
 
     setselectedkabupaten(newselectedkabupaten);
-    //console.log(selectedUsers);
+    //
   };
 
   const handlePageChange=(event, page) => {

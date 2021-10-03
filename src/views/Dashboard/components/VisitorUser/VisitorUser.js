@@ -100,7 +100,7 @@ export default function VisitorUser (props)  {
         //return false;
       })
       .catch(e => {
-        //console.log(e);
+        //
         alert("Nextwork Error");
         setProvinsis([]);
         setFilteredItems([]);
@@ -111,7 +111,7 @@ export default function VisitorUser (props)  {
     setOpen(false);
   }
   //alert(dashboard.totalVisitorMobile)
-  //console.log(dashboard.data.listAccessMenuMobile)
+  //
   const classes=useStyles();
 
   const [vUsers, setVusers]=useState([]);

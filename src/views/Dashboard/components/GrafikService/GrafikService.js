@@ -87,7 +87,7 @@ const GrafikService=props => {
     setWindowSize(getSize());
     getPie(data, options, windowSize)
   }
-  //console.log(listAccessMenuMobile);
+  //
 
   const data={
     datasets: [
@@ -111,7 +111,7 @@ const GrafikService=props => {
     //labels: ['Berita', 'Anggaran', 'Postur', 'Komentar', "Cari Anggaran"]
   };
 
-  //console.log("listAccessMenuMobile", listAccessMenuMobile)
+  //
   const options={
     legend: {
       display: false,
@@ -154,7 +154,7 @@ const GrafikService=props => {
     //text+=cars[i]+"<br>";
     ///    alert(data.labels[i])
     /* */
-    //console.log("data.datasets.data", data.datasets[0].data)
+    //
     data.datasets[0].data.push(listAccessMenuMobile[i].totalAccessMenu)
     data.labels.push(listAccessMenuMobile[i].accessMenu)
 
