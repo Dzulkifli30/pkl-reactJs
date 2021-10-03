@@ -142,7 +142,7 @@ const MainUser=props => {
                   <main id="main">
                     {children}
                   </main>
-                  <p className="mt-10">  {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}</p>
+                  <p className="mt-10">  {localStorage.getItem("username") == null ? "Harap Login Terlebih Dahulu !!" : localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}!! to Periode Sensus Tahun {localStorage.getItem("Periode Sensus")}</p>
                 {/* {localStorage.getItem("Setting Label").replace("[username]", localStorage.getItem("username"))}!! to Periode Sensus Tahun {localStorage.getItem("Periode Sensus")} */}
                 </div>{/*<!-- /.box-body -->*/}
               </div>{/*<!-- /.box -->*/}
