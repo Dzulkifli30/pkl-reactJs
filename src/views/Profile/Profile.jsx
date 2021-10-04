@@ -32,7 +32,7 @@ const Profile = () => {
                     }
                 />
                 <Divider />
-                <CardContent className="bg-blue-900 text-white">
+                <CardContent className="bg-blue-900 sm:text-black lg:text-white">
                     <Grid
                         container
                         spacing={0}
