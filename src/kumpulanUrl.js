@@ -1,4 +1,4 @@
-let urlport="http://192.168.137.61:8000/";
+let urlport="http://127.0.0.1:8000/api/";
 let urlportrefresh="http://localhost:8000/";
 
 
