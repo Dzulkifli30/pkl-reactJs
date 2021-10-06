@@ -224,7 +224,7 @@ const UserSignIn = props => {
             //history.push('/beranda');
 
           } else {
-            
+
             setFormState(formState => ({
               ...formState,
               isValid: false,
@@ -251,7 +251,7 @@ const UserSignIn = props => {
           }
         })
         .catch((e) => {
-          
+
           alert("Anda Tidak mempunyai akses");
           setFormState(formState => ({
             ...formState,
@@ -299,7 +299,7 @@ const UserSignIn = props => {
   return (
     <div className="h-full sm:mr-4">
       <div className="w-full font-poppins mt-9 p-9 mb-12 bg-gray-200 rounded-xl">
-        <h4 className="mb-12 font-poppins ">Login Petugas Sensus</h4>
+        <span className="align text-center"><h4 className="mb-12 font-poppins ">Login Petugas Sensus</h4></span>
         <div className={classes.root, "font-poppins sm:mt-20 lg:mt-5"}>
           <Grid
             className={classes.grid}
