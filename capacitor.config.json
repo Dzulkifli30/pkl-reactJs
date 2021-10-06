@@ -1,6 +1,6 @@
 {
-    "appId": "io.ionic.adminbkkbn",
-    "appName": "adminbkkbn",
+    "appId": "io.ionic.admin",
+    "appName": "admin",
     "bundledWebRuntime": false,
     "npmClient": "npm",
     "webDir": "build",
