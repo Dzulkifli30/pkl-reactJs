@@ -1,0 +1,7 @@
+{
+    "name": "petugasbkkbn",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }

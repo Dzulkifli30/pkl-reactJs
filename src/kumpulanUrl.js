@@ -1,4 +1,4 @@
-let urlport="http://localhost:8000/";
+let urlport="http://127.0.0.1:8000/api/";
 let urlportrefresh="http://localhost:8000/";
 
 
@@ -54,7 +54,7 @@ export const urlLaporanPerProv=urlport+'provinsi/laporanPerProv'
 export const urlKel = urlport+'kelurahan/getKelurahan'
 export const urlAddKel = urlport+'kelurahan/storeKel'
 export const urlEditKel = urlport+'kelurahan/updateKel'
-export const urlShowKel = urlport + '/kelurahan/showKel'
+export const urlShowKel = urlport + 'kelurahan/showKel'
 export const urlDeleteKel = urlport+'kelurahan/deleteKel'
 export const urlLaporanKel=urlport+'kelurahan/laporanKel'
 export const urlLaporanPerKel=urlport+'kelurahan/laporanPerKel'
@@ -91,27 +91,28 @@ export const urlShowLaporanSensusPerKec=urlport +'laporan-sensus/perkec'
 export const urlShowLaporanSensusPerKel=urlport +'laporan-sensus/perkel'
 
 //User Access Survey
-export const urlGetUserAccessSurvey = urlport + '/user-access-survey/get'
-export const urlPostLoginUser = urlport + '/user-access-survey/showUAS'
-export const urlAddUserAccessSurvey = urlport + '/user-access-survey/store'
-export const urlEditUserAccessSurvey = urlport + '/user-access-survey/update'
-export const urlDeleteUserAccessSurvey = urlport + '/user-access-survey/delete'
+export const urlGetUserAccessSurvey = urlport + 'user-access-survey/get'
+export const urlPostLoginUser = urlport + 'user-access-survey/showUAS'
+export const urlAddUserAccessSurvey = urlport + 'user-access-survey/store'
+export const urlEditUserAccessSurvey = urlport + 'user-access-survey/update'
+export const urlDeleteUserAccessSurvey = urlport + 'user-access-survey/delete'
 
 //Form KK
-export const urlGetFormKK = urlport + '/form-kk/getFormKK'
-export const urlAddFormKK = urlport + '/form-kk/storeFormKK'
-export const urlEditFormKK = urlport + '/form-kk/updateFormKK'
-export const urlDeleteFormKK = urlport + '/form-kk/deleteFormKK'
-export const urlAccForm = urlport +'/form-kk/acceptFormKK'
-export const urlGetIdKK = urlport + '/form-kk/getIdKK'
-export const urlAccKK = urlport + '/form-kk/acceptFormKK'
+export const urlGetFormKK = urlport + 'form-kk/getFormKK'
+export const urlAddFormKK = urlport + 'form-kk/storeFormKK'
+export const urlEditFormKK = urlport + 'form-kk/updateFormKK'
+export const urlDeleteFormKK = urlport + 'form-kk/deleteFormKK'
+export const urlAccForm = urlport +'form-kk/acceptFormKK'
+export const urlGetIdKK = urlport + 'form-kk/getIdKK'
+export const urlAccKK = urlport + 'form-kk/acceptFormKK'
+export const urlshowKKPerprov = urlport + 'form-kk/showKKPerprov'
 
 //Anggota KK
-export const urlGetAnggotaKK = urlport + '/anggota-kk/getAnggotaKK'
-export const urlShowAnggotaKK=urlport+'/anggota-kk/showAnggotaKK'
-export const urlAddAnggotaKK=urlport+'/anggota-kk/storeAnggotaKK'
-export const urlEditAnggotaKK=urlport+'/anggota-kk/updateAnggotaKK'
-export const urlGetNIKAnggota=urlport+'/anggota-kk/getNIKAnggota'
+export const urlGetAnggotaKK = urlport + 'anggota-kk/getAnggotaKK'
+export const urlShowAnggotaKK=urlport+'anggota-kk/showAnggotaKK'
+export const urlAddAnggotaKK=urlport+'anggota-kk/storeAnggotaKK'
+export const urlEditAnggotaKK=urlport+'anggota-kk/updateAnggotaKK'
+export const urlGetNIKAnggota=urlport+'anggota-kk/getNIKAnggota'
 
 //KB
 export const urlGetKB = urlport + 'data-kb/getKB'
@@ -123,8 +124,8 @@ export const urlDeleteKB = urlport + 'data-kb/deleteKB'
 
 // Realisasi
 export const urlshowRealisasiID = urlport + 'realisasi/id'
-export const urlRealisasiPerprov = urlport + '/realisasi/perprov'
-export const urlRealisasiPerkab = urlport + '/realisasi/perkab'
-export const urlRealisasiKBID = urlport + '/realisasi/kbId'
-export const urlRealisasiKBPerProv = urlport + '/realisasi/alatKbPerProv'
-export const urlRealisasiKBPerKab = urlport + '/realisasi/alatKbPerKab'
+export const urlRealisasiPerprov = urlport + 'realisasi/perprov'
+export const urlRealisasiPerkab = urlport + 'realisasi/perkab'
+export const urlRealisasiKBID = urlport + 'realisasi/kbId'
+export const urlRealisasiKBPerProv = urlport + 'realisasi/alatKbPerProv'
+export const urlRealisasiKBPerKab = urlport + 'realisasi/alatKbPerKab'
