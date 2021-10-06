@@ -81,6 +81,7 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
+    "@ionic/lab": "3.2.10",
     "autoprefixer": "^9.8.6",
     "eslint": "^5.16.0",
     "eslint-config-react": "^1.1.7",
