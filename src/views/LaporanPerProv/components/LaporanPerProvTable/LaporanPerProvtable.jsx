@@ -67,7 +67,7 @@ const LaporanPerProvTable=props => {
     order, orderBy, SettingProvinsi,
     provinsisExport, filteredItems, handleOpen, selectedProvinsis,
     setSelectedProvinsis,
-    Export,
+    Export,ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV,
     deleteProv,
@@ -237,6 +237,9 @@ const LaporanPerProvTable=props => {
       <div class="col-md-6">
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
+        </Button>
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
         </Button>
       </div>
     </div>

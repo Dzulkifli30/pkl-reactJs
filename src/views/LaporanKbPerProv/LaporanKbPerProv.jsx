@@ -199,6 +199,32 @@ const LaporanKbPerProv=props => {
     link.click();
   }
 
+  const ExportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "Laporan Target KB PerProvinsi";
+    const headers = [["Nama Kabupaten Kota", "Alat Kontrasepsi", "Jumlah Pemakaian"]];
+
+    const data = filteredItems.map(elt=> [elt.nama_kabupaten, elt.alat_kb, elt.Jumlah_Pemakai]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("Laporan.pdf")
+  }
+
 
   const [sensus, setSensus]=useState([]);
   const [kab, setKab]=useState([]);
@@ -362,6 +388,7 @@ const LaporanKbPerProv=props => {
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
+          ExportPDF={ExportPDF}
           Periode={Periode}
         />
 

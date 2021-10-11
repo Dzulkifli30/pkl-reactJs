@@ -10,7 +10,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import { makeStyles } from '@material-ui/styles';
-import { urlProv,urlShowKab } from '../../../../kumpulanUrl';
+import { urlProv, urlShowKab } from '../../../../kumpulanUrl';
 import DataTable from 'react-data-table-component';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
@@ -36,7 +36,7 @@ import {
 import { getInitials } from 'helpers';
 import { red } from '@material-ui/core/colors';
 
-const useStyles=makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   content: {
     padding: 0
@@ -52,7 +52,7 @@ const useStyles=makeStyles(theme => ({
   avatar: {
     marginRight: theme.spacing(2)
   },
-  fontFamily:{
+  fontFamily: {
     fontFamily: 'font-poppins'
   },
   actions: {
@@ -61,16 +61,16 @@ const useStyles=makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
 }));
-const LaporanSensusPerKab=props => {
+const LaporanSensusPerKab = props => {
   const {
     sensus,
     setSensus,
-    className,handleDelete,
-    textfind,kabupatenfind,
+    className, handleDelete,
+    textfind, kabupatenfind,
     order, orderBy,
     provinsisExport, filteredItems, handleOpen, selectedkabupaten,
     setselectedkabupaten,
-    Export,
+    Export,ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV,
     rowSelect,
@@ -79,25 +79,25 @@ const LaporanSensusPerKab=props => {
     // setFormState,
     onChangeFind
 
-    , ...rest }=props;
+    , ...rest } = props;
 
-  
-  const [filterText, setFilterText]=React.useState('');
-  const [resetPaginationToggle, setResetPaginationToggle]=React.useState(false);
-  const classes=useStyles();
 
-  const [rowsPerPage, setRowsPerPage]=useState(10);
-  const [page, setPage]=useState(0);
-  const[laporKab,setLaporKab]=useState([])
-  const [prov, setProv]=useState([]);
-  const [formState, setFormState]=useState({
+  const [filterText, setFilterText] = React.useState('');
+  const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
+  const classes = useStyles();
+
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0);
+  const [laporKab, setLaporKab] = useState([])
+  const [prov, setProv] = useState([]);
+  const [formState, setFormState] = useState({
     isValid: false,
     values: {},
     touched: {},
     errors: {}
   });
 
-  const customStyles={
+  const customStyles = {
     header: {
       style: {
         minHeight: '10px',
@@ -199,7 +199,7 @@ const LaporanSensusPerKab=props => {
 
         }
 
-        
+
 
 
       },
@@ -207,7 +207,7 @@ const LaporanSensusPerKab=props => {
     },
   };
 
-  const columns=[
+  const columns = [
     // {
     //   name: 'Kode Depdagri',
     //   selector: 'KodeDepdagri',
@@ -216,9 +216,9 @@ const LaporanSensusPerKab=props => {
     {
       name: 'Kecamatan',
       selector: 'nama_kecamatan',
-      font:'Poppins',
+      font: 'Poppins',
       sortable: true,
-    }, 
+    },
     {
       name: 'Target KK',
       selector: 'KK',
@@ -231,21 +231,23 @@ const LaporanSensusPerKab=props => {
     },
   ];
   // const filteredItems=provinsis.filter(item => item.nama_provinsi&&item.nama_provinsi.toLowerCase().includes(filterText.toLowerCase()));
-  const subHeaderComponentMemo=React.useMemo(() => {
-    const handleClear=() => {
+  const subHeaderComponentMemo = React.useMemo(() => {
+    const handleClear = () => {
       if (filterText) {
         setResetPaginationToggle(!resetPaginationToggle);
         setFilterText('');
       }
     };
     return <div class="form-group">
-    <div class="col-md-6">
-      <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
-        <img src="/img/xls.jpeg" />
-      </Button>
-
+      <div class="col-md-6">
+        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+          <img src="/img/xls.jpeg" />
+        </Button>
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
+        </Button>
+      </div>
     </div>
-  </div>
 
 
 
@@ -261,36 +263,36 @@ const LaporanSensusPerKab=props => {
     }
   */
 
-  const handleSelectAll=event => {
+  const handleSelectAll = event => {
 
     //const { groups }=props;
     //setSelectedUsers
     let selectedkabupaten_var;
 
     if (event.target.checked) {
-      selectedkabupaten_var=provinsis.map(provinsi => provinsi.id);
+      selectedkabupaten_var = provinsis.map(provinsi => provinsi.id);
     } else {
-      selectedkabupaten_var=[];
+      selectedkabupaten_var = [];
     }
 
     setselectedkabupaten(selectedkabupaten_var);
   };
 
-  const handleSelectOne=(event, id) => {
+  const handleSelectOne = (event, id) => {
 
-    const selectedIndex=selectedkabupaten.indexOf(id);
-    let newselectedkabupaten=[];
+    const selectedIndex = selectedkabupaten.indexOf(id);
+    let newselectedkabupaten = [];
 
-    if (selectedIndex===-1) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten, id);
-    } else if (selectedIndex===0) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(1));
-    } else if (selectedIndex===selectedkabupaten.length-1) {
-      newselectedkabupaten=newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
-    } else if (selectedIndex>0) {
-      newselectedkabupaten=newselectedkabupaten.concat(
+    if (selectedIndex === -1) {
+      newselectedkabupaten = newselectedkabupaten.concat(selectedkabupaten, id);
+    } else if (selectedIndex === 0) {
+      newselectedkabupaten = newselectedkabupaten.concat(selectedkabupaten.slice(1));
+    } else if (selectedIndex === selectedkabupaten.length - 1) {
+      newselectedkabupaten = newselectedkabupaten.concat(selectedkabupaten.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newselectedkabupaten = newselectedkabupaten.concat(
         selectedkabupaten.slice(0, selectedIndex),
-        selectedkabupaten.slice(selectedIndex+1)
+        selectedkabupaten.slice(selectedIndex + 1)
       );
     }
 
@@ -298,11 +300,11 @@ const LaporanSensusPerKab=props => {
     //console.log(selectedUsers);
   };
 
-  const handlePageChange=(event, page) => {
+  const handlePageChange = (event, page) => {
     setPage(page);
   };
 
-  const handleRowsPerPageChange=event => {
+  const handleRowsPerPageChange = event => {
     setRowsPerPage(event.target.value);
   };
   //  const filteredItems=provinsis;
@@ -318,7 +320,7 @@ const LaporanSensusPerKab=props => {
 
           <div className={classes.inner}>
             <DataTable
-            font="Poppins"
+              font="Poppins"
               title={rowSelect.nama_kabupaten == undefined ? "Laporan Target Sensus di Kabupaten" : "Laporan Target Sensus di Kabupaten " + rowSelect.nama_kabupaten}
               customStyles={customStyles}
               columns={columns}
@@ -343,7 +345,7 @@ const LaporanSensusPerKab=props => {
   );
 };
 
-LaporanSensusPerKab.propTypes={
+LaporanSensusPerKab.propTypes = {
   className: PropTypes.string,
   filteredItems: PropTypes.array.isRequired
 };

@@ -270,7 +270,7 @@ const ProvinsiList=props => {
 
     doc.setFontSize(15);
 
-    const title = "My Awesome Report";
+    const title = "Provinsi Di Indonesia";
     const headers = [["Provinsi ID", "KodeDepdagri", "Nama Provinsi", "Keterangan", "Dibuat oleh", "Dibuat tanggal", "Terakhir diedit tanggal", "Terakhir diedit oleh"]];
 
     const data = filteredItems.map(elt=> [elt.id_provinsi, elt.KodeDepdagri, elt.nama_provinsi, elt.Keterangan, elt.CreatedBy, elt.Created, elt.LastModified, elt.LastModifiedBy]);
@@ -283,7 +283,7 @@ const ProvinsiList=props => {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save("report.pdf")
+    doc.save("prov.pdf")
   }
 
 

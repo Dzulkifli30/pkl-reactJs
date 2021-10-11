@@ -260,6 +260,32 @@ const LaporanSensusPerKelurahan=props => {
     link.click();
   }
 
+  const ExportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "Laporan Sensus PerKelurahan";
+    const headers = [["Target KK", "Jumlah RW", "Jumlah RT"]];
+
+    const data = filteredItems.map(elt=> [elt.KK, elt.jumRW, elt.jumRT]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("Laporan.pdf")
+  }
+
 
   const [Perkelurahan, setPerkelurahan]=useState([]);
   const [kel,setKel] = React.useState([]);
@@ -403,6 +429,7 @@ const LaporanSensusPerKelurahan=props => {
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
+          ExportPDF={ExportPDF}
 
         />
 

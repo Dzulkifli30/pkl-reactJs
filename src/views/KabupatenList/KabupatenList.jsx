@@ -225,6 +225,32 @@ const KabupatenList=props => {
     link.click();
   }
 
+  const ExportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "Kabupaten Di Indonesia";
+    const headers = [["KodeDepdagri", "Nama Provinsi", "Nama kabupaten", "Keterangan", "Dibuat oleh", "Dibuat tanggal", "Terakhir diedit tanggal", "Terakhir diedit oleh"]];
+
+    const data = filteredItems.map(elt=> [elt.KodeDepdagri, elt.nama_provinsi, elt.nama_kabupaten, elt.Keterangan, elt.CreatedBy, elt.Created, elt.LastModified, elt.LastModifiedBy]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("kab.pdf")
+  }
+
 
   const [kabupaten, setkabupaten]=useState([]);
   // const [provinsiId, setProvinsiId]=useState(getKab());
@@ -357,6 +383,7 @@ const KabupatenList=props => {
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
+          ExportPDF={ExportPDF}
 
         />
 

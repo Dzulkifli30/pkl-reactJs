@@ -199,6 +199,32 @@ const LaporanSensusID=props => {
     link.click();
   }
 
+  const ExportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "Laporan Sensus Indonesia";
+    const headers = [["Nama Provinsi", "Target KK", "Jumlah Kab/Kota", "Jumlah Kecamatan", "Jumlah Kelurahan"]];
+
+    const data = filteredItems.map(elt=> [elt.nama_provinsi, elt.KK, elt.jumKab, elt.jumKec, elt.jumKel]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("Laporan.pdf")
+  }
+
 
   const [sensusID, setSensusID]=useState([]);
   const [kab, setKab]=useState([]);
@@ -358,6 +384,7 @@ const LaporanSensusID=props => {
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
+          ExportPDF={ExportPDF}
 
         />
       </div>

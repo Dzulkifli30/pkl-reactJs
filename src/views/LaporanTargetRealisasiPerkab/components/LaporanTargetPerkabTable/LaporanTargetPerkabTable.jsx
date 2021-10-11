@@ -68,7 +68,7 @@ const LaporanSensusPerKab=props => {
     order, orderBy,
     provinsisExport, filteredItems, handleOpen, selectedkabupaten,
     setselectedkabupaten,
-    Export,
+    Export,ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV,
     rowSelect,
@@ -242,7 +242,9 @@ const LaporanSensusPerKab=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
+        </Button>
       </div>
   </div>
 

@@ -63,7 +63,7 @@ const KabupatenTable=props => {
     order, orderBy,
     provinsisExport, filteredItems, handleOpen, selectedkabupaten,
     setselectedkabupaten,
-    Export,
+    Export,ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV
 
@@ -262,6 +262,9 @@ const KabupatenTable=props => {
       <div class="col-md-6">
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
+        </Button>
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
         </Button>
         <Button onClick={(e) => handleOpen(e, [], "Tambah Kabupaten")}>
           <AddIcon/>

@@ -65,7 +65,7 @@ const TargetKkTable=props => {
     order, orderBy, SettingVuser,
     VuserExport, filteredItems, handleOpen, selectedVuser,
     setSelectedVuser,
-    Export,
+    Export,ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV
 
@@ -282,6 +282,9 @@ const TargetKkTable=props => {
       <div class="col-md-6">
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
+        </Button>
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
         </Button>
         <Button onClick={(e) => handleOpen(e, [], "Tambah Target Kk")}>
           <AddIcon/>

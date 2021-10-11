@@ -70,7 +70,7 @@ const LaporanKabupatenTable = props => {
     order, orderBy,
     provinsisExport, filteredItems, handleOpen, selectedkabupaten,
     setselectedkabupaten,
-    Export,
+    Export, ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV,
     rowSelect,
@@ -393,13 +393,16 @@ const LaporanKabupatenTable = props => {
         setFilterText('');
       }
     };
-    return  <div class="form-group">
-    <div class="col-md-6">
-      <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
-        <img src="/img/xls.jpeg" />
-      </Button>
+    return <div class="form-group">
+      <div class="col-md-6">
+        <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
+          <img src="/img/xls.jpeg" />
+        </Button>
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
+        </Button>
+      </div>
     </div>
-  </div>
 
 
 

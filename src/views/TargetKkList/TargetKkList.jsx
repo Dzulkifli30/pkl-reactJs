@@ -258,6 +258,32 @@ const VuserList=props => {
     link.click();
   }
 
+  const ExportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "TargetKK Di Indonesia";
+    const headers = [["Periode Sensus", "Nama Provinsi", "Nama kabupaten", "Nama Kecamatan", "Nama Kelurahan", "Nama Rw", "Nama Rt", "Target KK", "Dibuat oleh", "Dibuat tanggal", "Terakhir diedit tanggal", "Terakhir diedit oleh"]];
+
+    const data = filteredItems.map(elt=> [elt.Periode_Sensus, elt.nama_provinsi, elt.nama_kabupaten, elt.nama_kecamatan, elt.nama_kelurahan, elt.nama_rw, elt.nama_rt, elt.KK, elt.CreatedBy, elt.Created, elt.LastModified, elt.LastModifiedBy]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("rt.pdf")
+  }
+
 
   const [Vuser, setVuser]=useState([]);
   const [filteredItems, setFilteredItems]=useState([]);
@@ -399,6 +425,7 @@ const VuserList=props => {
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
+          ExportPDF={ExportPDF}
 
         />
 

@@ -65,7 +65,7 @@ const LaporanKecamatanTable=props => {
     order, orderBy,
     kecamatanExport, filteredItems, handleOpen, selectedkecamatan,
     setselectedkecamatan,
-    Export,
+    Export,ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV
 
@@ -229,6 +229,9 @@ const LaporanKecamatanTable=props => {
       <div class="col-md-6">
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
+        </Button>
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
         </Button>
         {/* <Button onClick={(e) => handleOpen(e, [],)}>
           <SearchIcon/>

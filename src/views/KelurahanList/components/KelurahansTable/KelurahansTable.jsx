@@ -67,7 +67,7 @@ const KelurahansTable =props => {
     order, orderBy, SettingKelurahan,
     provinsisExport, filteredItems, handleOpen, selectedKelurahans,
     setSelectedKelurahans,
-    Export,
+    Export,ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV
 
@@ -286,6 +286,9 @@ const deleteKel = async (e,selectedKelurahans) => {
       <div class="col-md-6">
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
+        </Button>
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
         </Button>
         <Button className="btn btn-sm btn-primary" id="add" onClick={(e) => handleOpen(e,[], "Tambah Kelurahan")}>
         <AddIcon />
