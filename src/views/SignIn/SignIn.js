@@ -26,6 +26,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
 import { urlPostLogin } from '../../kumpulanUrl'
 import UsersByDevice from 'views/Dashboard/components/UsersByDevice';
+import axios from 'axios';
 
 
 const schema = {
@@ -180,10 +181,10 @@ const SignIn = props => {
 
       let urlGetData = urlPostLogin
       const response = await fetch(urlGetData, requestOptions)
-        .then(res => {
-          return res.json();
-        })/**/
-
+      .then(res => {
+        return res.json();
+      })
+      
         .then(res => {
 
           const data = res;
@@ -209,7 +210,7 @@ const SignIn = props => {
             //history.push('/beranda');
 
           } else {
-            console.log(data);
+            console.log(data.toString());
             setFormState(formState => ({
               ...formState,
               values: {
@@ -232,7 +233,7 @@ const SignIn = props => {
         })
         .catch((e) => {
           console.log(e)
-          alert("err");
+          // alert("err");
           setFormState(formState => ({
             ...formState,
             isValid: false,

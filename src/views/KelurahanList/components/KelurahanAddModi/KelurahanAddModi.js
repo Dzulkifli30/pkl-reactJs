@@ -381,12 +381,12 @@ async function showKab(id_provinsi) {
       // alert("Sukses")
       const data=tester;
     })
-      .catch((e) => {
-          alert(e.message)
-        return false;
+    .catch((e) => {
+        // alert(e.message)
+      return false;
 
 
-      });
+    });
 
 
   }

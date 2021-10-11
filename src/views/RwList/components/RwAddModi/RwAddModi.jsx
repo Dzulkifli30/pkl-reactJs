@@ -389,10 +389,15 @@ const RwAddModi=props => {
     }
 
     //console.log(body);
-
-
-
-
+    const requestOptions={
+      method: 'POST',
+      mode: "cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        varJson
+      )
+    };
+    
     const response=fetch(url, requestOptions)
       .then(tester => {
         return tester.json();
