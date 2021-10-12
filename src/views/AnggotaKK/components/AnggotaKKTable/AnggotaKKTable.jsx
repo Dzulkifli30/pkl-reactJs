@@ -72,7 +72,7 @@ const AnggotaKKTable=props => {
     anggotaKK_params,
     handleClose,
     AnggotaKK,
-    Export,
+    Export,ExportPDF,
     convertArrayOfObjectsToCSV,
     downloadCSV
 
@@ -272,7 +272,7 @@ const AnggotaKKTable=props => {
     },
     {
       name: 'Status Dalam Keluarga',
-      selector: 'agama',
+      selector: 'status_dalam_keluarga',
       sortable: true,
       cell: row => {
         return  stats[row.status_dalam_keluarga].nama
@@ -322,7 +322,9 @@ const AnggotaKKTable=props => {
           <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
+        </Button>
         <button className=" btn btn-md " onClick={(e) => handleOpen(e,[],"Tambah Anggota KK")}>
           <AddIcon/>
         </button>

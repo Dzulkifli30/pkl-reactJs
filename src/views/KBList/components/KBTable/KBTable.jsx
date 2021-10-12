@@ -4,7 +4,8 @@ import { Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { SearchInput } from 'components';
-
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Button } from '@material-ui/core';
@@ -213,6 +214,32 @@ const KBTable=props => {
     },
   };
 
+  const ExportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "KB";
+    const headers = [["NIK", "Nama Anggota", "Alat Kontrasepsi", "Tahun Pemakaian", "Alasan", "Dibuat oleh"]];
+
+    const data = filteredItems.map(elt=> [elt.NIK, elt.NIK.carinama(NIK), elt.alat_kontrasepsi, elt.alasan, elt.CreatedBy]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("KB.pdf")
+  }
+
   const carinama = (paramNIK) => {
     let value = paramNIK
     let result = [];
@@ -279,6 +306,9 @@ const KBTable=props => {
       <div class="col-md-6">
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
+        </Button>
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
         </Button>
         <Button onClick={(e) => handleOpen(e, [], "Tambah Pengguna Alat KB")}>
           <AddIcon/>

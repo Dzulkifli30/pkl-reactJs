@@ -250,6 +250,32 @@ const AnggotaKKList=props => {
     link.click();
   }
 
+  const ExportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "AnggotaKK";
+    const headers = [["Periode Sensus", "Nama Anggota KK", "NIK", "Jenis Kelamin", "Tempat Lahir", "Tanggal Lahir", "Agama", "Pendidikan", "Jenis Pekerjaan", "Status Nikah", "Tanggal Pernikahan", "Status Dalam Keluarga", "kewarganegaraan", "Nomor Paspor", "Nomor Kitas", "Nama Ayah", "Nama Ibu", "Dibuat oleh"]];
+
+    const data = filteredItems.map(elt=> [elt.periode_sensus, elt.nama_anggota, elt.NIK, elt.jenis_kelamin, elt.tempat_lahir, elt.tanggal_lahir, elt.agama, elt.pendidikan, elt.jenis_pekerjaan, elt.status_nikah, elt.tanggal_pernikahan, elt.status_dalam_keluarga, elt.kewarganegaraan, elt.no_paspor, elt.no_katas, elt.nama_ayah, elt.nama_ibu, elt.create_by]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("AnggotaKK.pdf")
+  }
+
 
   // const [AnggotaKK, setAnggotaKK]=useState([]);
   const [rowAnggotaKK, setRowAnggotaKK]=useState([]);
@@ -388,11 +414,12 @@ const AnggotaKKList=props => {
         filteredItems={filteredItems}
         anggotaKK_params={anggotaKK_params}
         handleOpen={handleOpen}
+        ExportPDF={ExportPDF}
         handleClose={handleClose}
         handleChange={handleChange} setData={setData}
         handleOpenViewMap={handleOpenViewMap}
         open={open} setRowSelect={setRowAnggotaKK} rowSelect={rowAnggotaKK}
-        title={title}
+        title={title} 
         />
       {popupComponen(AnggotaKKAddModi)}
 

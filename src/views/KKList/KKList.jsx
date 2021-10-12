@@ -11,6 +11,8 @@ import {
     Button,
     TextField
   } from '@material-ui/core';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import {urlGetFormKK, urlDeleteFormKK } from '../../kumpulanUrl'
 import '../../assets/vendor/dist/css/datatable.css';
 import '../../assets/vendor/dist/css/datatable1.css';
@@ -137,6 +139,32 @@ const KKList = (props) => {
       link.click();
     }
 
+    const ExportPDF = () => {
+      const unit = "pt";
+      const size = "A4"; // Use A1, A2, A3 or A4
+      const orientation = "portrait"; // portrait or landscape
+  
+      const marginLeft = 40;
+      const doc = new jsPDF(orientation, unit, size);
+  
+      doc.setFontSize(15);
+  
+      const title = "KK di Indonesia";
+      const headers = [["Periode Sensus", "Nomor KK", "NIK KK", "Nama KK", "Alamat KK", "Id Provinsi", "Id kabupaten", "Id Kecamatan", "Id Kelurahan", "Id Rw", "Id Rt", "Dibuat oleh"]];
+  
+      const data = filteredItems.map(elt=> [elt.periode_sensus, elt.NoKK, elt.NIK_KK, elt.nama_kk, elt.alamat_kk, elt.id_provinsi, elt.id_kabupaten, elt.id_kecamatan, elt.id_kelurahan, elt.id_rw, elt.id_rt, elt.create_by]);
+  
+      let content = {
+        startY: 50,
+        head: headers,
+        body: data
+      };
+  
+      doc.text(title, marginLeft, 40);
+      doc.autoTable(content);
+      doc.save("KK.pdf")
+    }
+
     // const [KK, setKK]=useState([]);
     const [filteredItems, setFilteredItems]=useState([]);
     // const [rowKK, setRowKK]=useState({});
@@ -205,7 +233,7 @@ const KKList = (props) => {
           handleChange={handleDelete} setData={setData} roles={downloadCSV}
           open={open} setRowSelect={setRowKK} rowSelect={rowKK}
           title={KKfind} handleClose={handleClose} datas={KK}
-          ComponenAddModi={componenPopup}>
+          ComponenAddModi={componenPopup} ExportPDF={ExportPDF}>
            </ModalComponent>
   
       )

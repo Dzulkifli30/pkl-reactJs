@@ -1,5 +1,5 @@
-let urlport="http://127.0.0.1:8000/api/";
-let urlportrefresh="http://localhost:8000/";
+let urlport="https://bkkbn-api.herokuapp.com/https://projectbkkbn.herokuapp.com/api/";
+let urlportrefresh="https://bkkbn-api.herokuapp.com/https://projectbkkbn.herokuapp.com/api/";
 
 
  // Vuser
