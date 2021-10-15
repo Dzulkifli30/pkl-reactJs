@@ -225,6 +225,32 @@ const KabupatenList=props => {
     link.click();
   }
 
+  const ExportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "KK di Indonesia";
+    const headers = [["Periode Sensus", "Nomor KK", "NIK KK", "Nama KK", "Alamat KK", "Nama Provinsi", "Nama kabupaten", "Nama Kecamatan", "Nama Kelurahan", "Nama Rw", "Nama Rt", "Dibuat oleh"]];
+
+    const data = filteredItems.map(elt=> [elt.periode_sensus, elt.NoKK, elt.NIK_KK, elt.nama_kk, elt.alamat_kk, elt.nama_provinsi, elt.nama_kabupaten, elt.nama_kecamatan, elt.nama_kelurahan, elt.nama_rw, elt.nama_rt, elt.create_by]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("KK.pdf")
+  }
+
 
   const [kabupaten, setkabupaten]=useState([]);
   // const [provinsiId, setProvinsiId]=useState(getKab());
@@ -356,6 +382,7 @@ const KabupatenList=props => {
           Export={Export}
           convertArrayOfObjectsToCSV={convertArrayOfObjectsToCSV}
           downloadCSV={downloadCSV}
+          ExportPDF={ExportPDF}
 
         />
 

@@ -65,7 +65,7 @@ const KKTable=props => {
     KKExport, filteredItems, handleOpen, selectedKK,
     handleView,
     setSelectedKK,datas,
-    Export,setData,
+    Export,setData,ExportPDF,
     convertArrayOfObjectsToCSV,
     roles,handleChange
 
@@ -278,7 +278,9 @@ const KKTable=props => {
         <Button filteredItems={filteredItems} color="primary" onClick={(e) => downloadCSV(e, [])}>
           <img src="/img/xls.jpeg" />
         </Button>
-
+        <Button filteredItems={filteredItems} color="primary" onClick={() => ExportPDF()}>
+          <img src="/img/pdf.jpeg" />
+        </Button>
       </div>
 
       <div class="col-md-6">
