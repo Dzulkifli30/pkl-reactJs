@@ -1,5 +1,5 @@
-let urlport="https://bkkbn-api.herokuapp.com/https://projectbkkbn.herokuapp.com/api/";
-let urlportrefresh="https://bkkbn-api.herokuapp.com/https://projectbkkbn.herokuapp.com/api/";
+let urlport="https://sensus-cors.herokuapp.com/https://projectbkkbn.herokuapp.com/api/";
+let urlportrefresh="https://sensus-cors.herokuapp.com/https://projectbkkbn.herokuapp.com/api/";
 
 
  // Vuser

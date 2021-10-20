@@ -53,6 +53,13 @@ const schema={
     //   maximum: 200
     // }
   },
+  id_rt: {
+    presence: { allowEmpty: false, message: 'harus diisi' },
+    //email: true,
+    // length: {
+    //   maximum: 200
+    // }
+  },
   /**/
 };
 
@@ -676,7 +683,7 @@ const KKAddModi=props => {
                 value={rowSelect.id_rt}
                 variant="outlined"
               >
-                {formRt.map((option)=> (
+                {formRt.map(option=> (
                   <option
                     key={option.id_rt}
                     value={option.id_rt}

@@ -49,7 +49,7 @@ const ProfileUser = () => {
                     }
                 />
                 <Divider />
-                <CardContent className="bg-indigo-900 lg:text-white sm:text-black">
+                <CardContent className="bg-indigo-900 lg:text-white sm:text-white">
                     <Grid
                         container
                         spacing={0}

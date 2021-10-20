@@ -628,10 +628,10 @@ const AnggotaKKAddModi=props => {
                 name="no_paspor"
                 onChange={handleChange}
                 helperText={
-                  hasError('no_paspor')? formState.errors.no_paspor[0]:null
+                  hasError('no_paspor')? formState.errors.no_paspor[0]:'0'
                 }
                 error={hasError('no_paspor')}
-                defaultValue={rowSelect.no_paspor == undefined  ? rowSelect.no_paspor = null  : rowSelect&&rowSelect.no_paspor ? rowSelect.no_paspor:''}
+                defaultValue={rowSelect.no_paspor == undefined  ? rowSelect.no_paspor = '0'  : rowSelect&&rowSelect.no_paspor ? rowSelect.no_paspor:''}
                 variant="outlined"
               />
             </Grid>
@@ -648,10 +648,10 @@ const AnggotaKKAddModi=props => {
                 name="no_katas"
                 onChange={handleChange}
                 helperText={
-                  hasError('no_katas')? formState.errors.no_katas[0]:null
+                  hasError('no_katas')? formState.errors.no_katas[0]:'0'
                 }
                 error={hasError('no_katas')}
-                defaultValue={rowSelect.no_katas == undefined  ? rowSelect.no_katas = null  : rowSelect&&rowSelect.no_katas ? rowSelect.no_katas:''}
+                defaultValue={rowSelect.no_katas == undefined  ? rowSelect.no_katas = '0'  : rowSelect&&rowSelect.no_katas ? rowSelect.no_katas:''}
                 variant="outlined"
               />
             </Grid>

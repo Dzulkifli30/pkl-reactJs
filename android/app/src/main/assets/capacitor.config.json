@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.petugasbkkbn",
-	"appName": "petugasbkkbn",
+	"appId": "io.ionic.PetugasSensus",
+	"appName": "PetugasSensus",
 	"bundledWebRuntime": false,
 	"npmClient": "npm",
 	"webDir": "build",

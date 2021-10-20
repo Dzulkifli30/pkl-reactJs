@@ -298,7 +298,7 @@ const UserSignIn = props => {
 
   return (
     <div className="h-full sm:mr-4">
-      <div className="w-full font-poppins mt-9 p-9 mb-12 sm:bg-gray-200 md:bg-gray-200 lg:bg-gray-200 rounded-xl">
+      <div className="w-full font-poppins mt-9 p-9 mb-12 sm:bg-gray-300 md:bg-gray-200 lg:bg-gray-200 rounded-xl">
         <span className="align text-center"><h4 className="sm:mb-10 md:mb-12 lg:mb-12 font-poppins ">Login Petugas Sensus</h4></span>
         <div className={classes.root, "font-poppins sm:mt-5 lg:mt-5"}>
           <Grid
